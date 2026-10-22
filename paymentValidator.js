@@ -149,28 +149,46 @@ function validatePaymentProofPayload(payment_proof, original_filename) {
  * Stores the validated proof buffer to disk and returns file metadata.
  */
 function storePaymentProof(buffer, ext, ref_id, original_filename) {
-  const uploadDir = path.join(__dirname, 'public', 'uploads', 'payment_proofs');
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
+  const isVercel = Boolean(process.env.VERCEL);
+  const uploadDir = isVercel
+    ? path.join('/tmp', 'uploads', 'payment_proofs')
+    : path.join(__dirname, 'public', 'uploads', 'payment_proofs');
+
+  try {
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
+    const cleanRef = (ref_id || 'PROMPT').toLowerCase().replace(/[^a-z0-9]/g, '_');
+    const storedFilename = `proof_${cleanRef}_${Date.now()}_${Math.floor(Math.random() * 10000)}.${ext}`;
+    const absolutePath = path.join(uploadDir, storedFilename);
+
+    fs.writeFileSync(absolutePath, buffer);
+
+    const relativeUrl = `/uploads/payment_proofs/${storedFilename}`;
+    const uploadedAt = new Date().toISOString();
+
+    return {
+      stored_path: relativeUrl,
+      stored_filename: storedFilename,
+      original_filename,
+      mimetype: Object.keys(ALLOWED_MIME_TYPES).find(m => ALLOWED_MIME_TYPES[m] === ext) || 'image/png',
+      size: buffer.length,
+      uploaded_at: uploadedAt
+    };
+  } catch (err) {
+    console.warn('[STORAGE] Falling back to inline data URI storage:', err.message);
+    const mime = Object.keys(ALLOWED_MIME_TYPES).find(m => ALLOWED_MIME_TYPES[m] === ext) || 'image/png';
+    const dataUri = `data:${mime};base64,${buffer.toString('base64')}`;
+    return {
+      stored_path: dataUri,
+      stored_filename: original_filename || `proof_${Date.now()}.${ext}`,
+      original_filename,
+      mimetype: mime,
+      size: buffer.length,
+      uploaded_at: new Date().toISOString()
+    };
   }
-
-  const cleanRef = (ref_id || 'PROMPT').toLowerCase().replace(/[^a-z0-9]/g, '_');
-  const storedFilename = `proof_${cleanRef}_${Date.now()}_${Math.floor(Math.random() * 10000)}.${ext}`;
-  const absolutePath = path.join(uploadDir, storedFilename);
-
-  fs.writeFileSync(absolutePath, buffer);
-
-  const relativeUrl = `/uploads/payment_proofs/${storedFilename}`;
-  const uploadedAt = new Date().toISOString();
-
-  return {
-    stored_path: relativeUrl,
-    stored_filename: storedFilename,
-    original_filename,
-    mimetype: Object.keys(ALLOWED_MIME_TYPES).find(m => ALLOWED_MIME_TYPES[m] === ext) || 'image/png',
-    size: buffer.length,
-    uploaded_at: uploadedAt
-  };
 }
 
 /**

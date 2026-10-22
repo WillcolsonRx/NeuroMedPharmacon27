@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env'), override: true });
 const express = require('express');
@@ -15,7 +16,29 @@ const {
 } = require('./paymentValidator');
 
 const app = express();
-const db = new Database(path.join(__dirname, 'nipercon.db'));
+
+// Initialize Database (handles Vercel Serverless /tmp writable directory or :memory: fallback)
+let db;
+try {
+  let dbPath;
+  if (process.env.VERCEL) {
+    dbPath = path.join('/tmp', 'nipercon.db');
+    const sourceDb = path.join(__dirname, 'nipercon.db');
+    if (!fs.existsSync(dbPath) && fs.existsSync(sourceDb)) {
+      try {
+        fs.copyFileSync(sourceDb, dbPath);
+      } catch (err) {
+        console.warn('Could not copy initial db to /tmp:', err.message);
+      }
+    }
+  } else {
+    dbPath = process.env.DATABASE_PATH || path.join(__dirname, 'nipercon.db');
+  }
+  db = new Database(dbPath);
+} catch (e) {
+  console.warn('SQLite file initialization failed, using in-memory database:', e.message);
+  db = new Database(':memory:');
+}
 
 // Initialize Schema
 db.exec(`
@@ -96,8 +119,10 @@ function currentTier(customDate) {
 }
 
 app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
+if (process.env.VERCEL) {
+  app.use('/uploads', express.static(path.join('/tmp', 'uploads')));
+}
 
 app.get('/api/tariff', (req, res) => {
   const tier = currentTier();
