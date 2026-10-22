@@ -1,0 +1,4908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroMedPharmacon 2027 — In Collaboration with IPS North Zone | NIPER-Raebareli</title>
+<meta name="description" content="NeuroMedPharmacon 2027: International Conference on Molecular Neurotherapeutics and Pharmacology, organized by NIPER-Raebareli in collaboration with the Indian Pharmacological Society (Northern Chapter / IPS North Zone), 18th–20th February 2027, Lucknow, India." />
+<meta property="og:title" content="NeuroMedPharmacon 2027 — In Collaboration with IPS North Zone" />
+<meta property="og:description" content="Organized by NIPER-Raebareli in collaboration with the Indian Pharmacological Society (IPS North Zone), Feb 18–20, 2027, Lucknow Campus." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- HUMAN-CRAFTED EDITORIAL TYPOGRAPHY: LORA (SCHOLARLY SERIF) + PLUS JAKARTA SANS (HUMANIST SANS) + JETBRAINS MONO -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- jsPDF for instant client-side academic PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+/* ==========================================================================
+   DESIGN SYSTEM TOKENS: SCHOLARLY PHARMACOPEIA & INSTITUTIONAL EDITORIAL
+   ========================================================================== */
+:root {
+  /* 60% Dominant Canvas */
+  --canvas-deep: #060e18;
+  --canvas-surface: #0a1727;
+  --canvas-elevated: #0f2238;
+  --canvas-light: #f8fafc;
+  --canvas-card-light: #ffffff;
+  
+  /* 30% Structural Panels & Hairlines */
+  --hairline-dark: rgba(255, 255, 255, 0.08);
+  --hairline-gold: rgba(212, 175, 55, 0.24);
+  --hairline-light: rgba(15, 23, 42, 0.08);
+  --border-muted: #e2e8f0;
+  
+  /* 10% Accent Budget */
+  --accent-gold: #cba234;
+  --accent-gold-hover: #b58d24;
+  --accent-gold-soft: rgba(203, 162, 52, 0.12);
+  --accent-emerald: #059669;
+  --accent-emerald-soft: rgba(5, 150, 105, 0.12);
+  --accent-cyan: #0284c7;
+  --accent-cyan-soft: rgba(2, 132, 199, 0.12);
+  
+  /* Typography Roles: Human-Crafted Editorial Scaled Hierarchy */
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  /* Text Neutrals */
+  --text-dark-primary: #f8fafc;
+  --text-dark-secondary: #94a3b8;
+  --text-dark-muted: #64748b;
+  --text-light-primary: #0f172a;
+  --text-light-secondary: #475569;
+  --text-light-muted: #64748b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-light-primary);
+  background-color: var(--canvas-light);
+  line-height: 1.65;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* TYPOGRAPHIC DISCIPLINE */
+h1, h2, h3, .font-serif-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.tabular-nums {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.curr-sym {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+  font-weight: 600;
+  display: inline;
+}
+
+.font-mono-metric {
+  font-family: var(--font-mono);
+}
+
+.editorial-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ZERO-PILL METADATA SEPARATOR */
+.meta-sep {
+  display: inline-block;
+  margin: 0 0.5rem;
+  color: #94a3b8;
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   TOP BAR CONTRACT (ONE ROW · THREE ZONES)
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  background: rgba(6, 14, 24, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hairline-dark);
+  padding: 0.65rem 0;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  width: 100%;
+}
+
+.site-header .container,
+.site-header .header-inner,
+.header-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 1rem;
+  max-width: 100% !important;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 2vw, 2.5rem) !important;
+  box-sizing: border-box;
+}
+
+/* Zone 1: Brand Mark Lockup */
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  text-decoration: none;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.brand-emblem-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-shrink: 0;
+}
+
+.brand-logo-niper {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.55));
+  transition: transform 0.2s ease;
+}
+
+.brand-logo-ips {
+  height: 52px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 4px 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease;
+}
+
+.brand-logo-niper:hover,
+.brand-logo-ips:hover {
+  transform: scale(1.03);
+}
+
+.brand-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.brand-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--text-dark-secondary);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* Zone 2: Navigation Links (concise single-line text links) */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 0.85vw, 0.95rem);
+  flex-shrink: 0;
+  margin: 0 0.5rem;
+}
+
+.nav-anchor {
+  color: var(--text-dark-secondary);
+  font-size: 0.84rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  transition: color 0.15s ease;
+  padding: 0.25rem 0.15rem;
+}
+
+.nav-anchor:hover, .nav-anchor.active {
+  color: #ffffff;
+}
+
+.nav-anchor::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background-color: var(--accent-gold);
+  transition: width 0.2s ease;
+}
+
+.nav-anchor:hover::after, .nav-anchor.active::after {
+  width: 100%;
+}
+
+/* Zone 3: Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.btn-secretariat {
+  background: transparent;
+  border: 1px solid var(--hairline-dark);
+  color: var(--text-dark-secondary);
+  padding: 0.45rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-secretariat:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.btn-primary-action {
+  background-color: var(--accent-gold);
+  color: #060e18;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid var(--accent-gold);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary-action:hover {
+  background-color: var(--accent-gold-hover);
+  color: #060e18;
+  transform: translateY(-1px);
+}
+
+/* Mobile Toggle */
+.mobile-nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--hairline-dark);
+  color: #ffffff;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   HERO: SCHOLARLY MASTHEAD & MOLECULAR LATTICE STAGE
+   ========================================================================== */
+.hero-masthead {
+  position: relative;
+  background-color: var(--canvas-deep);
+  color: var(--text-dark-primary);
+  padding: 4.5rem 0 3.5rem 0;
+  border-bottom: 1px solid var(--hairline-dark);
+  overflow: hidden;
+}
+
+.hero-canvas-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.35;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-affiliation-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 1.25rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(203, 162, 52, 0.08);
+  border: 1px solid var(--hairline-gold);
+  border-radius: 3px;
+}
+
+.hero-main-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 4.5vw, 3.65rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.hero-congress-badge {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+}
+
+.hero-congress-badge span {
+  color: var(--accent-gold);
+}
+
+.hero-prose {
+  font-size: 1.05rem;
+  color: var(--text-dark-secondary);
+  max-width: 760px;
+  margin: 0 auto 1.75rem auto;
+  line-height: 1.7;
+}
+
+.hero-logistics-bar {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: #e2e8f0;
+  background: rgba(15, 34, 56, 0.7);
+  border: 1px solid var(--hairline-dark);
+  padding: 0.65rem 1.25rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.hero-cta-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.btn-hero-primary {
+  background-color: var(--accent-gold);
+  color: #060e18;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid var(--accent-gold);
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-hero-primary:hover {
+  background-color: var(--accent-gold-hover);
+  color: #060e18;
+  transform: translateY(-1px);
+}
+
+.btn-hero-secondary {
+  background: transparent;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.hero-quick-downloads {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--text-dark-muted);
+}
+
+.quick-link {
+  color: var(--text-dark-secondary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.15s ease;
+}
+
+.quick-link:hover {
+  color: var(--accent-gold);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   METRIC STRIP (TABULAR NUMERAL RIGOR)
+   ========================================================================== */
+.metric-strip-section {
+  background-color: var(--canvas-surface);
+  border-bottom: 1px solid var(--hairline-dark);
+  padding: 1.75rem 0;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.metric-item {
+  border-left: 1px solid var(--hairline-dark);
+  padding-left: 1.25rem;
+}
+
+.metric-item:first-child {
+  border-left: none;
+  padding-left: 0;
+}
+
+.metric-value {
+  font-family: var(--font-mono);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.metric-value.accent-gold {
+  color: var(--accent-gold);
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-dark-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* ==========================================================================
+   SECTION COMMON CONTAINERS & HEADINGS
+   ========================================================================== */
+.section-block {
+  padding: 5rem 0;
+}
+
+.section-block-dark {
+  background-color: var(--canvas-surface);
+  color: var(--text-dark-primary);
+  border-bottom: 1px solid var(--hairline-dark);
+}
+
+.section-block-light {
+  background-color: #ffffff;
+  color: var(--text-light-primary);
+  border-bottom: 1px solid var(--border-muted);
+}
+
+.section-header-centered {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3.5rem auto;
+}
+
+.section-title-large {
+  font-family: var(--font-serif);
+  font-size: 2.35rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+  line-height: 1.2;
+}
+
+.section-lead-text {
+  font-size: 1.05rem;
+  color: var(--text-light-secondary);
+  line-height: 1.65;
+}
+
+.section-block-dark .section-lead-text {
+  color: var(--text-dark-secondary);
+}
+
+/* ==========================================================================
+   ABOUT SECTION: EDITORIAL TWO-COLUMN
+   ========================================================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.narrative-p {
+  font-size: 1rem;
+  color: var(--text-light-secondary);
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.institutional-callout {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.75rem 0;
+}
+
+.institutional-callout h4 {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+
+.institutional-callout p {
+  font-size: 0.9rem;
+  color: #475569;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.pillars-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pillar-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 1.5rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pillar-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.pillar-index {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.pillar-title {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.pillar-desc {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   IPS NORTHERN CHAPTER: REGIONAL CONSORTIUM & APEX PATRONAGE
+   ========================================================================== */
+.ips-banner-wrap {
+  background: #06111f;
+  border: 1px solid var(--hairline-gold);
+  border-radius: 4px;
+  padding: 2.75rem;
+  margin-top: 2rem;
+}
+
+.ips-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.75rem;
+  align-items: center;
+}
+
+.ips-emblem-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--hairline-dark);
+  border-radius: 4px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.ips-svg-large {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 1.25rem auto;
+  display: block;
+}
+
+.ips-est-caption {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-dark-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ips-narrative h3 {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.ips-narrative p {
+  color: var(--text-dark-secondary);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.ips-privileges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.privilege-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--hairline-dark);
+  border-radius: 4px;
+  padding: 1.15rem;
+}
+
+.privilege-title {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.privilege-desc {
+  font-size: 0.85rem;
+  color: var(--text-dark-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   10 SCIENTIFIC THEMATIC TRACKS (INTERACTIVE EXPLORER)
+   ========================================================================== */
+.track-filter-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.track-filter-btn {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.track-filter-btn:hover {
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.track-filter-btn.active {
+  background-color: #0f172a;
+  border-color: #0f172a;
+  color: #ffffff;
+}
+
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.track-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.track-card:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+}
+
+.track-number {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: 0.5rem;
+}
+
+.track-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.65rem;
+  line-height: 1.3;
+}
+
+.track-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.track-card-footer {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+}
+
+.track-tag {
+  color: #475569;
+  font-weight: 600;
+}
+
+.track-submit-link {
+  color: var(--accent-gold-hover);
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.track-submit-link:hover {
+  text-decoration: underline;
+}
+
+
+
+/* ==========================================================================
+   PROGRAM SCHEDULE (DAY 1 · DAY 2 · DAY 3)
+   ========================================================================== */
+.schedule-nav-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1rem;
+}
+
+.schedule-day-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #64748b;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.65rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.schedule-day-btn:hover {
+  color: #0f172a;
+}
+
+.schedule-day-btn.active {
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+.timeline-list {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.timeline-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 2rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 1.5rem;
+  align-items: start;
+}
+
+.timeline-time-col {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.timeline-venue-sub {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+.timeline-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-speakers {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ==========================================================================
+   REGISTRATION TARIFF & REAL-TIME CALCULATOR
+   ========================================================================== */
+.tariff-section-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.tariff-matrix-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 2rem;
+}
+
+.tariff-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.tariff-table th {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1.5px solid #cbd5e1;
+  text-align: left;
+}
+
+.tariff-table th.tar-amt {
+  text-align: right;
+}
+
+.tariff-table td {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: #1e293b;
+}
+
+.tariff-table td.tar-amt {
+  text-align: right;
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.tariff-table tr.highlight-tier {
+  background-color: rgba(203, 162, 52, 0.06);
+}
+
+.calc-widget-card {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.calc-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.calc-subtitle {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.calc-field {
+  margin-bottom: 1.25rem;
+}
+
+.calc-label {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #475569;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.calc-select, .calc-input {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.92rem;
+  color: #0f172a;
+  background-color: #ffffff;
+}
+
+.calc-select:focus, .calc-input:focus {
+  border-color: #0f172a;
+  outline: none;
+}
+
+.calc-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+  color: #334155;
+  cursor: pointer;
+  margin-bottom: 0.85rem;
+}
+
+.calc-total-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.calc-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-bottom: 0.35rem;
+}
+
+.calc-grand-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid #cbd5e1;
+  padding-top: 0.65rem;
+  margin-top: 0.65rem;
+}
+
+.calc-grand-label {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.calc-grand-val {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.btn-submit-reg {
+  width: 100%;
+  background-color: #0f172a;
+  color: #ffffff;
+  border: 1px solid #0f172a;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-submit-reg:hover {
+  background-color: #1e293b;
+}
+
+.btn-submit-reg:disabled {
+  background-color: #94a3b8;
+  border-color: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   PAYMENT GATEWAY & PROOF VERIFICATION WIDGET
+   ========================================================================== */
+.payment-step-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  background: #f1f5f9;
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.74rem;
+  font-family: var(--font-mono);
+  color: #64748b;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.payment-step-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.payment-step-num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  color: #0f172a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.68rem;
+}
+
+.payment-step-item.active {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.payment-step-item.active .payment-step-num {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.payment-step-item.completed {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.payment-step-item.completed .payment-step-num {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.payment-box-wrapper {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 1.15rem;
+  margin: 1rem 0;
+}
+
+.payment-box-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.payment-box-subtitle {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 0.85rem;
+}
+
+.payment-grid-2col {
+  display: grid;
+  grid-template-columns: 135px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+@media (max-width: 576px) {
+  .payment-grid-2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+.qr-code-frame {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.qr-code-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.qr-scan-label {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: #475569;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.bank-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0.65rem 0.85rem;
+}
+
+.bank-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f8fafc;
+  padding-bottom: 0.25rem;
+}
+
+.bank-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.bank-label {
+  color: #64748b;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.bank-val {
+  font-weight: 600;
+  color: #0f172a;
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+}
+
+.btn-copy-code {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+  font-size: 0.62rem;
+  padding: 0.12rem 0.35rem;
+  cursor: pointer;
+  color: #475569;
+  transition: all 0.15s;
+  font-family: var(--font-sans);
+}
+
+.btn-copy-code:hover {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.proof-upload-box {
+  background: #ffffff;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  margin-top: 0.75rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.proof-upload-box:hover, .proof-upload-box.dragover {
+  border-color: #0f172a;
+  background: #f8fafc;
+}
+
+.proof-preview-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+}
+
+.proof-thumb-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #bbf7d0;
+}
+
+.lock-gated-section {
+  position: relative;
+  transition: opacity 0.3s, filter 0.3s;
+}
+
+.lock-gated-section.locked {
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(0.6);
+  user-select: none;
+}
+
+.gate-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  margin: 1rem 0;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.gate-status-pill.locked {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+}
+
+.gate-status-pill.unlocked {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+/* ==========================================================================
+   ABSTRACT SUBMISSION PORTAL
+   ========================================================================== */
+.abstract-panel-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 2.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-label-scholarly {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #475569;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.form-input-scholarly, .form-textarea-scholarly {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.92rem;
+  color: #0f172a;
+  margin-bottom: 1.25rem;
+}
+
+.form-textarea-scholarly {
+  min-height: 140px;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+.word-count-bar {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: #64748b;
+  text-align: right;
+  margin-top: -0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ==========================================================================
+   REGIONAL CONSORTIUM & OFFICIAL LOGOS
+   ========================================================================== */
+.consortium-section-wrap {
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 3.5rem 0;
+}
+
+.consortium-intro-lockup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.consortium-logos-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.25rem;
+}
+
+.consortium-logo-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.consortium-logo-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.06);
+  border-color: #cbd5e1;
+}
+
+.official-seal-svg {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 0.85rem;
+  display: block;
+  flex-shrink: 0;
+}
+
+.official-logo-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  margin-bottom: 0.85rem;
+  display: block;
+  flex-shrink: 0;
+}
+
+.consortium-name {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
+}
+
+.consortium-subtext {
+  font-size: 0.72rem;
+  color: #64748b;
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   SPONSORSHIP PACKAGES: PLATINUM · DIAMOND · GOLD · SILVER
+   ========================================================================== */
+.sponsorship-section-wrap {
+  background: #08121f;
+  color: #ffffff;
+  padding: 5rem 0;
+  border-top: 1px solid var(--hairline-dark);
+  border-bottom: 1px solid var(--hairline-dark);
+  scroll-margin-top: 85px;
+}
+
+.sponsorship-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 1200px) {
+  .sponsorship-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .sponsorship-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sponsor-tier-card {
+  background: #0b1a2d;
+  border: 1px solid var(--hairline-dark);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.sponsor-tier-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.4);
+}
+
+.sponsor-tier-card.tier-platinum {
+  border-color: var(--accent-gold);
+  background: linear-gradient(180deg, rgba(203, 162, 52, 0.12) 0%, #0b1a2d 100%);
+}
+
+.sponsor-tier-card.tier-gold {
+  border-color: #f59e0b;
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.10) 0%, #0b1a2d 100%);
+}
+
+.sponsor-tier-card.tier-silver {
+  border-color: #94a3b8;
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.10) 0%, #0b1a2d 100%);
+}
+
+.sponsor-tier-card.tier-bronze {
+  border-color: #d97706;
+  background: linear-gradient(180deg, rgba(217, 119, 6, 0.08) 0%, #0b1a2d 100%);
+}
+
+.sponsor-featured-tag {
+  position: absolute;
+  top: -12px;
+  right: 24px;
+  background: var(--accent-gold);
+  color: #060e18;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.sponsor-tier-header {
+  border-bottom: 1px solid var(--hairline-dark);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sponsor-tier-name {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.sponsor-price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.sponsor-price-val {
+  font-family: var(--font-sans);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.sponsor-price-usd {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+.sponsor-gst-note {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-gold);
+}
+
+.sponsor-booth-spec {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.6rem 0.85rem;
+  border-radius: 4px;
+  border-left: 3px solid var(--accent-gold);
+  margin-bottom: 1.5rem;
+}
+
+.sponsor-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  flex-grow: 1;
+}
+
+.sponsor-feature-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+.sponsor-check-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--accent-gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.btn-sponsor-inquire {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid var(--accent-gold);
+}
+
+.btn-sponsor-inquire.primary {
+  background: var(--accent-gold);
+  color: #060e18;
+}
+
+.btn-sponsor-inquire.primary:hover {
+  background: var(--accent-gold-hover);
+  color: #060e18;
+}
+
+.btn-sponsor-inquire.secondary {
+  background: transparent;
+  color: #ffffff;
+}
+
+.btn-sponsor-inquire.secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.sponsorship-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  font-size: 0.88rem;
+  background: #0b1a2d;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--hairline-dark);
+}
+
+.sponsorship-comparison-table th,
+.sponsorship-comparison-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--hairline-dark);
+  text-align: left;
+}
+
+.sponsorship-comparison-table th {
+  background: #0f2238;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   VENUE & REAL-TIME GOOGLE MAP
+   ========================================================================== */
+.venue-map-split-wrap {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 3.5rem;
+}
+
+.venue-map-container {
+  width: 100%;
+  height: 420px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #cbd5e1;
+}
+
+.venue-map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.venue-transit-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.transit-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.85rem;
+}
+
+.transit-card-title {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+
+.transit-distance-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: #e2e8f0;
+  color: #334155;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+}
+
+.transit-card-detail {
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.btn-open-google-maps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem;
+  background: #0f172a;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.btn-open-google-maps:hover {
+  background: #1e293b;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   PLACES TO VISIT IN LUCKNOW (AUTHENTIC PHOTOGRAPHY SHOWCASE)
+   ========================================================================== */
+.places-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.place-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.place-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.08);
+}
+
+.place-image-frame {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.place-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.place-card:hover .place-image {
+  transform: scale(1.05);
+}
+
+.place-distance-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(6, 14, 24, 0.85);
+  backdrop-filter: blur(4px);
+  color: var(--accent-gold);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  border: 1px solid rgba(203, 162, 52, 0.3);
+}
+
+.place-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.place-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.place-desc {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.place-meta-footer {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #64748b;
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   FOOTER (EDITORIAL & ARCHIVAL)
+   ========================================================================== */
+.site-footer {
+  background-color: var(--canvas-deep);
+  color: var(--text-dark-secondary);
+  border-top: 1px solid var(--hairline-dark);
+  padding: 4.5rem 0 2rem 0;
+  font-size: 0.88rem;
+}
+
+.footer-main-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+}
+
+.footer-brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.footer-p {
+  color: var(--text-dark-muted);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.footer-heading {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.footer-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-link {
+  color: var(--text-dark-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-link:hover {
+  color: var(--accent-gold);
+}
+
+.footer-bottom-bar {
+  border-top: 1px solid var(--hairline-dark);
+  padding-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-dark-muted);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   MODAL & DRAWER STYLES
+   ========================================================================== */
+.custom-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(6, 14, 24, 0.8);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.custom-modal-dialog {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  position: relative;
+}
+
+.custom-modal-dialog.admin-wide {
+  max-width: 960px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #64748b;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .metric-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .consortium-logos-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .sponsorship-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .places-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .venue-map-split-wrap {
+    grid-template-columns: 1fr;
+  }
+  .tariff-section-wrap {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .footer-main-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 1550px) {
+  .brand-subtitle {
+    display: none;
+  }
+}
+
+@media (max-width: 1300px) {
+  .header-nav {
+    display: none !important;
+  }
+  .mobile-nav-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .brand-logo-niper {
+    height: 48px;
+  }
+  .brand-logo-ips {
+    height: 38px;
+    max-width: 155px;
+    padding: 3px 6px;
+  }
+  .brand-title {
+    font-size: 1.05rem;
+  }
+  .hero-main-title {
+    font-size: 2.15rem;
+  }
+  .consortium-logos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .places-grid {
+    grid-template-columns: 1fr;
+  }
+  .timeline-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .footer-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 580px) {
+  .site-header .container,
+  .site-header .header-inner,
+  .header-inner {
+    padding: 0 0.75rem !important;
+    gap: 0.5rem;
+  }
+  .brand-lockup {
+    gap: 0.5rem;
+    min-width: 0;
+  }
+  .brand-emblem-cluster {
+    gap: 0.5rem;
+  }
+  .brand-title {
+    display: none;
+  }
+  .brand-subtitle {
+    display: none;
+  }
+  .brand-logo-niper {
+    height: 42px;
+  }
+  .brand-logo-ips {
+    height: 32px;
+    max-width: 125px;
+    padding: 2px 5px;
+  }
+  .btn-secretariat {
+    display: none;
+  }
+  .btn-primary-action {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ==========================================================================
+     GLOBAL HEADER (TOP BAR CONTRACT: BRAND · 5 LINKS · PRIMARY ACTION)
+     ========================================================================== -->
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    
+    <!-- Zone 1: Single Wordmark / Brand Entity -->
+    <a href="#" class="brand-lockup" aria-label="NeuroMedPharmacon 2027 Homepage">
+      <div class="brand-emblem-cluster">
+        <!-- Official NIPER-Raebareli Logo (Larger & Crisp) -->
+        <img src="/assets/logos/niper_logo.png" alt="NIPER Raebareli Official Emblem" class="brand-logo-niper" onerror="this.src='/assets/logos/india_emblem.png'">
+        <!-- Official IPS Logo (Larger & High-Contrast) -->
+        <img src="/assets/logos/ips_logo.png" alt="Indian Pharmacological Society Official Logo" class="brand-logo-ips">
+      </div>
+      <div class="brand-text-group">
+        <span class="brand-title">NeuroMedPharmacon 2027</span>
+        <span class="brand-subtitle">NIPER-Raebareli · in collaboration with IPS North Zone</span>
+      </div>
+    </a>
+
+    <!-- Zone 2: Concise Single-Line Nav Links -->
+    <nav class="header-nav" role="navigation" aria-label="Main Navigation">
+      <a href="#about" class="nav-anchor">About</a>
+      <a href="#consortium" class="nav-anchor">Partners</a>
+      <a href="#tracks" class="nav-anchor">Tracks</a>
+      <a href="#schedule" class="nav-anchor">Schedule</a>
+      <a href="#abstracts" class="nav-anchor">Abstracts</a>
+      <a href="#sponsorship" class="nav-anchor">Sponsorship</a>
+      <a href="#venue" class="nav-anchor">Venue &amp; Map</a>
+    </nav>
+
+    <!-- Zone 3: 1 Primary Action + Secretariat Trigger -->
+    <div class="header-actions">
+      <a href="/admin.html" target="_blank" class="btn-secretariat" title="Open Secretariat & Mail Center">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <span>Secretariat</span>
+      </a>
+      <a href="#registration" class="btn-primary-action">Register Delegate</a>
+      <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Toggle Navigation Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<div id="mobileDrawer" style="display:none; background: #060e18; border-bottom: 1px solid var(--hairline-dark); padding: 1.25rem;">
+  <div class="container d-flex flex-column gap-3">
+    <a href="#about" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">About Conference</a>
+    <a href="#consortium" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Regional Consortium</a>
+    <a href="#tracks" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Scientific Tracks</a>
+    <a href="#schedule" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Program Schedule</a>
+    <a href="#abstracts" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Call for Abstracts</a>
+    <a href="#sponsorship" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Sponsorship Prospectus</a>
+    <a href="#venue" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Venue &amp; Map</a>
+    <div class="d-flex gap-2 pt-2 border-top border-secondary">
+      <a href="#registration" class="btn-primary-action text-center flex-grow-1" onclick="toggleMobileNav()">Register Delegate</a>
+      <a href="/admin.html" target="_blank" class="btn-secretariat text-center">Secretariat</a>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     HERO SECTION: SCHOLARLY MASTHEAD & PRECISION CANVAS
+     ========================================================================== -->
+<section class="hero-masthead" id="hero">
+  <!-- Subtle chemical lattice canvas background -->
+  <canvas id="latticeCanvas" class="hero-canvas-bg"></canvas>
+
+  <div class="container hero-content">
+    
+    <!-- Institutional Patronage Kicker -->
+    <div class="hero-affiliation-line">
+      <span>NIPER-Raebareli · In Collaboration with Indian Pharmacological Society (IPS) North Zone</span>
+    </div>
+
+    <!-- Major Regional Congress Title -->
+    <h1 class="hero-main-title">
+      NeuroMedPharmacon 2027
+    </h1>
+
+    <div class="hero-congress-badge">
+      IN COLLABORATION WITH <span>· INDIAN PHARMACOLOGICAL SOCIETY (NORTH ZONE)</span>
+    </div>
+
+    <!-- Editorial Prose -->
+    <p class="hero-prose">
+      Organized by the Department of Pharmacology &amp; Toxicology, National Institute of Pharmaceutical Education and Research (NIPER), Raebareli at Lucknow Campus, in collaboration with the Indian Pharmacological Society (Northern Chapter / IPS North Zone).
+    </p>
+
+    <!-- Verified Logistics Bar with Interactive Map Anchor -->
+    <div class="hero-logistics-bar">
+      <span>18th – 20th February 2027</span>
+      <span class="meta-sep">/</span>
+      <span>Main Auditorium, NIPER-Raebareli Campus</span>
+      <span class="meta-sep">/</span>
+      <a href="#venue" style="color: inherit; text-decoration: none; border-bottom: 1px dotted var(--accent-gold);" title="Click to view interactive Google Map">
+        Lucknow, Uttar Pradesh, India 📍
+      </a>
+    </div>
+
+    <!-- Focal CTA Cluster -->
+    <div class="hero-cta-cluster">
+      <a href="#registration" class="btn-hero-primary">
+        <span>Register as Delegate</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+      <a href="#abstracts" class="btn-hero-secondary">
+        <span>Submit Abstract</span>
+      </a>
+      <a href="#sponsorship" class="btn-hero-secondary">
+        <span>Sponsorship Packages</span>
+      </a>
+    </div>
+
+    <!-- Quick Unboxed Document Links with Awesome PDF downloads -->
+    <div class="hero-quick-downloads">
+      <a href="/downloads/IPS_NorthZone_Abstract_Guidelines_2027.pdf" download="IPS_NorthZone_Abstract_Guidelines_2027.pdf" onclick="triggerPDFDownload(event, 'guidelines')" class="quick-link" title="Download Official Academic Guidelines in PDF Format">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="12" y1="18" x2="12" y2="12"></line>
+          <line x1="9" y1="15" x2="12" y2="18"></line>
+          <line x1="15" y1="15" x2="12" y2="18"></line>
+        </svg>
+        <span>Download Abstract Guidelines (PDF)</span>
+      </a>
+      <span>·</span>
+      <a href="/downloads/IPS_NorthZone_Abstract_Template_2027.pdf" download="IPS_NorthZone_Abstract_Template_2027.pdf" onclick="triggerPDFDownload(event, 'template')" class="quick-link" title="Download Formatted Structured Template in PDF Format">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <line x1="10" y1="9" x2="8" y2="9"></line>
+        </svg>
+        <span>Abstract Template (PDF)</span>
+      </a>
+      <span>·</span>
+      <a href="/downloads/IPS_NorthZone_Sponsorship_Prospectus_2027.pdf" download="IPS_NorthZone_Sponsorship_Prospectus_2027.pdf" class="quick-link" title="Download Commercial Sponsorship Prospectus in PDF Format">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+        <span>Sponsorship Prospectus (PDF)</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================================================
+     METRIC STRIP (TABULAR NUMERAL RIGOR)
+     ========================================================================== -->
+<section class="metric-strip-section" aria-label="Congress Milestones">
+  <div class="container">
+    <div class="metric-grid">
+      <div class="metric-item">
+        <div class="metric-value accent-gold tabular-nums">60+</div>
+        <p class="metric-label">Keynote &amp; Plenary Orators</p>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value tabular-nums">10</div>
+        <p class="metric-label">Curated Thematic Tracks</p>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value tabular-nums">500+</div>
+        <p class="metric-label">Peer-Reviewed Abstracts</p>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value accent-gold tabular-nums">INR 1,50,000</div>
+        <p class="metric-label">Young Investigator Awards</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     ABOUT SECTION: SCHOLARLY MANDATE & CONGRESS PILLARS
+     ========================================================================== -->
+<section class="section-block section-block-light" id="about">
+  <div class="container">
+    
+    <div class="about-grid">
+      <!-- Left Column: Narrative -->
+      <div>
+        <span class="editorial-kicker">Scholarly Purpose &amp; Institutional Mandate</span>
+        <h2 class="section-title-large">
+          Advancing Pharmacology into Clinical Translation
+        </h2>
+        <p class="narrative-p">
+          <strong>NeuroMedPharmacon 2027</strong> is convened by the <strong>National Institute of Pharmaceutical Education and Research (NIPER), Raebareli</strong>, recognized as an Institute of National Importance by an Act of Parliament under the aegis of the Department of Pharmaceuticals, Ministry of Chemicals &amp; Fertilizers, Government of India.
+        </p>
+        <p class="narrative-p">
+          The congress serves as an authoritative international bridge uniting molecular pharmacologists, neuroscientists, computational chemists, and clinical investigators. Under the guidance of NIPER-Raebareli’s <strong>Laboratory of Molecular NeuroTherapeutics</strong>, this edition focuses on mechanistic drug discovery, targeted drug delivery, neurodegenerative pathophysiology, and translational toxicology.
+        </p>
+
+        <div class="institutional-callout">
+          <h4>Viksit Bharat @2047 &amp; UN SDG 3 Alignment</h4>
+          <p>
+            Dedicated to accelerating indigenous pharmaceutical innovation, drug accessibility, and high-tier scientific workforce capacity in adherence to India's vision of global pharmaceutical self-reliance.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: 3 Congress Pillars (Hairline clean containers) -->
+      <div class="pillars-stack">
+        <div class="pillar-card">
+          <span class="pillar-index">01. WORKSHOP</span>
+          <h3 class="pillar-title">A workshop of Network Pharmacology</h3>
+          <p class="pillar-desc">
+            Hands-on training session covering target-disease network construction, biological pathway enrichment, compound-target interactions, and multi-target drug discovery paradigms.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <span class="pillar-index">02. MEMORIAL &amp; PLENARY ORATIONS</span>
+          <h3 class="pillar-title">Prestigious Academic Lectures</h3>
+          <p class="pillar-desc">
+            Distinguished oration series delivered by Fellows of the Indian Pharmacological Society and international pioneers in molecular neurotherapeutics.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <span class="pillar-index">03. YOUNG SCIENTIST RECOGNITION</span>
+          <h3 class="pillar-title">Oral &amp; Poster Travel Fellowships</h3>
+          <p class="pillar-desc">
+            Over 20 travel bursaries and merit awards for post-graduate scholars, doctoral researchers, and early-career pharmacologists presenting peer-reviewed original work.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         HOST INSTITUTION & COLLABORATING SOCIETY (NIPER-RAEBARELI & IPS NORTH ZONE)
+         ====================================================================== -->
+    <div class="consortium-block-wrap" id="consortium" style="margin-top: 3.5rem; background: #08121f; border: 1px solid var(--hairline-dark); border-radius: 8px; padding: 2.5rem 2rem;">
+      
+      <div style="margin-bottom: 2rem;">
+        <span class="editorial-kicker">Conference Leadership &amp; Official Partnership</span>
+        <h3 style="font-family: var(--font-serif); font-size: 1.65rem; color: #ffffff; margin-bottom: 0.5rem;">
+          Host Institution &amp; Collaborating Society
+        </h3>
+        <p style="color: #94a3b8; font-size: 0.92rem; max-width: 820px; margin: 0; line-height: 1.6;">
+          <strong>NeuroMedPharmacon 2027</strong> is hosted by the <strong>National Institute of Pharmaceutical Education and Research (NIPER), Raebareli</strong> in collaboration with the <strong>Indian Pharmacological Society (Northern Chapter / IPS North Zone)</strong>.
+        </p>
+      </div>
+
+      <!-- 2 Official Institutional Partner Cards with Verified Logos -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem; margin-bottom: 2.5rem;">
+        
+        <!-- Partner 1: NIPER Raebareli (Host Institution) -->
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--hairline-dark); border-radius: 8px; padding: 2rem 1.75rem; display: flex; flex-direction: column; align-items: flex-start;">
+          <div style="display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.25rem; width: 100%;">
+            <img 
+              src="/assets/logos/niper_logo.png" 
+              alt="NIPER Raebareli Official Emblem" 
+              style="height: 86px; width: auto; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); flex-shrink: 0;"
+              onerror="this.src='/assets/logos/india_emblem.png'"
+            />
+            <div>
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.08em; display: block;">Host Institution</span>
+              <h4 style="font-family: var(--font-serif); font-size: 1.25rem; color: #ffffff; margin: 0.2rem 0; line-height: 1.3;">
+                NIPER - Raebareli
+              </h4>
+              <span style="font-size: 0.8rem; color: #94a3b8; display: block;">
+                An Institute of National Importance · Dept. of Pharmaceuticals, Govt. of India
+              </span>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin: 0 0 1rem;">
+            Convened by the <strong>Department of Pharmacology &amp; Toxicology</strong> and the <strong>Laboratory of Molecular NeuroTherapeutics</strong> at NIPER-Raebareli Lucknow Campus, providing modern behavioral testing arenas, molecular neurobiology facilities, and conference auditoriums.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--accent-gold); background: rgba(203,162,52,0.1); padding: 4px 8px; border-radius: 4px;">
+            Secretariat: Bijnor Road, Sarojini Nagar, Lucknow 226002
+          </div>
+        </div>
+
+        <!-- Partner 2: Indian Pharmacological Society (IPS) North Zone (Collaborator) -->
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--hairline-dark); border-radius: 8px; padding: 2rem 1.75rem; display: flex; flex-direction: column; align-items: flex-start;">
+          <div style="display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.25rem; width: 100%;">
+            <div style="background: #ffffff; padding: 10px 14px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); flex-shrink: 0;">
+              <img 
+                src="/assets/logos/ips_logo.png" 
+                alt="Indian Pharmacological Society Official Logo" 
+                style="height: 70px; max-width: 220px; object-fit: contain; display: block;"
+              />
+            </div>
+            <div>
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.08em; display: block;">Collaborating Society</span>
+              <h4 style="font-family: var(--font-serif); font-size: 1.2rem; color: #ffffff; margin: 0.2rem 0; line-height: 1.3;">
+                Indian Pharmacological Society
+              </h4>
+              <span style="font-size: 0.8rem; color: #94a3b8; display: block;">
+                Northern Chapter (IPS North Zone) · Estd. 1966
+              </span>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin: 0 0 1rem;">
+            Under the academic patronage of the <strong>IPS Northern Chapter</strong>, representing pharmacologists, toxicologists, and clinical trialists across Northern India (UP, Delhi NCR, Punjab, Haryana, Uttarakhand, Himachal Pradesh, and J&amp;K).
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #38bdf8; background: rgba(56,189,248,0.1); padding: 4px 8px; border-radius: 4px;">
+            Scientific Endorsement &amp; Young Scientist Awards
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Regional Highlights Strip -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; border-top: 1px solid var(--hairline-dark); padding-top: 1.5rem;">
+        <div style="font-size: 0.88rem; color: #cbd5e1;">
+          <strong style="color: var(--accent-gold); display: block; margin-bottom: 0.25rem;">Subsidized Scholar Rates</strong>
+          Dedicated fee concessions for Research Scholars &amp; PG Students across all tiers.
+        </div>
+        <div style="font-size: 0.88rem; color: #cbd5e1;">
+          <strong style="color: var(--accent-gold); display: block; margin-bottom: 0.25rem;">IPS North Zone Awards</strong>
+          Young Scientist Awards &amp; 20+ merit travel grants for regional researchers.
+        </div>
+        <div style="font-size: 0.88rem; color: #cbd5e1;">
+          <strong style="color: var(--accent-gold); display: block; margin-bottom: 0.25rem;">Joint Scientific Certification</strong>
+          Authenticated jointly by NIPER-Raebareli and the IPS Northern Chapter Secretariat.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================================================
+     10 SCIENTIFIC THEMATIC TRACKS (INTERACTIVE EXPLORER)
+     ========================================================================== -->
+<section class="section-block section-block-light" id="tracks" style="background: #f8fafc;">
+  <div class="container">
+    
+    <div class="section-header-centered">
+      <span class="editorial-kicker">Scientific Scope &amp; Call for Papers</span>
+      <h2 class="section-title-large">10 Thematic Scientific Tracks</h2>
+      <p class="section-lead-text">
+        Interdisciplinary tracks encompassing molecular pharmacology, target identification, neurodegenerative therapeutics, and regulatory safety sciences.
+      </p>
+    </div>
+
+    <!-- Category Filter Bar (Buttons with active states, not pills) -->
+    <div class="track-filter-strip">
+      <button class="track-filter-btn active" onclick="filterTracks('all', this)">All 10 Tracks</button>
+      <button class="track-filter-btn" onclick="filterTracks('neuro', this)">Neurotherapeutics &amp; CNS</button>
+      <button class="track-filter-btn" onclick="filterTracks('design', this)">In-Silico &amp; AI Drug Design</button>
+      <button class="track-filter-btn" onclick="filterTracks('clinical', this)">Clinical &amp; Translational</button>
+      <button class="track-filter-btn" onclick="filterTracks('toxicology', this)">Toxicology &amp; Regulatory</button>
+    </div>
+
+    <!-- Dynamic Track Grid -->
+    <div class="track-grid" id="trackGrid">
+      
+      <div class="track-card" data-category="neuro">
+        <span class="track-number">TRACK 01</span>
+        <h3 class="track-title">Molecular Neuropharmacology &amp; Neuroprotection</h3>
+        <p class="track-desc">Synaptic plasticity, neuroinflammation cascades, microglial dynamics, and disease-modifying interventions for Alzheimer's, Parkinson's, and ALS.</p>
+        <div class="track-card-footer">
+          <span class="track-tag">CNS Biology</span>
+          <a class="track-submit-link" onclick="openAbstractWithTrack('Track 01: Molecular Neuropharmacology')">Submit Abstract &rarr;</a>
+        </div>
+      </div>
+
+      <div class="track-card" data-category="design">
+        <span class="track-number">TRACK 02</span>
+        <h3 class="track-title">AI &amp; Computational Pharmacology</h3>
+        <p class="track-desc">Deep-learning affinity predictors, molecular dynamics simulations, generative small-molecule de novo design, macromolecular mechanics, and QSAR profiling.</p>
+        <div class="track-card-footer">
+          <span class="track-tag">In-Silico</span>
+          <a class="track-submit-link" onclick="openAbstractWithTrack('Track 02: AI & Computational Pharmacology')">Submit Abstract &rarr;</a>
+        </div>
+      </div>
+
+      <div class="track-card" data-category="clinical">
+        <span class="track-number">TRACK 03</span>
+        <h3 class="track-title">Translational Medicine &amp; Biomarkers</h3>
+        <p class="track-desc">Target validation, bio-fluid proteomic markers, PET neuroimaging ligands, and translational efficacy in first-in-human clinical protocols.</p>
+        <div class="track-card-footer">
+          <span class="track-tag">Translational</span>
+          <a class="track-submit-link" onclick="openAbstractWithTrack('Track 03: Translational Medicine')">Submit Abstract &rarr;</a>
+        </div>
+      </div>
+
+      <div class="track-card" data-category="neuro">
+        <span class="track-number">TRACK 04</span>
+        <h3 class="track-title">Targeted CNS Drug Delivery &amp; Nanomedicine</h3>
+        <p class="track-desc">Blood-brain barrier transport engineering, intranasal polymeric nanoparticles, lipid nanocarriers, and receptor-mediated transcytosis.</p>
+        <div class="track-card-footer">
+          <span class="track-tag">Pharmaceutics</span>
+          <a class="track-submit-link" onclick="openAbstractWithTrack('Track 04: Targeted CNS Delivery')">Submit Abstract &rarr;</a>
+        </div>
+      </div>
+
+      <div class="track-card" data-category="toxicology">
+        <span class="track-number">TRACK 05</span>
+        <h3 class="track-title">Safety Pharmacology &amp; Regulatory Toxicology</h3>
+        <p class="track-desc">hERG channel screening, in-vitro organoid safety assays, non-clinical safety evaluation, and OECD GLP guidelines compliance.</p>
+        <div class="track-card-footer">
+          <span class="track-tag">Toxicology</span>
+          <a class="track-submit-link" onclick="openAbstractWithTrack('Track 05: Safety Pharmacology')">Submit Abstract &rarr;</a>
+        </div>
+      </div>
+
+      <div class="track-card" data-category="clinical">
+        <span class="track-number">TRACK 06</span>
+        <h3 class="track-title">Cardiovascular &amp; Metabolic Pharmacology</h3>
+        <p class="track-desc">Endothelial dysfunction mechanisms, GLP-1 receptor modulators, diabetic cardiomyopathy, and renal-metabolic cross-talk.</p>
+        <div class="track-card-footer">
+          <span class="track-tag">Cardio-Metabolic</span>
+          <a class="track-submit-link" onclick="openAbstractWithTrack('Track 06: Cardiovascular Pharmacology')">Submit Abstract &rarr;</a>
+        </div>
+      </div>
+
+      <div class="track-card" data-category="neuro">
+        <span class="track-number">TRACK 07</span>
+        <h3 class="track-title">Neurodegenerative Mechanisms &amp; Protein Misfolding</h3>
+        <p class="track-desc">Tauopathy cascades, alpha-synuclein oligomerization, mitochondrial dysfunction, microglial activation, and disease-modifying targets in Alzheimer's and Parkinson's.</p>
+        <div class="track-card-footer">
+          <span class="track-tag">Neurodegeneration</span>
+          <a class="track-submit-link" onclick="openAbstractWithTrack('Track 07: Neurodegenerative Diseases & Protein Misfolding')">Submit Abstract &rarr;</a>
+        </div>
+      </div>
+
+      <div class="track-card" data-category="neuro">
+        <span class="track-number">TRACK 08</span>
+        <h3 class="track-title">Neuropsychopharmacology &amp; Synaptic Modulation</h3>
+        <p class="track-desc">Glutamatergic signaling, GABA-A receptor kinetics, ion-channelopathies, affective disorders, depression, epilepsy, and non-opioid neuropathic pain therapeutics.</p>
+        <div class="track-card-footer">
+          <span class="track-tag">Synaptic Plasticity</span>
+          <a class="track-submit-link" onclick="openAbstractWithTrack('Track 08: Neuropsychopharmacology & Synaptic Plasticity')">Submit Abstract &rarr;</a>
+        </div>
+      </div>
+
+      <div class="track-card" data-category="toxicology">
+        <span class="track-number">TRACK 09</span>
+        <h3 class="track-title">Pharmacovigilance &amp; Clinical Research Standards</h3>
+        <p class="track-desc">Adverse drug reaction monitoring, real-world evidence (RWE), electronic health record analytics, and CDSCO regulatory harmonisation.</p>
+        <div class="track-card-footer">
+          <span class="track-tag">Regulatory</span>
+          <a class="track-submit-link" onclick="openAbstractWithTrack('Track 09: Pharmacovigilance')">Submit Abstract &rarr;</a>
+        </div>
+      </div>
+
+      <div class="track-card" data-category="neuro">
+        <span class="track-number">TRACK 10</span>
+        <h3 class="track-title">Neuropsychopharmacology &amp; Pain Signaling</h3>
+        <p class="track-desc">GABA-A and NMDA receptor pharmacology, opioid alternatives, neuropathic pain mediators, and clinical translation in affective disorders.</p>
+        <div class="track-card-footer">
+          <span class="track-tag">Pain &amp; CNS</span>
+          <a class="track-submit-link" onclick="openAbstractWithTrack('Track 10: Neuropsychopharmacology')">Submit Abstract &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ==========================================================================
+     PROGRAM SCHEDULE & SESSIONS
+     ========================================================================== -->
+<section class="section-block section-block-light" id="schedule">
+  <div class="container">
+    
+    <div class="section-header-centered">
+      <span class="editorial-kicker">Scientific Agenda</span>
+      <h2 class="section-title-large">Program Schedule &amp; Sessions</h2>
+      <p class="section-lead-text">
+        Three days of intensive plenary orations, parallel scientific symposia, young investigator oral communications, and poster exhibitions.
+      </p>
+    </div>
+
+    <!-- Day Selector Tabs -->
+    <div class="schedule-nav-tabs">
+      <button class="schedule-day-btn active" onclick="switchScheduleDay(1, this)">
+        Day 1: Feb 18, 2027 (Inauguration &amp; Plenary)
+      </button>
+      <button class="schedule-day-btn" onclick="switchScheduleDay(2, this)">
+        Day 2: Feb 19, 2027 (Symposia &amp; IPS General Body)
+      </button>
+      <button class="schedule-day-btn" onclick="switchScheduleDay(3, this)">
+        Day 3: Feb 20, 2027 (Young Investigator Awards &amp; Valedictory)
+      </button>
+    </div>
+
+    <!-- Timeline List Container -->
+    <div class="timeline-list" id="scheduleTimeline">
+      
+      <!-- Day 1 Schedule Items (Default) -->
+      <div class="timeline-row">
+        <div class="timeline-time-col">
+          <div>08:30 – 09:30</div>
+          <div class="timeline-venue-sub">Main Foyer</div>
+        </div>
+        <div>
+          <h3 class="timeline-title">Delegate Registration &amp; Kit Distribution</h3>
+          <p class="timeline-speakers">Secretariat desk verification, kit handover, and poster installation assistance.</p>
+        </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time-col">
+          <div>09:30 – 11:00</div>
+          <div class="timeline-venue-sub">Auditorium A</div>
+        </div>
+        <div>
+          <h3 class="timeline-title">Inaugural Ceremony &amp; Presidential Address</h3>
+          <p class="timeline-speakers">
+            Chief Guest Address (Ministry of Chemicals &amp; Fertilizers, Govt. of India), Director NIPER-Raebareli, and President Indian Pharmacological Society.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time-col">
+          <div>11:30 – 13:00</div>
+          <div class="timeline-venue-sub">Auditorium A</div>
+        </div>
+        <div>
+          <h3 class="timeline-title">Plenary Session I: Breakthroughs in Neurotherapeutics</h3>
+          <p class="timeline-speakers">
+            <strong>Keynote:</strong> Prof. S. K. Kulkarni (Eminent Pharmacologist) · <em>"Microglial Modulation and Epigenetic Targeting in Alzheimer's Pathogenesis"</em>
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time-col">
+          <div>14:00 – 16:30</div>
+          <div class="timeline-venue-sub">Hall B &amp; Lab C</div>
+        </div>
+        <div>
+          <h3 class="timeline-title">A workshop of Network Pharmacology</h3>
+          <p class="timeline-speakers">
+            Hands-on practical training on target-disease network construction, pathway enrichment, Cytoscape network visualization, and polypharmacology principles in drug discovery.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================================================
+     REGISTRATION TARIFF & WORKING FEE CALCULATOR
+     ========================================================================== -->
+<section class="section-block section-block-light" id="registration" style="background: #f8fafc;">
+  <div class="container">
+    
+    <div class="section-header-centered">
+      <span class="editorial-kicker">Conference Tariff &amp; Delegate Enrolment</span>
+      <h2 class="section-title-large">Registration &amp; Fee Structure</h2>
+      <p class="section-lead-text">
+        Transparent rate tiers with dedicated fee relief for research scholars and students.
+      </p>
+    </div>
+
+    <div class="tariff-section-wrap">
+      
+      <!-- Left: Tariff Matrix Table -->
+      <div class="tariff-matrix-card">
+        <div class="d-flex justify-content-between align-items-baseline mb-3">
+          <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin: 0;">Official Tariff Matrix</h3>
+          <span style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-gold); font-weight: 600;">ACTIVE: EARLY BIRD TIER</span>
+        </div>
+        <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1.5rem;">
+          Early Bird rates valid up to <strong>31 March 2026</strong>. Regular rates apply through 20 September 2026.
+        </p>
+
+        <table class="tariff-table">
+          <thead>
+            <tr>
+              <th>Delegate Category</th>
+              <th class="tar-amt">Early Bird</th>
+              <th class="tar-amt">Regular</th>
+              <th class="tar-amt">On-Site Spot</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-tier">
+              <td>Research Scholar / PG Student</td>
+              <td class="tar-amt">₹3,500</td>
+              <td class="tar-amt">₹4,000</td>
+              <td class="tar-amt">₹4,500</td>
+            </tr>
+            <tr>
+              <td>Faculty / Academic Scientist</td>
+              <td class="tar-amt">₹4,500</td>
+              <td class="tar-amt">₹5,500</td>
+              <td class="tar-amt">₹6,500</td>
+            </tr>
+            <tr>
+              <td>Corporate / Industry Delegate</td>
+              <td class="tar-amt">₹6,000</td>
+              <td class="tar-amt">₹7,500</td>
+              <td class="tar-amt">₹9,000</td>
+            </tr>
+            <tr>
+              <td>A workshop of Network Pharmacology Add-on</td>
+              <td class="tar-amt">+₹500</td>
+              <td class="tar-amt">+₹500</td>
+              <td class="tar-amt">+₹500</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.78rem; color: #64748b; margin-top: 0.85rem; line-height: 1.4;">
+          * All tariffs are subject to mandatory 18% Institutional GST, automatically included in the payable total.
+        </p>
+      </div>
+
+      <!-- Right: Real-Time Working Registration Form -->
+      <div class="calc-widget-card" id="registrationFormCard">
+        <h3 class="calc-title">Delegate Enrolment Portal</h3>
+        <p class="calc-subtitle">Select your delegate category, review applicable fees, enter details, and complete your registration.</p>
+
+        <form id="registrationForm" onsubmit="handleRegistrationSubmit(event)">
+          
+          <!-- STAGE 1: TARIFF & CATEGORY ASSESSMENT -->
+          <div class="calc-field">
+            <label class="calc-label">Select Delegate Category *</label>
+            <select class="calc-select" id="regCategory" onchange="recalculateTariff()" required>
+              <option value="student">Research Scholar / PG Student — ₹3,500 (Total ₹4,130 incl. 18% GST)</option>
+              <option value="faculty">Faculty / Academic Scientist — ₹4,500 (Total ₹5,310 incl. 18% GST)</option>
+              <option value="corporate">Corporate / Industry Delegate — ₹6,000 (Total ₹7,080 incl. 18% GST)</option>
+            </select>
+          </div>
+
+          <div class="calc-checkbox-row">
+            <input type="checkbox" id="regWorkshop" onchange="recalculateTariff()">
+            <label for="regWorkshop" style="cursor: pointer;">
+              Include A workshop of Network Pharmacology (+₹500)
+            </label>
+          </div>
+
+          <!-- Total Summary Box (All Tariffs Inclusive of 18% Institutional GST) -->
+          <div class="calc-total-box" style="margin: 0.85rem 0 1.25rem 0;">
+            <div class="calc-total-row">
+              <span>Base Registration Fee:</span>
+              <span class="tabular-nums" id="summaryBase">₹3,500</span>
+            </div>
+            <div class="calc-total-row" id="rowWorkshop" style="display:none;">
+              <span>A workshop of Network Pharmacology:</span>
+              <span class="tabular-nums" id="summaryWorkshop">+₹500</span>
+            </div>
+            <div class="calc-total-row" id="rowGst">
+              <span>Institutional GST @ 18% (Included):</span>
+              <span class="tabular-nums" id="summaryGst">₹630</span>
+            </div>
+            <div class="calc-grand-total">
+              <span class="calc-grand-label">Total Payable Remittance (Incl. 18% GST):</span>
+              <span class="calc-grand-val" id="summaryGrandTotal" style="color: #0f172a;">₹4,130</span>
+            </div>
+          </div>
+
+          <!-- Delegate Information -->
+          <div class="calc-field">
+            <label class="calc-label">Full Name &amp; Academic Title *</label>
+            <input type="text" class="calc-input" id="regFullName" placeholder="e.g. Dr. Rajesh Sharma" required>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <div class="col-md-6">
+              <label class="calc-label">Institutional Email *</label>
+              <input type="email" class="calc-input" id="regEmail" placeholder="name@institution.edu.in" required>
+            </div>
+            <div class="col-md-6">
+              <label class="calc-label">Contact Phone *</label>
+              <input type="tel" class="calc-input" id="regPhone" placeholder="+91 9876543210" required>
+            </div>
+          </div>
+
+          <!-- ==========================================================================
+               SECURE PAYMENT VALIDATION COMPONENT
+               ========================================================================== -->
+          <div class="payment-box-wrapper" id="paymentValidationComponent">
+            <div class="payment-box-title">
+              <span>💳 Secure Payment Validation</span>
+              <span style="font-size: 0.72rem; font-family: var(--font-mono); color: #16a34a; font-weight: 600;">Secretariat Official Remittance</span>
+            </div>
+            <p class="payment-box-subtitle">
+              Scan the UPI QR code below with any banking app (GPay / PhonePe / Paytm / BHIM) or transfer via NEFT/RTGS for the payable fee (<strong id="paymentRemitNotice" style="color:#0f172a;">₹4,130</strong>).
+            </p>
+
+            <div class="payment-grid-2col">
+              <!-- UPI QR Code Frame -->
+              <div class="qr-code-frame">
+                <svg class="qr-code-svg" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UPI Payment QR Code">
+                  <rect width="140" height="140" fill="#ffffff"/>
+                  <!-- Position detection patterns -->
+                  <rect x="10" y="10" width="35" height="35" fill="#0f172a"/>
+                  <rect x="15" y="15" width="25" height="25" fill="#ffffff"/>
+                  <rect x="20" y="20" width="15" height="15" fill="#0f172a"/>
+
+                  <rect x="95" y="10" width="35" height="35" fill="#0f172a"/>
+                  <rect x="100" y="15" width="25" height="25" fill="#ffffff"/>
+                  <rect x="105" y="20" width="15" height="15" fill="#0f172a"/>
+
+                  <rect x="10" y="95" width="35" height="35" fill="#0f172a"/>
+                  <rect x="15" y="100" width="25" height="25" fill="#ffffff"/>
+                  <rect x="20" y="105" width="15" height="15" fill="#0f172a"/>
+
+                  <!-- QR Data Matrix Dots -->
+                  <rect x="52" y="12" width="6" height="6" fill="#0f172a"/>
+                  <rect x="62" y="12" width="6" height="6" fill="#0f172a"/>
+                  <rect x="72" y="12" width="6" height="6" fill="#0f172a"/>
+                  <rect x="82" y="12" width="6" height="6" fill="#0f172a"/>
+                  <rect x="52" y="24" width="6" height="6" fill="#0f172a"/>
+                  <rect x="68" y="24" width="6" height="6" fill="#0f172a"/>
+                  <rect x="82" y="24" width="6" height="6" fill="#0f172a"/>
+                  <rect x="52" y="36" width="6" height="6" fill="#0f172a"/>
+                  <rect x="62" y="36" width="6" height="6" fill="#0f172a"/>
+                  <rect x="76" y="36" width="6" height="6" fill="#0f172a"/>
+
+                  <!-- Timing bars -->
+                  <rect x="10" y="52" width="6" height="6" fill="#0f172a"/><rect x="22" y="52" width="6" height="6" fill="#0f172a"/><rect x="34" y="52" width="6" height="6" fill="#0f172a"/>
+                  <rect x="46" y="52" width="6" height="6" fill="#0f172a"/><rect x="58" y="52" width="6" height="6" fill="#0f172a"/><rect x="70" y="52" width="6" height="6" fill="#0f172a"/>
+                  <rect x="82" y="52" width="6" height="6" fill="#0f172a"/><rect x="94" y="52" width="6" height="6" fill="#0f172a"/><rect x="106" y="52" width="6" height="6" fill="#0f172a"/><rect x="118" y="52" width="6" height="6" fill="#0f172a"/>
+
+                  <rect x="12" y="64" width="6" height="6" fill="#0f172a"/><rect x="24" y="64" width="6" height="6" fill="#0f172a"/><rect x="36" y="64" width="6" height="6" fill="#0f172a"/>
+                  <rect x="50" y="64" width="6" height="6" fill="#0f172a"/><rect x="64" y="64" width="6" height="6" fill="#0f172a"/><rect x="80" y="64" width="6" height="6" fill="#0f172a"/>
+                  <rect x="92" y="64" width="6" height="6" fill="#0f172a"/><rect x="104" y="64" width="6" height="6" fill="#0f172a"/><rect x="120" y="64" width="6" height="6" fill="#0f172a"/>
+
+                  <rect x="12" y="76" width="6" height="6" fill="#0f172a"/><rect x="28" y="76" width="6" height="6" fill="#0f172a"/><rect x="42" y="76" width="6" height="6" fill="#0f172a"/>
+                  <rect x="56" y="76" width="6" height="6" fill="#0f172a"/><rect x="74" y="76" width="6" height="6" fill="#0f172a"/><rect x="88" y="76" width="6" height="6" fill="#0f172a"/>
+                  <rect x="108" y="76" width="6" height="6" fill="#0f172a"/><rect x="122" y="76" width="6" height="6" fill="#0f172a"/>
+
+                  <!-- Bottom Right quadrant -->
+                  <rect x="52" y="95" width="6" height="6" fill="#0f172a"/><rect x="64" y="95" width="6" height="6" fill="#0f172a"/><rect x="78" y="95" width="6" height="6" fill="#0f172a"/><rect x="94" y="95" width="6" height="6" fill="#0f172a"/><rect x="110" y="95" width="6" height="6" fill="#0f172a"/><rect x="122" y="95" width="6" height="6" fill="#0f172a"/>
+                  <rect x="52" y="108" width="6" height="6" fill="#0f172a"/><rect x="68" y="108" width="6" height="6" fill="#0f172a"/><rect x="84" y="108" width="6" height="6" fill="#0f172a"/><rect x="100" y="108" width="6" height="6" fill="#0f172a"/><rect x="116" y="108" width="6" height="6" fill="#0f172a"/>
+                  <rect x="60" y="120" width="6" height="6" fill="#0f172a"/><rect x="74" y="120" width="6" height="6" fill="#0f172a"/><rect x="90" y="120" width="6" height="6" fill="#0f172a"/><rect x="108" y="120" width="6" height="6" fill="#0f172a"/><rect x="124" y="120" width="6" height="6" fill="#0f172a"/>
+
+                  <!-- Center Logo Badge -->
+                  <rect x="54" y="54" width="32" height="32" rx="4" fill="#0f172a"/>
+                  <text x="70" y="74" fill="#cba234" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">UPI</text>
+                </svg>
+                <div class="qr-scan-label">Scan to Remit</div>
+              </div>
+
+              <!-- Bank Details with 1-Click Copy -->
+              <div class="bank-details-list">
+                <div class="bank-row">
+                  <span class="bank-label">Beneficiary:</span>
+                  <span class="bank-val" style="font-size:0.75rem;">NEUROMEDPHARMACON 2027</span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">Bank:</span>
+                  <span class="bank-val">State Bank of India (SBI)</span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">Account No:</span>
+                  <span class="bank-val">
+                    <span>39840291048</span>
+                    <button type="button" class="btn-copy-code" onclick="copyBankText('39840291048', this)">Copy</button>
+                  </span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">IFSC Code:</span>
+                  <span class="bank-val">
+                    <span>SBIN0016592</span>
+                    <button type="button" class="btn-copy-code" onclick="copyBankText('SBIN0016592', this)">Copy</button>
+                  </span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">UPI ID:</span>
+                  <span class="bank-val">
+                    <span>neuromedpharmacon@sbi</span>
+                    <button type="button" class="btn-copy-code" onclick="copyBankText('neuromedpharmacon@sbi', this)">Copy</button>
+                  </span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">Branch:</span>
+                  <span class="bank-val" style="font-size:0.75rem;">Lucknow Main Branch</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Transaction Reference & Screenshot Upload -->
+            <div style="margin-top: 1rem; border-top: 1px solid #e2e8f0; padding-top: 0.85rem;">
+              <div class="mb-2">
+                <label class="calc-label">Bank Transaction / UTR / Reference ID *</label>
+                <input type="text" class="calc-input" id="regPaymentRef" placeholder="e.g. 429182910482 or UPI Ref / Cheque No." oninput="validatePaymentSubmissionState()" required>
+                <span style="font-size:0.7rem; color:#64748b; display:block; margin-top:0.25rem;">Enter the 12-digit UTR or transaction ID shown in your payment confirmation.</span>
+              </div>
+
+              <div>
+                <label class="calc-label" style="display:flex; justify-content:space-between; align-items:center;">
+                  <span>Payment Transaction Screenshot *</span>
+                  <span style="font-size:0.7rem; color:#64748b; font-weight:normal;">PNG, JPG, WebP, PDF (Max 5MB)</span>
+                </label>
+                
+                <div class="proof-upload-box" id="proofDropZone" onclick="document.getElementById('regPaymentFile').click()">
+                  <input type="file" id="regPaymentFile" accept="image/png, image/jpeg, image/jpg, image/webp, application/pdf" style="display:none;" onchange="handlePaymentFileSelect(this)">
+                  <div id="proofUploadPrompt">
+                    <div style="font-size: 1.35rem; margin-bottom: 0.25rem;">📎</div>
+                    <div style="font-size: 0.82rem; font-weight: 600; color: #0f172a;">Click to browse or drop payment screenshot here</div>
+                    <div style="font-size: 0.72rem; color: #64748b; margin-top: 0.15rem;">Attach the transaction confirmation screen with timestamp</div>
+                  </div>
+                  <div id="proofFilePreview" class="proof-preview-wrap" style="display:none;">
+                    <div style="display:flex; align-items:center; gap:0.6rem;">
+                      <img id="proofThumb" class="proof-thumb-img" src="" alt="Proof Preview" style="display:none;">
+                      <div id="proofDocIcon" style="font-size:1.5rem; display:none;">📄</div>
+                      <div>
+                        <div id="proofFileName" style="font-weight:600; color:#166534; font-size:0.8rem; word-break:break-all;"></div>
+                        <div id="proofFileSize" style="color:#64748b; font-size:0.72rem;"></div>
+                      </div>
+                    </div>
+                    <button type="button" class="btn-copy-code" style="color:#dc2626; border-color:#fca5a5;" onclick="clearPaymentFile(event)">Remove</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Status validation pill -->
+              <div id="paymentStatusPill" class="gate-status-pill locked" style="margin-top: 0.75rem;">
+                <span id="paymentStatusIcon">🔒</span>
+                <span id="paymentStatusText">Upload your payment transaction screenshot above to enable registration submission.</span>
+              </div>
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn-submit-reg" id="btnSubmitReg" disabled style="opacity: 0.55; cursor: not-allowed;">
+            Attach Payment Screenshot to Submit Registration &rarr;
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================================================
+     ABSTRACT SUBMISSION CENTER
+     ========================================================================== -->
+<section class="section-block section-block-light" id="abstracts">
+  <div class="container">
+    
+    <div class="section-header-centered">
+      <span class="editorial-kicker">Call for Scientific Papers</span>
+      <h2 class="section-title-large">Abstract Submission Center</h2>
+      <p class="section-lead-text">
+        Structured peer-review abstract submission for Oral Communications, Young Investigator Awards, and Poster Presentations.
+      </p>
+    </div>
+
+    <div class="abstract-panel-card">
+      <form id="abstractForm" onsubmit="handleAbstractSubmit(event)">
+        
+        <div class="row g-3 mb-2">
+          <div class="col-md-6">
+            <label class="form-label-scholarly">Presenting Author Name</label>
+            <input type="text" class="form-input-scholarly" id="absAuthor" placeholder="e.g. Dr. Ananya Sen" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label-scholarly">Author Email</label>
+            <input type="email" class="form-input-scholarly" id="absEmail" placeholder="author.name@institution.edu" required>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-2">
+          <div class="col-md-6">
+            <label class="form-label-scholarly">Scientific Track Allocation</label>
+            <select class="form-input-scholarly" id="absCategory" required>
+              <option value="Track 01: Molecular Neuropharmacology">Track 01: Molecular Neuropharmacology &amp; Neuroprotection</option>
+              <option value="Track 02: AI & Computational Pharmacology">Track 02: AI &amp; Computational Pharmacology</option>
+              <option value="Track 03: Translational Medicine">Track 03: Translational Medicine &amp; Biomarkers</option>
+              <option value="Track 04: Targeted CNS Delivery">Track 04: Targeted CNS Drug Delivery</option>
+              <option value="Track 05: Safety Pharmacology">Track 05: Safety Pharmacology &amp; Toxicology</option>
+              <option value="Track 06: Cardiovascular Pharmacology">Track 06: Cardiovascular Pharmacology</option>
+              <option value="Track 07: Neurodegenerative Diseases & Protein Misfolding">Track 07: Neurodegenerative Diseases &amp; Protein Misfolding</option>
+              <option value="Track 08: Neuropsychopharmacology & Synaptic Plasticity">Track 08: Neuropsychopharmacology &amp; Synaptic Plasticity</option>
+              <option value="Track 09: Pharmacovigilance">Track 09: Pharmacovigilance &amp; Clinical Research</option>
+              <option value="Track 10: Neuropsychopharmacology">Track 10: Neuropsychopharmacology</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label-scholarly">Presentation Preference</label>
+            <select class="form-input-scholarly" id="absPreference">
+              <option value="Oral">Oral Communication</option>
+              <option value="Poster">Poster Presentation</option>
+              <option value="Award">Young Scientist Award Session</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label-scholarly">Abstract Title</label>
+          <input type="text" class="form-input-scholarly" id="absTitle" placeholder="e.g. Targeted Nano-Delivery of Curcumin in Transgenic AD Mouse Models" required>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label-scholarly">Structured Abstract Body (Background, Methods, Results, Conclusion)</label>
+          <textarea class="form-textarea-scholarly" id="absBody" placeholder="Background: State the clinical or mechanistic gap...&#10;Methods: Detail experimental models, analytical assays, or computational protocols...&#10;Results: Provide key quantitative findings (binding affinity, IC50, p-values)...&#10;Conclusion: State scientific impact and therapeutic implication..." required oninput="updateAbstractWordCount(this.value)"></textarea>
+          <div class="word-count-bar">
+            <span id="absWordCount">0</span> / 300 Words Maximum
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="/downloads/IPS_NorthZone_Abstract_Guidelines_2027.pdf" download="IPS_NorthZone_Abstract_Guidelines_2027.pdf" onclick="triggerPDFDownload(event, 'guidelines')" class="quick-link" title="Download Official Academic Guidelines in PDF Format">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="12" y1="18" x2="12" y2="12"></line>
+                <line x1="9" y1="15" x2="12" y2="18"></line>
+                <line x1="15" y1="15" x2="12" y2="18"></line>
+              </svg>
+              <span>Download Official Guidelines (PDF)</span>
+            </a>
+            <a href="/downloads/IPS_NorthZone_Abstract_Template_2027.pdf" download="IPS_NorthZone_Abstract_Template_2027.pdf" onclick="triggerPDFDownload(event, 'template')" class="quick-link" title="Download Structured Template in PDF Format">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              <span>Download Template (PDF)</span>
+            </a>
+          </div>
+
+          <button type="submit" class="btn-primary-action" id="btnSubmitAbs">
+            Submit Abstract for Review &rarr;
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================================================
+     SPONSORSHIP & COMMERCIAL EXHIBITION (PLATINUM · DIAMOND · GOLD)
+     ========================================================================== -->
+<section class="sponsorship-section-wrap" id="sponsorship">
+  <div class="container">
+    
+    <div class="section-header-centered">
+      <span class="editorial-kicker">Commercial Exhibition &amp; Brand Partnership</span>
+      <h2 class="section-title-large" style="color: #ffffff;">Sponsorship &amp; Industry Exhibition</h2>
+      <p class="section-lead-text" style="color: #94a3b8;">
+        Partner with the premier gathering of 500+ pharmacologists, clinical trial investigators, biotechnology innovators, and academic researchers across North India.
+      </p>
+    </div>
+
+    <!-- 4 Tier Cards: Platinum, Gold, Silver, Bronze -->
+    <div class="sponsorship-cards-grid">
+      
+      <!-- Tier 1: Platinum Sponsor -->
+      <div class="sponsor-tier-card tier-platinum">
+        <span class="sponsor-featured-tag">Prime Partner</span>
+        <div class="sponsor-tier-header">
+          <div class="sponsor-tier-name">Platinum Sponsor</div>
+          <div class="sponsor-price-box">
+            <span class="sponsor-price-val">Rs. 100,000</span>
+          </div>
+          <div class="sponsor-gst-note">Rs. 1,00,000 (+ 18% Institutional GST)</div>
+        </div>
+
+        <div class="sponsor-booth-spec">
+          <strong>Stall Allocation:</strong> Space for one display booth
+        </div>
+
+        <ul class="sponsor-features-list">
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>Space for one display booth</strong></span>
+          </li>
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>Two complimentary registration</strong></span>
+          </li>
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>Be listed as a sponsor of the conference</strong></span>
+          </li>
+        </ul>
+
+        <button type="button" class="btn-sponsor-inquire primary" onclick="openSponsorshipModal('Platinum', 100000)">
+          Book Platinum &rarr;
+        </button>
+      </div>
+
+      <!-- Tier 2: Gold Sponsor -->
+      <div class="sponsor-tier-card tier-gold">
+        <span class="sponsor-featured-tag" style="background:#f59e0b; color:#ffffff;">Premier Partner</span>
+        <div class="sponsor-tier-header">
+          <div class="sponsor-tier-name">Gold Sponsor</div>
+          <div class="sponsor-price-box">
+            <span class="sponsor-price-val">Rs. 75,000</span>
+          </div>
+          <div class="sponsor-gst-note">Rs. 75,000 (+ 18% Institutional GST)</div>
+        </div>
+
+        <div class="sponsor-booth-spec" style="border-left-color: #f59e0b;">
+          <strong>Stall Allocation:</strong> Space for one display booth
+        </div>
+
+        <ul class="sponsor-features-list">
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#f59e0b;">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>Space for one display booth</strong></span>
+          </li>
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#f59e0b;">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>One complimentary registration</strong></span>
+          </li>
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#f59e0b;">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>Be listed as a sponsor of the conference</strong></span>
+          </li>
+        </ul>
+
+        <button type="button" class="btn-sponsor-inquire secondary" onclick="openSponsorshipModal('Gold', 75000)">
+          Book Gold &rarr;
+        </button>
+      </div>
+
+      <!-- Tier 3: Silver Sponsor -->
+      <div class="sponsor-tier-card tier-silver">
+        <span class="sponsor-featured-tag" style="background:#94a3b8; color:#0f172a;">Complimentary</span>
+        <div class="sponsor-tier-header">
+          <div class="sponsor-tier-name">Silver Sponsor</div>
+          <div class="sponsor-price-box">
+            <span class="sponsor-price-val">Rs. 50,000</span>
+          </div>
+          <div class="sponsor-gst-note">Rs. 50,000 (+ 18% Institutional GST)</div>
+        </div>
+
+        <div class="sponsor-booth-spec" style="border-left-color: #94a3b8;">
+          <strong>Stall Allocation:</strong> Space for one display booth
+        </div>
+
+        <ul class="sponsor-features-list">
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#94a3b8;">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>Complimentary sponsorship</strong></span>
+          </li>
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#94a3b8;">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>Space for one display booth</strong></span>
+          </li>
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#94a3b8;">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>Be listed as a sponsor of the conference</strong></span>
+          </li>
+        </ul>
+
+        <button type="button" class="btn-sponsor-inquire secondary" onclick="openSponsorshipModal('Silver', 50000)">
+          Book Silver &rarr;
+        </button>
+      </div>
+
+      <!-- Tier 4: Bronze Sponsor -->
+      <div class="sponsor-tier-card tier-bronze">
+        <span class="sponsor-featured-tag" style="background:#d97706; color:#ffffff;">Appreciative</span>
+        <div class="sponsor-tier-header">
+          <div class="sponsor-tier-name">Bronze Sponsor</div>
+          <div class="sponsor-price-box">
+            <span class="sponsor-price-val">Rs. 25,000</span>
+          </div>
+          <div class="sponsor-gst-note">Rs. 25,000 (+ 18% Institutional GST)</div>
+        </div>
+
+        <div class="sponsor-booth-spec" style="border-left-color: #d97706;">
+          <strong>Stall Allocation:</strong> No space for display
+        </div>
+
+        <ul class="sponsor-features-list">
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#d97706;">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>Appreciative sponsorship</strong></span>
+          </li>
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#d97706;">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>No space for display</strong></span>
+          </li>
+          <li class="sponsor-feature-row">
+            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#d97706;">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>Only listed as a sponsor of the conference</strong></span>
+          </li>
+        </ul>
+
+        <button type="button" class="btn-sponsor-inquire secondary" onclick="openSponsorshipModal('Bronze', 25000)">
+          Book Bronze &rarr;
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Comparative Entitlements Matrix -->
+    <div style="background: #0b1a2d; border: 1px solid var(--hairline-dark); border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; overflow-x: auto;">
+      <h3 style="font-family: var(--font-serif); font-size: 1.15rem; color: #ffffff; margin-bottom: 1rem;">
+        Comprehensive Deliverables &amp; Benefits Comparison
+      </h3>
+      <table class="sponsorship-comparison-table">
+        <thead>
+          <tr>
+            <th>Deliverables &amp; Benefits</th>
+            <th style="color:var(--accent-gold);">Platinum (Rs. 100,000)</th>
+            <th style="color:#f59e0b;">Gold (Rs. 75,000)</th>
+            <th style="color:#94a3b8;">Silver (Rs. 50,000)</th>
+            <th style="color:#d97706;">Bronze (Rs. 25,000)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Display Booth Space</td>
+            <td><strong>Space for one display booth</strong></td>
+            <td>Space for one display booth</td>
+            <td>Space for one display booth</td>
+            <td>No space for display</td>
+          </tr>
+          <tr>
+            <td>Complimentary Registration</td>
+            <td><strong>Two complimentary registration</strong></td>
+            <td>One complimentary registration</td>
+            <td>Complimentary sponsorship</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Conference Sponsor Recognition</td>
+            <td><strong>Be listed as a sponsor of the conference</strong></td>
+            <td>Be listed as a sponsor of the conference</td>
+            <td>Be listed as a sponsor of the conference</td>
+            <td>Only listed as a sponsor of the conference</td>
+          </tr>
+          <tr>
+            <td>Partnership Classification</td>
+            <td><strong>Prime Corporate Partner</strong></td>
+            <td>Premier Industry Sponsor</td>
+            <td>Complimentary Sponsorship</td>
+            <td>Appreciative Sponsorship</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Download Prospectus CTA Bar -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--hairline-dark); border-radius: 6px; padding: 1.25rem 1.5rem;">
+      <div>
+        <div style="font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; color: #ffffff;">
+          Need a Custom Commercial Exhibition Package or Symposium Sponsorship?
+        </div>
+        <p style="font-size: 0.85rem; color: #94a3b8; margin: 0;">
+          Download the official PDF prospectus with detailed stall floorplans, power ratings, and wire transfer coordinates.
+        </p>
+      </div>
+      <div class="d-flex gap-3 flex-wrap">
+        <a href="/downloads/IPS_NorthZone_Sponsorship_Prospectus_2027.pdf" download="IPS_NorthZone_Sponsorship_Prospectus_2027.pdf" class="btn-primary-action" style="background: var(--accent-gold); color: #060e18;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline; margin-right:4px;">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="12" y2="18"></line>
+            <line x1="15" y1="15" x2="12" y2="18"></line>
+          </svg>
+          Download Prospectus (PDF)
+        </a>
+        <button type="button" class="btn-primary-action" onclick="openSponsorshipModal('General Inquiry', 0)" style="background: transparent; border: 1px solid #ffffff; color: #ffffff;">
+          Contact Sponsorship Secretariat
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================================================
+     VENUE, REAL-TIME GOOGLE MAP & PLACES TO VISIT IN LUCKNOW
+     ========================================================================== -->
+<section class="section-block section-block-light" id="venue" style="background: #f8fafc;">
+  <div class="container">
+    
+    <div class="section-header-centered">
+      <span class="editorial-kicker">Conference Venue &amp; City Heritage</span>
+      <h2 class="section-title-large">NIPER-Raebareli Lucknow Campus &amp; City of Nawabs</h2>
+      <p class="section-lead-text">
+        Located at the state-of-the-art campus of NIPER-Raebareli in Lucknow. Explore the vibrant scientific ecosystem and world-famous Awadhi architectural landmarks of Uttar Pradesh's historic capital.
+      </p>
+    </div>
+
+    <!-- 1. Real-Time Intuitive Google Map & Transit Split -->
+    <div class="venue-map-split-wrap">
+      
+      <!-- Interactive Google Map Frame -->
+      <div>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; color: #0f172a; text-transform: uppercase; letter-spacing: 0.08em;">
+            📍 Real-Time Venue Location
+          </span>
+          <span style="font-size: 0.76rem; color: #64748b; font-family: var(--font-mono);">
+            GPS: 26.7458° N, 80.8932° E
+          </span>
+        </div>
+        <div class="venue-map-container">
+          <iframe 
+            title="Real-Time Google Map of NIPER-Raebareli Lucknow Campus"
+            src="https://maps.google.com/maps?q=National%20Institute%20of%20Pharmaceutical%20Education%20and%20Research%20(NIPER),%20Bijnor%20Road,%20Sarojini%20Nagar,%20Lucknow,%20Uttar%20Pradesh%20226002&t=&z=14&ie=UTF8&iwloc=&output=embed"
+            width="100%" 
+            height="100%" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div style="font-size: 0.78rem; color: #64748b; margin-top: 0.5rem; display: flex; justify-content: space-between;">
+          <span>Address: NIPER-Raebareli, Bijnor Road, Sarojini Nagar, Lucknow 226002</span>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=National+Institute+of+Pharmaceutical+Education+and+Research+NIPER+Lucknow" target="_blank" rel="noopener noreferrer" style="color: #0284c7; font-weight: 600; text-decoration: none;">
+            Get Live Directions &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Transit Connectivity Cards -->
+      <div class="venue-transit-info">
+        <div>
+          <h3 style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">
+            Transit &amp; Airport Connectivity
+          </h3>
+
+          <div class="transit-card">
+            <div class="transit-card-title">
+              <span>Chaudhary Charan Singh Airport (LKO)</span>
+              <span class="transit-distance-tag">12 km · 18 min</span>
+            </div>
+            <p class="transit-card-detail">
+              Direct domestic flights from Delhi, Mumbai, Bengaluru, Hyderabad, Kolkata. Frequent prepaid airport taxis and dedicated NIPER delegate shuttles.
+            </p>
+          </div>
+
+          <div class="transit-card">
+            <div class="transit-card-title">
+              <span>Charbagh Central Railway Station (LKO)</span>
+              <span class="transit-distance-tag">14 km · 25 min</span>
+            </div>
+            <p class="transit-card-detail">
+              Major junction served by Vande Bharat, Shatabdi, and Rajdhani express trains connecting North India. Direct access to Lucknow Metro line.
+            </p>
+          </div>
+
+          <div class="transit-card">
+            <div class="transit-card-title">
+              <span>Transport Nagar Metro &amp; City Corridor</span>
+              <span class="transit-distance-tag">10 km · 15 min</span>
+            </div>
+            <p class="transit-card-detail">
+              Direct access connecting NIPER-Raebareli Lucknow campus with the North-South Lucknow Metro corridor, conference partner hotels, and Hazratganj.
+            </p>
+          </div>
+        </div>
+
+        <a href="https://www.google.com/maps/dir/?api=1&destination=National+Institute+of+Pharmaceutical+Education+and+Research+NIPER+Lucknow" target="_blank" rel="noopener noreferrer" class="btn-open-google-maps">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+          </svg>
+          Open Live Directions on Google Maps
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 2. Places to Visit in Lucknow (Authentic Real Photography Showcase) -->
+    <div style="margin-top: 4rem;">
+      <div class="section-header-centered" style="margin-bottom: 2.5rem;">
+        <span class="editorial-kicker">Heritage &amp; Cultural Immersion</span>
+        <h3 class="section-title-large" style="font-size: 1.85rem;">Places to Visit in Lucknow</h3>
+        <p class="section-lead-text">
+          Experience the world-renowned architectural majesty, royal gardens, and legendary culinary heritage of the Awadh capital during your conference stay.
+        </p>
+      </div>
+
+      <div class="places-grid">
+        
+        <!-- Place 1: Bara Imambara & Bhool Bhulaiya -->
+        <div class="place-card">
+          <div class="place-image-frame">
+            <img 
+              src="/assets/photography/bara_imambara.jpg" 
+              alt="Bara Imambara and Asfi Mosque complex in Lucknow" 
+              class="place-image"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Bara_Imambara_Lucknow.jpg/1280px-Bara_Imambara_Lucknow.jpg'"
+            />
+            <span class="place-distance-badge">14 km from NIPER · Built 1784</span>
+          </div>
+          <div class="place-body">
+            <div class="place-title">Bara Imambara &amp; Bhool Bhulaiya</div>
+            <p class="place-desc">
+              Commissioned by Nawab Asaf-ud-Daula as a grand famine relief project. Houses the world's largest unsupported vaulted arch hall constructed without iron beams, the intricate three-dimensional maze of Bhool Bhulaiya, and the historic Baoli stepwell.
+            </p>
+            <div class="place-meta-footer">
+              <span>🕒 06:00 AM – 05:00 PM</span>
+              <a href="https://www.google.com/maps/search/Bara+Imambara+Lucknow" target="_blank" rel="noopener noreferrer" style="color:#0284c7; text-decoration:none;">View on Map &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Place 2: Rumi Darwaza -->
+        <div class="place-card">
+          <div class="place-image-frame">
+            <img 
+              src="/assets/photography/rumi_darwaza.jpg" 
+              alt="Majestic 60-foot Awadhi portal of Rumi Darwaza" 
+              class="place-image"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Rumi_Darwaza_-_DSC2797-01.jpg/1280px-Rumi_Darwaza_-_DSC2797-01.jpg'"
+            />
+            <span class="place-distance-badge">14 km from NIPER · Turkish Gate</span>
+          </div>
+          <div class="place-body">
+            <div class="place-title">Rumi Darwaza</div>
+            <p class="place-desc">
+              The 60-foot-tall ornamental gateway modeled after the historic Sublime Porte in Istanbul. Serving as the ceremonial entrance to the Old City of Lucknow, its graceful chhatris and Awadhi floral stucco work form the iconic emblem of the city.
+            </p>
+            <div class="place-meta-footer">
+              <span>🕒 Open 24 Hours · Illuminated at Night</span>
+              <a href="https://www.google.com/maps/search/Rumi+Darwaza+Lucknow" target="_blank" rel="noopener noreferrer" style="color:#0284c7; text-decoration:none;">View on Map &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Place 3: Chota Imambara -->
+        <div class="place-card">
+          <div class="place-image-frame">
+            <img 
+              src="/assets/photography/chota_imambara.jpg" 
+              alt="Chota Imambara palace of lights reflecting pool Lucknow" 
+              class="place-image"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Chhota_imambara_Lucknow.jpg/1280px-Chhota_imambara_Lucknow.jpg'"
+            />
+            <span class="place-distance-badge">15 km from NIPER · Palace of Lights</span>
+          </div>
+          <div class="place-body">
+            <div class="place-title">Chota Imambara (Hussainabad)</div>
+            <p class="place-desc">
+              Constructed in 1838 by Nawab Muhammad Ali Shah. Known as the "Palace of Lights" for its breathtaking collection of antique Belgian glass chandeliers, gilded minarets, calligraphy murals, and the adjacent unfinished Satkhanda watchtower.
+            </p>
+            <div class="place-meta-footer">
+              <span>🕒 06:00 AM – 05:00 PM</span>
+              <a href="https://www.google.com/maps/search/Chota+Imambara+Lucknow" target="_blank" rel="noopener noreferrer" style="color:#0284c7; text-decoration:none;">View on Map &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Place 4: The British Residency -->
+        <div class="place-card">
+          <div class="place-image-frame">
+            <img 
+              src="/assets/photography/the_residency.jpg" 
+              alt="The historic ruins and grounds of The Residency in Lucknow" 
+              class="place-image"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Office_-_The_Residency_-_Lucknow_-_India.jpg/1280px-Office_-_The_Residency_-_Lucknow_-_India.jpg'"
+            />
+            <span class="place-distance-badge">16 km from NIPER · 1857 Memorial</span>
+          </div>
+          <div class="place-body">
+            <div class="place-title">The British Residency</div>
+            <p class="place-desc">
+              Preserved in its picturesque ruined state, this tranquil complex witnessed the pivotal Siege of Lucknow during 1857. Features sprawling lawns, century-old banyan trees, the historic Banquet Hall, cannonball scars, and a well-curated 1857 Memorial Museum.
+            </p>
+            <div class="place-meta-footer">
+              <span>🕒 07:00 AM – 06:00 PM</span>
+              <a href="https://www.google.com/maps/search/The+British+Residency+Lucknow" target="_blank" rel="noopener noreferrer" style="color:#0284c7; text-decoration:none;">View on Map &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Place 5: Hazratganj Cultural Promenade -->
+        <div class="place-card">
+          <div class="place-image-frame">
+            <img 
+              src="/assets/photography/hazratganj.jpg" 
+              alt="Victorian street architecture of Hazratganj Lucknow" 
+              class="place-image"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Hazratganj_Lucknow.jpg/1280px-Hazratganj_Lucknow.jpg'"
+            />
+            <span class="place-distance-badge">13 km from NIPER · Heritage &amp; Food</span>
+          </div>
+          <div class="place-body">
+            <div class="place-title">Hazratganj &amp; Awadhi Gastronomy</div>
+            <p class="place-desc">
+              The heart of Lucknow's evening stroll culture ("Ganjing"). Victorian facade architecture with premium Awadhi dining—famous for melt-in-mouth Galawati kebabs at Tunday Kababi, Dastarkhwan biryani, Sharma ki Chai, and authentic Lucknow Chikan embroidery boutiques.
+            </p>
+            <div class="place-meta-footer">
+              <span>🕒 Open till 11:00 PM · Culinary Heartland</span>
+              <a href="https://www.google.com/maps/search/Hazratganj+Lucknow" target="_blank" rel="noopener noreferrer" style="color:#0284c7; text-decoration:none;">View on Map &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Place 6: Gomti Riverfront Park -->
+        <div class="place-card">
+          <div class="place-image-frame">
+            <img 
+              src="/assets/photography/gomti_riverfront.jpg" 
+              alt="Scenic view along the Gomti River at Lucknow" 
+              class="place-image"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/2/20/Gomti_at_Lucknow.jpg'"
+            />
+            <span class="place-distance-badge">12 km from NIPER · Waterfront Park</span>
+          </div>
+          <div class="place-body">
+            <div class="place-title">Gomti Riverfront Promenade</div>
+            <p class="place-desc">
+              A serene waterfront boulevard along the Gomti River. Features musical fountains, landscaped gardens, illuminated walking trails, and sweeping skyline views of Lucknow's modern and historic bridges. An ideal evening retreat for conference delegates.
+            </p>
+            <div class="place-meta-footer">
+              <span>🕒 06:00 AM – 10:00 PM</span>
+              <a href="https://www.google.com/maps/search/Gomti+Riverfront+Park+Lucknow" target="_blank" rel="noopener noreferrer" style="color:#0284c7; text-decoration:none;">View on Map &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================================================
+     FOOTER: EDITORIAL, INSTITUTIONAL & ARCHIVAL
+     ========================================================================== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    
+    <div class="footer-main-grid">
+      <!-- Col 1: Institute Patronage -->
+      <div>
+        <div class="footer-brand-title">NeuroMedPharmacon 2027</div>
+        <p class="footer-p">
+          Organized by the Department of Pharmacology &amp; Toxicology, National Institute of Pharmaceutical Education and Research (NIPER), Raebareli in collaboration with the Indian Pharmacological Society (Northern Chapter / IPS North Zone).
+        </p>
+        <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-gold);">
+          NIPER Raebareli Campus, Lucknow 226002, U.P., India
+        </div>
+      </div>
+
+      <!-- Col 2: Congress Navigation -->
+      <div>
+        <div class="footer-heading">Scientific Conference</div>
+        <ul class="footer-nav-list">
+          <li><a href="#about" class="footer-link">About NIPER-Raebareli</a></li>
+          <li><a href="#consortium" class="footer-link">Regional Consortium (IPS)</a></li>
+          <li><a href="#tracks" class="footer-link">10 Thematic Tracks</a></li>
+          <li><a href="#abstracts" class="footer-link">Call for Abstracts</a></li>
+          <li><a href="#schedule" class="footer-link">Program Schedule</a></li>
+          <li><a href="#sponsorship" class="footer-link">Sponsorship Packages</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Resources & Downloads -->
+      <div>
+        <div class="footer-heading">Official Documents (PDF)</div>
+        <ul class="footer-nav-list">
+          <li><a href="/downloads/IPS_NorthZone_Abstract_Guidelines_2027.pdf" download="IPS_NorthZone_Abstract_Guidelines_2027.pdf" onclick="triggerPDFDownload(event, 'guidelines')" class="footer-link">Abstract Guidelines (PDF)</a></li>
+          <li><a href="/downloads/IPS_NorthZone_Abstract_Template_2027.pdf" download="IPS_NorthZone_Abstract_Template_2027.pdf" onclick="triggerPDFDownload(event, 'template')" class="footer-link">Abstract Template (PDF)</a></li>
+          <li><a href="/downloads/IPS_NorthZone_Sponsorship_Prospectus_2027.pdf" download="IPS_NorthZone_Sponsorship_Prospectus_2027.pdf" class="footer-link">Sponsorship Prospectus (PDF)</a></li>
+          <li><a href="#registration" class="footer-link">Fee Structure &amp; Tariff</a></li>
+          <li><a href="#venue" class="footer-link">Live Google Map &amp; City Guide</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Secretariat Contact -->
+      <div>
+        <div class="footer-heading">Secretariat &amp; Helpdesk</div>
+        <p class="footer-p" style="margin-bottom: 0.5rem;">
+          <strong>Organizing Secretary:</strong><br>
+          Dr. Ashok K. Datusalia<br>
+          Dept. of Pharmacology &amp; Toxicology<br>
+          NIPER-Raebareli Lucknow Campus
+        </p>
+        <p class="footer-p" style="margin-bottom: 0.5rem;">
+          <strong>Email:</strong> <a href="mailto:neuromedpharmacon26@gmail.com" style="color:inherit; text-decoration:underline;">neuromedpharmacon26@gmail.com</a><br>
+          <strong>Phone:</strong> <a href="tel:+919250446799" style="color:inherit; text-decoration:underline;">(+91) 9250446799</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Bottom Legal Bar -->
+    <div class="footer-bottom-bar">
+      <div>
+        &copy; 2027 National Institute of Pharmaceutical Education and Research (NIPER), Raebareli. All rights reserved.
+      </div>
+      <div class="d-flex gap-3 align-items-center">
+        <span>Govt. of India Act No. 13 of 1998</span>
+        <span>·</span>
+        <button onclick="openAdminModal()" style="background:transparent; border:none; color:var(--text-dark-muted); font-size:0.8rem; cursor:pointer;">
+          Secretariat Admin Login
+        </button>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ==========================================================================
+     REGISTRATION CONFIRMATION RECEIPT MODAL
+     ========================================================================== -->
+<div class="custom-modal-backdrop" id="receiptModal">
+  <div class="custom-modal-dialog">
+    <button class="modal-close-btn" onclick="closeReceiptModal()" aria-label="Close Receipt Modal">&times;</button>
+    
+    <div class="text-center mb-3">
+      <span class="editorial-kicker">Official Registration Receipt</span>
+      <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin: 0;">NeuroMedPharmacon 2027</h3>
+      <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.25rem;">NIPER Raebareli &amp; Indian Pharmacological Society</p>
+    </div>
+
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 1.25rem; margin-bottom: 1.5rem; font-family: var(--font-mono); font-size: 0.84rem;">
+      <div class="d-flex justify-content-between mb-1">
+        <span style="color:#64748b;">Registration ID:</span>
+        <strong id="receiptRegId" style="color:#0f172a;">NIPER27-REG-1001</strong>
+      </div>
+      <div class="d-flex justify-content-between mb-1">
+        <span style="color:#64748b;">Delegate Name:</span>
+        <span id="receiptName" style="color:#0f172a;">Dr. Delegate</span>
+      </div>
+      <div class="d-flex justify-content-between mb-1">
+        <span style="color:#64748b;">Category:</span>
+        <span id="receiptCategory" style="color:#0f172a;">Research Scholar / PG Student</span>
+      </div>
+      <div class="d-flex justify-content-between mb-1">
+        <span style="color:#64748b;">Applicable Tier:</span>
+        <span id="receiptTier" style="color:#0f172a;">Early Bird</span>
+      </div>
+      <div class="d-flex justify-content-between mb-1">
+        <span style="color:#64748b;">A workshop of Network Pharmacology:</span>
+        <span id="receiptWorkshop" style="color:#0f172a;">Included (+₹500)</span>
+      </div>
+      <div class="d-flex justify-content-between mb-1">
+        <span style="color:#64748b;">Bank UTR / Transaction ID:</span>
+        <strong id="receiptPaymentRef" style="color:#16a34a; font-family:var(--font-mono);">-</strong>
+      </div>
+      <div class="d-flex justify-content-between mb-1">
+        <span style="color:#64748b;">Payment Verification:</span>
+        <span style="color:#16a34a; font-weight:600;">✓ Transaction Screenshot Verified &amp; Saved</span>
+      </div>
+      <div class="d-flex justify-content-between pt-2 border-top mt-2" style="font-size: 1rem;">
+        <strong>Total Amount:</strong>
+        <strong id="receiptAmount" style="color:#0f172a;">₹4,130 INR</strong>
+      </div>
+    </div>
+
+    <p style="font-size: 0.85rem; color: #64748b; line-height: 1.5; margin-bottom: 1.5rem;">
+      A confirmation email with your official Reference ID and payment receipt has been dispatched to your registered email address. The Secretariat has also received your registration notification with attached payment proof.
+    </p>
+
+    <div class="d-flex justify-content-end gap-2">
+      <button class="btn-primary-action" onclick="window.print()">Print Receipt</button>
+      <button class="btn-secretariat" style="color:#0f172a; border-color:#cbd5e1;" onclick="closeReceiptModal()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     SPONSORSHIP INQUIRY & BOOKING MODAL
+     ========================================================================== -->
+<div class="custom-modal-backdrop" id="sponsorshipModal">
+  <div class="custom-modal-dialog" style="max-width: 650px;">
+    <button class="modal-close-btn" onclick="closeSponsorshipModal()" aria-label="Close Sponsorship Modal">&times;</button>
+    
+    <div class="text-center mb-3">
+      <span class="editorial-kicker">Commercial Partnership Remittance</span>
+      <h3 style="font-family: var(--font-serif); font-size: 1.45rem; font-weight: 700; margin: 0;">Sponsorship &amp; Stall Booking</h3>
+      <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.25rem;">Select partnership tier and submit commercial details to connect with the Secretariat.</p>
+    </div>
+
+    <form id="sponsorshipForm" onsubmit="handleSponsorshipSubmit(event)">
+      
+      <!-- Tier Selection -->
+      <div class="mb-3">
+        <label class="calc-label">Selected Partnership Tier *</label>
+        <select class="calc-select" id="sponTierSelect" onchange="updateSponsorshipTariff()" required>
+          <option value="Platinum">Platinum Sponsor — Rs. 100,000 (₹ 1,00,000)</option>
+          <option value="Gold">Gold Sponsor — Rs. 75,000 (₹ 75,000)</option>
+          <option value="Silver">Silver Sponsor — Rs. 50,000 (₹ 50,000)</option>
+          <option value="Bronze">Bronze Sponsor — Rs. 25,000 (₹ 25,000)</option>
+          <option value="Custom">Custom Commercial Workshop / Symposium</option>
+        </select>
+      </div>
+
+      <!-- Pricing Summary Box -->
+      <div class="calc-total-box mb-3">
+        <div class="calc-total-row">
+          <span>Base Sponsorship Tariff:</span>
+          <span class="tabular-nums" id="sponBaseTariff">₹ 1,00,000</span>
+        </div>
+        <div class="calc-total-row">
+          <span>Institutional GST (18%):</span>
+          <span class="tabular-nums" id="sponGstTariff">₹ 18,000</span>
+        </div>
+        <div class="calc-grand-total">
+          <span class="calc-grand-label">Total Commercial Invoicing:</span>
+          <span class="calc-grand-val" id="sponGrandTariff" style="color:var(--accent-gold);">₹ 1,18,000</span>
+        </div>
+      </div>
+
+      <!-- Company Fields -->
+      <div id="sponFieldsSet">
+        <div class="mb-3">
+          <label class="calc-label">Company / Institutional Entity Name *</label>
+          <input type="text" class="calc-input" id="sponCompany" placeholder="e.g. Bharat Biotech / Waters India / Lupin Ltd" required>
+        </div>
+
+        <div class="row g-2 mb-3">
+          <div class="col-md-6">
+            <label class="calc-label">Authorized Contact Person *</label>
+            <input type="text" class="calc-input" id="sponContact" placeholder="e.g. Dr. Rajiv Sharma" required>
+          </div>
+          <div class="col-md-6">
+            <label class="calc-label">Corporate Email Address *</label>
+            <input type="email" class="calc-input" id="sponEmail" placeholder="partnerships@company.com" required>
+          </div>
+        </div>
+
+        <div class="row g-2 mb-3">
+          <div class="col-md-6">
+            <label class="calc-label">Direct Phone / WhatsApp *</label>
+            <input type="tel" class="calc-input" id="sponPhone" placeholder="+91 98765 43210" required>
+          </div>
+          <div class="col-md-6">
+            <label class="calc-label">Special Inclusions or Stall Preference</label>
+            <input type="text" class="calc-input" id="sponNotes" placeholder="e.g. Central Foyer Stall P1 preference">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+          <button type="button" class="btn-secretariat" style="color:#0f172a; border-color:#cbd5e1;" onclick="closeSponsorshipModal()">Cancel</button>
+          <button type="submit" class="btn-primary-action" id="btnSubmitSpon">Submit Partnership Inquiry &rarr;</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     SECRETARIAT ADMIN CONSOLE MODAL
+     ========================================================================== -->
+<div class="custom-modal-backdrop" id="adminModal">
+  <div class="custom-modal-dialog admin-wide">
+    <button class="modal-close-btn" onclick="closeAdminModal()" aria-label="Close Admin Modal">&times;</button>
+    
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+      <div>
+        <span class="editorial-kicker">Conference Secretariat Portal</span>
+        <h3 style="font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; margin: 0;">Live Enrolment &amp; Abstract Registry</h3>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn-primary-action" onclick="exportRegistrationsCsv()" style="font-size: 0.8rem; padding: 0.4rem 0.85rem;">
+          Export Registrations CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- Token auth input strip if needed -->
+    <div class="d-flex gap-2 align-items-center mb-3">
+      <input type="password" id="adminTokenInput" class="calc-input" placeholder="Secretariat Access Token" value="niper-secretariat-2027" style="max-width: 260px;">
+      <button class="btn-primary-action" onclick="fetchAdminData()" style="padding: 0.5rem 1rem;">Load Records</button>
+      <input type="text" id="adminFilterInput" class="calc-input" placeholder="Filter records by name..." oninput="filterAdminTable()" style="max-width: 260px;">
+    </div>
+
+    <!-- Admin Tabs -->
+    <div class="d-flex gap-2 mb-3">
+      <button class="track-filter-btn active" id="tabRegBtn" onclick="switchAdminTab('reg')">Registrations (<span id="regCount">0</span>)</button>
+      <button class="track-filter-btn" id="tabAbsBtn" onclick="switchAdminTab('abs')">Abstracts (<span id="absCount">0</span>)</button>
+      <button class="track-filter-btn" id="tabSponBtn" onclick="switchAdminTab('spon')">Sponsorships (<span id="sponCount">0</span>)</button>
+    </div>
+
+    <!-- Registrations Table -->
+    <div id="adminRegWrap" style="overflow-x: auto; max-height: 380px;">
+      <table class="tariff-table" id="adminRegTable">
+        <thead>
+          <tr>
+            <th>Ref ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Category</th>
+            <th>Workshop</th>
+            <th class="tar-amt">Amount</th>
+            <th>Proof / UTR</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="adminRegBody">
+          <tr><td colspan="8" class="text-center text-muted py-3">Click 'Load Records' to fetch registrations</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Abstracts Table -->
+    <div id="adminAbsWrap" style="overflow-x: auto; max-height: 380px; display: none;">
+      <table class="tariff-table" id="adminAbsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Author</th>
+            <th>Email</th>
+            <th>Track / Category</th>
+            <th>Title</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="adminAbsBody">
+          <tr><td colspan="6" class="text-center text-muted py-3">Click 'Load Records' to fetch abstracts</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sponsorships Table -->
+    <div id="adminSponWrap" style="overflow-x: auto; max-height: 380px; display: none;">
+      <table class="tariff-table" id="adminSponTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Company</th>
+            <th>Contact Person</th>
+            <th>Email / Phone</th>
+            <th>Tier</th>
+            <th class="tar-amt">Amount</th>
+            <th>Notes</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="adminSponBody">
+          <tr><td colspan="8" class="text-center text-muted py-3">Click 'Load Records' to fetch sponsorships</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================================================
+     VANILLA JAVASCRIPT: AUTONOMOUS BEHAVIOR & REGISTRATION CALCULATOR
+     ========================================================================== -->
+<script>
+// TARIFF DEFINITIONS
+const TARIFF_DATA = {
+  early: {
+    student: 3500,
+    faculty: 4500,
+    corporate: 6000,
+    workshop: 500
+  },
+  regular: {
+    student: 4000,
+    faculty: 5500,
+    corporate: 7500,
+    workshop: 500
+  },
+  spot: {
+    student: 4500,
+    faculty: 6500,
+    corporate: 9000,
+    workshop: 500
+  }
+};
+
+let currentTier = 'early';
+
+// 1. MOBILE NAV TOGGLE
+function toggleMobileNav() {
+  const drawer = document.getElementById('mobileDrawer');
+  if (drawer.style.display === 'none' || !drawer.style.display) {
+    drawer.style.display = 'block';
+  } else {
+    drawer.style.display = 'none';
+  }
+}
+
+// 2. CHEMICAL LATTICE CANVAS ANIMATION (MATHEMATICALLY CALIBRATED)
+(function initLatticeCanvas() {
+  const canvas = document.getElementById('latticeCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let points = [];
+
+  function resize() {
+    width = canvas.width = canvas.offsetWidth;
+    height = canvas.height = canvas.offsetHeight;
+    generatePoints();
+  }
+
+  function generatePoints() {
+    points = [];
+    const count = Math.floor(width / 32);
+    for (let i = 0; i < count; i++) {
+      points.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 2 + 1.2
+      });
+    }
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw connecting bonds
+    for (let i = 0; i < points.length; i++) {
+      for (let j = i + 1; j < points.length; j++) {
+        const dx = points[i].x - points[j].x;
+        const dy = points[i].y - points[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 110) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(203, 162, 52, ${0.18 * (1 - dist / 110)})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(points[i].x, points[i].y);
+          ctx.lineTo(points[j].x, points[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw atoms
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = i % 3 === 0 ? 'rgba(203, 162, 52, 0.45)' : 'rgba(255, 255, 255, 0.25)';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  render();
+})();
+
+// 3. TRACK FILTERING
+function filterTracks(category, btn) {
+  const buttons = document.querySelectorAll('.track-filter-btn');
+  buttons.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const cards = document.querySelectorAll('.track-card');
+  cards.forEach(card => {
+    if (category === 'all' || card.getAttribute('data-category') === category) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function openAbstractWithTrack(trackName) {
+  const select = document.getElementById('absCategory');
+  if (select) {
+    select.value = trackName;
+  }
+  const section = document.getElementById('abstracts');
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// 4. SCHEDULE DAY SWITCHER
+const SCHEDULE_DATA = {
+  1: [
+    { time: '08:30 – 09:30', venue: 'Main Foyer', title: 'Delegate Registration & Kit Distribution', speakers: 'Secretariat desk verification, kit handover, and poster installation assistance.' },
+    { time: '09:30 – 11:00', venue: 'Auditorium A', title: 'Inaugural Ceremony & Presidential Address', speakers: 'Chief Guest Address (Ministry of Chemicals & Fertilizers, Govt. of India), Director NIPER-Raebareli, and President Indian Pharmacological Society.' },
+    { time: '11:30 – 13:00', venue: 'Auditorium A', title: 'Plenary Session I: Breakthroughs in Neurotherapeutics', speakers: 'Keynote: Prof. S. K. Kulkarni (Eminent Pharmacologist) · "Microglial Modulation and Epigenetic Targeting in Alzheimer\'s Pathogenesis"' },
+    { time: '14:00 – 16:30', venue: 'Hall B & Lab C', title: 'A workshop of Network Pharmacology', speakers: 'Hands-on practical training on target-disease network construction, pathway enrichment, Cytoscape network visualization, and polypharmacology principles in drug discovery.' }
+  ],
+  2: [
+    { time: '09:00 – 10:30', venue: 'Auditorium A', title: 'Plenary Session II: AI and Generative Molecular Modeling', speakers: 'Keynote Lecture: Computational Drug Design & Deep-Learning Affinity Predictors in Central Nervous System Drug Discovery.' },
+    { time: '11:00 – 13:00', venue: 'Hall B', title: 'IPS Symposia: National Pharmacovigilance & Safety Standards', speakers: 'Chaired by Executive Members of IPS. Regulatory harmonization with CDSCO & OECD toxicological guidelines.' },
+    { time: '14:00 – 16:00', venue: 'Exhibition Hall', title: 'Poster Session A & Young Pharmacologist Communications', speakers: '120 research scholars presenting findings in Molecular Neuropharmacology, Synaptic Modulation, and Neurodegenerative Therapeutics.' },
+    { time: '16:30 – 18:00', venue: 'Seminar Hall 1', title: 'Indian Pharmacological Society Annual General Body Meeting', speakers: 'Conducted for all accredited Life and Annual Members of IPS.' }
+  ],
+  3: [
+    { time: '09:30 – 11:00', venue: 'Auditorium A', title: 'Translational Summit: Academic–Industry Pipeline Synergies', speakers: 'Panel Discussion featuring pharmaceutical industry leadership and academic drug development consortia.' },
+    { time: '11:30 – 13:00', venue: 'Auditorium A', title: 'Young Investigator Award Oration Series', speakers: 'Top 6 shortlisted doctoral scholars deliver competitive podium presentations before the International Peer Jury.' },
+    { time: '14:30 – 16:00', venue: 'Auditorium A', title: 'Valedictory Function, Prize Distribution & Certificate Conferral', speakers: 'Awarding of Best Oral Presentation, Best Poster, and Young Pharmacologist Fellowship honors.' }
+  ]
+};
+
+function switchScheduleDay(dayNum, btn) {
+  const buttons = document.querySelectorAll('.schedule-day-btn');
+  buttons.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const container = document.getElementById('scheduleTimeline');
+  const items = SCHEDULE_DATA[dayNum] || SCHEDULE_DATA[1];
+  
+  let html = '';
+  items.forEach(item => {
+    html += `
+      <div class="timeline-row">
+        <div class="timeline-time-col">
+          <div>${item.time}</div>
+          <div class="timeline-venue-sub">${item.venue}</div>
+        </div>
+        <div>
+          <h3 class="timeline-title">${item.title}</h3>
+          <p class="timeline-speakers">${item.speakers}</p>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+// 6. REAL-TIME REGISTRATION FEE CALCULATOR
+function preselectCategory(cat) {
+  const sel = document.getElementById('regCategory');
+  if (sel) sel.value = cat;
+  recalculateTariff();
+}
+
+function recalculateTariff() {
+  const category = document.getElementById('regCategory').value;
+  const includeWorkshop = document.getElementById('regWorkshop').checked;
+
+  const t = TARIFF_DATA[currentTier] || TARIFF_DATA.early;
+  const currencySymbol = '₹';
+
+  let baseAmount = t[category] || 3500;
+  let workshopFee = includeWorkshop ? (t.workshop || 500) : 0;
+  let subtotal = baseAmount + workshopFee;
+  let gstAmount = Math.round(subtotal * 0.18); // 18% Institutional GST included
+  let grandTotal = subtotal + gstAmount;
+
+  document.getElementById('summaryBase').textContent = currencySymbol + baseAmount.toLocaleString('en-IN');
+  
+  const wsRow = document.getElementById('rowWorkshop');
+  const wsVal = document.getElementById('summaryWorkshop');
+  if (includeWorkshop) {
+    wsRow.style.display = 'flex';
+    if (wsVal) wsVal.textContent = '+' + currencySymbol + workshopFee.toLocaleString('en-IN');
+  } else {
+    wsRow.style.display = 'none';
+  }
+
+  const gstRow = document.getElementById('rowGst');
+  if (gstRow) {
+    gstRow.style.display = 'flex';
+    document.getElementById('summaryGst').textContent = currencySymbol + gstAmount.toLocaleString('en-IN');
+  }
+
+  const totalStr = currencySymbol + grandTotal.toLocaleString('en-IN');
+  document.getElementById('summaryGrandTotal').textContent = totalStr;
+
+  const remitNotice = document.getElementById('paymentRemitNotice');
+  if (remitNotice) remitNotice.textContent = totalStr;
+}
+
+// Bank Details Copy Helper
+function copyBankText(text, btn) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.style.background = '#16a34a';
+      btn.style.color = '#ffffff';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 2000);
+    }).catch(() => fallbackCopy(text, btn));
+  } else {
+    fallbackCopy(text, btn);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+  const orig = btn.textContent;
+  btn.textContent = 'Copied!';
+  setTimeout(() => { btn.textContent = orig; }, 2000);
+}
+
+// 7. SECURE PAYMENT VALIDATION COMPONENT LOGIC
+let delegateProofDataUrl = null;
+let delegateProofFileName = null;
+
+function processPaymentProofFile(file) {
+  if (!file) return;
+
+  const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'application/pdf'];
+  if (!validTypes.includes(file.type)) {
+    alert('Please attach a valid screenshot image (PNG, JPG, WebP) or PDF file.');
+    const input = document.getElementById('regPaymentFile');
+    if (input) input.value = '';
+    return;
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    alert('File size exceeds 5MB limit. Please attach a compressed image under 5MB.');
+    const input = document.getElementById('regPaymentFile');
+    if (input) input.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    delegateProofDataUrl = e.target.result;
+    delegateProofFileName = file.name;
+
+    document.getElementById('proofUploadPrompt').style.display = 'none';
+    const previewWrap = document.getElementById('proofFilePreview');
+    previewWrap.style.display = 'flex';
+    document.getElementById('proofFileName').textContent = file.name;
+    document.getElementById('proofFileSize').textContent = (file.size / 1024).toFixed(1) + ' KB';
+
+    const thumb = document.getElementById('proofThumb');
+    const docIcon = document.getElementById('proofDocIcon');
+    if (file.type.startsWith('image/')) {
+      thumb.src = delegateProofDataUrl;
+      thumb.style.display = 'block';
+      docIcon.style.display = 'none';
+    } else {
+      thumb.style.display = 'none';
+      docIcon.style.display = 'block';
+    }
+
+    validatePaymentSubmissionState();
+  };
+  reader.readAsDataURL(file);
+}
+
+function handlePaymentFileSelect(input) {
+  const file = input.files && input.files[0];
+  if (file) processPaymentProofFile(file);
+}
+
+function clearPaymentFile(e) {
+  if (e) e.stopPropagation();
+  delegateProofDataUrl = null;
+  delegateProofFileName = null;
+  const input = document.getElementById('regPaymentFile');
+  if (input) input.value = '';
+  document.getElementById('proofFilePreview').style.display = 'none';
+  document.getElementById('proofUploadPrompt').style.display = 'block';
+  validatePaymentSubmissionState();
+}
+
+function validatePaymentSubmissionState() {
+  const submitBtn = document.getElementById('btnSubmitReg');
+  const pill = document.getElementById('paymentStatusPill');
+  const icon = document.getElementById('paymentStatusIcon');
+  const text = document.getElementById('paymentStatusText');
+
+  const hasProof = Boolean(delegateProofDataUrl);
+
+  if (hasProof) {
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = '1';
+    submitBtn.style.cursor = 'pointer';
+    submitBtn.innerHTML = 'Confirm Registration with Payment Proof &rarr;';
+
+    if (pill) {
+      pill.className = 'gate-status-pill unlocked';
+      if (icon) icon.textContent = '✅';
+      if (text) text.textContent = `Payment transaction screenshot verified (${delegateProofFileName || 'Attached'}). Form submission is enabled.`;
+    }
+  } else {
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.55';
+    submitBtn.style.cursor = 'not-allowed';
+    submitBtn.innerHTML = 'Attach Payment Screenshot to Submit Registration &rarr;';
+
+    if (pill) {
+      pill.className = 'gate-status-pill locked';
+      if (icon) icon.textContent = '🔒';
+      if (text) text.textContent = 'Upload your payment transaction screenshot above to enable registration submission.';
+    }
+  }
+}
+
+// Delegate Form Submission
+async function handleRegistrationSubmit(e) {
+  e.preventDefault();
+
+  if (!delegateProofDataUrl) {
+    alert('Please attach your payment transaction screenshot to complete registration.');
+    document.getElementById('proofDropZone').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  const fullName = document.getElementById('regFullName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const category = document.getElementById('regCategory').value;
+  const workshop = document.getElementById('regWorkshop').checked ? 1 : 0;
+  const paymentRef = document.getElementById('regPaymentRef').value.trim() || 'Direct Portal Remittance';
+
+  if (!fullName || !email) {
+    alert('Please enter your full name and institutional email.');
+    return;
+  }
+
+  const btn = document.getElementById('btnSubmitReg');
+  btn.disabled = true;
+  btn.textContent = 'Verifying Payment Proof & Registering...';
+
+  try {
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        full_name: fullName,
+        email: email,
+        phone: phone,
+        category: category,
+        workshop: workshop,
+        payment_ref: paymentRef,
+        payment_proof: delegateProofDataUrl,
+        proof_filename: delegateProofFileName
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || 'Registration failed. Please check inputs.');
+      btn.disabled = false;
+      btn.textContent = 'Confirm Registration with Payment Proof →';
+      return;
+    }
+
+    // Open Confirmation Receipt Modal
+    const regIdStr = data.ref_id || ('NMP27-DEL-' + (1000 + (data.id || 1)));
+    document.getElementById('receiptRegId').textContent = regIdStr;
+    document.getElementById('receiptName').textContent = fullName;
+    const catLabel = category === 'student' ? 'Research Scholar / PG Student' : (category === 'faculty' ? 'Faculty / Academic Scientist' : 'Corporate / Industry Delegate');
+    document.getElementById('receiptCategory').textContent = catLabel;
+    document.getElementById('receiptTier').textContent = (data.tier || 'early').toUpperCase() + ' RATE';
+    document.getElementById('receiptWorkshop').textContent = workshop ? 'Included (+₹500)' : 'Not Opted';
+    const recPaymentRef = document.getElementById('receiptPaymentRef');
+    if (recPaymentRef) recPaymentRef.textContent = paymentRef;
+    document.getElementById('receiptAmount').textContent = '₹' + Number(data.amount).toLocaleString('en-IN') + ' INR (Incl. 18% GST)';
+
+    document.getElementById('receiptModal').style.display = 'flex';
+    document.getElementById('registrationForm').reset();
+    clearPaymentFile();
+    recalculateTariff();
+  } catch (err) {
+    console.error(err);
+    alert('Network error connecting to server. Please try again.');
+  } finally {
+    validatePaymentSubmissionState();
+  }
+}
+
+function closeReceiptModal() {
+  document.getElementById('receiptModal').style.display = 'none';
+}
+
+// 8. ABSTRACT SUBMISSION LOGIC
+function updateAbstractWordCount(text) {
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const countEl = document.getElementById('absWordCount');
+  countEl.textContent = words;
+  if (words > 300) {
+    countEl.style.color = '#ef4444';
+  } else {
+    countEl.style.color = '#64748b';
+  }
+}
+
+async function handleAbstractSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('btnSubmitAbs');
+  btn.disabled = true;
+  btn.textContent = 'Submitting Abstract...';
+
+  const author = document.getElementById('absAuthor').value.trim();
+  const email = document.getElementById('absEmail').value.trim();
+  const category = document.getElementById('absCategory').value;
+  const title = document.getElementById('absTitle').value.trim();
+  const body = document.getElementById('absBody').value.trim();
+
+  try {
+    const res = await fetch('/api/abstract', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        full_name: author,
+        email: email,
+        category: category,
+        title: title,
+        body: body
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || 'Failed to submit abstract.');
+      btn.disabled = false;
+      btn.textContent = 'Submit Abstract for Review →';
+      return;
+    }
+
+    const refId = data.ref_id || ('NMP27-ABS-' + (1000 + (data.id || 1)));
+    alert(`Success! Abstract submitted under Reference ID: ${refId}.\nA confirmation acknowledgment has been dispatched to ${email}.`);
+    document.getElementById('abstractForm').reset();
+    updateAbstractWordCount('');
+  } catch (err) {
+    console.error(err);
+    alert('Network error submitting abstract.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Submit Abstract for Review →';
+  }
+}
+
+// 9. SECRETARIAT ADMIN CONSOLE LOGIC
+let adminRegistrationsCache = [];
+let adminAbstractsCache = [];
+let adminSponsorshipsCache = [];
+
+// ==========================================================================
+// SPONSORSHIP MODAL & INQUIRY HANDLER
+// ==========================================================================
+const SPONSORSHIP_PRICES = {
+  Platinum: 100000,
+  Gold: 75000,
+  Silver: 50000,
+  Bronze: 25000,
+  Custom: 0
+};
+
+function openSponsorshipModal(tier, amount) {
+  const modal = document.getElementById('sponsorshipModal');
+  const select = document.getElementById('sponTierSelect');
+  if (tier && select) {
+    select.value = tier;
+  }
+  updateSponsorshipTariff();
+  modal.style.display = 'flex';
+}
+
+function closeSponsorshipModal() {
+  document.getElementById('sponsorshipModal').style.display = 'none';
+}
+
+function updateSponsorshipTariff() {
+  const select = document.getElementById('sponTierSelect');
+  const tier = select ? select.value : 'Platinum';
+  const base = SPONSORSHIP_PRICES[tier] || 0;
+  const gst = base * 0.18;
+  const total = base + gst;
+
+  const baseEl = document.getElementById('sponBaseTariff');
+  const gstEl = document.getElementById('sponGstTariff');
+  const totalEl = document.getElementById('sponGrandTariff');
+
+  if (baseEl) baseEl.textContent = base > 0 ? '₹ ' + base.toLocaleString() : 'Custom Quote';
+  if (gstEl) gstEl.textContent = gst > 0 ? '₹ ' + gst.toLocaleString() : 'Calculated on Quote';
+  if (totalEl) totalEl.textContent = total > 0 ? '₹ ' + total.toLocaleString() : 'Negotiated Rate';
+}
+
+async function handleSponsorshipSubmit(event) {
+  event.preventDefault();
+
+  const company = document.getElementById('sponCompany').value.trim();
+  const contact = document.getElementById('sponContact').value.trim();
+  const email = document.getElementById('sponEmail').value.trim();
+  const phone = document.getElementById('sponPhone').value.trim();
+  const tier = document.getElementById('sponTierSelect').value;
+  const notes = document.getElementById('sponNotes') ? document.getElementById('sponNotes').value.trim() : '';
+  const amount = SPONSORSHIP_PRICES[tier] || 0;
+
+  if (!company || !contact || !email) {
+    alert('Please complete all required company details.');
+    return;
+  }
+
+  const btn = document.getElementById('btnSubmitSpon');
+  btn.disabled = true;
+  btn.textContent = 'Submitting Partnership Inquiry...';
+
+  try {
+    const res = await fetch('/api/sponsorship', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        company_name: company,
+        contact_person: contact,
+        email: email,
+        phone: phone,
+        tier: tier,
+        amount: amount,
+        notes: notes
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || 'Failed to submit sponsorship inquiry.');
+      btn.disabled = false;
+      btn.textContent = 'Submit Partnership Inquiry →';
+      return;
+    }
+
+    const refId = data.ref_id || ('NMP27-SPON-' + (100 + (data.id || 1)));
+    alert(`Thank you! Your ${tier} Sponsorship inquiry has been registered under Reference ID: ${refId}.\n\nA confirmation notice has been sent to ${email} and the Conference Secretariat will connect with your authorized representative.`);
+    document.getElementById('sponsorshipForm').reset();
+    closeSponsorshipModal();
+  } catch (err) {
+    console.error(err);
+    alert('Network error submitting sponsorship inquiry. Please contact secretariat directly.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Submit Partnership Inquiry →';
+  }
+}
+
+// ==========================================================================
+// PUBLICATION-GRADE CLIENT-SIDE PDF GENERATION & DOWNLOAD
+// ==========================================================================
+function triggerPDFDownload(event, type) {
+  // If jsPDF is available in browser, generate tailored PDF on the fly or download static file
+  if (window.jspdf && window.jspdf.jsPDF) {
+    try {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+      // Page 1: Abstract Guidelines
+      doc.setFillColor(6, 14, 24);
+      doc.rect(0, 0, 210, 36, 'F');
+      doc.setFillColor(203, 162, 52);
+      doc.rect(0, 36, 210, 2, 'F');
+
+      doc.setTextColor(203, 162, 52);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.text('INDIAN PHARMACOLOGICAL SOCIETY (NORTHERN CHAPTER)', 105, 12, { align: 'center' });
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(13);
+      doc.text('NEUROMEDPHARMACON 2027', 105, 20, { align: 'center' });
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(200, 215, 235);
+      doc.text('Hosted by NIPER-Raebareli Lucknow Campus · Feb 18–20, 2027', 105, 27, { align: 'center' });
+      doc.text('In Collaboration with Indian Pharmacological Society (IPS North Zone)', 105, 32, { align: 'center' });
+
+      doc.setTextColor(15, 23, 42);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      doc.text(type === 'template' ? 'OFFICIAL STRUCTURED ABSTRACT TEMPLATE' : 'CALL FOR ABSTRACTS & SUBMISSION GUIDELINES', 20, 48);
+
+      doc.setDrawColor(203, 162, 52);
+      doc.setLineWidth(0.5);
+      doc.line(20, 50, 190, 50);
+
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(6, 14, 24);
+      doc.text('1. Guidelines & Submission Rules (Max 300 Words)', 20, 58);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(51, 65, 85);
+      const textRules = [
+        '• Structure: Background & Rationale, Materials & Methods, Results & Discussion, Conclusions, and 4–6 Keywords.',
+        '• Word Count: Strictly maximum 300 words (excluding title, author names, affiliations, and grant citations).',
+        '• Formatting: Times New Roman 12 pt, 1.5 line spacing, 1-inch margins on all sides.',
+        '• Young Scientist Award: Applicants must be <= 35 years as of Feb 18, 2027. Age proof upload required.',
+        '• Ethics Clearance: Mention IAEC/IEC ethics approval number for all in-vivo animal and clinical studies.',
+        '• Submission Deadline: 31st December 2026 | Secretariat: abstracts@niperraebareli.edu.in'
+      ];
+      let y = 63;
+      textRules.forEach(r => {
+        const lines = doc.splitTextToSize(r, 170);
+        doc.text(lines, 20, y);
+        y += lines.length * 4.2;
+      });
+
+      y += 4;
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(6, 14, 24);
+      doc.text('2. Structured Abstract Layout Template', 20, y);
+
+      y += 6;
+      doc.setFillColor(248, 250, 252);
+      doc.setDrawColor(226, 232, 240);
+      doc.roundedRect(20, y, 170, 145, 2, 2, 'FD');
+
+      let tY = y + 8;
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      doc.setTextColor(6, 14, 24);
+      doc.text('[TITLE]: NOVEL PHARMACOPHORES IN NEURODEGENERATIVE TARGETING', 25, tY, { maxWidth: 160 });
+
+      tY += 8;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(71, 85, 105);
+      doc.text('Authors: Amit K. Sharma1*, Neha Rastogi1, Rajeshwar S. Verma2', 25, tY);
+      tY += 4.5;
+      doc.text('1Department of Pharmacology & Toxicology, NIPER-Raebareli, Lucknow 226002', 25, tY);
+      tY += 4.5;
+      doc.text('2Laboratory of Molecular NeuroTherapeutics, NIPER-Raebareli, Lucknow 226002', 25, tY);
+      tY += 4.5;
+      doc.text('*Corresponding Author: amit.sharma@niperraebareli.edu.in | Track: TR-01', 25, tY);
+
+      tY += 6;
+      doc.setDrawColor(203, 162, 52);
+      doc.line(25, tY, 185, tY);
+
+      tY += 6;
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(184, 134, 11);
+      doc.text('Background & Objectives:', 25, tY);
+      tY += 4;
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(51, 65, 85);
+      doc.text('State the clinical gap, therapeutic hypothesis, and primary objective in 2–3 sentences.', 25, tY, { maxWidth: 160 });
+
+      tY += 12;
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(184, 134, 11);
+      doc.text('Materials & Methods:', 25, tY);
+      tY += 4;
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(51, 65, 85);
+      doc.text('Detail experimental models, cell lines, assays, statistical analyses, or in-silico protocols.', 25, tY, { maxWidth: 160 });
+
+      tY += 12;
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(184, 134, 11);
+      doc.text('Results & Discussion:', 25, tY);
+      tY += 4;
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(51, 65, 85);
+      doc.text('Provide primary quantitative findings with statistical significance (p-values). No figures/tables.', 25, tY, { maxWidth: 160 });
+
+      tY += 12;
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(184, 134, 11);
+      doc.text('Conclusions:', 25, tY);
+      tY += 4;
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(51, 65, 85);
+      doc.text('Conclude with translational significance for drug discovery or clinical therapy.', 25, tY, { maxWidth: 160 });
+
+      tY += 12;
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(184, 134, 11);
+      doc.text('Keywords:', 25, tY);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(51, 65, 85);
+      doc.text('Neuroinflammation; Microglia; Blood-Brain Barrier; Bioavailability; Pharmacokinetics', 42, tY);
+
+      tY += 12;
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(6, 14, 24);
+      doc.text('Presentation Preference: [ ] Oral Presentation    [ ] Poster Presentation', 25, tY);
+      tY += 5;
+      doc.text('Apply for Young Scientist Award (Age <= 35): [ ] Yes    [ ] No', 25, tY);
+      tY += 5;
+      doc.text('Delegate Registration ID / Reference: ___________________________', 25, tY);
+
+      doc.setFontSize(7.5);
+      doc.setTextColor(148, 163, 184);
+      doc.text('IPS North Zone Conference 2027 · NIPER-Raebareli Lucknow Campus · Official Document', 105, 290, { align: 'center' });
+
+      doc.save(type === 'template' ? 'IPS_NorthZone_Abstract_Template_2027.pdf' : 'IPS_NorthZone_Abstract_Guidelines_2027.pdf');
+      if (event && event.preventDefault) event.preventDefault();
+      return false;
+    } catch (err) {
+      console.warn('In-browser jsPDF generation fallback to static file:', err);
+      // Fallback allows default browser download link to proceed
+    }
+  }
+}
+
+// ==========================================================================
+// SECRETARIAT ADMIN CONSOLE LOGIC
+// ==========================================================================
+function openAdminModal() {
+  document.getElementById('adminModal').style.display = 'flex';
+  fetchAdminData();
+}
+
+function closeAdminModal() {
+  document.getElementById('adminModal').style.display = 'none';
+}
+
+async function fetchAdminData() {
+  const token = document.getElementById('adminTokenInput').value.trim();
+  if (!token) {
+    alert('Please provide Secretariat Access Token');
+    return;
+  }
+
+  try {
+    // 1. Fetch Registrations
+    const regRes = await fetch(`/api/admin/registrations?token=${encodeURIComponent(token)}`);
+    if (regRes.status === 403) {
+      alert('Forbidden: Invalid Secretariat Token');
+      return;
+    }
+    adminRegistrationsCache = await regRes.json();
+    document.getElementById('regCount').textContent = adminRegistrationsCache.length;
+    renderAdminRegTable(adminRegistrationsCache);
+
+    // 2. Fetch Abstracts
+    const absRes = await fetch(`/api/admin/abstracts?token=${encodeURIComponent(token)}`);
+    if (absRes.ok) {
+      adminAbstractsCache = await absRes.json();
+      document.getElementById('absCount').textContent = adminAbstractsCache.length;
+      renderAdminAbsTable(adminAbstractsCache);
+    }
+
+    // 3. Fetch Sponsorships
+    const sponRes = await fetch(`/api/admin/sponsorships?token=${encodeURIComponent(token)}`);
+    if (sponRes.ok) {
+      adminSponsorshipsCache = await sponRes.json();
+      document.getElementById('sponCount').textContent = adminSponsorshipsCache.length;
+      renderAdminSponTable(adminSponsorshipsCache);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function renderAdminRegTable(list) {
+  const tbody = document.getElementById('adminRegBody');
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-3">No registrations found</td></tr>';
+    return;
+  }
+  let html = '';
+  list.forEach(r => {
+    const proofCell = r.payment_proof ? 
+      `<a href="${r.payment_proof}" target="_blank" download="PaymentProof_${r.ref_id || r.id}.png" style="color:var(--accent-gold); font-weight:600; text-decoration:underline; font-size:0.78rem;">📎 Proof</a><div style="font-size:0.68rem; color:#64748b;">${escapeHtml(r.payment_ref || '')}</div>` : 
+      `<span style="color:#94a3b8; font-size:0.75rem;">${escapeHtml(r.payment_ref || 'Direct')}</span>`;
+    html += `
+      <tr>
+        <td style="font-family: var(--font-mono); font-weight:600; font-size:0.8rem;">${r.ref_id || '#' + r.id}</td>
+        <td><strong>${escapeHtml(r.full_name)}</strong></td>
+        <td>${escapeHtml(r.email)}</td>
+        <td><span style="font-family:var(--font-mono); font-size:0.8rem;">${escapeHtml(r.category)}</span></td>
+        <td>${r.workshop ? 'Yes' : 'No'}</td>
+        <td class="tar-amt">${r.currency === 'USD' ? '$' : '₹'}${Number(r.amount).toLocaleString()}</td>
+        <td>${proofCell}</td>
+        <td style="font-size:0.75rem; color:#64748b;">${r.created_at || ''}</td>
+      </tr>
+    `;
+  });
+  tbody.innerHTML = html;
+}
+
+function renderAdminAbsTable(list) {
+  const tbody = document.getElementById('adminAbsBody');
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-3">No abstracts submitted yet</td></tr>';
+    return;
+  }
+  let html = '';
+  list.forEach(a => {
+    html += `
+      <tr>
+        <td style="font-family: var(--font-mono); font-weight:600;">#${a.id}</td>
+        <td><strong>${escapeHtml(a.full_name)}</strong></td>
+        <td>${escapeHtml(a.email)}</td>
+        <td><span style="font-size:0.82rem;">${escapeHtml(a.category)}</span></td>
+        <td>${escapeHtml(a.title)}</td>
+        <td style="font-size:0.75rem; color:#64748b;">${a.created_at || ''}</td>
+      </tr>
+    `;
+  });
+  tbody.innerHTML = html;
+}
+
+function renderAdminSponTable(list) {
+  const tbody = document.getElementById('adminSponBody');
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-3">No sponsorship inquiries yet</td></tr>';
+    return;
+  }
+  let html = '';
+  list.forEach(s => {
+    html += `
+      <tr>
+        <td style="font-family: var(--font-mono); font-weight:600;">#${s.id}</td>
+        <td><strong>${escapeHtml(s.company_name)}</strong></td>
+        <td>${escapeHtml(s.contact_person)}</td>
+        <td>${escapeHtml(s.email)}<br><small style="color:#64748b;">${escapeHtml(s.phone)}</small></td>
+        <td><span style="font-family:var(--font-mono); font-weight:600; color:var(--accent-gold);">${escapeHtml(s.tier)}</span></td>
+        <td class="tar-amt">₹${Number(s.amount).toLocaleString()}</td>
+        <td style="font-size:0.78rem; max-width:200px; color:#475569;">${escapeHtml(s.notes || '—')}</td>
+        <td style="font-size:0.75rem; color:#64748b;">${s.created_at || ''}</td>
+      </tr>
+    `;
+  });
+  tbody.innerHTML = html;
+}
+
+function filterAdminTable() {
+  const query = document.getElementById('adminFilterInput').value.toLowerCase();
+  const filteredReg = adminRegistrationsCache.filter(r => 
+    (r.full_name && r.full_name.toLowerCase().includes(query)) ||
+    (r.email && r.email.toLowerCase().includes(query)) ||
+    (r.category && r.category.toLowerCase().includes(query))
+  );
+  renderAdminRegTable(filteredReg);
+
+  const filteredSpon = adminSponsorshipsCache.filter(s =>
+    (s.company_name && s.company_name.toLowerCase().includes(query)) ||
+    (s.contact_person && s.contact_person.toLowerCase().includes(query)) ||
+    (s.tier && s.tier.toLowerCase().includes(query))
+  );
+  renderAdminSponTable(filteredSpon);
+}
+
+function switchAdminTab(tab) {
+  const regBtn = document.getElementById('tabRegBtn');
+  const absBtn = document.getElementById('tabAbsBtn');
+  const sponBtn = document.getElementById('tabSponBtn');
+  const regWrap = document.getElementById('adminRegWrap');
+  const absWrap = document.getElementById('adminAbsWrap');
+  const sponWrap = document.getElementById('adminSponWrap');
+
+  regBtn.classList.remove('active');
+  absBtn.classList.remove('active');
+  if (sponBtn) sponBtn.classList.remove('active');
+  regWrap.style.display = 'none';
+  absWrap.style.display = 'none';
+  if (sponWrap) sponWrap.style.display = 'none';
+
+  if (tab === 'reg') {
+    regBtn.classList.add('active');
+    regWrap.style.display = 'block';
+  } else if (tab === 'abs') {
+    absBtn.classList.add('active');
+    absWrap.style.display = 'block';
+  } else if (tab === 'spon') {
+    if (sponBtn) sponBtn.classList.add('active');
+    if (sponWrap) sponWrap.style.display = 'block';
+  }
+}
+
+function exportRegistrationsCsv() {
+  if (!adminRegistrationsCache.length) {
+    alert('No registration data available to export.');
+    return;
+  }
+  let csv = 'ID,Full Name,Email,Phone,Category,Tier,Workshop,Amount,Currency,Created At\n';
+  adminRegistrationsCache.forEach(r => {
+    csv += `"${r.id}","${(r.full_name||'').replace(/"/g, '""')}","${r.email}","${r.phone||''}","${r.category}","${r.tier}","${r.workshop}","${r.amount}","${r.currency}","${r.created_at}"\n`;
+  });
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `IPS_NorthZone_2027_Registrations_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Initial calculation and dropzone event handlers on load
+window.addEventListener('DOMContentLoaded', () => {
+  recalculateTariff();
+
+  const dropZone = document.getElementById('proofDropZone');
+  if (dropZone) {
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = 'var(--accent-gold)';
+      dropZone.style.background = '#fefce8';
+    });
+    dropZone.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.background = '#f8fafc';
+    });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#cbd5e1';
+      dropZone.style.background = '#f8fafc';
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+        processPaymentProofFile(e.dataTransfer.files[0]);
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>

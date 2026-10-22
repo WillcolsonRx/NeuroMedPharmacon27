@@ -1,0 +1,35 @@
+NIPERCON 2026 — NATIONAL CONFERENCE ON PHARMACEUTICAL SCIENCES
+Host: National Institute of Pharmaceutical Education & Research (NIPER), Raebareli
+Venue: NIPER-Raebareli Campus, Lucknow-Raebareli Road, Uttar Pradesh, India
+Date: 28th October 2026 – 01st November 2026
+
+OFFICIAL ABSTRACT SUBMISSION TEMPLATE
+=====================================
+Title: [TITLE OF THE ABSTRACT IN BOLD CAPITAL LETTERS, TIMES NEW ROMAN 12pt]
+Authors: First Author 1*, Second Author 2, Corresponding Author 1#
+Affiliations: 
+1. Department of Medicinal Chemistry, National Institute of Pharmaceutical Education and Research (NIPER), Raebareli, UP, India
+2. Department of Pharmaceutics, Institute of Chemical Technology, Mumbai, India
+*Presenting Author email: delegate@example.com
+#Corresponding Author email: supervisor@example.com
+
+Category / Track: [Select one: Drug Discovery / Pharmacology / Pharmaceutics / Regulatory Affairs / Clinical Research / Natural Products]
+
+STRUCTURED ABSTRACT BODY (Maximum 300 words):
+--------------------------------------------
+Background & Objectives:
+State the background, hypothesis, and the precise aim of the study clearly in 2-3 sentences.
+
+Materials & Methods:
+Summarize the experimental design, materials, cell lines/animal models, synthesis protocols, analytical instrumentation (e.g. HPLC, LC-MS, NMR, Flow Cytometry), or computational modeling tools employed.
+
+Results & Discussion:
+Present key quantitative and qualitative findings with statistical significance (p-values) where relevant. Do not include figures or tables in the abstract body.
+
+Conclusions:
+Provide concise concluding remarks highlighting the translational or clinical impact in pharmaceutical sciences.
+
+Keywords: 4 to 6 keywords separated by semicolons (e.g., Nanoparticles; Targeted delivery; Bioavailability; Cytotoxicity).
+
+Category of Presentation: [ ] Oral Presentation   [ ] Poster Presentation
+Applying for Young Scientist Award (Age <= 35 Years): [ ] Yes   [ ] No

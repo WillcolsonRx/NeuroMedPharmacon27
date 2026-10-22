@@ -1,0 +1,6 @@
+{
+  "name": "NIPERCON 2026",
+  "description": "National Conference on Pharmaceutical Sciences, NIPER-Raebareli, Lucknow",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

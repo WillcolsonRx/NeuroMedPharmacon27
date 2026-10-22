@@ -1,0 +1,63 @@
+================================================================================
+NEUROMEDPHARMACON 2027 — OFFICIAL ABSTRACT SUBMISSION TEMPLATE
+International Conference on Advances in Pharmacology & Translational Medicine
+Organized by NIPER-Raebareli in association with Indian Pharmacological Society (IPS)
+18th – 20th February 2027 | Lucknow, Uttar Pradesh, India
+================================================================================
+
+INSTRUCTIONS FOR AUTHORS:
+- Word Limit: Maximum 300 words (excluding Title, Authors, and Affiliations)
+- Font: Times New Roman / Calibri, 12pt, 1.15 line spacing
+- Format: Structured Abstract (Background, Methods, Results, Conclusions)
+- Submission Portal: Online via conference website or email to nipercon2026@niperrbl.ac.in
+
+--------------------------------------------------------------------------------
+1. PRESENTATION CATEGORY:
+[ ] Oral Presentation (Eligible for PhD Scholars & Post-Doctoral Fellows)
+[ ] Poster Presentation (Eligible for Masters Students: M.Pharm, MS Pharm, M.Tech, M.Sc)
+[ ] Applying for Young Scientist Award (Age <= 35 Years)
+
+2. SELECT CONFERENCE THEME (Choose one):
+[ ] Theme I:    Molecular Mechanisms of Drug Action
+[ ] Theme II:   Neuropharmacology & CNS Drug Discovery
+[ ] Theme III:  Cardiovascular & Metabolic Pharmacology
+[ ] Theme IV:   Cancer Pharmacology & Immunotherapeutics
+[ ] Theme V:    Pharmacokinetics, PK/PD & MIDD
+[ ] Theme VI:   Toxicology & Drug Safety
+[ ] Theme VII:  Natural Products & Ethnopharmacology
+[ ] Theme VIII: Clinical Pharmacology & Pharmacovigilance
+[ ] Theme IX:   AI/ML in Drug Discovery & Repurposing
+[ ] Theme X:    Regulatory Science & Translational Medicine
+
+3. ABSTRACT DETAILS:
+--------------------------------------------------------------------------------
+TITLE: [TYPE TITLE IN CAPITAL BOLD LETTERS, MAXIMUM 20 WORDS]
+
+AUTHORS: First Author 1*, Second Author 2, Corresponding Author 1#
+1. Department of Pharmacology & Toxicology, National Institute of Pharmaceutical Education & Research (NIPER), Raebareli, UP, India
+2. Department of Pharmacology, All India Institute of Medical Sciences (AIIMS), New Delhi, India
+
+*Presenting Author Email: author@domain.edu | Mobile: +91-XXXXXXXXXX
+#Corresponding Author Email: supervisor@domain.edu
+
+--------------------------------------------------------------------------------
+STRUCTURED ABSTRACT BODY (Max 300 words):
+--------------------------------------------------------------------------------
+BACKGROUND & OBJECTIVES:
+State the clinical or pharmacological rationale, hypothesis, and primary objective in 2-3 sentences.
+
+MATERIALS & METHODS:
+Describe the experimental design, animal models/cell lines, pharmacological interventions, molecular assays (Western blot, qPCR, ELISA, patch-clamp), PK/PD modeling or computational modeling tools. Mention ethical approvals (IAEC/IEC).
+
+RESULTS & DISCUSSION:
+Summarize key quantitative and mechanistic outcomes with statistical significance (e.g., p < 0.05). Figures, tables, and reference citations should NOT be included in the abstract text.
+
+CONCLUSIONS:
+State the fundamental conclusions and translational relevance to neurotherapeutics, drug development, or patient healthcare.
+
+KEYWORDS: 4 to 6 keywords separated by semicolons (e.g., Neuroinflammation; Microglia; Blood-Brain Barrier; Bioavailability; Pharmacokinetics)
+
+--------------------------------------------------------------------------------
+INDIAN PHARMACOLOGICAL SOCIETY (IPS) MEMBERSHIP (IF APPLICABLE):
+Life / Annual Membership Number: ________________________
+================================================================================

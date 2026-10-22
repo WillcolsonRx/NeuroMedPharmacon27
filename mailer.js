@@ -1,0 +1,417 @@
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env'), override: true });
+const nodemailer = require('nodemailer');
+
+function generateRefId(type = 'DEL') {
+  const rand = Math.floor(10000 + Math.random() * 90000);
+  return `NMP27-${type.toUpperCase()}-${rand}`;
+}
+
+/**
+ * The exact six allowed environment variables:
+ * SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS, and ORGANIZER_EMAIL
+ */
+const ALLOWED_CONFIG_KEYS = [
+  'SMTP_HOST',
+  'SMTP_PORT',
+  'SMTP_SECURE',
+  'SMTP_USER',
+  'SMTP_PASS',
+  'ORGANIZER_EMAIL'
+];
+
+/**
+ * Validate and retrieve the 6 allowed SMTP configuration variables.
+ * Uses SMTP_USER as sender email address.
+ * Configures STARTTLS with requireTLS: true.
+ */
+function getSmtpConfig() {
+  const host = process.env.SMTP_HOST || 'smtp.gmail.com';
+  const port = parseInt(process.env.SMTP_PORT || '587', 10);
+  const secure = process.env.SMTP_SECURE === 'true';
+  const user = process.env.SMTP_USER || '';
+  const pass = process.env.SMTP_PASS || '';
+  // Single Gmail account for sending and receiving notifications
+  const organizerEmail = process.env.ORGANIZER_EMAIL || user || 'secretariat@conference.local';
+
+  // Environment variable validation: check presence of the 6 variables
+  const missing = [];
+  if (!process.env.SMTP_HOST) missing.push('SMTP_HOST');
+  if (!process.env.SMTP_PORT) missing.push('SMTP_PORT');
+  if (process.env.SMTP_SECURE === undefined) missing.push('SMTP_SECURE');
+  if (!process.env.SMTP_USER) missing.push('SMTP_USER');
+  if (!process.env.SMTP_PASS) missing.push('SMTP_PASS');
+  if (!process.env.ORGANIZER_EMAIL) missing.push('ORGANIZER_EMAIL');
+
+  const isValid = Boolean(user && pass);
+
+  return {
+    host,
+    port,
+    secure,
+    requireTLS: true,
+    auth: { user, pass },
+    senderEmail: user || 'secretariat@conference.local',
+    organizerEmail,
+    isValid,
+    missing,
+    allowedVars: ALLOWED_CONFIG_KEYS
+  };
+}
+
+let transporter = null;
+let lastUser = null;
+let lastPass = null;
+let lastPort = null;
+let lastHost = null;
+
+function getTransporter() {
+  const config = getSmtpConfig();
+
+  if (!config.auth.user || !config.auth.pass) {
+    transporter = null;
+    return null;
+  }
+
+  // Re-instantiate transporter if credentials or connection parameters change
+  if (
+    !transporter ||
+    lastUser !== config.auth.user ||
+    lastPass !== config.auth.pass ||
+    lastPort !== config.port ||
+    lastHost !== config.host
+  ) {
+    lastUser = config.auth.user;
+    lastPass = config.auth.pass;
+    lastPort = config.port;
+    lastHost = config.host;
+
+    transporter = nodemailer.createTransport({
+      host: config.host,
+      port: config.port,
+      secure: config.secure,
+      requireTLS: config.requireTLS,
+      auth: config.auth,
+      tls: {
+        rejectUnauthorized: false
+      }
+    });
+  }
+  return transporter;
+}
+
+/**
+ * Dispatch an email using SMTP_USER as sender with STARTTLS
+ */
+async function sendMail(db, { to, subject, html, text, type = 'GENERAL', refId = null }) {
+  const config = getSmtpConfig();
+  // Use SMTP_USER directly as the sender email address
+  const from = config.senderEmail;
+  const activeTransporter = getTransporter();
+
+  let status = 'logged';
+  let messageId = null;
+  let errorMsg = null;
+
+  if (process.env.NODE_ENV === 'test') {
+    // Automated test mode: simulate email delivery to avoid sending emails over the internet
+    status = 'simulated';
+    messageId = `test-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`;
+  } else if (activeTransporter) {
+    try {
+      const info = await activeTransporter.sendMail({
+        from,
+        to,
+        subject,
+        html,
+        text
+      });
+      status = 'sent';
+      messageId = info.messageId;
+      console.log(`[SMTP SENT] (${type}) Successfully dispatched to ${to} | Ref: ${refId || 'N/A'} | ID: ${messageId}`);
+    } catch (err) {
+      status = 'failed';
+      errorMsg = err.message;
+      console.error(`[SMTP ERROR] Failed to send email to ${to}:`, err.message);
+      if (err.message && (err.message.includes('534') || err.message.includes('InvalidSecondFactor') || err.message.includes('Application-specific password'))) {
+        console.warn('  -> [GMAIL APP PASSWORD NOTICE] Gmail requires a 16-character App Password when 2-Step Verification is active. Generate one at https://myaccount.google.com/apppasswords and set SMTP_PASS.');
+      }
+    }
+  } else {
+    // Development dry-run mode when credentials are not yet populated in .env
+    status = 'simulated';
+    messageId = `sim-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`;
+    console.log(`[SMTP SIMULATED] (${type}) From: ${from} | To: ${to} | Subj: ${subject} | Ref: ${refId || 'N/A'}`);
+  }
+
+  // Persist into mail_logs table for administrative verification
+  try {
+    if (db) {
+      db.prepare(`
+        INSERT INTO mail_logs (recipient, subject, type, ref_id, status, message_id, error_msg, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
+      `).run(to, subject, type, refId || '', status, messageId || '', errorMsg || '');
+    }
+  } catch (dbErr) {
+    console.error('[DB MAIL LOG ERROR]', dbErr.message);
+  }
+
+  return { status, messageId, error: errorMsg };
+}
+
+function formatCategoryName(cat) {
+  if (cat === 'student') return 'Research Scholar / PG Student';
+  if (cat === 'faculty') return 'Faculty / Academic Scientist';
+  if (cat === 'corporate') return 'Corporate / Industry Delegate';
+  return cat;
+}
+
+/**
+ * EMAIL 1: Registration confirmation email sent to the delegate
+ */
+async function sendDelegateConfirmation(db, registration) {
+  const { full_name, email, category, tier, workshop, amount, currency, ref_id, payment_ref } = registration;
+  const categoryLabel = formatCategoryName(category);
+  const subject = `Registration Confirmation: NeuroMedPharmacon 2027 [Ref: ${ref_id}]`;
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #0f172a; margin: 0; padding: 20px; }
+        .card { max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .header { background: #060e18; color: #ffffff; padding: 24px; text-align: center; border-bottom: 3px solid #cba234; }
+        .header h1 { margin: 0 0 4px; font-size: 20px; color: #ffffff; font-family: Georgia, serif; }
+        .header p { margin: 0; font-size: 13px; color: #cba234; text-transform: uppercase; letter-spacing: 0.08em; }
+        .body { padding: 24px; }
+        .ref-box { background: #f0fdf4; border: 1px dashed #16a34a; border-radius: 6px; padding: 14px; margin: 18px 0; text-align: center; }
+        .ref-label { font-size: 12px; color: #166534; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+        .ref-val { font-size: 24px; font-weight: 700; color: #15803d; font-family: monospace; margin-top: 4px; }
+        .details-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+        .details-table td { padding: 9px 12px; border-bottom: 1px solid #f1f5f9; }
+        .details-table td:first-child { color: #64748b; width: 42%; }
+        .details-table td:last-child { font-weight: 600; text-align: right; color: #0f172a; }
+        .footer { background: #f8fafc; padding: 16px; font-size: 12px; color: #64748b; text-align: center; border-top: 1px solid #e2e8f0; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="header">
+          <h1>NeuroMedPharmacon 2027</h1>
+          <p>In Collaboration with IPS North Zone</p>
+        </div>
+        <div class="body">
+          <p>Dear <strong>${full_name}</strong>,</p>
+          <p>Your registration for <strong>NeuroMedPharmacon 2027</strong> has been successfully confirmed.</p>
+          
+          <div class="ref-box">
+            <div class="ref-label">Official Delegate Reference ID</div>
+            <div class="ref-val">${ref_id}</div>
+          </div>
+
+          <table class="details-table">
+            <tr>
+              <td>Delegate Category</td>
+              <td>${categoryLabel}</td>
+            </tr>
+            <tr>
+              <td>Tariff Tier</td>
+              <td>${(tier || 'early').toUpperCase()} RATE</td>
+            </tr>
+            <tr>
+              <td>A workshop of Network Pharmacology</td>
+              <td>${workshop ? 'Included (+₹500)' : 'Not Included'}</td>
+            </tr>
+            <tr>
+              <td>Amount Remitted (Incl. 18% GST)</td>
+              <td>${currency === 'USD' ? '$' : '₹ '}${Number(amount).toLocaleString()} ${currency}</td>
+            </tr>
+            <tr>
+              <td>Payment / UTR Ref ID</td>
+              <td style="font-family: monospace; color: #16a34a;">${payment_ref || 'Submitted on Portal'}</td>
+            </tr>
+            <tr>
+              <td>Payment Proof Status</td>
+              <td style="color: #16a34a;">Screenshot Attached &amp; Reconciled</td>
+            </tr>
+            <tr>
+              <td>Conference Dates</td>
+              <td>18th – 20th February 2027</td>
+            </tr>
+            <tr>
+              <td>Venue</td>
+              <td>NIPER-Raebareli Lucknow Campus, Bijnor Road, Lucknow 226002</td>
+            </tr>
+          </table>
+
+          <p style="font-size: 13px; color: #475569; line-height: 1.5;">
+            Please present this Reference ID (<strong>${ref_id}</strong>) at the Secretariat Registration Counter upon arrival to collect your delegate badge, scientific proceedings, and conference kit.
+          </p>
+        </div>
+        <div class="footer">
+          NIPER-Raebareli Lucknow Campus · In Collaboration with IPS North Zone
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  const text = `
+NeuroMedPharmacon 2027 - Delegate Registration Confirmation
+Reference ID: ${ref_id}
+
+Dear ${full_name},
+
+Your registration for NeuroMedPharmacon 2027 is confirmed.
+- Category: ${categoryLabel}
+- Tier: ${(tier || 'early').toUpperCase()} RATE
+- A workshop of Network Pharmacology: ${workshop ? 'Included (+₹500)' : 'Not Included'}
+- Total Amount Remitted (Incl. 18% GST): ${currency === 'USD' ? '$' : '₹ '}${amount} ${currency}
+- Dates: 18th – 20th February 2027
+- Venue: NIPER-Raebareli Lucknow Campus, Bijnor Road, Sarojini Nagar, Lucknow 226002
+
+Please present your Reference ID (${ref_id}) at registration desk for badge collection.
+  `.trim();
+
+  return await sendMail(db, {
+    to: email,
+    subject,
+    html,
+    text,
+    type: 'DELEGATE_CONFIRMATION',
+    refId: ref_id
+  });
+}
+
+/**
+ * EMAIL 2: Registration notification sent to the conference Gmail address
+ */
+async function sendOrganizerNotification(db, registration) {
+  const config = getSmtpConfig();
+  const organizerEmail = config.organizerEmail;
+  const { full_name, email, phone, category, tier, workshop, amount, currency, ref_id, payment_ref, has_proof } = registration;
+  const categoryLabel = formatCategoryName(category);
+  const subject = `[New Registration] ${full_name} (${categoryLabel}) [Ref: ${ref_id}]`;
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #0f172a; margin: 0; padding: 16px; }
+        .card { max-width: 580px; margin: 0 auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; }
+        .banner { background: #060e18; color: #ffffff; padding: 18px; border-left: 5px solid #cba234; }
+        .banner h3 { margin: 0 0 4px; font-size: 16px; color: #ffffff; }
+        .body { padding: 20px; }
+        .item-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 13.5px; }
+        .item-label { color: #64748b; font-weight: 500; }
+        .item-val { color: #0f172a; font-weight: 600; text-align: right; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="banner">
+          <h3>⚡ New Delegate Registration Received</h3>
+          <p style="margin: 0; font-size: 12px; color: #cba234;">NeuroMedPharmacon 2027 · Notification</p>
+        </div>
+        <div class="body">
+          <div class="item-row">
+            <span class="item-label">Reference ID:</span>
+            <span class="item-val" style="font-family: monospace; color: #16a34a;">${ref_id}</span>
+          </div>
+          <div class="item-row">
+            <span class="item-label">Delegate Name:</span>
+            <span class="item-val">${full_name}</span>
+          </div>
+          <div class="item-row">
+            <span class="item-label">Email Address:</span>
+            <span class="item-val">${email}</span>
+          </div>
+          <div class="item-row">
+            <span class="item-label">Phone:</span>
+            <span class="item-val">${phone || 'N/A'}</span>
+          </div>
+          <div class="item-row">
+            <span class="item-label">Category:</span>
+            <span class="item-val">${categoryLabel}</span>
+          </div>
+          <div class="item-row">
+            <span class="item-label">Tier:</span>
+            <span class="item-val">${(tier || 'early').toUpperCase()} RATE</span>
+          </div>
+          <div class="item-row">
+            <span class="item-label">A workshop of Network Pharmacology:</span>
+            <span class="item-val">${workshop ? 'Included (+₹500)' : 'No'}</span>
+          </div>
+          <div class="item-row">
+            <span class="item-label">Fee Amount (Incl. 18% GST):</span>
+            <span class="item-val" style="color: #0f172a;">${currency === 'USD' ? '$' : '₹'} ${Number(amount).toLocaleString()} ${currency}</span>
+          </div>
+          <div class="item-row">
+            <span class="item-label">Bank Ref / UTR ID:</span>
+            <span class="item-val" style="font-family: monospace; color: #15803d; font-weight: 700;">${payment_ref || 'Provided'}</span>
+          </div>
+          <div class="item-row">
+            <span class="item-label">Payment Screenshot:</span>
+            <span class="item-val" style="color: #0284c7;">${has_proof ? '✓ Attached (Stored in SQLite Database)' : 'Not Attached'}</span>
+          </div>
+          <p style="margin: 18px 0 0; font-size: 12px; color: #64748b;">
+            Logged automatically in conference database. View full roster and payment proof in the Secretariat Admin Portal.
+          </p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  const text = `
+New Delegate Registration - NeuroMedPharmacon 2027
+Ref ID: ${ref_id}
+Name: ${full_name}
+Email: ${email}
+Phone: ${phone || 'N/A'}
+Category: ${categoryLabel}
+Tier: ${(tier || 'early').toUpperCase()} RATE
+Workshop: ${workshop ? 'Yes' : 'No'}
+Amount: ${currency === 'USD' ? '$' : '₹'} ${amount} ${currency}
+Bank Ref / UTR ID: ${payment_ref || 'N/A'}
+Payment Screenshot: ${has_proof ? 'Attached in Database' : 'None'}
+  `.trim();
+
+  return await sendMail(db, {
+    to: organizerEmail,
+    subject,
+    html,
+    text,
+    type: 'ORGANIZER_NOTIFICATION',
+    refId: ref_id
+  });
+}
+
+/**
+ * Helper to dispatch both automatic registration emails in parallel
+ */
+async function handleRegistrationEmails(db, registration) {
+  const [delegateResult, organizerResult] = await Promise.allSettled([
+    sendDelegateConfirmation(db, registration),
+    sendOrganizerNotification(db, registration)
+  ]);
+
+  return {
+    delegate: delegateResult.status === 'fulfilled' ? delegateResult.value : { status: 'failed', error: delegateResult.reason?.message },
+    organizer: organizerResult.status === 'fulfilled' ? organizerResult.value : { status: 'failed', error: organizerResult.reason?.message }
+  };
+}
+
+module.exports = {
+  generateRefId,
+  getSmtpConfig,
+  getTransporter,
+  sendMail,
+  sendDelegateConfirmation,
+  sendOrganizerNotification,
+  handleRegistrationEmails
+};
