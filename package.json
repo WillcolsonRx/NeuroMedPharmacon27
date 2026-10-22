@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "build": "node scripts/generate-sponsorship-pdf.js",
+    "build": "node scripts/build.js",
     "lint": "echo 'lint passed'",
     "test": "node --test"
   },
