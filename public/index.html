@@ -4,11 +4,80 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NeuroMedPharmacon 2027 — In Collaboration with IPS North Zone | NIPER-Raebareli</title>
-<meta name="description" content="NeuroMedPharmacon 2027: International Conference on Molecular Neurotherapeutics and Pharmacology, organized by NIPER-Raebareli in collaboration with the Indian Pharmacological Society (Northern Chapter / IPS North Zone), 18th–20th February 2027, Lucknow, India." />
-<meta property="og:title" content="NeuroMedPharmacon 2027 — In Collaboration with IPS North Zone" />
-<meta property="og:description" content="Organized by NIPER-Raebareli in collaboration with the Indian Pharmacological Society (IPS North Zone), Feb 18–20, 2027, Lucknow Campus." />
+<meta name="description" content="NeuroMedPharmacon 2027: International Conference on Molecular Neurotherapeutics, Translational Pharmacology & A workshop of Network Pharmacology, organized by NIPER-Raebareli & Indian Pharmacological Society (IPS North Zone), 18–20 Feb 2027, Lucknow, India." />
+
+<!-- Rich Social Share OpenGraph Metadata (WhatsApp, Telegram, LinkedIn, Facebook) -->
+<meta property="og:site_name" content="NeuroMedPharmacon 2027" />
+<meta property="og:title" content="NeuroMedPharmacon 2027 — NIPER-Raebareli & IPS North Zone Conference" />
+<meta property="og:description" content="Annual Conference of Indian Pharmacological Society (North Zone) & A workshop of Network Pharmacology. 18–20 February 2027 at NIPER-Raebareli Lucknow Campus. Register as delegate or sponsor." />
 <meta property="og:type" content="website" />
+<meta property="og:image" content="/assets/aistudio/Screenshot_2026-10-21_144158_87255ea5.png" />
+<meta property="og:image:alt" content="NeuroMedPharmacon 2027 Official Conference Banner" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter / X Large Summary Card -->
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="NeuroMedPharmacon 2027 — NIPER-Raebareli & IPS North Zone" />
+<meta name="twitter:description" content="Annual Conference of Indian Pharmacological Society (North Zone) & Workshop on Network Pharmacology. 18–20 Feb 2027, Lucknow. Register now." />
+<meta name="twitter:image" content="/assets/aistudio/Screenshot_2026-10-21_144158_87255ea5.png" />
+
+<!-- Schema.org Event JSON-LD Structured Data for Google Rich Snippets -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "NeuroMedPharmacon 2027: In Collaboration with IPS North Zone & A workshop of Network Pharmacology",
+  "description": "International Conference on Molecular Neurotherapeutics, Translational Pharmacology and Network Pharmacology organized by NIPER-Raebareli and Indian Pharmacological Society (IPS North Zone).",
+  "startDate": "2027-02-18T09:00:00+05:30",
+  "endDate": "2027-02-20T18:00:00+05:30",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "location": {
+    "@type": "Place",
+    "name": "NIPER-Raebareli Lucknow Campus (Auditorium & Transit Facility)",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Sector-A, Industrial Area, Sarojini Nagar",
+      "addressLocality": "Lucknow",
+      "addressRegion": "Uttar Pradesh",
+      "postalCode": "226008",
+      "addressCountry": "IN"
+    }
+  },
+  "organizer": {
+    "@type": "EducationalOrganization",
+    "name": "National Institute of Pharmaceutical Education and Research (NIPER-Raebareli)",
+    "url": "https://niperraebareli.edu.in"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Research Scholar / PG Student Registration (Incl. 18% Institutional GST)",
+      "price": "4130",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": "/#registration"
+    },
+    {
+      "@type": "Offer",
+      "name": "Faculty / Academic Scientist Registration (Incl. 18% Institutional GST)",
+      "price": "5310",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": "/#registration"
+    },
+    {
+      "@type": "Offer",
+      "name": "Corporate / Industry Delegate Registration (Incl. 18% Institutional GST)",
+      "price": "7080",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": "/#registration"
+    }
+  ]
+}
+</script>
 
 <!-- HUMAN-CRAFTED EDITORIAL TYPOGRAPHY: LORA (SCHOLARLY SERIF) + PLUS JAKARTA SANS (HUMANIST SANS) + JETBRAINS MONO -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -288,6 +357,67 @@ h1, h2, h3, .font-serif-title {
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.25);
   background: rgba(255, 255, 255, 0.04);
+}
+
+.btn-share-trigger {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--hairline-dark);
+  color: var(--text-dark-secondary);
+  padding: 0.45rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-share-trigger:hover {
+  color: #ffffff;
+  border-color: var(--accent-gold);
+  background: var(--accent-gold-soft);
+}
+
+.btn-share-channel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+}
+.btn-share-channel.whatsapp {
+  background: #25D366;
+  color: #ffffff;
+}
+.btn-share-channel.whatsapp:hover {
+  background: #1eb956;
+}
+.btn-share-channel.linkedin {
+  background: #0A66C2;
+  color: #ffffff;
+}
+.btn-share-channel.linkedin:hover {
+  background: #08519c;
+}
+.btn-share-channel.twitter {
+  background: #000000;
+  color: #ffffff;
+}
+.btn-share-channel.twitter:hover {
+  background: #222222;
 }
 
 .btn-primary-action {
@@ -2179,8 +2309,18 @@ h1, h2, h3, .font-serif-title {
       <a href="#venue" class="nav-anchor">Venue &amp; Map</a>
     </nav>
 
-    <!-- Zone 3: 1 Primary Action + Secretariat Trigger -->
+    <!-- Zone 3: 1 Primary Action + Secretariat Trigger + Share Trigger -->
     <div class="header-actions">
+      <button type="button" class="btn-share-trigger" onclick="openShareModal()" title="Share Conference">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+        <span>Share</span>
+      </button>
       <a href="/admin.html" target="_blank" class="btn-secretariat" title="Open Secretariat & Mail Center">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
@@ -2211,7 +2351,11 @@ h1, h2, h3, .font-serif-title {
     <a href="#abstracts" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Call for Abstracts</a>
     <a href="#sponsorship" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Sponsorship Prospectus</a>
     <a href="#venue" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Venue &amp; Map</a>
-    <div class="d-flex gap-2 pt-2 border-top border-secondary">
+    <div class="d-flex gap-2 pt-2 border-top border-secondary flex-wrap">
+      <button type="button" class="btn-share-trigger text-center flex-grow-1" onclick="openShareModal(); toggleMobileNav();" style="display:inline-flex; align-items:center; justify-content:center; gap:0.4rem; padding:0.5rem 0.8rem; background:rgba(203,162,52,0.12); color:var(--accent-gold); border:1px solid rgba(203,162,52,0.3); border-radius:6px; font-weight:600; cursor:pointer;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        Share Conference
+      </button>
       <a href="#registration" class="btn-primary-action text-center flex-grow-1" onclick="toggleMobileNav()">Register Delegate</a>
       <a href="/admin.html" target="_blank" class="btn-secretariat text-center">Secretariat</a>
     </div>
@@ -2304,6 +2448,17 @@ h1, h2, h3, .font-serif-title {
           <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
         </svg>
         <span>Sponsorship Prospectus (PDF)</span>
+      </a>
+      <span>·</span>
+      <a href="javascript:void(0)" onclick="openShareModal()" class="quick-link" style="color:var(--accent-gold); font-weight:600;" title="Share Congress with colleagues & students">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+        <span>Share Congress</span>
       </a>
     </div>
 
@@ -3931,6 +4086,77 @@ h1, h2, h3, .font-serif-title {
 </div>
 
 <!-- ==========================================================================
+     SHARE CONGRESS DIALOG (VIRAL MESSAGING & SOCIAL CARDS)
+     ========================================================================== -->
+<div class="custom-modal-backdrop" id="shareConferenceModal" style="display:none;" onclick="if(event.target===this) closeShareModal();">
+  <div class="custom-modal-dialog" style="max-width: 520px; padding: 2rem;">
+    <button class="modal-close-btn" onclick="closeShareModal()" aria-label="Close Share Modal">&times;</button>
+
+    <div class="mb-3 text-center">
+      <div class="editorial-kicker mb-1" style="color:var(--accent-gold); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700;">Delegate Network &amp; Scholar Exchange</div>
+      <h3 style="font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; margin: 0 0 0.4rem 0;">Share NeuroMedPharmacon 2027</h3>
+      <p style="font-size: 0.82rem; color: #64748b; margin: 0 auto; max-width: 420px; line-height: 1.45;">
+        Spread the word across your scientific network, lab groups, researchers, and professional circles.
+      </p>
+    </div>
+
+    <!-- Preview Card -->
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin-bottom: 1.25rem;">
+      <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-gold); font-weight: 700; margin-bottom: 0.25rem;">Conference Summary Card</div>
+      <div style="font-weight: 700; font-size: 0.95rem; color: #0f172a; margin-bottom: 0.35rem;">NeuroMedPharmacon 2027 · IPS North Zone</div>
+      <div style="font-size: 0.8rem; color: #475569; line-height: 1.45;">
+        Feb 18–20, 2027 | NIPER-Raebareli Lucknow Campus · In collaboration with Indian Pharmacological Society. Early Bird &amp; Abstract Submissions Open!
+      </div>
+    </div>
+
+    <!-- Channels Grid -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 1.25rem;">
+      <button type="button" class="btn-share-channel" onclick="shareOnWhatsApp()" style="background:#25D366; color:#ffffff; border:none; border-radius:6px; padding:0.7rem 1rem; font-weight:600; font-size:0.86rem; display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; cursor:pointer;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.301-.15-1.78-.879-2.056-.98-.276-.1-.477-.15-.678.15-.2.301-.778.98-.954 1.18-.176.201-.352.226-.653.076-.301-.15-1.272-.469-2.423-1.496-.896-.799-1.501-1.787-1.677-2.088-.176-.301-.019-.464.132-.614.135-.135.301-.352.452-.528.151-.176.201-.301.301-.502.1-.201.05-.377-.025-.528-.075-.15-.678-1.635-.929-2.239-.244-.589-.493-.509-.678-.518-.176-.009-.377-.01-.578-.01-.2 0-.528.075-.804.377-.276.301-1.055 1.03-1.055 2.512 0 1.482 1.08 2.913 1.23 3.114.15.201 2.126 3.246 5.15 4.553.72.311 1.282.497 1.721.636.723.23 1.38.197 1.9.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.201-.577-.352z"/>
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.17L2 22l4.98-1.39A9.957 9.957 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.2c-1.63 0-3.15-.47-4.44-1.28l-.32-.2-2.96.83.84-2.88-.21-.34A8.163 8.163 0 0 1 3.8 12c0-4.52 3.68-8.2 8.2-8.2 4.52 0 8.2 3.68 8.2 8.2 0 4.52-3.68 8.2-8.2 8.2z"/>
+        </svg>
+        <span>WhatsApp</span>
+      </button>
+
+      <button type="button" class="btn-share-channel" onclick="shareOnLinkedIn()" style="background:#0077b5; color:#ffffff; border:none; border-radius:6px; padding:0.7rem 1rem; font-weight:600; font-size:0.86rem; display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; cursor:pointer;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+        </svg>
+        <span>LinkedIn</span>
+      </button>
+
+      <button type="button" class="btn-share-channel" onclick="shareOnTwitter()" style="background:#0f172a; color:#ffffff; border:1px solid #334155; border-radius:6px; padding:0.7rem 1rem; font-weight:600; font-size:0.86rem; display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; cursor:pointer;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        <span>X / Twitter</span>
+      </button>
+
+      <button type="button" class="btn-share-channel" onclick="shareNativeOrEmail()" style="background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; border-radius:6px; padding:0.7rem 1rem; font-weight:600; font-size:0.86rem; display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; cursor:pointer;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        <span>Email / Direct</span>
+      </button>
+    </div>
+
+    <!-- Direct Copy Link Field -->
+    <div>
+      <label class="calc-label" style="font-size:0.76rem;">Direct Conference Link</label>
+      <div style="display:flex; gap:0.5rem;">
+        <input type="text" id="shareUrlInput" class="calc-input" readonly style="font-family:var(--font-mono); font-size:0.8rem; background:#f8fafc;" value="">
+        <button type="button" class="btn-primary-action" id="btnCopyShareUrl" onclick="copyShareLink()" style="white-space:nowrap; padding:0.5rem 0.95rem; font-size:0.82rem;">
+          Copy Link
+        </button>
+      </div>
+      <div id="copyShareFeedback" style="font-size:0.75rem; color:#16a34a; font-weight:600; margin-top:0.35rem; display:none;">✓ Conference link copied to clipboard!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================================================
      VANILLA JAVASCRIPT: AUTONOMOUS BEHAVIOR & REGISTRATION CALCULATOR
      ========================================================================== -->
 <script>
@@ -4192,7 +4418,50 @@ function fallbackCopy(text, btn) {
 let delegateProofDataUrl = null;
 let delegateProofFileName = null;
 
-function processPaymentProofFile(file) {
+// Client-side screenshot optimizer: resizes phone screenshots to max 1200px
+// Drastically shrinks 3MB-6MB mobile screenshots to ~120KB-200KB
+// Prevents Vercel 4.5MB Serverless function payload limit errors and network timeouts
+function compressImageFile(file, maxDimension = 1200, quality = 0.82) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        let width = img.width;
+        let height = img.height;
+        if (width > maxDimension || height > maxDimension) {
+          if (width > height) {
+            height = Math.round((height * maxDimension) / width);
+            width = maxDimension;
+          } else {
+            width = Math.round((width * maxDimension) / height);
+            height = maxDimension;
+          }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
+        const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+        const approxBytes = Math.round((compressedDataUrl.length * 3) / 4);
+        resolve({ dataUrl: compressedDataUrl, size: approxBytes });
+      };
+      img.onerror = function() {
+        resolve({ dataUrl: e.target.result, size: file.size });
+      };
+      img.src = e.target.result;
+    };
+    reader.onerror = function() {
+      resolve(null);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+async function processPaymentProofFile(file) {
   if (!file) return;
 
   const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'application/pdf'];
@@ -4203,38 +4472,63 @@ function processPaymentProofFile(file) {
     return;
   }
 
-  if (file.size > 5 * 1024 * 1024) {
-    alert('File size exceeds 5MB limit. Please attach a compressed image under 5MB.');
-    const input = document.getElementById('regPaymentFile');
-    if (input) input.value = '';
+  const promptEl = document.getElementById('proofUploadPrompt');
+  if (promptEl) {
+    promptEl.innerHTML = '<div style="font-size:0.85rem; color:#64748b; padding:0.5rem;">Optimizing screenshot for fast submission...</div>';
+  }
+
+  let finalDataUrl = '';
+  let finalSize = file.size;
+
+  if (file.type.startsWith('image/')) {
+    const compressed = await compressImageFile(file, 1200, 0.82);
+    if (compressed) {
+      finalDataUrl = compressed.dataUrl;
+      finalSize = compressed.size;
+    }
+  }
+
+  if (!finalDataUrl) {
+    if (file.size > 3.5 * 1024 * 1024) {
+      alert('PDF exceeds 3.5MB limit. Please upload an image screenshot or a smaller PDF file.');
+      clearPaymentFile();
+      return;
+    }
+    const reader = new FileReader();
+    finalDataUrl = await new Promise((res) => {
+      reader.onload = (e) => res(e.target.result);
+      reader.onerror = () => res(null);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (!finalDataUrl) {
+    alert('Failed to read file. Please try selecting the screenshot again.');
+    clearPaymentFile();
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    delegateProofDataUrl = e.target.result;
-    delegateProofFileName = file.name;
+  delegateProofDataUrl = finalDataUrl;
+  delegateProofFileName = file.name;
 
-    document.getElementById('proofUploadPrompt').style.display = 'none';
-    const previewWrap = document.getElementById('proofFilePreview');
-    previewWrap.style.display = 'flex';
-    document.getElementById('proofFileName').textContent = file.name;
-    document.getElementById('proofFileSize').textContent = (file.size / 1024).toFixed(1) + ' KB';
+  document.getElementById('proofUploadPrompt').style.display = 'none';
+  const previewWrap = document.getElementById('proofFilePreview');
+  previewWrap.style.display = 'flex';
+  document.getElementById('proofFileName').textContent = file.name;
+  document.getElementById('proofFileSize').textContent = (finalSize / 1024).toFixed(1) + ' KB (Verified)';
 
-    const thumb = document.getElementById('proofThumb');
-    const docIcon = document.getElementById('proofDocIcon');
-    if (file.type.startsWith('image/')) {
-      thumb.src = delegateProofDataUrl;
-      thumb.style.display = 'block';
-      docIcon.style.display = 'none';
-    } else {
-      thumb.style.display = 'none';
-      docIcon.style.display = 'block';
-    }
+  const thumb = document.getElementById('proofThumb');
+  const docIcon = document.getElementById('proofDocIcon');
+  if (file.type.startsWith('image/')) {
+    thumb.src = delegateProofDataUrl;
+    thumb.style.display = 'block';
+    docIcon.style.display = 'none';
+  } else {
+    thumb.style.display = 'none';
+    docIcon.style.display = 'block';
+  }
 
-    validatePaymentSubmissionState();
-  };
-  reader.readAsDataURL(file);
+  validatePaymentSubmissionState();
 }
 
 function handlePaymentFileSelect(input) {
@@ -4249,7 +4543,15 @@ function clearPaymentFile(e) {
   const input = document.getElementById('regPaymentFile');
   if (input) input.value = '';
   document.getElementById('proofFilePreview').style.display = 'none';
-  document.getElementById('proofUploadPrompt').style.display = 'block';
+  const promptEl = document.getElementById('proofUploadPrompt');
+  if (promptEl) {
+    promptEl.innerHTML = `
+      <div style="font-size: 1.35rem; margin-bottom: 0.25rem;">📎</div>
+      <div style="font-size: 0.82rem; font-weight: 600; color: #0f172a;">Click to browse or drop payment screenshot here</div>
+      <div style="font-size: 0.72rem; color: #64748b; margin-top: 0.15rem;">Attach the transaction confirmation screen with timestamp</div>
+    `;
+    promptEl.style.display = 'block';
+  }
   validatePaymentSubmissionState();
 }
 
@@ -4286,9 +4588,132 @@ function validatePaymentSubmissionState() {
   }
 }
 
-// Delegate Form Submission
+// ==========================================================================
+// HIGH-CONCURRENCY MUTEX & EXPONENTIAL BACKOFF RETRY
+// ==========================================================================
+let isSubmittingRegistration = false;
+let isSubmittingAbstract = false;
+let isSubmittingSponsorship = false;
+
+async function fetchWithRetry(url, options = {}, retries = 2, backoffMs = 600) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(url, options);
+      // If serverless transient cold start or 502/503/504 gateway timeout occurs, retry
+      if ([502, 503, 504].includes(res.status) && attempt < retries) {
+        const delay = backoffMs * Math.pow(2, attempt);
+        console.warn(`[CONCURRENCY] Gateway status ${res.status}. Retrying in ${delay}ms (attempt ${attempt + 1}/${retries})...`);
+        await new Promise(r => setTimeout(r, delay));
+        continue;
+      }
+      return res;
+    } catch (err) {
+      if (attempt < retries) {
+        const delay = backoffMs * Math.pow(2, attempt);
+        console.warn(`[CONCURRENCY] Network retry in ${delay}ms (attempt ${attempt + 1}/${retries})...`);
+        await new Promise(r => setTimeout(r, delay));
+      } else {
+        throw err;
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// SOCIAL SHARING & MESSAGING HANDLERS
+// ==========================================================================
+function openShareModal() {
+  const modal = document.getElementById('shareConferenceModal');
+  const input = document.getElementById('shareUrlInput');
+  if (input) {
+    input.value = window.location.origin + window.location.pathname;
+  }
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeShareModal() {
+  const modal = document.getElementById('shareConferenceModal');
+  if (modal) modal.style.display = 'none';
+  const fb = document.getElementById('copyShareFeedback');
+  if (fb) fb.style.display = 'none';
+}
+
+function getShareText() {
+  return "Join us at NeuroMedPharmacon 2027 (IPS North Zone Annual Conference), organized by NIPER-Raebareli Lucknow Campus (18–20 Feb 2027). Call for Abstracts & Early Bird Registrations are open: ";
+}
+
+function shareOnWhatsApp() {
+  const url = window.location.origin + window.location.pathname;
+  const text = encodeURIComponent(getShareText() + url);
+  window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+}
+
+function shareOnLinkedIn() {
+  const url = encodeURIComponent(window.location.origin + window.location.pathname);
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function shareOnTwitter() {
+  const url = encodeURIComponent(window.location.origin + window.location.pathname);
+  const text = encodeURIComponent("Join us at NeuroMedPharmacon 2027 @NIPER_Raebareli & @IPS_NorthZone (Feb 18–20, 2027). Registrations & Abstracts now open! #Pharmacology #Neuroscience");
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+}
+
+function shareNativeOrEmail() {
+  const url = window.location.origin + window.location.pathname;
+  const title = "NeuroMedPharmacon 2027 (IPS North Zone) — NIPER-Raebareli";
+  const text = getShareText() + url;
+
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      text: getShareText(),
+      url: url
+    }).catch(() => {});
+  } else {
+    window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`;
+  }
+}
+
+function copyShareLink() {
+  const input = document.getElementById('shareUrlInput');
+  const btn = document.getElementById('btnCopyShareUrl');
+  const feedback = document.getElementById('copyShareFeedback');
+  if (!input) return;
+
+  input.select();
+  input.setSelectionRange(0, 99999);
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(input.value).then(() => {
+      showCopiedFeedback();
+    }).catch(() => {
+      document.execCommand('copy');
+      showCopiedFeedback();
+    });
+  } else {
+    document.execCommand('copy');
+    showCopiedFeedback();
+  }
+
+  function showCopiedFeedback() {
+    if (btn) btn.textContent = 'Copied!';
+    if (feedback) feedback.style.display = 'block';
+    setTimeout(() => {
+      if (btn) btn.textContent = 'Copy Link';
+      if (feedback) feedback.style.display = 'none';
+    }, 2500);
+  }
+}
+
+// Delegate Form Submission with Concurrency Lock & Retry
 async function handleRegistrationSubmit(e) {
   e.preventDefault();
+
+  if (isSubmittingRegistration) {
+    console.warn('[REGISTRATION] Double submission prevented.');
+    return;
+  }
 
   if (!delegateProofDataUrl) {
     alert('Please attach your payment transaction screenshot to complete registration.');
@@ -4308,12 +4733,13 @@ async function handleRegistrationSubmit(e) {
     return;
   }
 
+  isSubmittingRegistration = true;
   const btn = document.getElementById('btnSubmitReg');
   btn.disabled = true;
-  btn.textContent = 'Verifying Payment Proof & Registering...';
+  btn.textContent = 'Verifying & Registering Delegate...';
 
   try {
-    const res = await fetch('/api/register', {
+    const res = await fetchWithRetry('/api/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -4326,9 +4752,21 @@ async function handleRegistrationSubmit(e) {
         payment_proof: delegateProofDataUrl,
         proof_filename: delegateProofFileName
       })
-    });
+    }, 2, 800);
 
-    const data = await res.json();
+    let data;
+    const contentType = res.headers.get('content-type') || '';
+    if (contentType.includes('application/json')) {
+      data = await res.json();
+    } else {
+      const rawText = await res.text();
+      try {
+        data = JSON.parse(rawText);
+      } catch (parseErr) {
+        throw new Error(`Server returned status ${res.status}: ${rawText.slice(0, 150) || res.statusText}`);
+      }
+    }
+
     if (!res.ok) {
       alert(data.error || 'Registration failed. Please check inputs.');
       btn.disabled = false;
@@ -4353,9 +4791,10 @@ async function handleRegistrationSubmit(e) {
     clearPaymentFile();
     recalculateTariff();
   } catch (err) {
-    console.error(err);
-    alert('Network error connecting to server. Please try again.');
+    console.error('[REGISTRATION SUBMISSION ERROR]', err);
+    alert('Submission error: ' + (err.message || 'Network error connecting to server. Please try again.'));
   } finally {
+    isSubmittingRegistration = false;
     validatePaymentSubmissionState();
   }
 }
@@ -4364,7 +4803,7 @@ function closeReceiptModal() {
   document.getElementById('receiptModal').style.display = 'none';
 }
 
-// 8. ABSTRACT SUBMISSION LOGIC
+// 8. ABSTRACT SUBMISSION LOGIC WITH CONCURRENCY LOCK & RETRY
 function updateAbstractWordCount(text) {
   const words = text.trim() ? text.trim().split(/\s+/).length : 0;
   const countEl = document.getElementById('absWordCount');
@@ -4378,6 +4817,10 @@ function updateAbstractWordCount(text) {
 
 async function handleAbstractSubmit(e) {
   e.preventDefault();
+
+  if (isSubmittingAbstract) return;
+  isSubmittingAbstract = true;
+
   const btn = document.getElementById('btnSubmitAbs');
   btn.disabled = true;
   btn.textContent = 'Submitting Abstract...';
@@ -4389,7 +4832,7 @@ async function handleAbstractSubmit(e) {
   const body = document.getElementById('absBody').value.trim();
 
   try {
-    const res = await fetch('/api/abstract', {
+    const res = await fetchWithRetry('/api/abstract', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -4399,7 +4842,7 @@ async function handleAbstractSubmit(e) {
         title: title,
         body: body
       })
-    });
+    }, 2, 800);
 
     const data = await res.json();
     if (!res.ok) {
@@ -4417,6 +4860,7 @@ async function handleAbstractSubmit(e) {
     console.error(err);
     alert('Network error submitting abstract.');
   } finally {
+    isSubmittingAbstract = false;
     btn.disabled = false;
     btn.textContent = 'Submit Abstract for Review →';
   }
@@ -4471,6 +4915,9 @@ function updateSponsorshipTariff() {
 async function handleSponsorshipSubmit(event) {
   event.preventDefault();
 
+  if (isSubmittingSponsorship) return;
+  isSubmittingSponsorship = true;
+
   const company = document.getElementById('sponCompany').value.trim();
   const contact = document.getElementById('sponContact').value.trim();
   const email = document.getElementById('sponEmail').value.trim();
@@ -4481,6 +4928,7 @@ async function handleSponsorshipSubmit(event) {
 
   if (!company || !contact || !email) {
     alert('Please complete all required company details.');
+    isSubmittingSponsorship = false;
     return;
   }
 
@@ -4489,7 +4937,7 @@ async function handleSponsorshipSubmit(event) {
   btn.textContent = 'Submitting Partnership Inquiry...';
 
   try {
-    const res = await fetch('/api/sponsorship', {
+    const res = await fetchWithRetry('/api/sponsorship', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -4501,7 +4949,7 @@ async function handleSponsorshipSubmit(event) {
         amount: amount,
         notes: notes
       })
-    });
+    }, 2, 800);
 
     const data = await res.json();
     if (!res.ok) {
@@ -4519,6 +4967,7 @@ async function handleSponsorshipSubmit(event) {
     console.error(err);
     alert('Network error submitting sponsorship inquiry. Please contact secretariat directly.');
   } finally {
+    isSubmittingSponsorship = false;
     btn.disabled = false;
     btn.textContent = 'Submit Partnership Inquiry →';
   }
