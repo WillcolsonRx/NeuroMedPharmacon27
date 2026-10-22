@@ -6,9 +6,11 @@
   <title>Secretariat Admin Portal · NeuroMedPharmacon 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
+      --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --bg: #060e18;
       --surface: #0a1727;
       --card: #0f2238;
@@ -19,12 +21,16 @@
     }
     * { box-sizing: border-box; }
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-family: var(--font-body);
       background: var(--bg);
       color: var(--text);
       margin: 0;
       padding: 0;
       line-height: 1.5;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      letter-spacing: -0.03em;
     }
     header {
       background: var(--surface);
@@ -46,10 +52,11 @@
       height: 38px;
     }
     .brand-title {
-      font-family: 'Lora', serif;
+      font-family: var(--font-heading);
       font-size: 1.15rem;
       font-weight: 700;
       color: #fff;
+      letter-spacing: -0.02em;
     }
     .brand-sub {
       font-size: 0.75rem;
