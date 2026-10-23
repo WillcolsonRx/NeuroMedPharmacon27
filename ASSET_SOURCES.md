@@ -88,14 +88,12 @@ This manifest documents all external photographic and identity assets utilized a
 - **Dimensions**: 500 × 797 px (107 KB)
 - **Verification Status**: Verified (HTTP 200, locally saved in `/public/assets/logos/india_emblem.png`)
 
-### `niper_logo.png`
+### NIPER Raebareli complete logo
 - **Organization**: National Institute of Pharmaceutical Education and Research (NIPER), Raebareli
-- **Source**: Official Institution Portal (`https://niperraebareli.edu.in/images/logo.png`)
-- **Direct URL**: `https://niperraebareli.edu.in/images/logo.png`
-- **Applicable Usage**: Official statutory institutional emblem of host institute
-- **Intended Component**: Global Header Lockup (`.brand-lockup`) and Host Institution Showcase (`#consortium`)
-- **Dimensions**: 101 × 114 px (15 KB, RGBA PNG)
-- **Verification Status**: Verified & locally hosted in `/public/assets/logos/niper_logo.png`
+- **Official URL supplied by the organizer**: `https://niperraebareli.edu.in/images/logo.png`
+- **Current website usage**: Header and host-institution card load the official URL directly, using a white background and `object-fit: contain` to retain the full wordmark.
+- **Local fallback**: `/assets/logos/niper_logo.png` is the earlier incomplete 101 × 114 emblem. It is retained only if the official remote image cannot load.
+- **Verification limit**: The organizer supplied the full-logo preview and source URL. The cloud workspace proxy blocked downloading that domain; the remote file has not been independently inspected or saved locally. A network allowlist addition was saved to the environment draft for later download.
 
 ### `ips_logo.png`
 - **Organization**: Indian Pharmacological Society (Northern Chapter / IPS North Zone)
