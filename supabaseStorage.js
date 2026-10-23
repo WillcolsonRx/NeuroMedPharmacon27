@@ -38,18 +38,25 @@ function createSupabaseStorage({ url, key, fetchImpl = fetch }) {
           if (!Array.isArray(rows)) throw new Error('Invalid permanent storage response');
           // Only authenticated admin routes call all(); proofs remain private at rest.
           return Promise.all(rows.map(async row => {
-            if (row.payment_proof?.startsWith('supabase://payment-proofs/')) {
-              const object = row.payment_proof.slice('supabase://payment-proofs/'.length);
-              const signed = await request(`/storage/v1/object/sign/${bucket}/${encodeURIComponent(object)}`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({expiresIn:300})});
+            for (const [field, privateBucket] of [['payment_proof','payment-proofs'], ['document_path','abstract-documents']]) {
+              const prefix = `supabase://${privateBucket}/`;
+              if (!row[field]?.startsWith(prefix)) continue;
+              const object = row[field].slice(prefix.length);
+              const signed = await request(`/storage/v1/object/sign/${privateBucket}/${encodeURIComponent(object)}`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({expiresIn:300})});
               const signedPath = signed.signedURL || signed.signedUrl;
-              if (!signedPath) throw new Error('Could not sign payment proof');
-              row.payment_proof = new URL('/storage/v1'+signedPath, base).href;
+              if (!signedPath) throw new Error('Could not sign private document');
+              row[field] = new URL('/storage/v1'+signedPath, base).href;
             }
             return row;
           }));
         }};
       }
       throw new Error('Unsupported storage query');
+    },
+    async storeDocument(document) {
+      const object = `${randomUUID()}.${document.ext}`;
+      await request(`/storage/v1/object/abstract-documents/${object}`, {method:'POST',headers:{'Content-Type':document.mimetype,'x-upsert':'false'},body:document.buffer});
+      return `supabase://abstract-documents/${object}`;
     },
     async storeProof(buffer, ext, refId, originalFilename) {
       const object = `${randomUUID()}.${ext}`;

@@ -86,6 +86,7 @@ class InMemoryDb {
             category: args[3],
             body: args[4],
             ref_id: args[5],
+            document_path: args[6], document_filename: args[7], document_mimetype: args[8], document_size: args[9], preference: args[10],
             created_at: now
           };
         } else if (tableName === 'contacts') {

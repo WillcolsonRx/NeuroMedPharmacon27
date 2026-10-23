@@ -486,7 +486,7 @@
           <td>${escapeHtml(s.email)}</td>
           <td>${escapeHtml(s.phone || '—')}</td>
           <td><strong style="color:var(--gold);">${escapeHtml(s.tier)} Sponsor</strong></td>
-          <td>₹ ${Number(s.amount).toLocaleString()}</td>
+          <td>₹ ${Number(s.amount).toLocaleString()}<br>${escapeHtml(s.payment_ref || 'Unpaid inquiry')}${s.payment_proof ? `<br><a href="${escapeHtml(s.payment_proof)}" target="_blank" rel="noopener">View payment proof</a><br>Pending bank verification` : ''}</td>
           <td style="font-size:0.8rem; color:var(--muted);">${s.created_at}</td>
         </tr>
       `).join('');
@@ -504,7 +504,7 @@
           <td><strong>${escapeHtml(a.full_name)}</strong></td>
           <td>${escapeHtml(a.email)}</td>
           <td>${escapeHtml(a.category)}</td>
-          <td>${escapeHtml(a.title)}</td>
+          <td>${escapeHtml(a.title)}<br>${escapeHtml(a.preference || '')}${a.document_path ? `<br><a href="${escapeHtml(a.document_path)}" target="_blank" rel="noopener">Download ${escapeHtml(a.document_filename || 'Word abstract')}</a>` : `<details><summary>Legacy text submission</summary>${escapeHtml(a.body || '')}</details>`}</td>
           <td style="font-size:0.8rem; color:var(--muted);">${a.created_at}</td>
         </tr>
       `).join('');

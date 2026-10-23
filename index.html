@@ -3457,11 +3457,9 @@ button, input, select, textarea {
         </div>
 
         <div class="mb-2">
-          <label class="form-label-scholarly">Structured Abstract Body (Background, Methods, Results, Conclusion)</label>
-          <textarea class="form-textarea-scholarly" id="absBody" placeholder="Background: State the clinical or mechanistic gap...&#10;Methods: Detail experimental models, analytical assays, or computational protocols...&#10;Results: Provide key quantitative findings (binding affinity, IC50, p-values)...&#10;Conclusion: State scientific impact and therapeutic implication..." required oninput="updateAbstractWordCount(this.value)"></textarea>
-          <div class="word-count-bar">
-            <span id="absWordCount">0</span> / 300 Words Maximum
-          </div>
+          <label class="form-label-scholarly" for="absDocument">Attach Abstract Word Document *</label>
+          <input type="file" class="form-input-scholarly" id="absDocument" accept=".doc,.docx" required>
+          <p>Upload a .doc or .docx file, up to 2 MB. Follow the structured abstract guidelines (maximum 300 words). The Secretariat will review your document.</p>
         </div>
 
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
@@ -4221,6 +4219,14 @@ button, input, select, textarea {
             <label class="calc-label">Special Inclusions or Stall Preference</label>
             <input type="text" class="calc-input" id="sponNotes" placeholder="e.g. Central Foyer Stall P1 preference">
           </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="calc-label" for="sponPaymentRef">Transaction Reference (optional for an inquiry)</label>
+          <input type="text" class="calc-input" id="sponPaymentRef" placeholder="Bank UTR / transaction reference">
+          <label class="calc-label" for="sponPaymentProof">Payment Proof</label>
+          <input type="file" class="calc-input" id="sponPaymentProof" accept=".png,.jpg,.jpeg,.webp,.pdf">
+          <p>If already paid, provide both the reference and proof (up to 2 MB). Bank confirmation is subject to Secretariat review. Custom sponsorships require an agreed quotation before payment.</p>
         </div>
 
         <div class="d-flex justify-content-end gap-2">
@@ -5116,15 +5122,22 @@ function closeReceiptModal() {
 }
 
 // 8. ABSTRACT SUBMISSION LOGIC WITH CONCURRENCY LOCK & RETRY
-function updateAbstractWordCount(text) {
-  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-  const countEl = document.getElementById('absWordCount');
-  countEl.textContent = words;
-  if (words > 300) {
-    countEl.style.color = '#ef4444';
-  } else {
-    countEl.style.color = '#64748b';
-  }
+function readSubmissionFile(file, allowedExtensions) {
+  return new Promise((resolve,reject) => {
+    if (!file || !allowedExtensions.test(file.name) || file.size > 2 * 1024 * 1024 || !file.size) {
+      reject(new Error('Select a supported file up to 2 MB.'));
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error('Could not read the selected file. Please select it again.'));
+    reader.readAsDataURL(file);
+  });
+}
+function submissionEmailNotice(status) {
+  return status?.delegate === 'sent' && status?.organizer === 'sent'
+    ? 'Both confirmation emails were accepted by the mail server. Check inbox and spam folders.'
+    : 'Your submission is saved, but email delivery was incomplete. Keep your reference ID and contact the Secretariat; do not submit again.';
 }
 
 async function handleAbstractSubmit(e) {
@@ -5141,9 +5154,11 @@ async function handleAbstractSubmit(e) {
   const email = document.getElementById('absEmail').value.trim();
   const category = document.getElementById('absCategory').value;
   const title = document.getElementById('absTitle').value.trim();
-  const body = document.getElementById('absBody').value.trim();
+  const file = document.getElementById('absDocument').files[0];
+  const preference = document.getElementById('absPreference').value;
 
   try {
+    const documentData = await readSubmissionFile(file, /\.docx?$/i);
     const res = await fetchWithRetry('/api/abstract', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -5152,7 +5167,9 @@ async function handleAbstractSubmit(e) {
         email: email,
         category: category,
         title: title,
-        body: body
+        preference,
+        document_data: documentData,
+        document_filename: file.name
       })
     }, 2, 800);
 
@@ -5165,12 +5182,11 @@ async function handleAbstractSubmit(e) {
     }
 
     const refId = data.ref_id || ('NMP27-ABS-' + (1000 + (data.id || 1)));
-    alert(`Success! Abstract submitted under Reference ID: ${refId}.\nA confirmation acknowledgment has been dispatched to ${email}.`);
+    alert(`Success! Abstract submitted under Reference ID: ${refId}.\n${submissionEmailNotice(data.email_status)}`);
     document.getElementById('abstractForm').reset();
-    updateAbstractWordCount('');
   } catch (err) {
     console.error(err);
-    alert('Network error submitting abstract.');
+    alert(err.message || 'Could not confirm abstract submission. Contact the Secretariat before retrying.');
   } finally {
     isSubmittingAbstract = false;
     btn.disabled = false;
@@ -5249,6 +5265,10 @@ async function handleSponsorshipSubmit(event) {
   btn.textContent = 'Submitting Partnership Inquiry...';
 
   try {
+    const paymentRef = document.getElementById('sponPaymentRef').value.trim();
+    const proofFile = document.getElementById('sponPaymentProof').files[0];
+    if (Boolean(paymentRef) !== Boolean(proofFile)) throw new Error('Provide both a transaction reference and a payment proof, or leave both empty for an inquiry.');
+    const proofData = proofFile ? await readSubmissionFile(proofFile, /\.(png|jpe?g|webp|pdf)$/i) : undefined;
     const res = await fetchWithRetry('/api/sponsorship', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -5259,7 +5279,10 @@ async function handleSponsorshipSubmit(event) {
         phone: phone,
         tier: tier,
         amount: amount,
-        notes: notes
+        notes: notes,
+        payment_ref: paymentRef,
+        payment_proof: proofData,
+        proof_filename: proofFile?.name
       })
     }, 2, 800);
 
@@ -5272,12 +5295,12 @@ async function handleSponsorshipSubmit(event) {
     }
 
     const refId = data.ref_id || ('NMP27-SPON-' + (100 + (data.id || 1)));
-    alert(`Thank you! Your ${tier} Sponsorship inquiry has been registered under Reference ID: ${refId}.\n\nA confirmation notice has been sent to ${email} and the Conference Secretariat will connect with your authorized representative.`);
+    alert(`Thank you! Your ${tier} Sponsorship inquiry has been registered under Reference ID: ${refId}.\n\n${submissionEmailNotice(data.email_status)}`);
     document.getElementById('sponsorshipForm').reset();
     closeSponsorshipModal();
   } catch (err) {
     console.error(err);
-    alert('Network error submitting sponsorship inquiry. Please contact secretariat directly.');
+    alert(err.message || 'Could not confirm sponsorship submission. Contact the Secretariat before retrying.');
   } finally {
     isSubmittingSponsorship = false;
     btn.disabled = false;
@@ -5539,7 +5562,7 @@ function renderAdminAbsTable(list) {
         <td><strong>${escapeHtml(a.full_name)}</strong></td>
         <td>${escapeHtml(a.email)}</td>
         <td><span style="font-size:0.82rem;">${escapeHtml(a.category)}</span></td>
-        <td>${escapeHtml(a.title)}</td>
+        <td>${escapeHtml(a.title)}${a.document_path ? `<br><a href="${escapeHtml(a.document_path)}" target="_blank" rel="noopener">Download ${escapeHtml(a.document_filename || 'Word abstract')}</a>` : ''}</td>
         <td style="font-size:0.75rem; color:#64748b;">${a.created_at || ''}</td>
       </tr>
     `;

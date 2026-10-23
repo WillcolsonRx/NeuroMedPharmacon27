@@ -123,3 +123,31 @@ The Secretariat must reconcile submitted references against bank records.
 
 Early-bird rates run through 9 November 2026, regular rates through 9 December
 2026 (inclusive, Asia/Kolkata), and spot rates apply afterward.
+
+## Word abstracts and sponsorship confirmations
+
+For an existing Supabase project, run
+`supabase/migrations/20261023_abstract_documents.sql` in the SQL Editor before
+redeploying this update. It adds document metadata and a private
+`abstract-documents` bucket. New projects can run the complete `supabase/schema.sql`.
+No additional credentials are needed.
+
+Abstract submissions require a Word `.doc` or `.docx` file (maximum 2 MB) instead
+of a text body. File headers/container contents are checked; this is not malware
+scanning. The Secretariat should review attachments in protected mode. The file
+is stored privately and attached to both author and organizer acknowledgement
+emails. Admins can download it from the Abstracts table using short-lived signed
+links. Existing text-only abstracts remain available as legacy records; they
+cannot be converted into the original Word files automatically.
+
+Sponsorship requests now send acknowledgements to the sponsor and organizer.
+Standard tier totals, including 18% GST, are calculated on the server; client
+amounts are ignored. Payment is optional for inquiries, but a submitted payment
+requires both a transaction reference and a valid PNG/JPEG/WebP/PDF proof. Proofs
+are stored privately, attached to acknowledgement emails and linked in the admin
+Sponsorships table. Receipt of a proof does not verify bank settlement. Custom
+sponsorships show a zero provisional total pending an agreed quotation.
+
+Both flows wait for both mail attempts and report separate recipient statuses.
+A mail failure does not undo a saved submission; do not resubmit to retry mail.
+Live SMTP delivery still requires checking real inboxes and function mail logs.

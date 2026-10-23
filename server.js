@@ -15,7 +15,8 @@ const {
   generateRefId,
   getSmtpConfig,
   handleRegistrationEmails,
-  sendMail
+  sendMail,
+  sendSubmissionEmails
 } = require('./mailer');
 const {
   handlePaymentValidationAndStorage,
@@ -23,6 +24,7 @@ const {
   validatePaymentProofPayload
 } = require('./paymentValidator');
 
+const {validateAbstractDocument,storeAbstractDocument,DOCUMENT_DIR} = require('./abstractDocument');
 const app = express();
 
 // Initialize Database (handles Vercel Serverless /tmp writable directory or InMemoryDb fallback)
@@ -123,6 +125,10 @@ try { db.exec(`ALTER TABLE sponsorships ADD COLUMN ref_id TEXT;`); } catch (e) {
 try { db.exec(`ALTER TABLE sponsorships ADD COLUMN payment_ref TEXT;`); } catch (e) {}
 try { db.exec(`ALTER TABLE sponsorships ADD COLUMN payment_proof TEXT;`); } catch (e) {}
 try { db.exec(`ALTER TABLE abstracts ADD COLUMN ref_id TEXT;`); } catch (e) {}
+
+for (const column of ['document_path TEXT','document_filename TEXT','document_mimetype TEXT','document_size INTEGER', 'preference TEXT']) {
+  try { db.exec(`ALTER TABLE abstracts ADD COLUMN ${column}`); } catch {}
+}
 
 const TARIFF = {
   early:   { student: 3500, faculty: 4500, corporate: 6000, workshop: 500 },
@@ -307,19 +313,22 @@ app.post(['/api/register', '/register'], async (req, res) => {
 
 app.post(['/api/abstract', '/abstract'], async (req, res) => {
   try {
-    const { full_name, email, title, category, body } = req.body;
-    if (!full_name || !email || !title || !body) return res.status(400).json({ error: 'Missing required fields' });
+    const { full_name, email, title, category, preference, document_data, document_filename } = req.body;
+    if (!full_name || !email || !title || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ error: 'Valid author name, email and title are required' });
+    let document;
+    try { document = validateAbstractDocument(document_data, document_filename); }
+    catch (err) { return res.status(400).json({error:err.message}); }
     const ref_id = generateRefId('ABS');
-
+    const document_path = await storeAbstractDocument(document, permanentStorage);
     const info = await db.prepare(`
-      INSERT INTO abstracts (full_name,email,title,category,body,ref_id)
-      VALUES (?,?,?,?,?,?)
-    `).run(full_name, email, title, category || '', body, ref_id);
-
-    res.json({ id: info.lastInsertRowid, ref_id });
+      INSERT INTO abstracts (full_name,email,title,category,body,ref_id,document_path,document_filename,document_mimetype,document_size,preference)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?)
+    `).run(full_name, email, title, category || '', '', ref_id, document_path, document.filename, document.mimetype, document.buffer.length, preference || 'Oral');
+    const email_status = await sendSubmissionEmails(db, 'ABSTRACT', {full_name,email,title,category,preference:preference || 'Oral',ref_id}, [{filename:document.filename,content:document.buffer,contentType:document.mimetype}]);
+    res.json({ id: info.lastInsertRowid, ref_id, email_status });
   } catch (err) {
-    console.error('[ABSTRACT SUBMISSION ERROR]', err);
-    res.status(500).json({ error: 'Abstract submission error: ' + err.message });
+    console.error('[ABSTRACT SUBMISSION ERROR]', err.message);
+    res.status(500).json({ error: 'Could not save abstract. Please contact the Secretariat.' });
   }
 });
 
@@ -333,26 +342,44 @@ app.post(['/api/contact', '/contact'], async (req, res) => {
   }
 });
 
+const SPONSORSHIP_PRICES = { Platinum:100000, Gold:75000, Silver:50000, Bronze:25000, Custom:0 };
 app.post(['/api/sponsorship', '/sponsorship'], async (req, res) => {
   try {
-    const { company_name, contact_person, email, phone, tier, amount, notes, payment_ref, payment_proof } = req.body;
-    if (!company_name || !contact_person || !email || !tier) {
-      return res.status(400).json({ error: 'Missing required sponsorship fields' });
+    const { company_name, contact_person, email, phone, tier, notes, payment_ref, payment_proof, proof_filename } = req.body;
+    if (!company_name || !contact_person || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '') || !Object.hasOwn(SPONSORSHIP_PRICES,tier)) {
+      return res.status(400).json({ error: 'Valid company, contact, email and sponsorship tier are required' });
     }
     const ref_id = generateRefId('SPON');
-
+    const amount = Math.round(SPONSORSHIP_PRICES[tier] * 1.18);
+    let proofUrl = '', validatedRef = '', attachments = [];
+    if (payment_ref || payment_proof) {
+      const validation = await handlePaymentValidationAndStorage({payment_ref,payment_proof,original_filename:proof_filename,ref_id});
+      if (!validation.success) return res.status(400).json({error:validation.error});
+      proofUrl = validation.payment_proof_url;
+      validatedRef = validation.payment_ref;
+      const proof = validatePaymentProofPayload(payment_proof,proof_filename);
+      attachments = [{filename:validation.metadata.proof_filename || `PaymentProof.${proof.ext}`,content:proof.buffer,contentType:proof.mimetype}];
+    }
     const info = await db.prepare(`
       INSERT INTO sponsorships (company_name, contact_person, email, phone, tier, amount, notes, ref_id, payment_ref, payment_proof)
       VALUES (?,?,?,?,?,?,?,?,?,?)
-    `).run(company_name, contact_person, email, phone || '', tier, amount || 0, notes || '', ref_id, payment_ref || '', payment_proof || '');
-
-    res.json({ id: info.lastInsertRowid, ref_id, success: true, tier, payment_ref });
+    `).run(company_name, contact_person, email, phone || '', tier, amount, notes || '', ref_id, validatedRef, proofUrl);
+    const email_status = await sendSubmissionEmails(db,'SPONSORSHIP',{company_name,contact_person,email,tier,amount,notes,ref_id,payment_ref:validatedRef},attachments);
+    res.json({ id: info.lastInsertRowid, ref_id, success: true, tier, amount, payment_ref:validatedRef, email_status });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('[SPONSORSHIP ERROR]',err.message);
+    res.status(500).json({ error: 'Could not save sponsorship. Please contact the Secretariat.' });
   }
 });
 
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || (process.env.VERCEL ? null : 'change-me');
+
+app.get('/api/admin/abstract-document/:filename', (req,res) => {
+  if (req.query.token !== ADMIN_TOKEN) return res.status(403).json({error:'Forbidden'});
+  if (!/^[a-f0-9-]{36}\.docx?$/.test(req.params.filename)) return res.status(404).end();
+  res.setHeader('Cache-Control','no-store');
+  res.download(path.join(DOCUMENT_DIR,req.params.filename));
+});
 
 for (const table of ['registrations', 'abstracts', 'sponsorships', 'mail_logs']) {
   const route = table === 'mail_logs' ? 'mail-logs' : table;
@@ -361,6 +388,9 @@ for (const table of ['registrations', 'abstracts', 'sponsorships', 'mail_logs'])
     res.setHeader('Cache-Control', 'no-store');
     try {
       const rows = await db.prepare(`SELECT * FROM ${table} ORDER BY created_at DESC${table === 'mail_logs' ? ' LIMIT 100' : ''}`).all();
+      if (table === 'abstracts') {
+        for (const row of rows) if (row.document_path?.startsWith('local-abstract://')) row.document_path = '/api/admin/abstract-document/' + encodeURIComponent(row.document_path.slice('local-abstract://'.length)) + '?token=' + encodeURIComponent(ADMIN_TOKEN);
+      }
       res.json(rows);
     } catch (err) {
       console.error('[ADMIN STORAGE]', err.message);

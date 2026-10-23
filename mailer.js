@@ -106,7 +106,7 @@ function getTransporter() {
 /**
  * Dispatch an email using SMTP_USER as sender with STARTTLS
  */
-async function sendMail(db, { to, subject, html, text, type = 'GENERAL', refId = null }) {
+async function sendMail(db, { to, subject, html, text, type = 'GENERAL', refId = null, attachments = [] }) {
   const config = getSmtpConfig();
   // Use SMTP_USER directly as the sender email address
   const from = config.senderEmail;
@@ -127,7 +127,8 @@ async function sendMail(db, { to, subject, html, text, type = 'GENERAL', refId =
         to,
         subject,
         html,
-        text
+        text,
+        attachments
       });
       status = 'sent';
       messageId = info.messageId;
@@ -407,11 +408,25 @@ async function handleRegistrationEmails(db, registration) {
   };
 }
 
+async function sendSubmissionEmails(db, kind, submission, attachments = []) {
+  const organizer = getSmtpConfig().organizerEmail;
+  const details = kind === 'ABSTRACT'
+    ? `Title: ${submission.title}\nTrack: ${submission.category}\nPresentation: ${submission.preference}\nAuthor: ${submission.full_name}`
+    : `Company: ${submission.company_name}\nContact: ${submission.contact_person}\nTier: ${submission.tier}\nTotal including GST: INR ${submission.amount}\nTransaction reference: ${submission.payment_ref || 'Not provided (inquiry only)'}\nPayment status: ${submission.payment_ref ? 'Proof received; pending bank verification' : 'Unpaid inquiry'}\nNotes: ${submission.notes || ''}`;
+  const text = `NeuroMedPharmacon 2027\nReference: ${submission.ref_id}\n${details}\nEmail: ${submission.email}\nYour submission has been received for Secretariat review. This is an acknowledgement, not acceptance or payment verification.`;
+  const results = await Promise.allSettled([
+    sendMail(db,{to:submission.email,subject:`${kind === 'ABSTRACT' ? 'Abstract submission' : 'Sponsorship'} acknowledgement [${submission.ref_id}]`,text,type:`${kind}_CONFIRMATION`,refId:submission.ref_id,attachments}),
+    sendMail(db,{to:organizer,subject:`New ${kind.toLowerCase()} submission [${submission.ref_id}]`,text,type:`${kind}_ORGANIZER_NOTIFICATION`,refId:submission.ref_id,attachments})
+  ]);
+  return Object.fromEntries(['delegate','organizer'].map((recipient,index)=>[recipient,results[index].status === 'fulfilled' ? results[index].value.status : 'failed']));
+}
+
 module.exports = {
   generateRefId,
   getSmtpConfig,
   getTransporter,
   sendMail,
+  sendSubmissionEmails,
   sendDelegateConfirmation,
   sendOrganizerNotification,
   handleRegistrationEmails

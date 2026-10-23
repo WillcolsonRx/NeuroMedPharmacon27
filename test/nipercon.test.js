@@ -224,12 +224,15 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
         email: 'research@example.com',
         title: 'Targeted Nano-carriers in Cancer Chemotherapy',
         category: 'Drug Discovery',
-        body: 'Detailed abstract methodology, results and discussion.'
+        preference: 'Poster',
+        document_filename: 'abstract.docx',
+        document_data: 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + Buffer.from(require('fflate').zipSync({'[Content_Types].xml':Buffer.from('<Types/>'), 'word/document.xml':Buffer.from('<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body/></w:document>')})).toString('base64')
       })
     });
     assert.equal(absRes.status, 200);
     const absJson = await absRes.json();
     assert.ok(absJson.id);
+    assert.deepEqual(absJson.email_status,{delegate:'simulated',organizer:'simulated'});
     assert.ok(absJson.ref_id && absJson.ref_id.startsWith('NMP27-ABS-'));
 
     // 6. POST /api/contact
@@ -274,6 +277,12 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
     const abstractsList = await authAbs.json();
     assert.ok(Array.isArray(abstractsList));
     assert.ok(abstractsList.length >= 1);
+    assert.equal(abstractsList[0].document_filename, 'abstract.docx');
+    const wordDownload = await fetch(baseUrl + abstractsList[0].document_path);
+    assert.equal(wordDownload.status,200);
+    assert.ok((await wordDownload.arrayBuffer()).byteLength > 0);
+    const protectedDownload = await fetch(baseUrl + abstractsList[0].document_path.split('?')[0]);
+    assert.equal(protectedDownload.status,403);
 
     // 10. POST /api/sponsorship & GET /api/admin/sponsorships
     const sponRes = await fetch(`${baseUrl}/api/sponsorship`, {
@@ -295,6 +304,8 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
     const sponJson = await sponRes.json();
     assert.ok(sponJson.id);
     assert.equal(sponJson.tier, 'Platinum');
+    assert.equal(sponJson.amount,118000);
+    assert.deepEqual(sponJson.email_status,{delegate:'simulated',organizer:'simulated'});
     assert.equal(sponJson.payment_ref, 'SPON-UTR-112233');
     assert.ok(sponJson.ref_id && sponJson.ref_id.startsWith('NMP27-SPON-'));
 
