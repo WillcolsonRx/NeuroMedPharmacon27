@@ -4428,6 +4428,7 @@ const TARIFF_DATA = {
 };
 
 let currentTier = 'early';
+let registrationTariffReady = false;
 
 // 1. MOBILE NAV TOGGLE
 function toggleMobileNav() {
@@ -4583,6 +4584,27 @@ function switchScheduleDay(dayNum, btn) {
   });
   container.innerHTML = html;
 }
+
+// Keep the displayed payable amount aligned with the registration API.
+async function loadRegistrationTariff() {
+  const button = document.getElementById('btnSubmitReg');
+  if (button) button.disabled = true;
+  try {
+    const response = await fetch('/api/tariff', { cache: 'no-store' });
+    if (!response.ok) throw new Error('Unable to load current registration fees');
+    const tariff = await response.json();
+    if (!tariff.all || !tariff.all[tariff.tier]) throw new Error('Invalid tariff response');
+    Object.assign(TARIFF_DATA, tariff.all);
+    currentTier = tariff.tier;
+    registrationTariffReady = true;
+    recalculateTariff();
+    validatePaymentSubmissionState();
+  } catch (error) {
+    console.error('[TARIFF]', error);
+    if (button) { button.disabled = true; button.textContent = 'Fees unavailable — reload to retry'; }
+  }
+}
+window.addEventListener('load', loadRegistrationTariff);
 
 // 6. REAL-TIME REGISTRATION FEE CALCULATOR
 function preselectCategory(cat) {
@@ -4808,6 +4830,12 @@ function validatePaymentSubmissionState() {
 
   const hasProof = Boolean(delegateProofDataUrl);
 
+  if (!registrationTariffReady) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Waiting for current fees — reload if unavailable';
+    return;
+  }
+
   if (hasProof) {
     submitBtn.disabled = false;
     submitBtn.style.opacity = '1';
@@ -4954,6 +4982,11 @@ function copyShareLink() {
 // Delegate Form Submission with Concurrency Lock & Retry
 async function handleRegistrationSubmit(e) {
   e.preventDefault();
+
+  if (!registrationTariffReady) {
+    alert('Current registration fees are unavailable. Please reload before submitting.');
+    return;
+  }
 
   if (isSubmittingRegistration) {
     console.warn('[REGISTRATION] Double submission prevented.');

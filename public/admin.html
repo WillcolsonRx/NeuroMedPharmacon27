@@ -269,31 +269,11 @@
         <div class="kpi-label">Committed Partnerships</div>
         <div class="kpi-val" id="kpiSponsorships">0</div>
       </div>
-      <div class="kpi-card">
-        <span class="kpi-badge">Anti-Flood</span>
-        <div class="kpi-label">Pending in Digest Queue</div>
-        <div class="kpi-val" id="kpiDigestQueue">0</div>
-      </div>
     </div>
 
-    <!-- Anti-Flooding Control Banner -->
-    <div class="section-card" style="border-left: 4px solid var(--gold); background: #0c1a2b;">
-      <div class="section-header" style="margin-bottom: 0.5rem;">
-        <div>
-          <h3 style="margin:0; font-family:'Lora',serif; color:#fff; font-size: 1.15rem;">
-            📬 Smart Anti-Flooding Digest Dispatcher
-          </h3>
-          <p style="margin:4px 0 0; color:var(--muted); font-size:0.85rem;">
-            Individual delegate registrations are held in this queue and compiled into executive digests instead of flooding your inbox with 500+ messages.
-          </p>
-        </div>
-        <div style="display:flex; gap:8px;">
-          <button class="btn" onclick="triggerDigestNow()">
-            ⚡ Dispatch Registration Digest Email Now
-          </button>
-        </div>
-      </div>
-      <div id="digestStatus" style="font-size:0.85rem; color: var(--gold); margin-top: 8px;"></div>
+    <div class="section-card">
+      <p>Registration notifications are attempted individually for the delegate and Secretariat.
+      Check SMTP Mail Audit Log for delivery failures or missing SMTP configuration.</p>
     </div>
 
     <!-- Tab Bar -->
@@ -425,12 +405,11 @@
       localStorage.setItem('nm_admin_token', token);
 
       try {
-        const [regRes, sponRes, absRes, mailRes, queueRes] = await Promise.all([
+        const [regRes, sponRes, absRes, mailRes] = await Promise.all([
           fetch(`/api/admin/registrations?token=${encodeURIComponent(token)}`),
           fetch(`/api/admin/sponsorships?token=${encodeURIComponent(token)}`),
           fetch(`/api/admin/abstracts?token=${encodeURIComponent(token)}`),
-          fetch(`/api/admin/mail-logs?token=${encodeURIComponent(token)}`),
-          fetch(`/api/admin/digest-queue?token=${encodeURIComponent(token)}`)
+          fetch(`/api/admin/mail-logs?token=${encodeURIComponent(token)}`)
         ]);
 
         if (regRes.status === 403) {
@@ -438,11 +417,13 @@
           return;
         }
 
+        if ([regRes, sponRes, absRes, mailRes].some(res => !res.ok)) {
+          throw new Error('Dashboard request failed');
+        }
         registrationsData = await regRes.json();
         const sponData = await sponRes.json();
         const absData = await absRes.json();
         const mailData = await mailRes.json();
-        const queueData = await queueRes.json();
 
         // Update KPIs
         document.getElementById('kpiRegistrations').textContent = registrationsData.length;
@@ -455,7 +436,6 @@
         document.getElementById('kpiRevenueINR').textContent = '₹ ' + totalINR.toLocaleString();
         document.getElementById('kpiRevenueUSD').textContent = '$ ' + totalUSD.toLocaleString();
         document.getElementById('kpiSponsorships').textContent = sponData.length;
-        document.getElementById('kpiDigestQueue').textContent = queueData.pendingCount || 0;
 
         renderRegistrations(registrationsData);
         renderSponsorships(sponData);
@@ -539,7 +519,7 @@
       tb.innerHTML = list.map(m => {
         let pillClass = 'status-sent';
         if (m.status === 'simulated') pillClass = 'status-sim';
-        if (m.status === 'failed') pillClass = 'status-failed';
+        if (m.status === 'failed' || m.status === 'not_configured') pillClass = 'status-failed';
         return `
           <tr>
             <td style="font-size:0.8rem; color:var(--muted);">${m.created_at}</td>
@@ -563,27 +543,6 @@
         (r.category && r.category.toLowerCase().includes(q))
       );
       renderRegistrations(filtered);
-    }
-
-    async function triggerDigestNow() {
-      const statusEl = document.getElementById('digestStatus');
-      statusEl.textContent = 'Triggering automated registration digest email...';
-      try {
-        const res = await fetch(`/api/admin/send-digest?token=${encodeURIComponent(token)}`, {
-          method: 'POST'
-        });
-        const data = await res.json();
-        if (data.status === 'digest_sent') {
-          statusEl.textContent = `✅ Successfully dispatched executive registration digest for ${data.count} registrants!`;
-          fetchDashboardData();
-        } else if (data.status === 'empty_queue') {
-          statusEl.textContent = 'ℹ️ Queue is currently clean. No un-digested registrations pending.';
-        } else {
-          statusEl.textContent = 'Status: ' + JSON.stringify(data);
-        }
-      } catch (e) {
-        statusEl.textContent = 'Error triggering digest: ' + e.message;
-      }
     }
 
     function escapeHtml(str) {
