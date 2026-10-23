@@ -380,10 +380,10 @@ app.get(['/api/admin/smtp-status', '/admin/smtp-status'], (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = parseInt(process.env.APP_PORT || (process.env.PORT && process.env.PORT !== '8080' ? process.env.PORT : 3000), 10);
 let server;
 if (require.main === module) {
-  server = app.listen(PORT, '0.0.0.0', () => console.log(`NeuroMedPharmacon 2027 running at http://localhost:${PORT}`));
+  server = app.listen(PORT, '0.0.0.0', () => console.log(`NeuroMedPharmacon 2027 running at http://0.0.0.0:${PORT}`));
 }
 
 module.exports = { app, db, TARIFF, currentTier, server };
