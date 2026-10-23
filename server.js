@@ -143,6 +143,10 @@ if (process.env.VERCEL) {
   app.use('/uploads', express.static(path.join('/tmp', 'uploads')));
 }
 
+app.get('/assets/jspdf.umd.min.js', (req, res) => {
+  res.sendFile(require.resolve('jspdf/dist/jspdf.umd.min.js'));
+});
+
 app.get(['/api/tariff', '/tariff'], (req, res) => {
   res.setHeader('Cache-Control', 'public, max-age=1800, s-maxage=86400, stale-while-revalidate=604800');
   const tier = currentTier();
@@ -254,9 +258,8 @@ app.post(['/api/register', '/register'], async (req, res) => {
       metadata.proof_uploaded_at
     );
 
-    // Trigger the 2 automatic emails asynchronously (non-blocking for instant sub-50ms HTTP response)
-    setImmediate(() => {
-      handleRegistrationEmails(db, {
+    // Finish both delivery attempts before Vercel can suspend this invocation.
+    const emailResults = await handleRegistrationEmails(db, {
         full_name,
         email,
         phone: phone || '',
@@ -270,8 +273,7 @@ app.post(['/api/register', '/register'], async (req, res) => {
         has_proof: true,
         proof_url: payment_proof_url,
         proof_metadata: metadata
-      }).catch(err => console.error('[ASYNC REGISTRATION EMAIL ERROR]', err.message));
-    });
+      });
 
     res.json({
       id: info.lastInsertRowid,
@@ -281,7 +283,11 @@ app.post(['/api/register', '/register'], async (req, res) => {
       currency,
       payment_ref: validatedRef,
       payment_proof: payment_proof_url,
-      proof_metadata: metadata
+      proof_metadata: metadata,
+      email_status: {
+        delegate: emailResults.delegate.status,
+        organizer: emailResults.organizer.status
+      }
     });
   } catch (err) {
     console.error('[REGISTRATION HANDLER ERROR]', err);

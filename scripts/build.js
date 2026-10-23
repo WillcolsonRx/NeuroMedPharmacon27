@@ -28,3 +28,7 @@ if (fs.existsSync(rootIndex)) {
 }
 
 console.log('[BUILD] Successfully prepared dist output directory with static assets.');
+
+// Bundle the installed PDF library so receipt downloads do not depend on a CDN.
+fs.mkdirSync(path.join(distDir, 'assets'), { recursive: true });
+fs.copyFileSync(require.resolve('jspdf/dist/jspdf.umd.min.js'), path.join(distDir, 'assets', 'jspdf.umd.min.js'));

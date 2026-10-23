@@ -64,6 +64,7 @@ let lastUser = null;
 let lastPass = null;
 let lastPort = null;
 let lastHost = null;
+let lastSecure = null;
 
 function getTransporter() {
   const config = getSmtpConfig();
@@ -79,12 +80,14 @@ function getTransporter() {
     lastUser !== config.auth.user ||
     lastPass !== config.auth.pass ||
     lastPort !== config.port ||
-    lastHost !== config.host
+    lastHost !== config.host ||
+    lastSecure !== config.secure
   ) {
     lastUser = config.auth.user;
     lastPass = config.auth.pass;
     lastPort = config.port;
     lastHost = config.host;
+    lastSecure = config.secure;
 
     transporter = nodemailer.createTransport({
       host: config.host,
@@ -92,9 +95,9 @@ function getTransporter() {
       secure: config.secure,
       requireTLS: config.requireTLS,
       auth: config.auth,
-      tls: {
-        rejectUnauthorized: false
-      }
+      connectionTimeout: 10000,
+      greetingTimeout: 10000,
+      socketTimeout: 15000
     });
   }
   return transporter;
@@ -138,10 +141,8 @@ async function sendMail(db, { to, subject, html, text, type = 'GENERAL', refId =
       }
     }
   } else {
-    // Development dry-run mode when credentials are not yet populated in .env
-    status = 'simulated';
-    messageId = `sim-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`;
-    console.log(`[SMTP SIMULATED] (${type}) From: ${from} | To: ${to} | Subj: ${subject} | Ref: ${refId || 'N/A'}`);
+    status = 'not_configured';
+    errorMsg = 'SMTP credentials are not configured.';
   }
 
   // Persist into mail_logs table for administrative verification

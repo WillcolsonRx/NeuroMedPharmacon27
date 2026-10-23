@@ -209,6 +209,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
     assert.equal(facultyRes.status, 200);
     const facultyJson = await facultyRes.json();
     assert.equal(facultyJson.currency, 'INR');
+    assert.deepEqual(facultyJson.email_status, { delegate: 'simulated', organizer: 'simulated' });
     assert.ok(facultyJson.ref_id && facultyJson.ref_id.startsWith('NMP27-DEL-'));
     assert.equal(facultyJson.payment_ref, 'HDFC-UTR-7788990011');
     assert.equal(facultyJson.proof_metadata.proof_mimetype, 'image/jpeg');
