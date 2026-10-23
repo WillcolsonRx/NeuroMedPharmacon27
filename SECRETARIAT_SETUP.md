@@ -154,3 +154,25 @@ then confirm private downloads, both submission mailboxes, staff MFA, a queued t
 letter, scheduler execution and a small approved campaign. No real recipients were
 emailed during development. Embedded PostgreSQL tests verify the application SQL,
 not production secrets, provider quotas, Cron availability or inbox delivery.
+
+## Staff password recovery
+
+In Supabase Authentication > URL Configuration, set Site URL to the deployed site
+origin (`https://neuro-med-pharmacon-27.vercel.app`) rather than localhost. Add the
+exact URL `https://neuro-med-pharmacon-27.vercel.app/secretariat/reset` to Redirect
+URLs. Vercel APP_URL must still be the production origin. Redeploy the updated code,
+then use **Forgot password?** on `/secretariat` to request a new email. Open only
+the newest link; expired/used links cannot be repaired by editing their URL.
+
+Supabase Auth sends recovery emails using its own mail configuration, not this
+app's Nodemailer SMTP variables. If its default sender is rate-limited, wait for
+the quota window or configure Authentication's custom SMTP with your authorized
+mail account. Do not repeatedly request new emails. Keep the standard recovery
+email template's ConfirmationURL link so the requested redirect is preserved.
+
+The reset page removes tokens from the address bar and exchanges them into a
+secure HttpOnly cookie. It verifies the approved account with Supabase before any
+password update. Existing verified MFA factors still require an authenticator
+code. Successful password changes clear the browser session and request global
+sign-out; return to staff login with the new password. Membership and MFA factors
+are not deleted. There is no new database migration for this recovery update.

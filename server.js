@@ -163,6 +163,7 @@ if (process.env.VERCEL) {
   app.use('/uploads', express.static(path.join('/tmp', 'uploads')));
 }
 
+app.get('/secretariat/reset',(req,res)=>res.sendFile(path.join(__dirname,'public','secretariat-reset.html')));
 app.get('/secretariat',(req,res)=>res.sendFile(path.join(__dirname,'public','secretariat.html')));
 
 app.get('/assets/jspdf.umd.min.js', (req, res) => {

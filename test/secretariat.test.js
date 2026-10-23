@@ -92,3 +92,31 @@ test('password login issues only a secure cookie, MFA upgrades it, and removed s
  assert.equal((await fetch(base+'/login',{method:'POST',headers,body:JSON.stringify({email:'staff@example.test',password:'test-only'})})).status,429);
  assert.equal(auth.length,count);
 });
+
+test('password recovery uses the deployed redirect, checks staff approval and preserves MFA',async t=>{
+ const actor='00000000-0000-4000-8000-000000000001',factor='00000000-0000-4000-8000-000000000002';
+ const token=aal=>'header.'+Buffer.from(JSON.stringify({aal})).toString('base64url')+'.signature';
+ const low=token('aal1'),high=token('aal2');let approved=true;
+ const auth=[];
+ const storage={request:async()=>approved?[{user_id:actor}]:[],rpc:async()=>true};
+ const app=express();app.use(express.json());app.use('/api/secretariat',createSecretariat({storage,env:{SUPABASE_URL:'https://project.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'test-only',APP_URL:'https://conference.example.test'},fetchImpl:async(url,options)=>{
+  auth.push({url:String(url),options});return {ok:true,json:async()=>({id:actor,email:'staff@example.test',factors:[{id:factor,factor_type:'totp',status:'verified'}]})};
+ }}));
+ const server=app.listen(0,'127.0.0.1');await new Promise(resolve=>server.once('listening',resolve));t.after(()=>new Promise(resolve=>server.close(resolve)));
+ const base=`http://127.0.0.1:${server.address().port}/api/secretariat`;
+ const headers={origin:'https://conference.example.test','Content-Type':'application/json'};
+ const post=(route,body,cookie)=>fetch(base+route,{method:'POST',headers:{...headers,...(cookie?{cookie:'__Host-nmp_session='+cookie}:{})},body:JSON.stringify(body)});
+ const recovery=await post('/recover',{email:'staff@example.test'});assert.equal(recovery.status,200);
+ const sent=new URL(auth[0].url);assert.equal(sent.searchParams.get('redirect_to'),'https://conference.example.test/secretariat/reset');
+ const exchange=await post('/recovery-session',{accessToken:low});assert.equal(exchange.status,200);assert.match(exchange.headers.get('set-cookie'),/HttpOnly; Secure; SameSite=Strict/);
+ const state=await fetch(base+'/recovery-state',{headers:{cookie:'__Host-nmp_session='+low}});assert.equal((await state.json()).mfaRequired,true);
+ assert.equal((await post('/password',{password:'a-new-strong-password'},low)).status,403);
+ assert.ok(!auth.some(call=>call.options.method==='PUT'));
+ assert.equal((await post('/password',{password:'short'},high)).status,400);
+ const changed=await post('/password',{password:'a-new-strong-password'},high);assert.equal(changed.status,200);assert.match(changed.headers.get('set-cookie'),/Max-Age=0/);
+ assert.equal(JSON.parse(auth.find(call=>call.options.method==='PUT').options.body).password,'a-new-strong-password');
+ assert.ok(!auth.some(call=>call.options.method==='DELETE'));
+ approved=false;
+ const rejected=await post('/recovery-session',{accessToken:low});assert.equal(rejected.status,403);assert.equal(rejected.headers.get('set-cookie'),null);
+ const expired=await post('/recovery-session',{accessToken:'invalid'});assert.equal(expired.status,400);
+});

@@ -21,7 +21,7 @@ function createSecretariat({storage,fetchImpl=fetch,env=process.env}) {
   const router=express.Router();
   const service=async(path,options={})=>{
     const response=await fetchImpl(new URL(path,env.SUPABASE_URL),{...options,headers:{apikey:env.SUPABASE_SERVICE_ROLE_KEY,...options.headers},signal:AbortSignal.timeout(12000)});
-    if(!response.ok)throw Object.assign(new Error('Authentication failed'),{status:401});
+    if(!response.ok)throw Object.assign(new Error(response.status===429?'Too many requests. Please wait before trying again.':'Authentication failed'),{status:response.status===429?429:401});
     return response.status===204?{}:response.json();
   };
   const rpc=(name,args={})=>storage.rpc(name,args);
@@ -39,7 +39,7 @@ function createSecretariat({storage,fetchImpl=fetch,env=process.env}) {
     // Claims are read only after Supabase verified this exact token via /user.
     const claims=JSON.parse(Buffer.from(token.split('.')[1],'base64url').toString());
     if(requireMfa&&claims.aal!=='aal2')throw Object.assign(new Error('Authenticator verification required'),{status:403});
-    return {id:user.id,email:user.email,token,aal:claims.aal};
+    return {id:user.id,email:user.email,token,aal:claims.aal,factors:user.factors || []};
   }
   router.use((req,res,next)=>{
     res.setHeader('Cache-Control','no-store');
@@ -51,6 +51,41 @@ function createSecretariat({storage,fetchImpl=fetch,env=process.env}) {
     next();
   });
   const route=fn=>async(req,res)=>{try{await fn(req,res);}catch(error){res.status(error.status || 503).json({error:error.status?error.message:'Secretariat service unavailable. Please retry later.'});}};
+  router.post('/recover',route(async(req,res)=>{
+    const email=String(req.body.email || '').trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length>254)return res.status(400).json({error:'Enter your staff email address'});
+    const ip=String(req.headers['x-vercel-forwarded-for'] || req.socket.remoteAddress || 'unknown').split(',')[0];
+    const hash=value=>crypto.createHmac('sha256',env.SUPABASE_SERVICE_ROLE_KEY).update('recovery:'+value).digest('hex');
+    if(!await rpc('secretariat_login_limit',{p_keys:[hash(ip),hash(email.toLowerCase())]}))return res.status(429).json({error:'Too many requests. Try again in 15 minutes.'});
+    const redirect=new URL('/secretariat/reset',env.APP_URL).href;
+    await service('/auth/v1/recover?redirect_to='+encodeURIComponent(redirect),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    res.json({message:'If this address has an account, a recovery email has been requested. Open only the newest link. Check spam as well.'});
+  }));
+  router.post('/recovery-session',route(async(req,res)=>{
+    const token=req.body.accessToken;
+    if(typeof token!=='string' || token.length>8192 || !/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(token))return res.status(400).json({error:'Invalid recovery link. Request a fresh email.'});
+    req.headers.cookie=`${COOKIE}=${token}`;
+    await identity(req,false);
+    setSession(res,token);
+    res.json({ok:true});
+  }));
+  router.get('/recovery-state',route(async(req,res)=>{
+    const user=await identity(req,false);
+    const factors=user.factors.filter(f=>f.factor_type==='totp'&&f.status==='verified');
+    res.json({email:user.email,mfaRequired:factors.length>0&&user.aal!=='aal2',factorId:factors[0]?.id});
+  }));
+  router.post('/password',route(async(req,res)=>{
+    const user=await identity(req,false);
+    const hasMfa=user.factors.some(f=>f.factor_type==='totp'&&f.status==='verified');
+    if(hasMfa&&user.aal!=='aal2')return res.status(403).json({error:'Verify your authenticator code before changing the password'});
+    const password=req.body.password;
+    if(typeof password!=='string'||password.length<12||password.length>128)return res.status(400).json({error:'Choose a new password between 12 and 128 characters'});
+    try{await service('/auth/v1/user',{method:'PUT',headers:{Authorization:`Bearer ${user.token}`,'Content-Type':'application/json'},body:JSON.stringify({password})});}
+    catch(error){if(error.status===429)throw error;return res.status(400).json({error:'Password could not be updated. Choose a different strong password, or request a fresh recovery email.'});}
+    try{await service('/auth/v1/logout?scope=global',{method:'POST',headers:{Authorization:`Bearer ${user.token}`}});}catch{}
+    res.setHeader('Set-Cookie',`${COOKIE}=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0`);
+    res.json({ok:true});
+  }));
   router.post('/login',route(async(req,res)=>{
     const email=String(req.body.email || '').trim();
     const password=req.body.password;
