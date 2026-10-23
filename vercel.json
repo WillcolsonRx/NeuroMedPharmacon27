@@ -5,7 +5,7 @@
   "rewrites": [
     {
       "source": "/secretariat/reset",
-      "destination": "/secretariat-reset.html"
+      "destination": "/secretariat-reset"
     },
     {
       "source": "/secretariat",

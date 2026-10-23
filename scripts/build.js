@@ -37,3 +37,9 @@ console.log('[BUILD] Successfully prepared dist output directory with static ass
 // Bundle the installed PDF library so receipt downloads do not depend on a CDN.
 fs.mkdirSync(path.join(distDir, 'assets'), { recursive: true });
 fs.copyFileSync(require.resolve('jspdf/dist/jspdf.umd.min.js'), path.join(distDir, 'assets', 'jspdf.umd.min.js'));
+
+// Provide the recovery URL as a real nested page as well as a clean-URL rewrite.
+// Supabase emails may already contain this path, so keep it stable.
+const recoveryDir = path.join(distDir, 'secretariat');
+fs.mkdirSync(recoveryDir, { recursive: true });
+fs.copyFileSync(path.join(publicDir, 'secretariat-reset.html'), path.join(recoveryDir, 'reset.html'));
