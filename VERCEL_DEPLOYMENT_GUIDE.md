@@ -135,7 +135,7 @@ No additional credentials are needed.
 Abstract submissions require a Word `.doc` or `.docx` file (maximum 2 MB) instead
 of a text body. File headers/container contents are checked; this is not malware
 scanning. The Secretariat should review attachments in protected mode. The file
-is stored privately and attached to both author and organizer acknowledgement
+is stored privately and attached only to organizer acknowledgement
 emails. Admins can download it from the Abstracts table using short-lived signed
 links. Existing text-only abstracts remain available as legacy records; they
 cannot be converted into the original Word files automatically.
@@ -144,7 +144,7 @@ Sponsorship requests now send acknowledgements to the sponsor and organizer.
 Standard tier totals, including 18% GST, are calculated on the server; client
 amounts are ignored. Payment is optional for inquiries, but a submitted payment
 requires both a transaction reference and a valid PNG/JPEG/WebP/PDF proof. Proofs
-are stored privately, attached to acknowledgement emails and linked in the admin
+are stored privately, attached only to organizer acknowledgement emails and linked in the admin
 Sponsorships table. Receipt of a proof does not verify bank settlement. Custom
 sponsorships show a zero provisional total pending an agreed quotation.
 

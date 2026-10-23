@@ -33,7 +33,7 @@ test('registration waits for both SMTP attempts and preserves failures', async t
   assert.equal(result.organizer.status, 'sent');
 });
 
-test('abstract and sponsorship emails carry attachments to both recipients and preserve failures', async t => {
+test('abstract and sponsorship emails attach files only for admins and preserve failures', async t => {
   delete process.env.NODE_ENV;
   process.env.SMTP_USER='submission-sender@example.test';
   process.env.SMTP_PASS='test-only';
@@ -45,8 +45,15 @@ test('abstract and sponsorship emails carry attachments to both recipients and p
   const status=await sendSubmissionEmails(null,'ABSTRACT',{email:'author@example.test',full_name:'Author',title:'Study',category:'Track 1',preference:'Poster',ref_id:'ABS-TEST'},[attachment]);
   assert.deepEqual(status,{delegate:'sent',organizer:'sent'});
   assert.deepEqual(messages.map(m=>m.to),['author@example.test','organizer@example.test']);
-  for(const message of messages)assert.equal(message.attachments[0].content,attachment.content);
+  assert.equal(messages[0].attachments.length,0);
+  assert.equal(messages[1].attachments[0].content,attachment.content);
+  assert.match(messages[0].html,/Abstract Submission Receipt/);
+  assert.match(messages[0].html,/ABS-TEST/);
+  assert.match(messages[0].html,/Pending scientific review/);
   const failed=await sendSubmissionEmails(null,'SPONSORSHIP',{email:'failed@example.test',company_name:'Company',tier:'Gold',amount:88500,ref_id:'SPON-TEST'},[attachment]);
   assert.deepEqual(failed,{delegate:'failed',organizer:'sent'});
   assert.match(messages[2].text,/Unpaid inquiry/);
+  assert.equal(messages[2].attachments.length,0);
+  assert.equal(messages[3].attachments.length,1);
+  assert.match(messages[2].html,/Sponsorship Acknowledgement/);
 });
