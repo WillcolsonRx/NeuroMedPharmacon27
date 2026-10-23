@@ -194,7 +194,7 @@ function storePaymentProof(buffer, ext, ref_id, original_filename) {
 /**
  * High-level validator and storage handler.
  */
-function handlePaymentValidationAndStorage({ payment_ref, payment_proof, original_filename, ref_id }) {
+async function handlePaymentValidationAndStorage({ payment_ref, payment_proof, original_filename, ref_id }) {
   const refValidation = validatePaymentRef(payment_ref);
   if (!refValidation.valid) {
     return { success: false, error: refValidation.error };
@@ -205,7 +205,9 @@ function handlePaymentValidationAndStorage({ payment_ref, payment_proof, origina
     return { success: false, error: proofValidation.error };
   }
 
-  const stored = storePaymentProof(
+  const permanentStorage = require('./supabaseStorage').getSupabaseStorage();
+  const saveProof = permanentStorage ? permanentStorage.storeProof : storePaymentProof;
+  const stored = await saveProof(
     proofValidation.buffer,
     proofValidation.ext,
     ref_id,

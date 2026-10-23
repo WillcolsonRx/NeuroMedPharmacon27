@@ -97,3 +97,29 @@ The build bundles jsPDF at `/assets/jspdf.umd.min.js`. The receipt's Download
 Receipt PDF button saves a PDF directly rather than opening the browser print
 dialog. Verify the downloaded file contains the correct registration ID, delegate,
 transaction reference, and amount.
+
+## Permanent storage with Supabase (required on Vercel)
+
+1. Create a Supabase project and run `supabase/schema.sql` in its SQL Editor.
+   This installs server-only tables and a private `payment-proofs` bucket.
+2. In Vercel Production environment variables, set `SUPABASE_URL` to the project
+   URL and `SUPABASE_SERVICE_ROLE_KEY` to its service-role key. Never use a public
+   anon key here, commit the key, or put it in browser code. Use a separate project
+   for preview/test deployments.
+3. Set a strong private `ADMIN_TOKEN` and the SMTP variables above, then redeploy.
+4. Check `/api/health`: `storage` must be `supabase` and `submissionsEnabled` true.
+   This reports configuration selection, not database connectivity. An authorized
+   test registration must also succeed, appear in Supabase and the admin console,
+   and retain its private proof after another deployment. Verify both mailboxes.
+
+On Vercel, POST submissions return 503 until permanent storage is configured;
+this prevents silently accepting registrations into disposable `/tmp` storage.
+Local development continues to use SQLite via `DATABASE_PATH`. Existing bundled
+SQLite records and uploads are not automatically migrated or published into
+Supabase; preserve/export genuine previous submissions before a migration.
+Admin proof links are signed for five minutes; refresh the dashboard to renew.
+The website checks image/PDF headers, not whether a bank transfer actually settled.
+The Secretariat must reconcile submitted references against bank records.
+
+Early-bird rates run through 9 November 2026, regular rates through 9 December
+2026 (inclusive, Asia/Kolkata), and spot rates apply afterward.

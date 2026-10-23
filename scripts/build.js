@@ -19,7 +19,12 @@ if (!fs.existsSync(distDir)) {
 
 // Copy public directory to dist
 if (fs.existsSync(publicDir)) {
-  fs.cpSync(publicDir, distDir, { recursive: true });
+  // Payment evidence must never be published as static website assets.
+  fs.rmSync(path.join(distDir, 'uploads'), { recursive: true, force: true });
+  fs.cpSync(publicDir, distDir, {
+    recursive: true,
+    filter: source => source !== path.join(publicDir, 'uploads')
+  });
 }
 
 // Ensure root index.html is copied to dist/index.html

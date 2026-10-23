@@ -6,18 +6,11 @@ const Database = require('better-sqlite3');
 const { currentTier, TARIFF, app } = require('../server.js');
 
 test('Tier calculation auto-switches correctly by date', () => {
-  // Early bird: <= 2026-03-31
-  assert.equal(currentTier(new Date('2026-01-15T12:00:00Z')), 'early');
-  assert.equal(currentTier(new Date('2026-03-31T00:00:00Z')), 'early');
-  
-  // Regular: > 2026-03-31 and <= 2026-09-20
-  assert.equal(currentTier(new Date('2026-04-01T12:00:00Z')), 'regular');
-  assert.equal(currentTier(new Date('2026-08-15T12:00:00Z')), 'regular');
-  assert.equal(currentTier(new Date('2026-09-20T00:00:00Z')), 'regular');
-
-  // Spot: > 2026-09-20
-  assert.equal(currentTier(new Date('2026-09-21T12:00:00Z')), 'spot');
-  assert.equal(currentTier(new Date('2026-10-28T12:00:00Z')), 'spot');
+  assert.equal(currentTier(new Date('2026-10-23T12:00:00Z')), 'early');
+  assert.equal(currentTier(new Date('2026-11-09T23:59:59+05:30')), 'early');
+  assert.equal(currentTier(new Date('2026-11-10T00:00:00+05:30')), 'regular');
+  assert.equal(currentTier(new Date('2026-12-09T23:59:59+05:30')), 'regular');
+  assert.equal(currentTier(new Date('2026-12-10T00:00:00+05:30')), 'spot');
 });
 
 test('TARIFF contains expected rate structures for all tiers', () => {

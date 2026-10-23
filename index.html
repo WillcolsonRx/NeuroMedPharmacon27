@@ -3130,7 +3130,7 @@ button, input, select, textarea {
           <span style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-gold); font-weight: 600;">ACTIVE: EARLY BIRD TIER</span>
         </div>
         <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1.5rem;">
-          Early Bird rates valid up to <strong>31 March 2026</strong>. Regular rates apply through 20 September 2026.
+          Early Bird rates valid up to <strong>9 November 2026</strong>. Regular rates apply through 9 December 2026.
         </p>
 
         <table class="tariff-table">
@@ -4869,6 +4869,8 @@ let isSubmittingAbstract = false;
 let isSubmittingSponsorship = false;
 
 async function fetchWithRetry(url, options = {}, retries = 2, backoffMs = 600) {
+  // A lost response can follow a successful save: never replay a submission automatically.
+  if (!['GET', 'HEAD'].includes((options.method || 'GET').toUpperCase())) retries = 0;
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
       const res = await fetch(url, options);

@@ -4,3 +4,7 @@
 test/
 *.log
 .DS_Store
+
+# Registration data belongs in private permanent storage, not deployment artifacts.
+nipercon.db
+public/uploads/

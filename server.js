@@ -26,8 +26,11 @@ const {
 const app = express();
 
 // Initialize Database (handles Vercel Serverless /tmp writable directory or InMemoryDb fallback)
+const permanentStorage = require('./supabaseStorage').getSupabaseStorage();
 let db;
-if (Database) {
+if (permanentStorage) {
+  db = permanentStorage;
+} else if (Database) {
   try {
     let dbPath;
     if (process.env.VERCEL) {
@@ -129,12 +132,19 @@ const TARIFF = {
 
 function currentTier(customDate) {
   const now = customDate || new Date();
-  if (now <= new Date('2026-03-31')) return 'early';
-  if (now <= new Date('2026-09-20')) return 'regular';
+  if (now < new Date('2026-11-10T00:00:00+05:30')) return 'early';
+  if (now < new Date('2026-12-10T00:00:00+05:30')) return 'regular';
   return 'spot';
 }
 
 app.use(express.json({ limit: '10mb' }));
+// Vercel's temporary filesystem cannot safely retain conference submissions.
+app.use((req, res, next) => {
+  if (process.env.VERCEL && !permanentStorage && req.method === 'POST') {
+    return res.status(503).json({error:'Registration storage is not configured. Please contact the Secretariat; do not submit payment proofs yet.'});
+  }
+  next();
+});
 if (fs.existsSync(path.join(__dirname, 'dist'))) {
   app.use(express.static(path.join(__dirname, 'dist')));
 }
@@ -155,15 +165,15 @@ app.get(['/api/tariff', '/tariff'], (req, res) => {
 
 app.get(['/api/health', '/health'], (req, res) => {
   res.setHeader('Cache-Control', 'no-cache');
-  res.json({ status: 'ok', time: new Date().toISOString() });
+  res.json({ status: 'ok', time: new Date().toISOString(), storage: permanentStorage ? 'supabase' : 'local', durableStorage: Boolean(permanentStorage), submissionsEnabled: !process.env.VERCEL || Boolean(permanentStorage) });
 });
 
 // Endpoint: Standalone Payment Proof Pre-Validation & Metadata Inspection
-app.post(['/api/validate-payment-proof', '/validate-payment-proof'], (req, res) => {
+app.post(['/api/validate-payment-proof', '/validate-payment-proof'], async (req, res) => {
   try {
     const { payment_ref, payment_proof, proof_filename } = req.body;
     const tempRef = generateRefId('CHK');
-    const result = handlePaymentValidationAndStorage({
+    const result = await handlePaymentValidationAndStorage({
       payment_ref,
       payment_proof,
       original_filename: proof_filename,
@@ -220,7 +230,7 @@ app.post(['/api/register', '/register'], async (req, res) => {
     const ref_id = generateRefId('DEL');
 
     // Server-side payment validation & storage
-    const paymentValidation = handlePaymentValidationAndStorage({
+    const paymentValidation = await handlePaymentValidationAndStorage({
       payment_ref,
       payment_proof,
       original_filename: proof_filename,
@@ -233,7 +243,7 @@ app.post(['/api/register', '/register'], async (req, res) => {
 
     const { payment_ref: validatedRef, payment_proof_url, metadata } = paymentValidation;
 
-    const info = db.prepare(`
+    const info = await db.prepare(`
       INSERT INTO registrations (
         full_name, email, phone, category, tier, workshop,
         amount, currency, ref_id, payment_ref, payment_proof,
@@ -301,7 +311,7 @@ app.post(['/api/abstract', '/abstract'], async (req, res) => {
     if (!full_name || !email || !title || !body) return res.status(400).json({ error: 'Missing required fields' });
     const ref_id = generateRefId('ABS');
 
-    const info = db.prepare(`
+    const info = await db.prepare(`
       INSERT INTO abstracts (full_name,email,title,category,body,ref_id)
       VALUES (?,?,?,?,?,?)
     `).run(full_name, email, title, category || '', body, ref_id);
@@ -313,10 +323,10 @@ app.post(['/api/abstract', '/abstract'], async (req, res) => {
   }
 });
 
-app.post(['/api/contact', '/contact'], (req, res) => {
+app.post(['/api/contact', '/contact'], async (req, res) => {
   try {
     const { name, email, message } = req.body;
-    db.prepare('INSERT INTO contacts (name,email,message) VALUES (?,?,?)').run(name || '', email || '', message || '');
+    await db.prepare('INSERT INTO contacts (name,email,message) VALUES (?,?,?)').run(name || '', email || '', message || '');
     res.json({ ok: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -331,7 +341,7 @@ app.post(['/api/sponsorship', '/sponsorship'], async (req, res) => {
     }
     const ref_id = generateRefId('SPON');
 
-    const info = db.prepare(`
+    const info = await db.prepare(`
       INSERT INTO sponsorships (company_name, contact_person, email, phone, tier, amount, notes, ref_id, payment_ref, payment_proof)
       VALUES (?,?,?,?,?,?,?,?,?,?)
     `).run(company_name, contact_person, email, phone || '', tier, amount || 0, notes || '', ref_id, payment_ref || '', payment_proof || '');
@@ -342,28 +352,22 @@ app.post(['/api/sponsorship', '/sponsorship'], async (req, res) => {
   }
 });
 
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'change-me';
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN || (process.env.VERCEL ? null : 'change-me');
 
-app.get(['/api/admin/registrations', '/admin/registrations'], (req, res) => {
-  if (req.query.token !== ADMIN_TOKEN) return res.status(403).json({ error: 'Forbidden' });
-  res.json(db.prepare('SELECT * FROM registrations ORDER BY created_at DESC').all());
-});
-
-app.get(['/api/admin/abstracts', '/admin/abstracts'], (req, res) => {
-  if (req.query.token !== ADMIN_TOKEN) return res.status(403).json({ error: 'Forbidden' });
-  res.json(db.prepare('SELECT * FROM abstracts ORDER BY created_at DESC').all());
-});
-
-app.get(['/api/admin/sponsorships', '/admin/sponsorships'], (req, res) => {
-  if (req.query.token !== ADMIN_TOKEN) return res.status(403).json({ error: 'Forbidden' });
-  res.json(db.prepare('SELECT * FROM sponsorships ORDER BY created_at DESC').all());
-});
-
-// Admin endpoint to inspect email delivery audit logs
-app.get(['/api/admin/mail-logs', '/admin/mail-logs'], (req, res) => {
-  if (req.query.token !== ADMIN_TOKEN) return res.status(403).json({ error: 'Forbidden' });
-  res.json(db.prepare('SELECT * FROM mail_logs ORDER BY created_at DESC LIMIT 100').all());
-});
+for (const table of ['registrations', 'abstracts', 'sponsorships', 'mail_logs']) {
+  const route = table === 'mail_logs' ? 'mail-logs' : table;
+  app.get([`/api/admin/${route}`, `/admin/${route}`], async (req, res) => {
+    if (req.query.token !== ADMIN_TOKEN) return res.status(403).json({ error: 'Forbidden' });
+    res.setHeader('Cache-Control', 'no-store');
+    try {
+      const rows = await db.prepare(`SELECT * FROM ${table} ORDER BY created_at DESC${table === 'mail_logs' ? ' LIMIT 100' : ''}`).all();
+      res.json(rows);
+    } catch (err) {
+      console.error('[ADMIN STORAGE]', err.message);
+      res.status(503).json({error:'Could not load conference records'});
+    }
+  });
+}
 
 // Configuration check endpoint for Secretariat admin
 app.get(['/api/admin/smtp-status', '/admin/smtp-status'], (req, res) => {

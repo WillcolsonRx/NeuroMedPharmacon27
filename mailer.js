@@ -148,7 +148,7 @@ async function sendMail(db, { to, subject, html, text, type = 'GENERAL', refId =
   // Persist into mail_logs table for administrative verification
   try {
     if (db) {
-      db.prepare(`
+      await db.prepare(`
         INSERT INTO mail_logs (recipient, subject, type, ref_id, status, message_id, error_msg, created_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
       `).run(to, subject, type, refId || '', status, messageId || '', errorMsg || '');
