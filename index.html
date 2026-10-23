@@ -2516,6 +2516,16 @@ button, input, select, textarea {
     font-size: 0.78rem;
   }
 }
+
+/* Live conference countdown: opening time is fixed to India Standard Time. */
+.conference-countdown { margin: 1.6rem 0; max-width: 590px; padding: 1.25rem; border: 1px solid rgba(203,162,52,.4); border-radius: 8px; background: rgba(6,14,24,.65); }
+.conference-countdown-title { margin: 0 0 .8rem; color: #e2c477; font-size: .9rem; }
+.countdown-units { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .6rem; }
+.countdown-unit { padding: .7rem .3rem; text-align: center; background: rgba(255,255,255,.04); border-radius: 5px; }
+.countdown-unit strong { display: block; color: #fff; font-size: clamp(1.55rem,4vw,2.4rem); font-variant-numeric: tabular-nums; line-height: 1.2; }
+.countdown-unit span { display: block; margin-top: .35rem; color: #cbd5e1; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+.conference-countdown-note { margin: .85rem 0 0; color: #cbd5e1; font-size: .78rem; }
+
 </style>
 </head>
 <body>
@@ -2640,6 +2650,18 @@ button, input, select, textarea {
       </a>
     </div>
 
+    <section id="conferenceCountdown" class="conference-countdown" aria-label="Conference countdown">
+      <p id="countdownStatus" class="conference-countdown-title" aria-live="polite">Until the conference begins</p>
+      <div class="countdown-units" role="timer" aria-live="off" aria-label="Time remaining to the conference opening">
+        <div class="countdown-unit"><strong id="countdown-days">—</strong><span>Days</span></div>
+        <div class="countdown-unit"><strong id="countdown-hours">—</strong><span>Hours</span></div>
+        <div class="countdown-unit"><strong id="countdown-minutes">—</strong><span>Minutes</span></div>
+        <div class="countdown-unit"><strong id="countdown-seconds">—</strong><span>Seconds</span></div>
+      </div>
+      <p class="conference-countdown-note">Opening: 18 February 2027 · 9:00 a.m. IST (UTC+05:30)</p>
+      <noscript>Enable JavaScript to see the live countdown.</noscript>
+    </section>
+
     <!-- Focal CTA Cluster -->
     <div class="hero-cta-cluster">
       <a href="#registration" class="btn-hero-primary">
@@ -2723,8 +2745,8 @@ button, input, select, textarea {
         <p class="metric-label">Peer-Reviewed Abstracts</p>
       </div>
       <div class="metric-item">
-        <div class="metric-value accent-gold tabular-nums">INR 1,50,000</div>
-        <p class="metric-label">Young Investigator Awards</p>
+        <div class="metric-value accent-gold">Research</div>
+        <p class="metric-label">Recognition for Young Investigators</p>
       </div>
     </div>
   </div>
@@ -3076,9 +3098,9 @@ button, input, select, textarea {
           <div class="timeline-venue-sub">Auditorium A</div>
         </div>
         <div>
-          <h3 class="timeline-title">Plenary Session I: Breakthroughs in Neurotherapeutics</h3>
+          <h3 class="timeline-title">Plenary Session I</h3>
           <p class="timeline-speakers">
-            <strong>Keynote:</strong> Prof. S. K. Kulkarni (Eminent Pharmacologist) · <em>"Microglial Modulation and Epigenetic Targeting in Alzheimer's Pathogenesis"</em>
+            <strong>Keynote:</strong> Dr. Ashok K Datusalia
           </p>
         </div>
       </div>
@@ -4444,7 +4466,7 @@ const SCHEDULE_DATA = {
   1: [
     { time: '08:30 – 09:30', venue: 'Main Foyer', title: 'Delegate Registration & Kit Distribution', speakers: 'Secretariat desk verification, kit handover, and poster installation assistance.' },
     { time: '09:30 – 11:00', venue: 'Auditorium A', title: 'Inaugural Ceremony & Presidential Address', speakers: 'Chief Guest Address (Ministry of Chemicals & Fertilizers, Govt. of India), Director NIPER-Raebareli, and President Indian Pharmacological Society.' },
-    { time: '11:30 – 13:00', venue: 'Auditorium A', title: 'Plenary Session I: Breakthroughs in Neurotherapeutics', speakers: 'Keynote: Prof. S. K. Kulkarni (Eminent Pharmacologist) · "Microglial Modulation and Epigenetic Targeting in Alzheimer\'s Pathogenesis"' },
+    { time: '11:30 – 13:00', venue: 'Auditorium A', title: 'Plenary Session I', speakers: 'Keynote: Dr. Ashok K Datusalia' },
     { time: '14:00 – 16:30', venue: 'Hall B & Lab C', title: 'A workshop of Network Pharmacology', speakers: 'Hands-on practical training on target-disease network construction, pathway enrichment, Cytoscape network visualization, and polypharmacology principles in drug discovery.' }
   ],
   2: [
@@ -4456,7 +4478,7 @@ const SCHEDULE_DATA = {
   3: [
     { time: '09:30 – 11:00', venue: 'Auditorium A', title: 'Translational Summit: Academic–Industry Pipeline Synergies', speakers: 'Panel Discussion featuring pharmaceutical industry leadership and academic drug development consortia.' },
     { time: '11:30 – 13:00', venue: 'Auditorium A', title: 'Young Investigator Award Oration Series', speakers: 'Top 6 shortlisted doctoral scholars deliver competitive podium presentations before the International Peer Jury.' },
-    { time: '14:30 – 16:00', venue: 'Auditorium A', title: 'Valedictory Function, Prize Distribution & Certificate Conferral', speakers: 'Awarding of Best Oral Presentation, Best Poster Presentation, and Young Scientist Recognition honors.' }
+    { time: '14:30 – 16:00', venue: 'Auditorium A', title: 'Valedictory Function, Research Recognition & Certificate Conferral', speakers: 'Awarding of Best Oral Presentation, Best Poster Presentation, and Young Scientist Recognition honors.' }
   ]
 };
 
@@ -5398,5 +5420,6 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+<script src="/conference-countdown.js" defer></script>
 </body>
 </html>
