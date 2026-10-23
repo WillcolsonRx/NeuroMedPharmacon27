@@ -11,14 +11,44 @@ function createSupabaseStorage({ url, key, fetchImpl = fetch }) {
       signal: AbortSignal.timeout(15000)
     });
     if (!response.ok) {
+      // Only fixed workflow conflicts are safe to show; never forward arbitrary provider data.
+      if (path.startsWith('/rest/v1/rpc/secretariat_') && response.status === 400) {
+        const error = await response.json().catch(() => ({}));
+        const safe = new Set([
+          'Review changed; reload before saving', 'Resolve queued notification before changing decision',
+          'Selection includes missing or pending reviews', 'Decision changed after preview; reload',
+          'Recipient suppressed after a bounce or complaint', 'Select between 1 and 500 abstracts',
+          'Cannot safely retry this job; inspect provider logs', 'Job is already sending or finished',
+          'Record provider-log evidence before resolving an uncertain delivery', 'Only uncertain jobs can be reconciled'
+        ]);
+        if (error.code === 'P0001' && safe.has(error.message)) throw Object.assign(new Error(error.message), {status:409});
+      }
       // Never expose provider responses (which may contain personal data) or credentials.
       throw new Error(`Permanent storage request failed (${response.status})`);
     }
     return response.status === 204 ? null : response.json();
   }
+  async function signRows(rows) {
+    // Only authenticated admin routes request temporary download links.
+    return Promise.all(rows.map(async source => {
+      const row = {...source};
+      for (const [field, privateBucket] of [['payment_proof','payment-proofs'], ['document_path','abstract-documents']]) {
+        const prefix = `supabase://${privateBucket}/`;
+        if (!row[field]?.startsWith(prefix)) continue;
+        const object = row[field].slice(prefix.length);
+        const signed = await request(`/storage/v1/object/sign/${privateBucket}/${encodeURIComponent(object)}`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({expiresIn:300})});
+        const signedPath = signed.signedURL || signed.signedUrl;
+        if (!signedPath) throw new Error('Could not sign private document');
+        row[field] = new URL('/storage/v1'+signedPath, base).href;
+      }
+      return row;
+    }));
+  }
   const tables = new Set(['registrations', 'abstracts', 'contacts', 'sponsorships', 'mail_logs']);
   return {
     kind: 'supabase',
+    request, signRows,
+    rpc: (name,args={}) => request('/rest/v1/rpc/'+name,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(args)}),
     exec() { /* Schema is installed explicitly using supabase/schema.sql. */ },
     prepare(sql) {
       const insert = sql.match(/INSERT INTO\s+(\w+)\s*\(([^)]+)\)/i);
@@ -36,19 +66,7 @@ function createSupabaseStorage({ url, key, fetchImpl = fetch }) {
         return { async all() {
           const rows = await request(`/rest/v1/${select[1]}?select=*&order=created_at.desc${select[2] ? '&limit='+select[2] : ''}`);
           if (!Array.isArray(rows)) throw new Error('Invalid permanent storage response');
-          // Only authenticated admin routes call all(); proofs remain private at rest.
-          return Promise.all(rows.map(async row => {
-            for (const [field, privateBucket] of [['payment_proof','payment-proofs'], ['document_path','abstract-documents']]) {
-              const prefix = `supabase://${privateBucket}/`;
-              if (!row[field]?.startsWith(prefix)) continue;
-              const object = row[field].slice(prefix.length);
-              const signed = await request(`/storage/v1/object/sign/${privateBucket}/${encodeURIComponent(object)}`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({expiresIn:300})});
-              const signedPath = signed.signedURL || signed.signedUrl;
-              if (!signedPath) throw new Error('Could not sign private document');
-              row[field] = new URL('/storage/v1'+signedPath, base).href;
-            }
-            return row;
-          }));
+          return signRows(rows);
         }};
       }
       throw new Error('Unsupported storage query');

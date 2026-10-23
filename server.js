@@ -143,6 +143,10 @@ function currentTier(customDate) {
   return 'spot';
 }
 
+app.post('/api/internal/mail-events',express.raw({type:'application/json',limit:'256kb'}),(req,res)=>{
+  if(!permanentStorage)return res.status(503).end();
+  return require('./secretariat').handleMailEvent({req,res,storage:permanentStorage});
+});
 app.use(express.json({ limit: '10mb' }));
 // Vercel's temporary filesystem cannot safely retain conference submissions.
 app.use((req, res, next) => {
@@ -158,6 +162,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 if (process.env.VERCEL) {
   app.use('/uploads', express.static(path.join('/tmp', 'uploads')));
 }
+
+app.get('/secretariat',(req,res)=>res.sendFile(path.join(__dirname,'public','secretariat.html')));
 
 app.get('/assets/jspdf.umd.min.js', (req, res) => {
   res.sendFile(require.resolve('jspdf/dist/jspdf.umd.min.js'));
@@ -370,6 +376,27 @@ app.post(['/api/sponsorship', '/sponsorship'], async (req, res) => {
     console.error('[SPONSORSHIP ERROR]',err.message);
     res.status(500).json({ error: 'Could not save sponsorship. Please contact the Secretariat.' });
   }
+});
+
+// Approved accounts and MFA protect the dedicated Secretariat workspace.
+const {createSecretariat,processMailQueue} = require('./secretariat');
+if (permanentStorage) app.use('/api/secretariat',createSecretariat({storage:permanentStorage}));
+else app.use('/api/secretariat',(req,res)=>res.status(503).json({error:'Configure Supabase to use the secured Secretariat workspace'}));
+app.all('/api/internal/mail-worker',async(req,res)=>{
+  res.setHeader('Cache-Control','no-store');
+  const configured=process.env.MAIL_WORKER_SECRET;
+  const actual=Buffer.from(req.headers.authorization || '');
+  const expected=Buffer.from('Bearer '+configured);
+  const crypto=require('node:crypto');
+  if(!configured || configured.length<32 || actual.length!==expected.length || !crypto.timingSafeEqual(actual,expected))return res.status(403).json({error:'Forbidden'});
+  if(req.method!=='POST')return res.status(405).json({error:'Use POST'});
+  try { if(!permanentStorage)throw Error('Permanent storage unavailable');res.json({results:await processMailQueue({storage:permanentStorage})}); }
+  catch(err){console.error('[MAIL WORKER]',err.message);res.status(503).json({error:'Mail worker unavailable; check configuration and queue'});}
+});
+// Production no longer accepts the shared token or tokens embedded in URLs.
+app.use(['/api/admin','/admin'],(req,res,next)=>{
+  if(!process.env.VERCEL && process.env.NODE_ENV!=='production')return next();
+  res.status(410).json({error:'Use the secured /secretariat workspace'});
 });
 
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || (process.env.VERCEL ? null : 'change-me');

@@ -77,9 +77,9 @@ test('Vercel registration persists records and proofs through Supabase and prote
   assert.equal(tables.mail_logs.length,2);
   assert.equal(uploads.length,1);
   assert.match(tables.registrations[0].payment_proof,/^supabase:\/\//);
-  assert.equal((await previousFetch(base+'/api/admin/registrations')).status,403);
-  const admin=await previousFetch(base+'/api/admin/registrations?token=test-private');
-  const rows=await admin.json();
+  assert.equal((await previousFetch(base+'/api/admin/registrations')).status,410);
+  assert.equal((await previousFetch(base+'/api/admin/registrations?token=test-private')).status,410);
+  const rows=await require('../supabaseStorage').getSupabaseStorage().signRows(tables.registrations);
   assert.match(rows[0].payment_proof,/^https:\/\/project.supabase.co\/storage\/v1\/object\/sign\//);
   const word = Buffer.from(require('fflate').zipSync({'[Content_Types].xml':Buffer.from('<Types/>'),'word/document.xml':Buffer.from('<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"/>')}));
   const post = (route,body)=>previousFetch(base+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
@@ -88,8 +88,8 @@ test('Vercel registration persists records and proofs through Supabase and prote
   assert.deepEqual((await abstract.json()).email_status,{delegate:'simulated',organizer:'simulated'});
   assert.match(tables.abstracts[0].document_path,/^supabase:\/\/abstract-documents\//);
   assert.ok(uploads.some(path=>path.includes('/abstract-documents/')));
-  const abstractAdmin = await previousFetch(base+'/api/admin/abstracts?token=test-private');
-  assert.match((await abstractAdmin.json())[0].document_path,/^https:/);
+  const abstractRows = await require('../supabaseStorage').getSupabaseStorage().signRows(tables.abstracts);
+  assert.match(abstractRows[0].document_path,/^https:/);
   const invalidAbstract=await post('/api/abstract',{full_name:'Author',email:'author@example.test',title:'Study',document_filename:'study.docx',document_data:'data:text/plain;base64,aGVsbG8='});
   assert.equal(invalidAbstract.status,400);
   assert.equal(tables.abstracts.length,1);

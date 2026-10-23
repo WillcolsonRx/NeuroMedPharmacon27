@@ -3,21 +3,14 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 
-test('admin dashboard loads supported APIs and renders all tables', async () => {
-  const html = fs.readFileSync(require.resolve('../public/admin.html'), 'utf8');
-  const start = html.indexOf('    async function fetchDashboardData()');
-  const code = html.slice(start, html.indexOf('    function renderRegistrations', start));
-  const requests = [], rendered = [];
-  const nodes = { adminToken: {value:'test-only'} };
-  const context = {token:'',registrationsData:[],localStorage:{setItem(){}},document:{getElementById:id=>nodes[id] ||= {}},fetch:async url=>{
-    requests.push(url);
-    assert.match(url,/\/api\/admin\/(registrations|sponsorships|abstracts|mail-logs)\?/);
-    return {ok:true,status:200,json:async()=>[]};
-  },alert:msg=>assert.fail(msg),console,
-  renderRegistrations:()=>rendered.push('registrations'),renderSponsorships:()=>rendered.push('sponsorships'),renderAbstracts:()=>rendered.push('abstracts'),renderMailLogs:()=>rendered.push('mail')};
-  await vm.runInNewContext(code+'\nfetchDashboardData();',context);
-  assert.equal(requests.length,4);
-  assert.equal(rendered.length,4);
+test('Secretariat document links reject executable URLs and escape filenames', () => {
+  const source=fs.readFileSync(require.resolve('../public/secretariat.js'),'utf8');
+  const start=source.indexOf('function fileLink('), end=source.indexOf('function renderRows',start);
+  const context={escape:value=>String(value).replace(/</g,'&lt;').replace(/"/g,'&quot;')};
+  vm.runInNewContext(source.slice(start,end),context);
+  assert.equal(context.fileLink('javascript:alert(1)','Unsafe'),'');
+  assert.match(context.fileLink('https://example.test/document','<script>'),/&lt;script>/);
+  assert.ok(!source.includes('localStorage'));
 });
 
 test('fee calculator loads the backend tariff before enabling registration', async () => {

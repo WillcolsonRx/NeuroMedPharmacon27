@@ -2563,13 +2563,7 @@ button, input, select, textarea {
         </svg>
         <span>Share</span>
       </button>
-      <a href="/admin.html" target="_blank" class="btn-secretariat" title="Open Secretariat & Mail Center">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-        </svg>
-        <span>Secretariat</span>
-      </a>
+
       <a href="#registration" class="btn-primary-action">
         <span class="reg-label-full">Register Delegate</span>
         <span class="reg-label-short">Register</span>
@@ -2602,7 +2596,7 @@ button, input, select, textarea {
         Share Conference
       </button>
       <a href="#registration" class="btn-primary-action text-center flex-grow-1" onclick="toggleMobileNav()">Register Delegate</a>
-      <a href="/admin.html" target="_blank" class="btn-secretariat text-center">Secretariat</a>
+
     </div>
   </div>
 </div>
@@ -4081,9 +4075,7 @@ button, input, select, textarea {
       <div class="d-flex gap-3 align-items-center">
         <span>Govt. of India Act No. 13 of 1998</span>
         <span>·</span>
-        <button onclick="openAdminModal()" style="background:transparent; border:none; color:var(--text-dark-muted); font-size:0.8rem; cursor:pointer;">
-          Secretariat Admin Login
-        </button>
+
       </div>
     </div>
 
@@ -4236,103 +4228,6 @@ button, input, select, textarea {
       </div>
 
     </form>
-  </div>
-</div>
-
-<!-- ==========================================================================
-     SECRETARIAT ADMIN CONSOLE MODAL
-     ========================================================================== -->
-<div class="custom-modal-backdrop" id="adminModal">
-  <div class="custom-modal-dialog admin-wide">
-    <button class="modal-close-btn" onclick="closeAdminModal()" aria-label="Close Admin Modal">&times;</button>
-    
-    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
-      <div>
-        <span class="editorial-kicker">Conference Secretariat Portal</span>
-        <h3 style="font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; margin: 0;">Live Enrolment &amp; Abstract Registry</h3>
-      </div>
-      <div class="d-flex gap-2">
-        <button class="btn-primary-action" onclick="exportRegistrationsCsv()" style="font-size: 0.8rem; padding: 0.4rem 0.85rem;">
-          Export Registrations CSV
-        </button>
-      </div>
-    </div>
-
-    <!-- Token auth input strip if needed -->
-    <div class="d-flex gap-2 align-items-center mb-3">
-      <input type="password" id="adminTokenInput" class="calc-input" placeholder="Secretariat Access Token" value="niper-secretariat-2027" style="max-width: 260px;">
-      <button class="btn-primary-action" onclick="fetchAdminData()" style="padding: 0.5rem 1rem;">Load Records</button>
-      <input type="text" id="adminFilterInput" class="calc-input" placeholder="Filter records by name..." oninput="filterAdminTable()" style="max-width: 260px;">
-    </div>
-
-    <!-- Admin Tabs -->
-    <div class="d-flex gap-2 mb-3">
-      <button class="track-filter-btn active" id="tabRegBtn" onclick="switchAdminTab('reg')">Registrations (<span id="regCount">0</span>)</button>
-      <button class="track-filter-btn" id="tabAbsBtn" onclick="switchAdminTab('abs')">Abstracts (<span id="absCount">0</span>)</button>
-      <button class="track-filter-btn" id="tabSponBtn" onclick="switchAdminTab('spon')">Sponsorships (<span id="sponCount">0</span>)</button>
-    </div>
-
-    <!-- Registrations Table -->
-    <div id="adminRegWrap" style="overflow-x: auto; max-height: 380px;">
-      <table class="tariff-table" id="adminRegTable">
-        <thead>
-          <tr>
-            <th>Ref ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Category</th>
-            <th>Workshop</th>
-            <th class="tar-amt">Amount</th>
-            <th>Proof / UTR</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody id="adminRegBody">
-          <tr><td colspan="8" class="text-center text-muted py-3">Click 'Load Records' to fetch registrations</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Abstracts Table -->
-    <div id="adminAbsWrap" style="overflow-x: auto; max-height: 380px; display: none;">
-      <table class="tariff-table" id="adminAbsTable">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Author</th>
-            <th>Email</th>
-            <th>Track / Category</th>
-            <th>Title</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody id="adminAbsBody">
-          <tr><td colspan="6" class="text-center text-muted py-3">Click 'Load Records' to fetch abstracts</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Sponsorships Table -->
-    <div id="adminSponWrap" style="overflow-x: auto; max-height: 380px; display: none;">
-      <table class="tariff-table" id="adminSponTable">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Company</th>
-            <th>Contact Person</th>
-            <th>Email / Phone</th>
-            <th>Tier</th>
-            <th class="tar-amt">Amount</th>
-            <th>Notes</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody id="adminSponBody">
-          <tr><td colspan="8" class="text-center text-muted py-3">Click 'Load Records' to fetch sponsorships</td></tr>
-        </tbody>
-      </table>
-    </div>
-
   </div>
 </div>
 
@@ -5469,191 +5364,6 @@ function triggerPDFDownload(event, type) {
       // Fallback allows default browser download link to proceed
     }
   }
-}
-
-// ==========================================================================
-// SECRETARIAT ADMIN CONSOLE LOGIC
-// ==========================================================================
-function openAdminModal() {
-  document.getElementById('adminModal').style.display = 'flex';
-  fetchAdminData();
-}
-
-function closeAdminModal() {
-  document.getElementById('adminModal').style.display = 'none';
-}
-
-async function fetchAdminData() {
-  const token = document.getElementById('adminTokenInput').value.trim();
-  if (!token) {
-    alert('Please provide Secretariat Access Token');
-    return;
-  }
-
-  try {
-    // 1. Fetch Registrations
-    const regRes = await fetch(`/api/admin/registrations?token=${encodeURIComponent(token)}`);
-    if (regRes.status === 403) {
-      alert('Forbidden: Invalid Secretariat Token');
-      return;
-    }
-    adminRegistrationsCache = await regRes.json();
-    document.getElementById('regCount').textContent = adminRegistrationsCache.length;
-    renderAdminRegTable(adminRegistrationsCache);
-
-    // 2. Fetch Abstracts
-    const absRes = await fetch(`/api/admin/abstracts?token=${encodeURIComponent(token)}`);
-    if (absRes.ok) {
-      adminAbstractsCache = await absRes.json();
-      document.getElementById('absCount').textContent = adminAbstractsCache.length;
-      renderAdminAbsTable(adminAbstractsCache);
-    }
-
-    // 3. Fetch Sponsorships
-    const sponRes = await fetch(`/api/admin/sponsorships?token=${encodeURIComponent(token)}`);
-    if (sponRes.ok) {
-      adminSponsorshipsCache = await sponRes.json();
-      document.getElementById('sponCount').textContent = adminSponsorshipsCache.length;
-      renderAdminSponTable(adminSponsorshipsCache);
-    }
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-function renderAdminRegTable(list) {
-  const tbody = document.getElementById('adminRegBody');
-  if (!list.length) {
-    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-3">No registrations found</td></tr>';
-    return;
-  }
-  let html = '';
-  list.forEach(r => {
-    const proofCell = r.payment_proof ? 
-      `<a href="${r.payment_proof}" target="_blank" download="PaymentProof_${r.ref_id || r.id}.png" style="color:var(--accent-gold); font-weight:600; text-decoration:underline; font-size:0.78rem;">📎 Proof</a><div style="font-size:0.68rem; color:#64748b;">${escapeHtml(r.payment_ref || '')}</div>` : 
-      `<span style="color:#94a3b8; font-size:0.75rem;">${escapeHtml(r.payment_ref || 'Direct')}</span>`;
-    html += `
-      <tr>
-        <td style="font-family: var(--font-mono); font-weight:600; font-size:0.8rem;">${r.ref_id || '#' + r.id}</td>
-        <td><strong>${escapeHtml(r.full_name)}</strong></td>
-        <td>${escapeHtml(r.email)}</td>
-        <td><span style="font-family:var(--font-mono); font-size:0.8rem;">${escapeHtml(r.category)}</span></td>
-        <td>${r.workshop ? 'Yes' : 'No'}</td>
-        <td class="tar-amt">${r.currency === 'USD' ? '$' : '₹'}${Number(r.amount).toLocaleString()}</td>
-        <td>${proofCell}</td>
-        <td style="font-size:0.75rem; color:#64748b;">${r.created_at || ''}</td>
-      </tr>
-    `;
-  });
-  tbody.innerHTML = html;
-}
-
-function renderAdminAbsTable(list) {
-  const tbody = document.getElementById('adminAbsBody');
-  if (!list.length) {
-    tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-3">No abstracts submitted yet</td></tr>';
-    return;
-  }
-  let html = '';
-  list.forEach(a => {
-    html += `
-      <tr>
-        <td style="font-family: var(--font-mono); font-weight:600;">#${a.id}</td>
-        <td><strong>${escapeHtml(a.full_name)}</strong></td>
-        <td>${escapeHtml(a.email)}</td>
-        <td><span style="font-size:0.82rem;">${escapeHtml(a.category)}</span></td>
-        <td>${escapeHtml(a.title)}${a.document_path ? `<br><a href="${escapeHtml(a.document_path)}" target="_blank" rel="noopener">Download ${escapeHtml(a.document_filename || 'Word abstract')}</a>` : ''}</td>
-        <td style="font-size:0.75rem; color:#64748b;">${a.created_at || ''}</td>
-      </tr>
-    `;
-  });
-  tbody.innerHTML = html;
-}
-
-function renderAdminSponTable(list) {
-  const tbody = document.getElementById('adminSponBody');
-  if (!list.length) {
-    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-3">No sponsorship inquiries yet</td></tr>';
-    return;
-  }
-  let html = '';
-  list.forEach(s => {
-    html += `
-      <tr>
-        <td style="font-family: var(--font-mono); font-weight:600;">#${s.id}</td>
-        <td><strong>${escapeHtml(s.company_name)}</strong></td>
-        <td>${escapeHtml(s.contact_person)}</td>
-        <td>${escapeHtml(s.email)}<br><small style="color:#64748b;">${escapeHtml(s.phone)}</small></td>
-        <td><span style="font-family:var(--font-mono); font-weight:600; color:var(--accent-gold);">${escapeHtml(s.tier)}</span></td>
-        <td class="tar-amt">₹${Number(s.amount).toLocaleString()}</td>
-        <td style="font-size:0.78rem; max-width:200px; color:#475569;">${escapeHtml(s.notes || '—')}</td>
-        <td style="font-size:0.75rem; color:#64748b;">${s.created_at || ''}</td>
-      </tr>
-    `;
-  });
-  tbody.innerHTML = html;
-}
-
-function filterAdminTable() {
-  const query = document.getElementById('adminFilterInput').value.toLowerCase();
-  const filteredReg = adminRegistrationsCache.filter(r => 
-    (r.full_name && r.full_name.toLowerCase().includes(query)) ||
-    (r.email && r.email.toLowerCase().includes(query)) ||
-    (r.category && r.category.toLowerCase().includes(query))
-  );
-  renderAdminRegTable(filteredReg);
-
-  const filteredSpon = adminSponsorshipsCache.filter(s =>
-    (s.company_name && s.company_name.toLowerCase().includes(query)) ||
-    (s.contact_person && s.contact_person.toLowerCase().includes(query)) ||
-    (s.tier && s.tier.toLowerCase().includes(query))
-  );
-  renderAdminSponTable(filteredSpon);
-}
-
-function switchAdminTab(tab) {
-  const regBtn = document.getElementById('tabRegBtn');
-  const absBtn = document.getElementById('tabAbsBtn');
-  const sponBtn = document.getElementById('tabSponBtn');
-  const regWrap = document.getElementById('adminRegWrap');
-  const absWrap = document.getElementById('adminAbsWrap');
-  const sponWrap = document.getElementById('adminSponWrap');
-
-  regBtn.classList.remove('active');
-  absBtn.classList.remove('active');
-  if (sponBtn) sponBtn.classList.remove('active');
-  regWrap.style.display = 'none';
-  absWrap.style.display = 'none';
-  if (sponWrap) sponWrap.style.display = 'none';
-
-  if (tab === 'reg') {
-    regBtn.classList.add('active');
-    regWrap.style.display = 'block';
-  } else if (tab === 'abs') {
-    absBtn.classList.add('active');
-    absWrap.style.display = 'block';
-  } else if (tab === 'spon') {
-    if (sponBtn) sponBtn.classList.add('active');
-    if (sponWrap) sponWrap.style.display = 'block';
-  }
-}
-
-function exportRegistrationsCsv() {
-  if (!adminRegistrationsCache.length) {
-    alert('No registration data available to export.');
-    return;
-  }
-  let csv = 'ID,Full Name,Email,Phone,Category,Tier,Workshop,Amount,Currency,Created At\n';
-  adminRegistrationsCache.forEach(r => {
-    csv += `"${r.id}","${(r.full_name||'').replace(/"/g, '""')}","${r.email}","${r.phone||''}","${r.category}","${r.tier}","${r.workshop}","${r.amount}","${r.currency}","${r.created_at}"\n`;
-  });
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `IPS_NorthZone_2027_Registrations_${new Date().toISOString().slice(0,10)}.csv`;
-  a.click();
-  URL.revokeObjectURL(url);
 }
 
 function escapeHtml(str) {

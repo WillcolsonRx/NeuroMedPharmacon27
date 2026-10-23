@@ -151,3 +151,11 @@ sponsorships show a zero provisional total pending an agreed quotation.
 Both flows wait for both mail attempts and report separate recipient statuses.
 A mail failure does not undo a saved submission; do not resubmit to retry mail.
 Live SMTP delivery still requires checking real inboxes and function mail logs.
+
+## Secured Secretariat and abstract decision campaigns
+
+The shared-token production dashboard has been replaced by `/secretariat`, using
+approved Supabase Auth accounts and MFA. Follow `SECRETARIAT_SETUP.md` for the
+migration, staff approvals, required APP_URL, SMTP queue configuration and Supabase
+Cron schedule. The queue starts paused. There is no paid upgrade or account creation
+automated by this repository. Public submissions continue using existing SMTP.
