@@ -2549,6 +2549,24 @@ button, input, select, textarea {
   .conference-leadership-card { scroll-snap-align: start; }
   .committee-scroll-hint { display: block; color: #cbd5e1; font-size: .8rem; }
 }
+
+/* Institutional hero lockup; effects surround the original artwork. */
+.hero-title-lockup { display: grid; grid-template-columns: 96px minmax(0,1fr) 168px; align-items: center; gap: clamp(.8rem,1.8vw,1.5rem); width: 100%; margin: 1.5rem auto 1.7rem; isolation: isolate; }
+.hero-title-text { min-width: 0; container-type: inline-size; }
+.hero-title-lockup .hero-main-title { margin: 0; white-space: nowrap; text-wrap: nowrap; font-size: clamp(.72rem,4vw,3.65rem); font-size: clamp(.72rem,6.6cqw,3.65rem); }
+.hero-logo-frame { position: relative; display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 106px; padding: 8px; border-radius: 12px; background: #fff; border: 1px solid rgba(226,196,119,.8); box-shadow: 0 0 22px rgba(203,162,52,.18); transition: transform .25s ease, box-shadow .25s ease; }
+.hero-logo-frame::before,.hero-logo-frame::after { content: ''; position: absolute; pointer-events: none; border-radius: 17px; }
+.hero-logo-frame::before { inset: -7px; border: 1px solid rgba(226,196,119,.4); box-shadow: 0 0 18px rgba(203,162,52,.13); animation: institutional-halo 4s ease-in-out infinite; }
+.hero-logo-frame::after { inset: -12px; border: 1px solid rgba(226,196,119,.13); }
+.hero-logo-ips::before { animation-delay: -2s; border-color: rgba(125,190,230,.4); box-shadow: 0 0 18px rgba(125,190,230,.13); }
+.hero-logo-frame img { display: block; width: 100%; height: auto; max-height: 100px; object-fit: contain; }
+.hero-logo-frame:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(203,162,52,.3); }
+.hero-logo-frame:focus-visible { outline: 3px solid #e2c477; outline-offset: 11px; }
+@keyframes institutional-halo { 0%,100% { opacity: .5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.035); } }
+@media (max-width: 900px) { .hero-title-lockup { grid-template-columns: 72px minmax(0,1fr) 128px; gap: 1rem; } .hero-logo-frame { min-height: 82px; padding: 6px; } }
+@media (max-width: 600px) { .hero-title-lockup { grid-template-columns: 40px minmax(0,1fr) 72px; gap: .4rem; margin-top: 1.3rem; } .hero-logo-frame { min-height: 54px; padding: 3px; border-radius: 6px; } .hero-logo-frame::before { inset: -3px; border-radius: 9px; } .hero-logo-frame::after { inset: -6px; border-radius: 12px; } }
+@media (prefers-reduced-motion: reduce) { .hero-logo-frame::before { animation: none; } .hero-logo-frame { transition: none; } .hero-logo-frame:hover { transform: none; } }
+
 </style>
 </head>
 <body>
@@ -2561,12 +2579,6 @@ button, input, select, textarea {
     
     <!-- Zone 1: Single Wordmark / Brand Entity -->
     <a href="#" class="brand-lockup" aria-label="NeuroMet Pharmacon-2027 Homepage">
-      <div class="brand-emblem-cluster">
-        <!-- Official NIPER-Raebareli Logo (Larger & Crisp) -->
-        <img src="https://niperraebareli.edu.in/images/logo.png" referrerpolicy="no-referrer" alt="NIPER Raebareli Official Emblem" class="brand-logo-niper" onerror="this.onerror=null;this.src='/assets/logos/niper_logo.png'">
-        <!-- Official IPS Logo (Larger & High-Contrast) -->
-        <img src="/assets/logos/ips_logo.png" alt="Indian Pharmacological Society Official Logo" class="brand-logo-ips">
-      </div>
       <div class="brand-text-group">
         <span class="brand-title">NeuroMet Pharmacon-2027</span>
         <span class="brand-subtitle">NIPER-Raebareli · in collaboration with Indian Pharmacological Society</span>
@@ -2648,10 +2660,16 @@ button, input, select, textarea {
       <span>NIPER-Raebareli · In Collaboration with Indian Pharmacological Society (IPS)</span>
     </div>
 
-    <!-- Major Regional Congress Title -->
-    <h1 class="hero-main-title">
-      NeuroMet Pharmacon-2027
-    </h1>
+    <!-- Official institutional logos frame the conference title. -->
+    <div class="hero-title-lockup">
+      <a class="hero-logo-frame hero-logo-niper" href="https://niperraebareli.edu.in/" target="_blank" rel="noopener noreferrer" aria-label="NIPER-Raebareli official website">
+        <img src="https://niperraebareli.edu.in/images/logo.png" referrerpolicy="no-referrer" alt="NIPER-Raebareli official logo" onerror="this.onerror=null;this.src='/assets/logos/niper_logo.png'">
+      </a>
+      <div class="hero-title-text"><h1 class="hero-main-title">NeuroMet Pharmacon-2027</h1></div>
+      <div class="hero-logo-frame hero-logo-ips">
+        <img src="/assets/logos/ips_logo.png" alt="Indian Pharmacological Society official logo">
+      </div>
+    </div>
 
     <div class="hero-congress-badge">
       IN COLLABORATION WITH <span>· INDIAN PHARMACOLOGICAL SOCIETY</span>
