@@ -36,7 +36,7 @@ function renderRows(){
   $('recordBody').innerHTML=state.rows.map(row=>`<tr><td>${escape(row.recipient)}</td><td>${escape(row.type)}<br>${escape(row.ref_id)}</td><td>${escape(row.status)}</td><td>${escape(row.error_msg || row.message_id)}</td></tr>`).join('');
  }else{
   $('recordHead').innerHTML='<tr><th>Name / Reference</th><th>Email</th><th>Category / Tier</th><th>Amount</th><th>Payment proof · requires bank verification</th></tr>';
-  $('recordBody').innerHTML=state.rows.map(row=>`<tr><td>${escape(row.full_name||row.company_name)}<br>${escape(row.ref_id)}</td><td>${escape(row.email)}</td><td>${escape(row.category||row.tier)}</td><td>INR ${Number(row.amount).toLocaleString('en-IN')}</td><td>${escape(row.payment_ref||'Unpaid inquiry')}<br>${fileLink(row.payment_proof,'Open proof')}</td></tr>`).join('');
+  $('recordBody').innerHTML=state.rows.map(row=>`<tr><td>${escape(row.full_name||row.company_name)}<br>${escape(row.affiliation||'')}<br>${escape(row.ref_id)}</td><td>${escape(row.email)}</td><td>${escape(row.category||row.tier)}</td><td>INR ${Number(row.amount).toLocaleString('en-IN')}</td><td>${escape(row.payment_ref||'Unpaid inquiry')}<br>${fileLink(row.payment_proof,'Open proof')}</td></tr>`).join('');
  }
  updateSelection();
 }

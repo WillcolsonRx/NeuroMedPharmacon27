@@ -159,3 +159,26 @@ approved Supabase Auth accounts and MFA. Follow `SECRETARIAT_SETUP.md` for the
 migration, staff approvals, required APP_URL, SMTP queue configuration and Supabase
 Cron schedule. The queue starts paused. There is no paid upgrade or account creation
 automated by this repository. Public submissions continue using existing SMTP.
+
+## Delegate affiliation and inclusive registration fees
+
+Before deploying this update to an existing project, run
+`supabase/migrations/20261026_registration_affiliation.sql` in the Supabase SQL Editor.
+New projects have the affiliation column in the base schema. This preserves all old
+registrations and amounts; no historical payments are recalculated.
+
+Delegates enter their name, affiliation, email and phone before choosing a category.
+Standard delegate prices already include GST: no additional percentage is added.
+The optional workshop adds only its listed INR 500. Sponsorship pricing is unchanged.
+
+The fourth category, In-house students (INR 2,000 in every registration tier), is
+shown only when the entered affiliation matches NIPER-Raebareli aliases, including
+NIPER-R, NIPER Raebareli and the full institutional name. Changing to a different
+affiliation removes the option and resets an in-house selection to the standard
+student category. The server independently checks affiliation, allowed categories
+and payable amounts; it ignores client-provided totals. Affiliation is recorded
+and included in receipts, registration email and staff records.
+
+This is self-declared affiliation, not identity verification. Secretariat staff must
+verify in-house student status before confirming eligibility. Hiding a dropdown
+option does not make a fee secret or establish student identity.

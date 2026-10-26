@@ -10,6 +10,11 @@ test('PostgreSQL review workflow: paging, permissions, stale reviews, dedupe, le
  const schema=fs.readFileSync(path.join(__dirname,'../supabase/schema.sql'),'utf8');
  const migration=fs.readFileSync(path.join(__dirname,'../supabase/migrations/20261023_secretariat.sql'),'utf8');
  await db.exec(schema);await db.exec(migration);await db.exec(migration);
+ await db.exec("insert into registrations(full_name,email,category,tier,amount) values('Existing Delegate','existing@example.test','student','early',4130);alter table registrations drop column affiliation;");
+ const affiliationMigration=fs.readFileSync(path.join(__dirname,'../supabase/migrations/20261026_registration_affiliation.sql'),'utf8');
+ await db.exec(affiliationMigration);await db.exec(affiliationMigration);
+ const legacy=await db.query('select amount,affiliation from registrations');assert.equal(Number(legacy.rows[0].amount),4130);assert.equal(legacy.rows[0].affiliation,'');
+
  const actor='00000000-0000-4000-8000-000000000001';
  const call=async(name,values,casts)=>{const result=await db.query(`select public.${name}(${values.map((v,i)=>'$'+(i+1)+(casts?.[i]?'::'+casts[i]:'')).join(',')}) as result`,values);return result.rows[0].result;};
  await db.exec("insert into abstracts(full_name,email,title,body,ref_id) select 'Author '||i,'author'||i||'@example.test','Study '||i,'','ABS-'||i from generate_series(1,501) i;");

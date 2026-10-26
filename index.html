@@ -54,7 +54,7 @@
     {
       "@type": "Offer",
       "name": "Research Scholar / PG Student Registration (Incl. 18% Institutional GST)",
-      "price": "4130",
+      "price": "3500",
       "priceCurrency": "INR",
       "availability": "https://schema.org/InStock",
       "url": "/#registration"
@@ -62,7 +62,7 @@
     {
       "@type": "Offer",
       "name": "Faculty / Academic Scientist Registration (Incl. 18% Institutional GST)",
-      "price": "5310",
+      "price": "4500",
       "priceCurrency": "INR",
       "availability": "https://schema.org/InStock",
       "url": "/#registration"
@@ -70,7 +70,7 @@
     {
       "@type": "Offer",
       "name": "Corporate / Industry Delegate Registration (Incl. 18% Institutional GST)",
-      "price": "7080",
+      "price": "6000",
       "priceCurrency": "INR",
       "availability": "https://schema.org/InStock",
       "url": "/#registration"
@@ -3081,58 +3081,26 @@ button, input, select, textarea {
           </tbody>
         </table>
         <p style="font-size: 0.78rem; color: #64748b; margin-top: 0.85rem; line-height: 1.4;">
-          Tariffs + 18% GST Included
+          Tariffs + 18% GST Included — no additional GST is added to the listed registration fees.
         </p>
       </div>
 
       <!-- Right: Real-Time Working Registration Form -->
       <div class="calc-widget-card" id="registrationFormCard">
         <h3 class="calc-title">Delegate Enrolment Portal</h3>
-        <p class="calc-subtitle">Select your delegate category, review applicable fees, enter details, and complete your registration.</p>
+        <p class="calc-subtitle">Enter your details and affiliation, select your delegate category, review the payable fee, and complete your registration.</p>
 
         <form id="registrationForm" onsubmit="handleRegistrationSubmit(event)">
           
-          <!-- STAGE 1: TARIFF & CATEGORY ASSESSMENT -->
-          <div class="calc-field">
-            <label class="calc-label">Select Delegate Category *</label>
-            <select class="calc-select" id="regCategory" onchange="recalculateTariff()" required>
-              <option value="student">Research Scholar / PG Student — ₹3,500 (Total ₹4,130 incl. 18% GST)</option>
-              <option value="faculty">Faculty / Academic Scientist — ₹4,500 (Total ₹5,310 incl. 18% GST)</option>
-              <option value="corporate">Corporate / Industry Delegate — ₹6,000 (Total ₹7,080 incl. 18% GST)</option>
-            </select>
-          </div>
-
-          <div class="calc-checkbox-row">
-            <input type="checkbox" id="regWorkshop" onchange="recalculateTariff()">
-            <label for="regWorkshop" style="cursor: pointer;">
-              Include post-conference workshop — 21 February (+₹500)
-            </label>
-          </div>
-
-          <!-- Total Summary Box (All Tariffs Inclusive of 18% Institutional GST) -->
-          <div class="calc-total-box" style="margin: 0.85rem 0 1.25rem 0;">
-            <div class="calc-total-row">
-              <span>Base Registration Fee:</span>
-              <span class="tabular-nums" id="summaryBase">₹3,500</span>
-            </div>
-            <div class="calc-total-row" id="rowWorkshop" style="display:none;">
-              <span>A workshop of Network Pharmacology:</span>
-              <span class="tabular-nums" id="summaryWorkshop">+₹500</span>
-            </div>
-            <div class="calc-total-row" id="rowGst">
-              <span>Institutional GST @ 18% (Included):</span>
-              <span class="tabular-nums" id="summaryGst">₹630</span>
-            </div>
-            <div class="calc-grand-total">
-              <span class="calc-grand-label">Total Payable Remittance (Incl. 18% GST):</span>
-              <span class="calc-grand-val" id="summaryGrandTotal" style="color: #0f172a;">₹4,130</span>
-            </div>
-          </div>
-
           <!-- Delegate Information -->
           <div class="calc-field">
             <label class="calc-label">Full Name &amp; Academic Title *</label>
             <input type="text" class="calc-input" id="regFullName" placeholder="e.g. Dr. Rajesh Sharma" required>
+          </div>
+
+          <div class="calc-field">
+            <label class="calc-label" for="regAffiliation">Institutional Affiliation *</label>
+            <input type="text" class="calc-input" id="regAffiliation" placeholder="Institution / university name" minlength="2" maxlength="300" oninput="recalculateTariff()" autocomplete="organization" required>
           </div>
 
           <div class="row g-2 mb-3">
@@ -3146,6 +3114,40 @@ button, input, select, textarea {
             </div>
           </div>
 
+          <!-- STAGE 1: TARIFF & CATEGORY ASSESSMENT -->
+          <div class="calc-field">
+            <label class="calc-label">Select Delegate Category *</label>
+            <select class="calc-select" id="regCategory" onchange="recalculateTariff()" required>
+              <option value="student">Research Scholar / PG Student — ₹3,500</option>
+              <option value="faculty">Faculty / Academic Scientist — ₹4,500</option>
+              <option value="corporate">Corporate / Industry Delegate — ₹6,000</option>
+            </select>
+            <p id="inHouseEligibility" hidden style="font-size:.82rem; color:#475569; margin-top:.6rem;">In-house student pricing is available for this affiliation. Student eligibility is subject to Secretariat verification.</p>
+          </div>
+
+          <div class="calc-checkbox-row">
+            <input type="checkbox" id="regWorkshop" onchange="recalculateTariff()">
+            <label for="regWorkshop" style="cursor: pointer;">
+              Include post-conference workshop — 21 February (+₹500)
+            </label>
+          </div>
+
+          <!-- Total Summary Box (All Tariffs Inclusive of 18% Institutional GST) -->
+          <div class="calc-total-box" style="margin: 0.85rem 0 1.25rem 0;">
+            <div class="calc-total-row">
+              <span>Registration Fee (GST Included):</span>
+              <span class="tabular-nums" id="summaryBase">₹3,500</span>
+            </div>
+            <div class="calc-total-row" id="rowWorkshop" style="display:none;">
+              <span>A workshop of Network Pharmacology:</span>
+              <span class="tabular-nums" id="summaryWorkshop">+₹500</span>
+            </div>
+            <div class="calc-grand-total">
+              <span class="calc-grand-label">Total Payable Remittance (Incl. 18% GST):</span>
+              <span class="calc-grand-val" id="summaryGrandTotal" style="color: #0f172a;">₹3,500</span>
+            </div>
+          </div>
+
           <!-- ==========================================================================
                SECURE PAYMENT VALIDATION COMPONENT
                ========================================================================== -->
@@ -3155,7 +3157,7 @@ button, input, select, textarea {
               <span style="font-size: 0.72rem; font-family: var(--font-mono); color: #16a34a; font-weight: 600;">Secretariat Official Remittance</span>
             </div>
             <p class="payment-box-subtitle">
-              Scan the UPI QR code below with any banking app (GPay / PhonePe / Paytm / BHIM) or transfer via NEFT/RTGS for the payable fee (<strong id="paymentRemitNotice" style="color:#0f172a;">₹4,130</strong>).
+              Scan the UPI QR code below with any banking app (GPay / PhonePe / Paytm / BHIM) or transfer via NEFT/RTGS for the payable fee (<strong id="paymentRemitNotice" style="color:#0f172a;">₹3,500</strong>).
             </p>
 
             <div class="payment-grid-2col">
@@ -4021,6 +4023,9 @@ button, input, select, textarea {
         <span id="receiptName" style="color:#0f172a;">Dr. Delegate</span>
       </div>
       <div class="d-flex justify-content-between mb-1">
+        <span style="color:#64748b;">Affiliation:</span><span id="receiptAffiliation" style="color:#0f172a;">—</span>
+      </div>
+      <div class="d-flex justify-content-between mb-1">
         <span style="color:#64748b;">Category:</span>
         <span id="receiptCategory" style="color:#0f172a;">Research Scholar / PG Student</span>
       </div>
@@ -4042,7 +4047,7 @@ button, input, select, textarea {
       </div>
       <div class="d-flex justify-content-between pt-2 border-top mt-2" style="font-size: 1rem;">
         <strong>Total Amount:</strong>
-        <strong id="receiptAmount" style="color:#0f172a;">₹4,130 INR</strong>
+        <strong id="receiptAmount" style="color:#0f172a;">₹3,500 INR</strong>
       </div>
     </div>
 
@@ -4221,6 +4226,7 @@ button, input, select, textarea {
 <!-- ==========================================================================
      VANILLA JAVASCRIPT: AUTONOMOUS BEHAVIOR & REGISTRATION CALCULATOR
      ========================================================================== -->
+<script src="/registration-pricing.js"></script>
 <script>
 // TARIFF DEFINITIONS
 const TARIFF_DATA = {
@@ -4386,40 +4392,24 @@ function preselectCategory(cat) {
 }
 
 function recalculateTariff() {
-  const category = document.getElementById('regCategory').value;
-  const includeWorkshop = document.getElementById('regWorkshop').checked;
-
-  const t = TARIFF_DATA[currentTier] || TARIFF_DATA.early;
-  const currencySymbol = '₹';
-
-  let baseAmount = t[category] || 3500;
-  let workshopFee = includeWorkshop ? (t.workshop || 500) : 0;
-  let subtotal = baseAmount + workshopFee;
-  let gstAmount = Math.round(subtotal * 0.18); // 18% Institutional GST included
-  let grandTotal = subtotal + gstAmount;
-
-  document.getElementById('summaryBase').textContent = currencySymbol + baseAmount.toLocaleString('en-IN');
-  
-  const wsRow = document.getElementById('rowWorkshop');
-  const wsVal = document.getElementById('summaryWorkshop');
-  if (includeWorkshop) {
-    wsRow.style.display = 'flex';
-    if (wsVal) wsVal.textContent = '+' + currencySymbol + workshopFee.toLocaleString('en-IN');
-  } else {
-    wsRow.style.display = 'none';
-  }
-
-  const gstRow = document.getElementById('rowGst');
-  if (gstRow) {
-    gstRow.style.display = 'flex';
-    document.getElementById('summaryGst').textContent = currencySymbol + gstAmount.toLocaleString('en-IN');
-  }
-
-  const totalStr = currencySymbol + grandTotal.toLocaleString('en-IN');
-  document.getElementById('summaryGrandTotal').textContent = totalStr;
-
-  const remitNotice = document.getElementById('paymentRemitNotice');
-  if (remitNotice) remitNotice.textContent = totalStr;
+  const select = document.getElementById('regCategory');
+  const affiliation = document.getElementById('regAffiliation').value;
+  const eligible = RegistrationPricing.isInHouseAffiliation(affiliation);
+  const prices = TARIFF_DATA[currentTier] || TARIFF_DATA.early;
+  const previous = select.value;
+  const categories = ['student','faculty','corporate',...(eligible ? ['inhouse_student'] : [])];
+  select.innerHTML = categories.map(category => `<option value="${category}">${RegistrationPricing.labels[category]} — ₹${Number(category === 'inhouse_student' ? 2000 : prices[category]).toLocaleString('en-IN')}</option>`).join('');
+  select.value = categories.includes(previous) ? previous : 'student';
+  document.getElementById('inHouseEligibility').hidden = !eligible;
+  const workshop = document.getElementById('regWorkshop').checked;
+  const amount = RegistrationPricing.registrationAmount({category:select.value,workshop,affiliation},prices);
+  const base = select.value === 'inhouse_student' ? 2000 : prices[select.value];
+  document.getElementById('summaryBase').textContent = '₹' + base.toLocaleString('en-IN');
+  document.getElementById('rowWorkshop').style.display = workshop ? 'flex' : 'none';
+  document.getElementById('summaryWorkshop').textContent = '+₹' + Number(prices.workshop ?? 500).toLocaleString('en-IN');
+  const total = '₹' + amount.toLocaleString('en-IN');
+  document.getElementById('summaryGrandTotal').textContent = total;
+  document.getElementById('paymentRemitNotice').textContent = total;
 }
 
 // Bank Details Copy Helper
@@ -4774,14 +4764,15 @@ async function handleRegistrationSubmit(e) {
   }
 
   const fullName = document.getElementById('regFullName').value.trim();
+  const affiliation = document.getElementById('regAffiliation').value.trim();
   const email = document.getElementById('regEmail').value.trim();
   const phone = document.getElementById('regPhone').value.trim();
   const category = document.getElementById('regCategory').value;
   const workshop = document.getElementById('regWorkshop').checked ? 1 : 0;
   const paymentRef = document.getElementById('regPaymentRef').value.trim() || 'Direct Portal Remittance';
 
-  if (!fullName || !email) {
-    alert('Please enter your full name and institutional email.');
+  if (!fullName || !email || affiliation.length < 2) {
+    alert('Please enter your full name, institutional email and affiliation.');
     return;
   }
 
@@ -4798,6 +4789,7 @@ async function handleRegistrationSubmit(e) {
         full_name: fullName,
         email: email,
         phone: phone,
+        affiliation: affiliation,
         category: category,
         workshop: workshop,
         payment_ref: paymentRef,
@@ -4830,7 +4822,8 @@ async function handleRegistrationSubmit(e) {
     const regIdStr = data.ref_id || ('NMP27-DEL-' + (1000 + (data.id || 1)));
     document.getElementById('receiptRegId').textContent = regIdStr;
     document.getElementById('receiptName').textContent = fullName;
-    const catLabel = category === 'student' ? 'Research Scholar / PG Student' : (category === 'faculty' ? 'Faculty / Academic Scientist' : 'Corporate / Industry Delegate');
+    document.getElementById('receiptAffiliation').textContent = data.affiliation || affiliation;
+    const catLabel = RegistrationPricing.labels[data.category || category];
     document.getElementById('receiptCategory').textContent = catLabel;
     document.getElementById('receiptTier').textContent = (data.tier || 'early').toUpperCase() + ' RATE';
     document.getElementById('receiptWorkshop').textContent = workshop ? 'Included (+₹500)' : 'Not Opted';
@@ -4868,7 +4861,7 @@ function downloadRegistrationReceipt() {
   let y = 50;
   const fields = [
     ['Registration ID', 'receiptRegId'], ['Delegate', 'receiptName'],
-    ['Category', 'receiptCategory'], ['Rate', 'receiptTier'],
+    ['Affiliation', 'receiptAffiliation'], ['Category', 'receiptCategory'], ['Rate', 'receiptTier'],
     ['Workshop', 'receiptWorkshop'], ['Transaction reference', 'receiptPaymentRef'],
     ['Total amount', 'receiptAmount']
   ];

@@ -69,11 +69,13 @@ test('Vercel registration persists records and proofs through Supabase and prote
     for(const [name,value] of Object.entries(previousEnv))if(value===undefined)delete process.env[name];else process.env[name]=value;
   });
   const base=`http://127.0.0.1:${server.address().port}`;
-  const registration=await previousFetch(base+'/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({full_name:'Test Delegate',email:'delegate@example.test',category:'student',payment_ref:'TEST-12345',payment_proof:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY44YAAAAASUVORK5CYII=',proof_filename:'test.png'})});
+  const registration=await previousFetch(base+'/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({full_name:'Test Delegate',email:'delegate@example.test',affiliation:'Example University',category:'student',payment_ref:'TEST-12345',payment_proof:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY44YAAAAASUVORK5CYII=',proof_filename:'test.png'})});
   assert.equal(registration.status,200);
   const data=await registration.json();
   assert.deepEqual(data.email_status,{delegate:'simulated',organizer:'simulated'});
   assert.equal(tables.registrations.length,1);
+  assert.equal(tables.registrations[0].affiliation,'Example University');
+  assert.equal(tables.registrations[0].amount,3500);
   assert.equal(tables.mail_logs.length,2);
   assert.equal(uploads.length,1);
   assert.match(tables.registrations[0].payment_proof,/^supabase:\/\//);

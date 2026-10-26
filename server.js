@@ -25,6 +25,7 @@ const {
 } = require('./paymentValidator');
 
 const {validateAbstractDocument,storeAbstractDocument,DOCUMENT_DIR} = require('./abstractDocument');
+const { registrationAmount } = require('./public/registration-pricing');
 const app = express();
 
 // Initialize Database (handles Vercel Serverless /tmp writable directory or InMemoryDb fallback)
@@ -113,6 +114,8 @@ CREATE TABLE IF NOT EXISTS mail_logs (
 );
 `);
 
+try { db.exec(`ALTER TABLE registrations ADD COLUMN affiliation TEXT NOT NULL DEFAULT '';`); } catch {}
+
 // Safe column migrations for existing databases
 try { db.exec(`ALTER TABLE registrations ADD COLUMN ref_id TEXT;`); } catch (e) {}
 try { db.exec(`ALTER TABLE registrations ADD COLUMN payment_ref TEXT;`); } catch (e) {}
@@ -131,9 +134,9 @@ for (const column of ['document_path TEXT','document_filename TEXT','document_mi
 }
 
 const TARIFF = {
-  early:   { student: 3500, faculty: 4500, corporate: 6000, workshop: 500 },
-  regular: { student: 4000, faculty: 5500, corporate: 7500, workshop: 500 },
-  spot:    { student: 4500, faculty: 6500, corporate: 9000, workshop: 500 }
+  early:   { student: 3500, inhouse_student: 2000, faculty: 4500, corporate: 6000, workshop: 500 },
+  regular: { student: 4000, inhouse_student: 2000, faculty: 5500, corporate: 7500, workshop: 500 },
+  spot:    { student: 4500, inhouse_student: 2000, faculty: 6500, corporate: 9000, workshop: 500 }
 };
 
 function currentTier(customDate) {
@@ -218,6 +221,7 @@ app.post(['/api/register', '/register'], async (req, res) => {
       full_name,
       email,
       phone,
+      affiliation,
       category,
       workshop,
       payment_ref,
@@ -225,20 +229,15 @@ app.post(['/api/register', '/register'], async (req, res) => {
       proof_filename
     } = req.body;
 
-    if (!full_name || !email || !category) {
-      return res.status(400).json({ error: 'Missing required fields: full name, email, and delegate category are required.' });
+    if (!full_name || !email || !category || typeof affiliation !== 'string' || affiliation.trim().length < 2 || affiliation.length > 300) {
+      return res.status(400).json({ error: 'Full name, email, institutional affiliation and delegate category are required.' });
     }
 
     const tier = currentTier();
     const t = TARIFF[tier] || TARIFF.early;
-    if (!(category in t)) {
-      return res.status(400).json({ error: 'Invalid delegate category.' });
-    }
-
-    let subtotal = t[category];
-    if (workshop) subtotal += (t.workshop || 500);
-    const gstAmount = Math.round(subtotal * 0.18);
-    const amount = subtotal + gstAmount;
+    let amount;
+    try { amount = registrationAmount({category,workshop,affiliation},t); }
+    catch (err) { return res.status(400).json({error:err.message}); }
     const currency = 'INR';
     const ref_id = generateRefId('DEL');
 
@@ -260,9 +259,9 @@ app.post(['/api/register', '/register'], async (req, res) => {
       INSERT INTO registrations (
         full_name, email, phone, category, tier, workshop,
         amount, currency, ref_id, payment_ref, payment_proof,
-        proof_filename, proof_mimetype, proof_size, proof_uploaded_at
+        proof_filename, proof_mimetype, proof_size, proof_uploaded_at, affiliation
       )
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     `).run(
       full_name,
       email,
@@ -278,7 +277,8 @@ app.post(['/api/register', '/register'], async (req, res) => {
       metadata.proof_filename,
       metadata.proof_mimetype,
       metadata.proof_size,
-      metadata.proof_uploaded_at
+      metadata.proof_uploaded_at,
+      affiliation.trim()
     );
 
     // Finish both delivery attempts before Vercel can suspend this invocation.
@@ -286,6 +286,7 @@ app.post(['/api/register', '/register'], async (req, res) => {
         full_name,
         email,
         phone: phone || '',
+        affiliation: affiliation.trim(),
         category,
         tier,
         workshop: Boolean(workshop),
@@ -304,6 +305,8 @@ app.post(['/api/register', '/register'], async (req, res) => {
       tier,
       amount,
       currency,
+      affiliation: affiliation.trim(),
+      category,
       payment_ref: validatedRef,
       payment_proof: payment_proof_url,
       proof_metadata: metadata,

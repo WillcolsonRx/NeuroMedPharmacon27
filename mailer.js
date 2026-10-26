@@ -162,6 +162,7 @@ async function sendMail(db, { to, subject, html, text, type = 'GENERAL', refId =
 }
 
 function formatCategoryName(cat) {
+  if (cat === 'inhouse_student') return 'In-house students';
   if (cat === 'student') return 'Research Scholar / PG Student';
   if (cat === 'faculty') return 'Faculty / Academic Scientist';
   if (cat === 'corporate') return 'Corporate / Industry Delegate';
@@ -171,8 +172,11 @@ function formatCategoryName(cat) {
 /**
  * EMAIL 1: Registration confirmation email sent to the delegate
  */
+function affiliationHtml(value) {
+  return String(value || 'Not supplied').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
 async function sendDelegateConfirmation(db, registration) {
-  const { full_name, email, category, tier, workshop, amount, currency, ref_id, payment_ref } = registration;
+  const { full_name, email, affiliation, category, tier, workshop, amount, currency, ref_id, payment_ref } = registration;
   const categoryLabel = formatCategoryName(category);
   const subject = `Registration Confirmation: NeuroMet Pharmacon-2027 [Ref: ${ref_id}]`;
 
@@ -214,6 +218,7 @@ async function sendDelegateConfirmation(db, registration) {
           </div>
 
           <table class="details-table">
+            <tr><td>Institutional Affiliation</td><td>${affiliationHtml(affiliation)}</td></tr>
             <tr>
               <td>Delegate Category</td>
               <td>${categoryLabel}</td>
@@ -267,6 +272,7 @@ Reference ID: ${ref_id}
 Dear ${full_name},
 
 Your registration for NeuroMet Pharmacon-2027 is confirmed.
+- Affiliation: ${affiliation || 'Not supplied'}
 - Category: ${categoryLabel}
 - Tier: ${(tier || 'early').toUpperCase()} RATE
 - A workshop of Network Pharmacology: ${workshop ? 'Included (+₹500)' : 'Not Included'}
@@ -293,7 +299,7 @@ Please present your Reference ID (${ref_id}) at registration desk for badge coll
 async function sendOrganizerNotification(db, registration) {
   const config = getSmtpConfig();
   const organizerEmail = config.organizerEmail;
-  const { full_name, email, phone, category, tier, workshop, amount, currency, ref_id, payment_ref, has_proof } = registration;
+  const { full_name, email, phone, affiliation, category, tier, workshop, amount, currency, ref_id, payment_ref, has_proof } = registration;
   const categoryLabel = formatCategoryName(category);
   const subject = `[New Registration] ${full_name} (${categoryLabel}) [Ref: ${ref_id}]`;
 
@@ -328,6 +334,7 @@ async function sendOrganizerNotification(db, registration) {
             <span class="item-label">Delegate Name:</span>
             <span class="item-val">${full_name}</span>
           </div>
+          <div class="item-row"><span class="item-label">Affiliation:</span><span class="item-val">${affiliationHtml(affiliation)}</span></div>
           <div class="item-row">
             <span class="item-label">Email Address:</span>
             <span class="item-val">${email}</span>
@@ -373,6 +380,7 @@ async function sendOrganizerNotification(db, registration) {
 New Delegate Registration - NeuroMet Pharmacon-2027
 Ref ID: ${ref_id}
 Name: ${full_name}
+Affiliation: ${affiliation || 'Not supplied'}
 Email: ${email}
 Phone: ${phone || 'N/A'}
 Category: ${categoryLabel}

@@ -52,10 +52,10 @@ Track 10: Toxicology & Safety Pharmacology
 ================================================================================
 BROCHURE REGISTRATION TARIFF (INR Inclusive of 18% GST):
 ================================================================================
-- Research Scholar / PG Student:          Base ₹ 3,500 + 18% GST = Total ₹ 4,130
-- Faculty & Academic Scientists:          Base ₹ 4,500 + 18% GST = Total ₹ 5,310
-- Corporate & Industry Delegates:         Base ₹ 6,000 + 18% GST = Total ₹ 7,080
-- A workshop of Network Pharmacology (21st February 2027): Base ₹ 500 (+ 18% GST = ₹ 590)
+- Research Scholar / PG Student:          ₹ 3,500 (GST included)
+- Faculty & Academic Scientists:          ₹ 4,500 (GST included)
+- Corporate & Industry Delegates:         ₹ 6,000 (GST included)
+- A workshop of Network Pharmacology (21st February 2027): ₹ 500 (GST included)
 
 ================================================================================
 KEY HIGHLIGHTS:

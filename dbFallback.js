@@ -75,6 +75,7 @@ class InMemoryDb {
             proof_mimetype: args[12],
             proof_size: args[13],
             proof_uploaded_at: args[14] || now,
+            affiliation: args[15] || '',
             created_at: now
           };
         } else if (tableName === 'abstracts') {

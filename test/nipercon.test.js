@@ -106,6 +106,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
         full_name: 'Test Scholar',
         email: 'scholar@example.com',
         phone: '1234567890',
+        affiliation: 'Example University',
         category: 'student',
         workshop: 1,
         payment_ref: 'SBI-UTR-998822334411',
@@ -123,7 +124,8 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
     assert.ok(regJson.proof_metadata);
     assert.equal(regJson.proof_metadata.proof_mimetype, 'image/png');
     assert.ok(regJson.proof_metadata.proof_size > 0);
-    assert.ok(regJson.amount > 0);
+    assert.equal(regJson.amount, 4000);
+    assert.equal(regJson.affiliation, 'Example University');
 
     // 3. POST /api/register - rejection when payment proof is missing
     const noProofRes = await fetch(`${baseUrl}/api/register`, {
@@ -132,6 +134,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
       body: JSON.stringify({
         full_name: 'Prof. Scientist',
         email: 'faculty@example.com',
+        affiliation: 'Example University',
         category: 'faculty',
         workshop: 0,
         payment_ref: 'UTR-MISSING-PROOF'
@@ -148,6 +151,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
       body: JSON.stringify({
         full_name: 'Prof. Scientist',
         email: 'faculty@example.com',
+        affiliation: 'Example University',
         category: 'faculty',
         workshop: 0,
         payment_ref: '   ',
@@ -163,6 +167,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
       body: JSON.stringify({
         full_name: 'Prof. Scientist',
         email: 'faculty@example.com',
+        affiliation: 'Example University',
         category: 'faculty',
         workshop: 0,
         payment_ref: 'SBI-UTR-882233',
@@ -195,6 +200,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
       body: JSON.stringify({
         full_name: 'Prof. Scientist',
         email: 'faculty@example.com',
+        affiliation: 'Example University',
         category: 'faculty',
         workshop: 0,
         payment_ref: 'HDFC-UTR-7788990011',
@@ -205,6 +211,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
     assert.equal(facultyRes.status, 200);
     const facultyJson = await facultyRes.json();
     assert.equal(facultyJson.currency, 'INR');
+    assert.equal(facultyJson.amount,4500);
     assert.deepEqual(facultyJson.email_status, { delegate: 'simulated', organizer: 'simulated' });
     assert.ok(facultyJson.ref_id && facultyJson.ref_id.startsWith('NMP27-DEL-'));
     assert.equal(facultyJson.payment_ref, 'HDFC-UTR-7788990011');
@@ -346,6 +353,16 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
       'SMTP_PASS',
       'ORGANIZER_EMAIL'
     ], 'Allowed variables must be exactly the specified 6 variables');
+
+    const proof='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY44YAAAAASUVORK5CYII=';
+    const inhouse={full_name:'In-house Student',email:'inhouse@example.test',affiliation:'NIPER-Raebareli',category:'inhouse_student',workshop:0,payment_ref:'INHOUSE-UTR-12345',payment_proof:proof,proof_filename:'proof.png',amount:1};
+    const register=body=>fetch(`${baseUrl}/api/register`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    assert.equal((await register({...inhouse,affiliation:'NIPER Mohali'})).status,400);
+    assert.equal((await register({...inhouse,category:'workshop'})).status,400);
+    assert.equal((await register({...inhouse,affiliation:''})).status,400);
+    const inhouseResponse=await register(inhouse);assert.equal(inhouseResponse.status,200);
+    const inhouseData=await inhouseResponse.json();assert.equal(inhouseData.amount,2000);assert.equal(inhouseData.affiliation,'NIPER-Raebareli');
+    const inhouseWorkshop=await register({...inhouse,workshop:1,payment_ref:'INHOUSE-UTR-67890'});assert.equal(inhouseWorkshop.status,200);assert.equal((await inhouseWorkshop.json()).amount,2500);
 
   } finally {
     testServer.close();
