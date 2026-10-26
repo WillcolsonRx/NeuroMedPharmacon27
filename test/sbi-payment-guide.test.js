@@ -1,0 +1,20 @@
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const vm=require('node:vm');
+const fs=require('node:fs');
+test('SBI walkthrough selects steps and bounds Back/Next without touching payment data',()=>{
+ const node=()=>({hidden:true,attrs:{},listeners:{},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this.attrs[k];},addEventListener(k,f){this.listeners[k]=f;}});
+ const steps=Array.from({length:5},node), buttons=Array.from({length:5},node);
+ const nodes=Object.fromEntries(['[data-guide-back]','[data-guide-next]','[data-guide-progress]','.sbi-walk-navigation','.sbi-walk-controls'].map(k=>[k,node()]));
+ const guide={classList:{add(){}},querySelector:s=>nodes[s],querySelectorAll:s=>s.includes(' > li')?steps:buttons};
+ vm.runInNewContext(fs.readFileSync('public/sbi-payment-guide.js','utf8'),{document:{querySelector:()=>guide}});
+ assert.deepEqual(steps.map(s=>s.hidden),[false,true,true,true,true]);
+ assert.equal(nodes['[data-guide-back]'].disabled,true);
+ nodes['[data-guide-next]'].listeners.click();
+ assert.equal(steps[1].hidden,false);assert.equal(buttons[1].attrs['aria-current'],'step');
+ buttons[4].listeners.click();
+ assert.equal(nodes['[data-guide-next]'].disabled,true);
+ assert.equal(nodes['[data-guide-progress]'].textContent,'Step 5 of 5');
+ nodes['[data-guide-back]'].listeners.click();assert.equal(steps[3].hidden,false);
+ assert.equal(nodes['.sbi-walk-navigation'].hidden,false);
+});

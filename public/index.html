@@ -1217,10 +1217,18 @@ button, input, select, textarea {
 .sbi-reference-example { border:1px dashed #7dd3fc; border-radius:8px; background:#f0f9ff; padding:.8rem; margin-top:.8rem; }
 .sbi-reference-example span,.sbi-reference-example small { display:block; color:#475569; font-size:.72rem; }
 .sbi-reference-example code { display:block; color:#075985; font-size:1.35rem; font-weight:700; margin:.3rem 0; }
-.sbi-guide-actions { display:grid; gap:.75rem; }
-.sbi-guide-return { padding:.75rem; border:1px solid #cbd5e1; border-radius:8px; background:#fff; color:#075985; font-weight:600; cursor:pointer; }
-.sbi-guide-return:focus-visible { outline:3px solid #d4a72c; outline-offset:3px; }
-.sbi-guide-note { margin:1rem 0 0; font-size:.72rem; }
+.sbi-walk-navigation:not([hidden]) { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:.35rem; margin:1.25rem 0; }
+.sbi-walk-navigation button { border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; padding:.65rem .1rem; font-size:1rem; font-weight:700; cursor:pointer; }
+.sbi-walk-navigation button span { display:block; font-size:.65rem; margin-top:.3rem; font-weight:500; }
+.sbi-walk-navigation button[aria-current="step"] { background:#075985; border-color:#075985; color:white; box-shadow:0 3px 10px #07598525; }
+.sbi-payment-guide.is-interactive .sbi-guide-steps { min-height:15rem; border:1px solid #e0f2fe; border-radius:10px; padding:1.25rem; background:linear-gradient(135deg,#f0f9ff,#fff); }
+.sbi-payment-guide.is-interactive .sbi-guide-steps li { padding:0; }
+.sbi-payment-guide.is-interactive .sbi-guide-steps li::before,.sbi-payment-guide.is-interactive .sbi-guide-steps li::after { display:none; }
+.sbi-walk-controls:not([hidden]) { display:flex; justify-content:space-between; align-items:center; gap:.5rem; }
+.sbi-walk-controls button { border:1px solid #cbd5e1; border-radius:8px; padding:.65rem .8rem; background:#fff; color:#075985; font-weight:600; cursor:pointer; }
+.sbi-walk-controls button:disabled { opacity:.45; cursor:default; }
+.sbi-walk-controls span { font-size:.75rem; color:#64748b; }
+.sbi-walk-navigation button:focus-visible,.sbi-walk-controls button:focus-visible { outline:3px solid #d4a72c; outline-offset:3px; }
 
 .tariff-matrix-card {
   background: #ffffff;
@@ -3088,19 +3096,26 @@ button, input, select, textarea {
       <aside class="sbi-payment-guide" aria-labelledby="sbiGuideTitle">
         <span class="sbi-guide-kicker">PAYMENT GUIDE</span>
         <h3 id="sbiGuideTitle">SBI Collect → Delegate enrolment</h3>
-        <p class="sbi-guide-intro">Keep this page open while you use the official institutional payment portal in another tab.</p>
+        <p class="sbi-guide-intro">Explore the five steps below. Keep this page open while using SBI Collect in another tab; its screens and category labels may vary.</p>
+        <nav class="sbi-walk-navigation" aria-label="Payment guide steps" hidden>
+          <button type="button" data-guide-step="0" aria-label="Step 1: Open portal">1<span>Portal</span></button>
+          <button type="button" data-guide-step="1" aria-label="Step 2: Conference fee">2<span>Fee</span></button>
+          <button type="button" data-guide-step="2" aria-label="Step 3: Check details">3<span>Details</span></button>
+          <button type="button" data-guide-step="3" aria-label="Step 4: Save DU reference">4<span>Receipt</span></button>
+          <button type="button" data-guide-step="4" aria-label="Step 5: Finish enrolment">5<span>Submit</span></button>
+        </nav>
         <ol class="sbi-guide-steps">
-          <li><strong>Open the NIPER-Raebareli portal</strong><p>Use the SBI Collect link below. Check that the institution shown is NIPER-Raebareli before proceeding.</p></li>
+          <li><strong>Open the NIPER-Raebareli portal</strong><p>Use the Pay via SBI Collect button in the enrolment payment section. Check that the institution shown is NIPER-Raebareli before proceeding.</p></li>
           <li><strong>Find the conference fee category</strong><p>Look for the conference fee option for NeuroMet Pharmacon-2027. If it is missing or unclear, contact the Secretariat before paying.</p></li>
           <li><strong>Enter your details and check the amount</strong><p>Follow SBI’s prompts. Use the same delegate details as this form and check the amount against your selected category and optional ₹600 workshop.</p></li>
           <li><strong>Save the payment confirmation</strong><p>After a successful payment, keep the SBI receipt and its Transaction/Reference ID starting with <strong>DU</strong>. Copy the full ID exactly as printed.</p><div class="sbi-reference-example"><span>SBI reference format</span><code>DU…</code><small>Illustration only — use your own receipt’s full ID.</small></div></li>
           <li><strong>Return here to finish enrolment</strong><p>Enter the DU reference in <strong>Transaction/Reference ID</strong>, attach your payment proof (maximum <strong>200 KB</strong>), then submit the delegate form. SBI payment alone does not submit your enrolment.</p></li>
         </ol>
-        <div class="sbi-guide-actions">
-          <a class="sbi-collect-link" href="https://sbcollect.sbi.bank.in/sbicollect/icollecthome.htm?corpID=4357359" target="_blank" rel="noopener noreferrer">Open SBI Collect ↗<small>Opens in a new tab</small></a>
-          <button type="button" class="sbi-guide-return" onclick="document.getElementById('regPaymentRef').focus()">Already paid? Enter reference →</button>
+        <div class="sbi-walk-controls" hidden>
+          <button type="button" data-guide-back>← Back</button>
+          <span data-guide-progress aria-live="polite"></span>
+          <button type="button" data-guide-next>Next →</button>
         </div>
-        <p class="sbi-guide-note">General guidance, not a recording of SBI’s screens. Category names and steps may vary on the payment portal.</p>
       </aside>
       </div>
 
@@ -5017,6 +5032,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+<script src="/sbi-payment-guide.js" defer></script>
 <script src="/conference-countdown.js" defer></script>
 </body>
 </html>
