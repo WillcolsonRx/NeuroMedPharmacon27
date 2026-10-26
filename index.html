@@ -1871,7 +1871,7 @@ button, input, select, textarea {
   background: linear-gradient(180deg, rgba(148, 163, 184, 0.10) 0%, #0b1a2d 100%);
 }
 
-.sponsor-tier-card.tier-bronze {
+.sponsor-tier-card.tier-support {
   border-color: #d97706;
   background: linear-gradient(180deg, rgba(217, 119, 6, 0.08) 0%, #0b1a2d 100%);
 }
@@ -3439,7 +3439,7 @@ button, input, select, textarea {
       </p>
     </div>
 
-    <!-- 4 Tier Cards: Platinum, Gold, Silver, Bronze -->
+    <!-- 4 Tier Cards: Platinum, Gold, Silver, Philanthropic Support -->
     <div class="sponsorship-cards-grid">
       
       <!-- Tier 1: Platinum Sponsor -->
@@ -3489,9 +3489,9 @@ button, input, select, textarea {
         <div class="sponsor-tier-header">
           <div class="sponsor-tier-name">Gold Sponsor</div>
           <div class="sponsor-price-box">
-            <span class="sponsor-price-val">Rs. 75,000</span>
+            <span class="sponsor-price-val">Rs. 50,000</span>
           </div>
-          <div class="sponsor-gst-note">Rs. 75,000 (+ 18% Institutional GST)</div>
+          <div class="sponsor-gst-note">Rs. 50,000 (+ 18% Institutional GST)</div>
         </div>
 
         <div class="sponsor-booth-spec" style="border-left-color: #f59e0b;">
@@ -3519,7 +3519,7 @@ button, input, select, textarea {
           </li>
         </ul>
 
-        <button type="button" class="btn-sponsor-inquire secondary" onclick="openSponsorshipModal('Gold', 75000)">
+        <button type="button" class="btn-sponsor-inquire secondary" onclick="openSponsorshipModal('Gold', 50000)">
           Book Gold &rarr;
         </button>
       </div>
@@ -3530,9 +3530,9 @@ button, input, select, textarea {
         <div class="sponsor-tier-header">
           <div class="sponsor-tier-name">Silver Sponsor</div>
           <div class="sponsor-price-box">
-            <span class="sponsor-price-val">Rs. 50,000</span>
+            <span class="sponsor-price-val">Rs. 25,000</span>
           </div>
-          <div class="sponsor-gst-note">Rs. 50,000 (+ 18% Institutional GST)</div>
+          <div class="sponsor-gst-note">Rs. 25,000 (+ 18% Institutional GST)</div>
         </div>
 
         <div class="sponsor-booth-spec" style="border-left-color: #94a3b8;">
@@ -3560,50 +3560,24 @@ button, input, select, textarea {
           </li>
         </ul>
 
-        <button type="button" class="btn-sponsor-inquire secondary" onclick="openSponsorshipModal('Silver', 50000)">
+        <button type="button" class="btn-sponsor-inquire secondary" onclick="openSponsorshipModal('Silver', 25000)">
           Book Silver &rarr;
         </button>
       </div>
 
-      <!-- Tier 4: Bronze Sponsor -->
-      <div class="sponsor-tier-card tier-bronze">
-        <span class="sponsor-featured-tag" style="background:#d97706; color:#ffffff;">Appreciative</span>
-        <div class="sponsor-tier-header">
-          <div class="sponsor-tier-name">Bronze Sponsor</div>
-          <div class="sponsor-price-box">
-            <span class="sponsor-price-val">Rs. 25,000</span>
-          </div>
-          <div class="sponsor-gst-note">Rs. 25,000 (+ 18% Institutional GST)</div>
-        </div>
-
-        <div class="sponsor-booth-spec" style="border-left-color: #d97706;">
-          <strong>Stall Allocation:</strong> No space for display
-        </div>
-
+      <!-- Voluntary philanthropic support -->
+      <div class="sponsor-tier-card tier-support">
+        <span class="sponsor-featured-tag">Voluntary Support</span>
+        <div class="sponsor-tier-name">Philanthropic Support</div>
+        <div class="sponsor-price-box"><span class="sponsor-price-val" style="font-size:1.8rem;">Custom contribution</span></div>
+        <div class="sponsor-gst-note">Amount agreed with the Secretariat</div>
+        <div class="sponsor-booth-spec">Support the conference’s academic activities in a personal or institutional capacity.</div>
         <ul class="sponsor-features-list">
-          <li class="sponsor-feature-row">
-            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#d97706;">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-            </svg>
-            <span><strong>Appreciative sponsorship</strong></span>
-          </li>
-          <li class="sponsor-feature-row">
-            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#d97706;">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-            </svg>
-            <span><strong>No space for display</strong></span>
-          </li>
-          <li class="sponsor-feature-row">
-            <svg class="sponsor-check-icon" viewBox="0 0 20 20" fill="currentColor" style="color:#d97706;">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-            </svg>
-            <span><strong>Only listed as a sponsor of the conference</strong></span>
-          </li>
+          <li class="sponsor-feature-row">One lunch and one dinner for one supporter</li>
+          <li class="sponsor-feature-row">No commercial deliverables, display booth or promotional commitments</li>
+          <li class="sponsor-feature-row">Delegate registration is separate; support is voluntary</li>
         </ul>
-
-        <button type="button" class="btn-sponsor-inquire secondary" onclick="openSponsorshipModal('Bronze', 25000)">
-          Book Bronze &rarr;
-        </button>
+        <button type="button" class="btn-sponsor-inquire secondary" onclick="openSponsorshipModal('Philanthropic', 0)">Discuss a contribution &rarr;</button>
       </div>
 
     </div>
@@ -4039,9 +4013,9 @@ button, input, select, textarea {
     <button class="modal-close-btn" onclick="closeSponsorshipModal()" aria-label="Close Sponsorship Modal">&times;</button>
     
     <div class="text-center mb-3">
-      <span class="editorial-kicker">Commercial Partnership Remittance</span>
-      <h3 style="font-family: var(--font-serif); font-size: 1.45rem; font-weight: 700; margin: 0;">Sponsorship &amp; Stall Booking</h3>
-      <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.25rem;">Select partnership tier and submit commercial details to connect with the Secretariat.</p>
+      <span class="editorial-kicker">Sponsorship &amp; Voluntary Support</span>
+      <h3 style="font-family: var(--font-serif); font-size: 1.45rem; font-weight: 700; margin: 0;">Sponsorship &amp; Support Inquiry</h3>
+      <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.25rem;">Choose sponsorship or voluntary support and share your details with the Secretariat.</p>
     </div>
 
     <form id="sponsorshipForm" onsubmit="handleSponsorshipSubmit(event)">
@@ -4051,9 +4025,9 @@ button, input, select, textarea {
         <label class="calc-label">Selected Partnership Tier *</label>
         <select class="calc-select" id="sponTierSelect" onchange="updateSponsorshipTariff()" required>
           <option value="Platinum">Platinum Sponsor — Rs. 100,000 (₹ 1,00,000)</option>
-          <option value="Gold">Gold Sponsor — Rs. 75,000 (₹ 75,000)</option>
-          <option value="Silver">Silver Sponsor — Rs. 50,000 (₹ 50,000)</option>
-          <option value="Bronze">Bronze Sponsor — Rs. 25,000 (₹ 25,000)</option>
+          <option value="Gold">Gold Sponsor — Rs. 50,000 (₹ 50,000)</option>
+          <option value="Silver">Silver Sponsor — Rs. 25,000 (₹ 25,000)</option>
+          <option value="Philanthropic">Philanthropic Support — contribution agreed with Secretariat</option>
           <option value="Custom">Custom Commercial Workshop / Symposium</option>
         </select>
       </div>
@@ -4077,7 +4051,7 @@ button, input, select, textarea {
       <!-- Company Fields -->
       <div id="sponFieldsSet">
         <div class="mb-3">
-          <label class="calc-label">Company / Institutional Entity Name *</label>
+          <label class="calc-label">Individual / Company / Institution Name *</label>
           <input type="text" class="calc-input" id="sponCompany" placeholder="e.g. Bharat Biotech / Waters India / Lupin Ltd" required>
         </div>
 
@@ -4087,7 +4061,7 @@ button, input, select, textarea {
             <input type="text" class="calc-input" id="sponContact" placeholder="e.g. Dr. Rajiv Sharma" required>
           </div>
           <div class="col-md-6">
-            <label class="calc-label">Corporate Email Address *</label>
+            <label class="calc-label">Email *</label>
             <input type="email" class="calc-input" id="sponEmail" placeholder="partnerships@company.com" required>
           </div>
         </div>
@@ -4098,7 +4072,7 @@ button, input, select, textarea {
             <input type="tel" class="calc-input" id="sponPhone" placeholder="+91 98765 43210" required>
           </div>
           <div class="col-md-6">
-            <label class="calc-label">Special Inclusions or Stall Preference</label>
+            <label class="calc-label">Message / Sponsorship Requirements</label>
             <input type="text" class="calc-input" id="sponNotes" placeholder="e.g. Central Foyer Stall P1 preference">
           </div>
         </div>
@@ -4108,7 +4082,7 @@ button, input, select, textarea {
           <input type="text" class="calc-input" id="sponPaymentRef" placeholder="Transaction/Reference ID">
           <label class="calc-label" for="sponPaymentProof">Payment Proof</label>
           <input type="file" class="calc-input" id="sponPaymentProof" accept=".png,.jpg,.jpeg,.webp,.pdf">
-          <p>If already paid, provide both the reference and proof (up to 200 KB). Bank confirmation is subject to Secretariat review. Custom sponsorships require an agreed quotation before payment.</p>
+          <p>If already paid, provide both the reference and proof (up to 200 KB). Bank confirmation is subject to Secretariat review. Philanthropic support is an inquiry only: agree the contribution and any applicable taxes with the Secretariat before payment. It includes one lunch and one dinner for one supporter, without commercial deliverables. Custom sponsorships also require an agreed quotation.</p>
         </div>
 
         <div class="d-flex justify-content-end gap-2">
@@ -4872,9 +4846,9 @@ let adminSponsorshipsCache = [];
 // ==========================================================================
 const SPONSORSHIP_PRICES = {
   Platinum: 100000,
-  Gold: 75000,
-  Silver: 50000,
-  Bronze: 25000,
+  Gold: 50000,
+  Silver: 25000,
+  Philanthropic: 0,
   Custom: 0
 };
 
@@ -4896,6 +4870,12 @@ function updateSponsorshipTariff() {
   const select = document.getElementById('sponTierSelect');
   const tier = select ? select.value : 'Platinum';
   const base = SPONSORSHIP_PRICES[tier] || 0;
+  const philanthropic = tier === 'Philanthropic';
+  const paymentRef = document.getElementById('sponPaymentRef');
+  const paymentProof = document.getElementById('sponPaymentProof');
+  if (philanthropic) { paymentRef.value = ''; paymentProof.value = ''; }
+  paymentRef.disabled = philanthropic;
+  paymentProof.disabled = philanthropic;
   const gst = base * 0.18;
   const total = base + gst;
 
@@ -4903,9 +4883,9 @@ function updateSponsorshipTariff() {
   const gstEl = document.getElementById('sponGstTariff');
   const totalEl = document.getElementById('sponGrandTariff');
 
-  if (baseEl) baseEl.textContent = base > 0 ? '₹ ' + base.toLocaleString() : 'Custom Quote';
-  if (gstEl) gstEl.textContent = gst > 0 ? '₹ ' + gst.toLocaleString() : 'Calculated on Quote';
-  if (totalEl) totalEl.textContent = total > 0 ? '₹ ' + total.toLocaleString() : 'Negotiated Rate';
+  if (baseEl) baseEl.textContent = base > 0 ? '₹ ' + base.toLocaleString() : 'Agreed with Secretariat';
+  if (gstEl) gstEl.textContent = gst > 0 ? '₹ ' + gst.toLocaleString() : (philanthropic ? 'Institution to confirm' : 'Calculated on Quote');
+  if (totalEl) totalEl.textContent = total > 0 ? '₹ ' + total.toLocaleString() : 'Pending agreement';
 }
 
 async function handleSponsorshipSubmit(event) {

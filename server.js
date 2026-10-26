@@ -352,13 +352,14 @@ app.post(['/api/contact', '/contact'], async (req, res) => {
   }
 });
 
-const SPONSORSHIP_PRICES = { Platinum:100000, Gold:75000, Silver:50000, Bronze:25000, Custom:0 };
+const SPONSORSHIP_PRICES = { Platinum:100000, Gold:50000, Silver:25000, Philanthropic:0, Custom:0 };
 app.post(['/api/sponsorship', '/sponsorship'], async (req, res) => {
   try {
     const { company_name, contact_person, email, phone, tier, notes, payment_ref, payment_proof, proof_filename } = req.body;
     if (!company_name || !contact_person || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '') || !Object.hasOwn(SPONSORSHIP_PRICES,tier)) {
       return res.status(400).json({ error: 'Valid company, contact, email and sponsorship tier are required' });
     }
+    if (tier === 'Philanthropic' && (payment_ref || payment_proof)) return res.status(400).json({error:'Please agree the contribution with the Secretariat before payment. Submit an inquiry without payment proof.'});
     const ref_id = generateRefId('SPON');
     const amount = Math.round(SPONSORSHIP_PRICES[tier] * 1.18);
     let proofUrl = '', validatedRef = '', attachments = [];

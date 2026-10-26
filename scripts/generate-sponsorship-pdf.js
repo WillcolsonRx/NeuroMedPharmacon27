@@ -79,25 +79,25 @@ function generateSponsorshipProspectusPDF() {
   doc.setFont('helvetica', 'normal');
   doc.text('Space for one display booth · Two complimentary registrations · Listed as sponsor of conference', 32, 200);
 
-  // Tier 2: Gold (Rs. 75,000)
+  // Tier 2: Gold (Rs. 50,000)
   doc.setFillColor(20, 40, 68);
   doc.roundedRect(25, 208, 160, 19, 2, 2, 'F');
   doc.setTextColor(203, 162, 52);
   doc.setFontSize(10.5);
   doc.setFont('helvetica', 'bold');
-  doc.text('GOLD SPONSOR — Rs. 75,000 (INR 75,000 + 18% GST)', 32, 216);
+  doc.text('GOLD SPONSOR — Rs. 50,000 (INR 50,000 + 18% GST)', 32, 216);
   doc.setFontSize(8);
   doc.setTextColor(220, 230, 245);
   doc.setFont('helvetica', 'normal');
   doc.text('Space for one display booth · One complimentary registration · Listed as sponsor of conference', 32, 222);
 
-  // Tier 3: Silver (Rs. 50,000)
+  // Tier 3: Silver (Rs. 25,000)
   doc.setFillColor(20, 40, 68);
   doc.roundedRect(25, 230, 160, 19, 2, 2, 'F');
   doc.setTextColor(203, 162, 52);
   doc.setFontSize(10.5);
   doc.setFont('helvetica', 'bold');
-  doc.text('SILVER SPONSOR — Rs. 50,000 (INR 50,000 + 18% GST)', 32, 238);
+  doc.text('SILVER SPONSOR — Rs. 25,000 (INR 25,000 + 18% GST)', 32, 238);
   doc.setFontSize(8);
   doc.setTextColor(220, 230, 245);
   doc.setFont('helvetica', 'normal');
@@ -109,11 +109,11 @@ function generateSponsorshipProspectusPDF() {
   doc.setTextColor(203, 162, 52);
   doc.setFontSize(10.5);
   doc.setFont('helvetica', 'bold');
-  doc.text('BRONZE SPONSOR — Rs. 25,000 (INR 25,000 + 18% GST)', 32, 260);
+  doc.text('PHILANTHROPIC SUPPORT — Contribution agreed with Secretariat', 32, 260);
   doc.setFontSize(8);
   doc.setTextColor(220, 230, 245);
   doc.setFont('helvetica', 'normal');
-  doc.text('Appreciative sponsorship · No space for display · Only listed as a sponsor of the conference', 32, 266);
+  doc.text('One lunch and one dinner for one supporter. No commercial deliverables; registration is separate.', 32, 266);
 
   doc.setFontSize(8);
   doc.setTextColor(148, 163, 184);
@@ -134,49 +134,26 @@ function generateSponsorshipProspectusPDF() {
 
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(13);
-  doc.text('COMPREHENSIVE DELIVERABLES & SPONSOR MATRIX', 105, 23, { align: 'center' });
+  doc.text('SPONSORSHIP & VOLUNTARY SUPPORT', 105, 23, { align: 'center' });
 
   let rY = 44;
   doc.setTextColor(15, 23, 42);
   doc.setFontSize(11);
-  doc.text('Deliverables & Benefits Comparison Table', 20, rY);
+  doc.text('Support options and inclusions', 20, rY);
 
-  rY += 6;
-  doc.setFillColor(241, 245, 249);
-  doc.rect(20, rY, 170, 8, 'F');
-  doc.setFontSize(8);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(15, 23, 42);
-  doc.text('Benefits / Entitlements', 23, rY + 5.5);
-  doc.text('Platinum (Rs. 1 Lakh)', 88, rY + 5.5);
-  doc.text('Gold (Rs. 75k)', 118, rY + 5.5);
-  doc.text('Silver (Rs. 50k)', 143, rY + 5.5);
-  doc.text('Bronze (Rs. 25k)', 168, rY + 5.5);
-
-  const matrix = [
-    ['Display Booth Allocation', 'Space for 1 booth', 'Space for 1 booth', 'Space for 1 booth', 'No display space'],
-    ['Complimentary Registration', '2 Registrations', '1 Registration', 'Complimentary', '—'],
-    ['Conference Sponsor Recognition', 'Listed as sponsor', 'Listed as sponsor', 'Listed as sponsor', 'Only listed sponsor'],
-    ['Official Category', 'Prime Sponsor', 'Leading Sponsor', 'Complimentary', 'Appreciative Sponsor']
-  ];
-
-  rY += 8;
+  // Philanthropic contributions have no commercial entitlements.
+  rY += 18;
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(7.5);
-  matrix.forEach((row, i) => {
-    if (i % 2 === 1) {
-      doc.setFillColor(248, 250, 252);
-      doc.rect(20, rY, 170, 7, 'F');
-    }
-    doc.setTextColor(30, 41, 59);
-    doc.text(row[0], 23, rY + 4.8);
-    doc.setTextColor(15, 23, 42);
-    doc.text(row[1], 88, rY + 4.8);
-    doc.text(row[2], 118, rY + 4.8);
-    doc.text(row[3], 143, rY + 4.8);
-    doc.text(row[4], 168, rY + 4.8);
-    rY += 7;
-  });
+  doc.setFontSize(9);
+  const summary = [
+    'Platinum: INR 100,000 + 18% GST; one booth, two registrations, sponsor listing.',
+    'Gold: INR 50,000 + 18% GST; one booth, one registration, sponsor listing.',
+    'Silver: INR 25,000 + 18% GST; one booth and sponsor listing.',
+    'Philanthropic support: custom contribution agreed with Secretariat; one lunch and one dinner',
+    'for one supporter. No commercial deliverables. Delegate registration is separate.',
+    'The institution will confirm the contribution amount and applicable tax treatment before payment.'
+  ];
+  summary.forEach(line => { doc.text(line, 23, rY); rY += 7; });
 
   // Terms & Payment Details
   rY += 8;

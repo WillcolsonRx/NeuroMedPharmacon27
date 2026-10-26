@@ -98,14 +98,20 @@ test('Vercel registration persists records and proofs through Supabase and prote
   const inquiry=await post('/api/sponsorship',{company_name:'Company',contact_person:'Contact',email:'sponsor@example.test',tier:'Gold',amount:1});
   assert.equal(inquiry.status,200);
   const inquiryData=await inquiry.json();
-  assert.equal(inquiryData.amount,88500);
+  assert.equal(inquiryData.amount,59000);
   assert.deepEqual(inquiryData.email_status,{delegate:'simulated',organizer:'simulated'});
+  const support=await post('/api/sponsorship',{company_name:'Individual supporter',contact_person:'Supporter',email:'support@example.test',tier:'Philanthropic',amount:99999});
+  assert.equal(support.status,200);assert.equal((await support.json()).amount,0);
+  const unsupportedPayment=await post('/api/sponsorship',{company_name:'Supporter',contact_person:'Supporter',email:'support@example.test',tier:'Philanthropic',payment_ref:'TEST-REF'});
+  assert.equal(unsupportedPayment.status,400);
+  const retired=await post('/api/sponsorship',{company_name:'Company',contact_person:'Contact',email:'support@example.test',tier:'Bronze'});
+  assert.equal(retired.status,400);
   const badPayment=await post('/api/sponsorship',{company_name:'Company',contact_person:'Contact',email:'sponsor@example.test',tier:'Gold',payment_ref:'TEST-REF'});
   assert.equal(badPayment.status,400);
   const paid=await post('/api/sponsorship',{company_name:'Company',contact_person:'Contact',email:'sponsor@example.test',tier:'Silver',payment_ref:'TEST-REF',proof_filename:'proof.png',payment_proof:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY44YAAAAASUVORK5CYII='});
   assert.equal(paid.status,200);
-  assert.equal((await paid.json()).amount,59000);
-  assert.match(tables.sponsorships[1].payment_proof,/^supabase:\/\/payment-proofs\//);
-  assert.equal(tables.mail_logs.length,8);
+  assert.equal((await paid.json()).amount,29500);
+  assert.match(tables.sponsorships[2].payment_proof,/^supabase:\/\/payment-proofs\//);
+  assert.equal(tables.mail_logs.length,10);
 
 });
