@@ -174,7 +174,7 @@ function formatCategoryName(cat) {
 async function sendDelegateConfirmation(db, registration) {
   const { full_name, email, category, tier, workshop, amount, currency, ref_id, payment_ref } = registration;
   const categoryLabel = formatCategoryName(category);
-  const subject = `Registration Confirmation: NeuroMedPharmacon 2027 [Ref: ${ref_id}]`;
+  const subject = `Registration Confirmation: NeuroMet Pharmacon-2027 [Ref: ${ref_id}]`;
 
   const html = `
     <!DOCTYPE html>
@@ -201,12 +201,12 @@ async function sendDelegateConfirmation(db, registration) {
     <body>
       <div class="card">
         <div class="header">
-          <h1>NeuroMedPharmacon 2027</h1>
-          <p>In Collaboration with IPS North Zone</p>
+          <h1>NeuroMet Pharmacon-2027</h1>
+          <p>In Collaboration with Indian Pharmacological Society</p>
         </div>
         <div class="body">
           <p>Dear <strong>${full_name}</strong>,</p>
-          <p>Your registration for <strong>NeuroMedPharmacon 2027</strong> has been successfully confirmed.</p>
+          <p>Your registration for <strong>NeuroMet Pharmacon-2027</strong> has been successfully confirmed.</p>
           
           <div class="ref-box">
             <div class="ref-label">Official Delegate Reference ID</div>
@@ -240,7 +240,7 @@ async function sendDelegateConfirmation(db, registration) {
             </tr>
             <tr>
               <td>Conference Dates</td>
-              <td>18th – 20th February 2027</td>
+              <td>19th – 20th February 2027; workshop: 21 February 2027</td>
             </tr>
             <tr>
               <td>Venue</td>
@@ -253,7 +253,7 @@ async function sendDelegateConfirmation(db, registration) {
           </p>
         </div>
         <div class="footer">
-          NIPER-Raebareli Lucknow Campus · In Collaboration with IPS North Zone
+          NIPER-Raebareli Lucknow Campus · In Collaboration with Indian Pharmacological Society
         </div>
       </div>
     </body>
@@ -261,17 +261,17 @@ async function sendDelegateConfirmation(db, registration) {
   `;
 
   const text = `
-NeuroMedPharmacon 2027 - Delegate Registration Confirmation
+NeuroMet Pharmacon-2027 - Delegate Registration Confirmation
 Reference ID: ${ref_id}
 
 Dear ${full_name},
 
-Your registration for NeuroMedPharmacon 2027 is confirmed.
+Your registration for NeuroMet Pharmacon-2027 is confirmed.
 - Category: ${categoryLabel}
 - Tier: ${(tier || 'early').toUpperCase()} RATE
 - A workshop of Network Pharmacology: ${workshop ? 'Included (+₹500)' : 'Not Included'}
 - Total Amount Remitted (Incl. 18% GST): ${currency === 'USD' ? '$' : '₹ '}${amount} ${currency}
-- Dates: 18th – 20th February 2027
+- Dates: 19th – 20th February 2027; workshop: 21 February 2027
 - Venue: NIPER-Raebareli Lucknow Campus, Bijnor Road, Sarojini Nagar, Lucknow 226002
 
 Please present your Reference ID (${ref_id}) at registration desk for badge collection.
@@ -317,7 +317,7 @@ async function sendOrganizerNotification(db, registration) {
       <div class="card">
         <div class="banner">
           <h3>⚡ New Delegate Registration Received</h3>
-          <p style="margin: 0; font-size: 12px; color: #cba234;">NeuroMedPharmacon 2027 · Notification</p>
+          <p style="margin: 0; font-size: 12px; color: #cba234;">NeuroMet Pharmacon-2027 · Notification</p>
         </div>
         <div class="body">
           <div class="item-row">
@@ -370,7 +370,7 @@ async function sendOrganizerNotification(db, registration) {
   `;
 
   const text = `
-New Delegate Registration - NeuroMedPharmacon 2027
+New Delegate Registration - NeuroMet Pharmacon-2027
 Ref ID: ${ref_id}
 Name: ${full_name}
 Email: ${email}
@@ -417,7 +417,7 @@ function submissionReceiptHtml(kind, submission, admin = false) {
     ? [['Presenting author',submission.full_name],['Email',submission.email],['Abstract title',submission.title],['Scientific track',submission.category],['Presentation preference',submission.preference]]
     : [['Company',submission.company_name],['Contact person',submission.contact_person],['Email',submission.email],['Sponsorship tier',submission.tier],['Total including 18% GST',submission.tier === 'Custom' ? 'Pending agreed quotation' : 'INR ' + Number(submission.amount).toLocaleString('en-IN')],['Transaction reference',submission.payment_ref || 'Not provided'],['Notes',submission.notes || '—']];
   const rows = fields.map(([label,value]) => `<tr><td style="padding:12px;border-bottom:1px solid #e2e8f0;color:#64748b;width:35%;vertical-align:top;">${escape(label)}</td><td style="padding:12px;border-bottom:1px solid #e2e8f0;color:#0f172a;overflow-wrap:anywhere;">${escape(value)}</td></tr>`).join('');
-  return `<!doctype html><html><body style="margin:0;background:#f1f5f9;font-family:Arial,sans-serif;color:#0f172a;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 12px;"><table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><tr><td style="background:#060e18;border-bottom:4px solid #cba234;padding:28px;color:#fff;"><p style="color:#e2c477;font-size:12px;letter-spacing:2px;margin:0 0 12px;">OFFICIAL SUBMISSION RECEIPT</p><h1 style="font-family:Georgia,serif;font-size:26px;margin:0 0 10px;">NeuroMedPharmacon 2027</h1><p style="font-size:13px;margin:0;color:#cbd5e1;">NIPER Raebareli &amp; Indian Pharmacological Society</p></td></tr><tr><td style="padding:28px;"><h2 style="font-family:Georgia,serif;font-size:22px;">${heading}</h2><p>${admin ? 'A new submission is ready for Secretariat review. Uploaded files are attached to this email.' : 'Thank you. Your submission has been recorded. Please keep this receipt for your records.'}</p><div style="background:#f8fafc;border:1px solid #cbd5e1;padding:18px;margin:20px 0;"><div style="font-size:12px;color:#64748b;">REFERENCE ID</div><strong style="font-size:21px;">${escape(submission.ref_id)}</strong><p style="font-size:13px;color:#334155;margin-bottom:0;">${status}</p></div><table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-size:14px;">${rows}</table><p style="font-size:13px;line-height:1.6;color:#64748b;margin-top:24px;">This receipt acknowledges submission only. It does not confirm scientific acceptance or bank settlement. Quote your reference ID when contacting the Secretariat.</p></td></tr><tr><td style="padding:18px;background:#f8fafc;font-size:12px;color:#64748b;text-align:center;">18–20 February 2027 · NIPER Raebareli, Lucknow Campus</td></tr></table></td></tr></table></body></html>`;
+  return `<!doctype html><html><body style="margin:0;background:#f1f5f9;font-family:Arial,sans-serif;color:#0f172a;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 12px;"><table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><tr><td style="background:#060e18;border-bottom:4px solid #cba234;padding:28px;color:#fff;"><p style="color:#e2c477;font-size:12px;letter-spacing:2px;margin:0 0 12px;">OFFICIAL SUBMISSION RECEIPT</p><h1 style="font-family:Georgia,serif;font-size:26px;margin:0 0 10px;">NeuroMet Pharmacon-2027</h1><p style="font-size:13px;margin:0;color:#cbd5e1;">NIPER Raebareli &amp; Indian Pharmacological Society</p></td></tr><tr><td style="padding:28px;"><h2 style="font-family:Georgia,serif;font-size:22px;">${heading}</h2><p>${admin ? 'A new submission is ready for Secretariat review. Uploaded files are attached to this email.' : 'Thank you. Your submission has been recorded. Please keep this receipt for your records.'}</p><div style="background:#f8fafc;border:1px solid #cbd5e1;padding:18px;margin:20px 0;"><div style="font-size:12px;color:#64748b;">REFERENCE ID</div><strong style="font-size:21px;">${escape(submission.ref_id)}</strong><p style="font-size:13px;color:#334155;margin-bottom:0;">${status}</p></div><table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-size:14px;">${rows}</table><p style="font-size:13px;line-height:1.6;color:#64748b;margin-top:24px;">This receipt acknowledges submission only. It does not confirm scientific acceptance or bank settlement. Quote your reference ID when contacting the Secretariat.</p></td></tr><tr><td style="padding:18px;background:#f8fafc;font-size:12px;color:#64748b;text-align:center;">19–20 February 2027 · Post-conference workshop: 21 February 2027 · NIPER Raebareli, Lucknow Campus</td></tr></table></td></tr></table></body></html>`;
 }
 
 async function sendSubmissionEmails(db, kind, submission, attachments = []) {
@@ -425,7 +425,7 @@ async function sendSubmissionEmails(db, kind, submission, attachments = []) {
   const details = kind === 'ABSTRACT'
     ? `Title: ${submission.title}\nTrack: ${submission.category}\nPresentation: ${submission.preference}\nAuthor: ${submission.full_name}`
     : `Company: ${submission.company_name}\nContact: ${submission.contact_person}\nTier: ${submission.tier}\nTotal including GST: INR ${submission.amount}\nTransaction reference: ${submission.payment_ref || 'Not provided (inquiry only)'}\nPayment status: ${submission.payment_ref ? 'Proof received; pending bank verification' : 'Unpaid inquiry'}\nNotes: ${submission.notes || ''}`;
-  const text = `NeuroMedPharmacon 2027\nReference: ${submission.ref_id}\n${details}\nEmail: ${submission.email}\nYour submission has been received for Secretariat review. This is an acknowledgement, not acceptance or payment verification.`;
+  const text = `NeuroMet Pharmacon-2027\nReference: ${submission.ref_id}\n${details}\nEmail: ${submission.email}\nYour submission has been received for Secretariat review. This is an acknowledgement, not acceptance or payment verification.`;
   const results = await Promise.allSettled([
     sendMail(db,{to:submission.email,subject:`${kind === 'ABSTRACT' ? 'Abstract submission' : 'Sponsorship'} acknowledgement [${submission.ref_id}]`,text,html:submissionReceiptHtml(kind,submission),type:`${kind}_CONFIRMATION`,refId:submission.ref_id}),
     sendMail(db,{to:organizer,subject:`New ${kind.toLowerCase()} submission [${submission.ref_id}]`,text,html:submissionReceiptHtml(kind,submission,true),type:`${kind}_ORGANIZER_NOTIFICATION`,refId:submission.ref_id,attachments})

@@ -1,9 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('[BUILD] Generating official Sponsorship PDF...');
+console.log('[BUILD] Generating current conference documents...');
 try {
   require('./generate-sponsorship-pdf');
+  require('./generate-guidelines-pdf');
 } catch (err) {
   console.warn('[BUILD] PDF generation warning:', err.message);
 }
@@ -43,3 +44,13 @@ fs.copyFileSync(require.resolve('jspdf/dist/jspdf.umd.min.js'), path.join(distDi
 const recoveryDir = path.join(distDir, 'secretariat');
 fs.mkdirSync(recoveryDir, { recursive: true });
 fs.copyFileSync(path.join(publicDir, 'secretariat-reset.html'), path.join(recoveryDir, 'reset.html'));
+
+const legacyDownloads = {
+  'IPS_NorthZone_Abstract_Guidelines_2027.pdf': 'NeuroMet_Pharmacon_2027_Abstract_Guidelines.pdf',
+  'IPS_NorthZone_Abstract_Template_2027.pdf': 'NeuroMet_Pharmacon_2027_Abstract_Template.pdf',
+  'IPS_NorthZone_Sponsorship_Prospectus_2027.pdf': 'NeuroMet_Pharmacon_2027_Sponsorship_Prospectus.pdf'
+};
+for (const [legacy, current] of Object.entries(legacyDownloads)) {
+  const source = path.join(distDir, 'downloads', current);
+  if (fs.existsSync(source)) fs.copyFileSync(source, path.join(distDir, 'downloads', legacy));
+}

@@ -21,15 +21,15 @@ function generateSponsorshipProspectusPDF() {
   doc.setTextColor(203, 162, 52);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
-  doc.text('INDIAN PHARMACOLOGICAL SOCIETY (NORTHERN CHAPTER)', 105, 35, { align: 'center' });
+  doc.text('INDIAN PHARMACOLOGICAL SOCIETY ', 105, 35, { align: 'center' });
 
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(22);
-  doc.text('IPS NORTH ZONE CONFERENCE 2027', 105, 52, { align: 'center' });
+  doc.text('NeuroMet Pharmacon-2027', 105, 52, { align: 'center' });
 
   doc.setTextColor(200, 215, 235);
   doc.setFontSize(12);
-  doc.text('NeuroMedPharmacon: Regional Frontiers in Pharmacology & Drug Delivery', 105, 62, { align: 'center' });
+  doc.text('Scientific Talks · 10+ Curated Thematic Tracks · 300+ Abstracts', 105, 62, { align: 'center' });
 
   doc.setDrawColor(203, 162, 52);
   doc.setLineWidth(0.5);
@@ -42,9 +42,9 @@ function generateSponsorshipProspectusPDF() {
   doc.setTextColor(220, 230, 242);
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
-  doc.text('Host Institution: Department of Pharmacology & Toxicology', 105, 96, { align: 'center' });
+  doc.text('Host Institution: NIPER-Raebareli', 105, 96, { align: 'center' });
   doc.text('National Institute of Pharmaceutical Education and Research (NIPER), Raebareli at Lucknow', 105, 102, { align: 'center' });
-  doc.text('In Association with CSIR-CDRI, CSIR-IITR & KGMU Lucknow · February 18–20, 2027', 105, 108, { align: 'center' });
+  doc.text('19–20 February 2027 | Post-conference workshop: 21 February', 105, 108, { align: 'center' });
 
   // Key stats box
   doc.setFillColor(15, 34, 56);
@@ -57,10 +57,10 @@ function generateSponsorshipProspectusPDF() {
 
   doc.setFontSize(9);
   doc.setTextColor(255, 255, 255);
-  doc.text('• 500+ Registered Pharmacologists, Toxicologists, and R&D Leaders across North India', 32, 140);
-  doc.text('• 60+ Renowned Plenary Speakers & Department Chairs (AIIMS, PGIMER, CDRI, IITR, NIPERs)', 32, 147);
+  doc.text('• 300+ Peer-Reviewed Abstracts across 10+ Curated Thematic Tracks', 32, 140);
+  doc.text('• 30 Scientific Talks across Pharmaceutical Research', 32, 147);
   doc.text('• 20+ Commercial Pharmaceutical, Analytical Instrument, and Biotech Exhibitors', 32, 154);
-  doc.text('• 3 Days of High-Impact Plenary Symposia, Industry Showcases, and Networking Dinners', 32, 161);
+  doc.text('• 2 Conference Days (19-20 February) + Post-conference Workshop (21 February)', 32, 161);
 
   // Sponsorship Summary Table
   doc.setFontSize(12);
@@ -130,7 +130,7 @@ function generateSponsorshipProspectusPDF() {
   doc.setTextColor(203, 162, 52);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10);
-  doc.text('IPS NORTH ZONE CONFERENCE 2027 · NIPER-RAEBARELI LUCKNOW', 105, 14, { align: 'center' });
+  doc.text('NeuroMet Pharmacon-2027 · NIPER-RAEBARELI LUCKNOW', 105, 14, { align: 'center' });
 
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(13);
@@ -208,7 +208,7 @@ function generateSponsorshipProspectusPDF() {
 
   const buffer = doc.output('arraybuffer');
   const targetDir = path.join(__dirname, '../public/downloads');
-  const filePath = path.join(targetDir, 'IPS_NorthZone_Sponsorship_Prospectus_2027.pdf');
+  const filePath = path.join(targetDir, 'NeuroMet_Pharmacon_2027_Sponsorship_Prospectus.pdf');
   fs.writeFileSync(filePath, Buffer.from(buffer));
   console.log(`Generated official Sponsorship PDF: ${filePath} (${fs.statSync(filePath).size} bytes)`);
 }

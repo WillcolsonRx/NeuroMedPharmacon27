@@ -11,7 +11,7 @@ test('receipt button creates a PDF containing registration details', () => {
   let saved;
   function Pdf() { const doc = new jsPDF(); doc.save = name => { saved = { name, content: doc.output() }; }; return doc; }
   vm.runInNewContext(fn + '\ndownloadRegistrationReceipt();', { window: {jspdf:{jsPDF:Pdf}}, document: {getElementById:id=>({textContent:values[id]})}, alert: msg=>assert.fail(msg) });
-  assert.equal(saved.name,'NeuroMedPharmacon_Receipt_NMP27-DEL-TEST.pdf');
+  assert.equal(saved.name,'NeuroMet Pharmacon-2027_Receipt_NMP27-DEL-TEST.pdf');
   assert.ok(saved.content.startsWith('%PDF-'));
   assert.ok(saved.content.includes('Test Delegate'));
   assert.ok(saved.content.includes('UTR-12345'));

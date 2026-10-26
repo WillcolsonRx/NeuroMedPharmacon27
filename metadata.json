@@ -1,6 +1,8 @@
 {
-  "name": "NIPERCON 2026",
-  "description": "National Conference on Pharmaceutical Sciences, NIPER-Raebareli, Lucknow",
+  "name": "NeuroMet Pharmacon-2027",
+  "description": "Conference at NIPER-Raebareli, Lucknow, 19\u201320 February 2027; post-conference workshop on 21 February 2027.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

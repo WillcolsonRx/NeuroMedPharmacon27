@@ -1,6 +1,6 @@
 (function (root) {
   'use strict';
-  const START = Date.parse('2027-02-18T09:00:00+05:30');
+  const START = Date.parse('2027-02-19T09:00:00+05:30');
   const END = Date.parse('2027-02-20T18:00:00+05:30');
   function conferenceCountdown(now) {
     const phase = now >= END ? 'ended' : now >= START ? 'active' : 'upcoming';
@@ -19,7 +19,7 @@
     }
     if (phase !== value.phase) {
       phase = value.phase;
-      root.document.getElementById('countdownStatus').textContent = phase === 'upcoming' ? 'Until the conference begins' : phase === 'active' ? 'The conference is underway. Welcome to NeuroMedPharmacon 2027!' : 'The conference has concluded. Thank you for joining us.';
+      root.document.getElementById('countdownStatus').textContent = phase === 'upcoming' ? 'Until the conference begins' : phase === 'active' ? 'The conference is underway. Welcome to NeuroMet Pharmacon-2027!' : 'The conference has concluded. Thank you for joining us.';
     }
   }
   update();

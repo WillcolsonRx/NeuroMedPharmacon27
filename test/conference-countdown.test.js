@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const {conferenceCountdown,START,END}=require('../public/conference-countdown');
 
 test('countdown measures days and seconds against the IST opening without timezone drift',()=>{
- assert.equal(START,Date.parse('2027-02-18T03:30:00Z'));
+ assert.equal(START,Date.parse('2027-02-19T03:30:00Z'));
  assert.deepEqual(conferenceCountdown(START-90061000),{phase:'upcoming',days:1,hours:1,minutes:1,seconds:1});
  assert.equal(conferenceCountdown(START-1000).seconds,1);
 });

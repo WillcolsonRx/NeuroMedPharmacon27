@@ -1,16 +1,15 @@
 ================================================================================
-NEUROMEDPHARMACON 2027
+NeuroMet Pharmacon-2027
 International Conference on Advances in Pharmacology & Translational Medicine
 ================================================================================
 Theme: "Innovations in Neurotherapeutics, Molecular Pharmacology & Translational Medicine"
 Vision: Aligned with India's Viksit Bharat @2047 & UN Sustainable Development Goals (SDGs)
 
-DATES: 18th – 20th February 2027
+DATES: 19th – 20th February 2027
+POST-CONFERENCE WORKSHOP: 21st February 2027
 VENUE: NIPER-Raebareli Campus, Lucknow-Raebareli Road, Sarojini Nagar, Lucknow – 226002, UP, India
 
-ORGANIZED BY:
-Laboratory of MolecularNeuroTherapeutics
-Department of Pharmacology & Toxicology
+HOST INSTITUTION:
 National Institute of Pharmaceutical Education & Research (NIPER), Raebareli
 (An Institute of National Importance under Dept. of Pharmaceuticals, Ministry of Chemicals & Fertilizers, Govt. of India)
 
@@ -21,11 +20,10 @@ Indian Pharmacological Society (IPS)
 ================================================================================
 LEADERSHIP & ORGANIZING COMMITTEE:
 ================================================================================
-- Patron & Director: Prof. Shubhini A. Saraf (Director, NIPER-Raebareli)
-- Organizer & Convener: Dr. Ashok K. Datusalia (Associate Professor, Dept. of Pharmacology & Toxicology)
-- Dean: Prof. Rakesh Kumar Singh (Dean & Head, Dept. of Pharmacology & Toxicology / Regulatory Toxicology)
-- Registrar: Dr. Jai Narain (Registrar, NIPER-Raebareli)
-- IPS Leadership: President & Secretary, Indian Pharmacological Society
+- Patron: Prof. Shubhini A. Saraf, Director, NIPER-Raebareli
+- Chairperson: Prof. Rakesh Kumar Singh, Dean & HOD
+- Co-Chairperson: Prof. Abha Sharma
+- Organizers: Dr. Ashok K. Datusalia and Dr. Gopal L. Khatik
 
 ================================================================================
 10 SCIENTIFIC THEMES (CALL FOR ABSTRACTS):
@@ -47,7 +45,7 @@ BROCHURE REGISTRATION TARIFF (INR Inclusive of 18% GST):
 - Research Scholar / PG Student:          Base ₹ 3,500 + 18% GST = Total ₹ 4,130
 - Faculty & Academic Scientists:          Base ₹ 4,500 + 18% GST = Total ₹ 5,310
 - Corporate & Industry Delegates:         Base ₹ 6,000 + 18% GST = Total ₹ 7,080
-- A workshop of Network Pharmacology (18th Feb): Base ₹ 500 (+ 18% GST = ₹ 590)
+- A workshop of Network Pharmacology (21st February 2027): Base ₹ 500 (+ 18% GST = ₹ 590)
 
 ================================================================================
 KEY HIGHLIGHTS:
@@ -64,13 +62,13 @@ IMPORTANT DEADLINES:
 ================================================================================
 - Abstract Submission Closes: 31st December 2026
 - Acceptance Notification:    15th January 2027
-- Early Bird Closes:          31st March 2026
-- Conference Dates:           18th – 20th February 2027
+- Early Bird Closes:          9th November 2026
+- Conference Dates:           19th – 20th February 2027
 
 SECRETARIAT CONTACT:
 Organizing Secretary: Dr. Ashok K. Datusalia
 Dept. of Pharmacology & Toxicology, NIPER-Raebareli Lucknow Campus
 Sarojini Nagar, Lucknow – 226002, Uttar Pradesh, India
 Email: neuromedpharmacon26@gmail.com | Phone: (+91) 9250446799
-Website: http://localhost:3000
+Website: https://neuro-med-pharmacon-27.vercel.app/
 ================================================================================

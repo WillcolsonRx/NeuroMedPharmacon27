@@ -104,3 +104,10 @@ This manifest documents all external photographic and identity assets utilized a
 - **Dimensions**: 571 × 116 px (50 KB, RGBA PNG)
 - **Verification Status**: Verified & locally hosted in `/public/assets/logos/ips_logo.png`
 
+
+## Conference leadership portrait (26 October 2026)
+
+- **Patron**: Prof. Shubhini A. Saraf, Director, verified on the official Director’s Message page: https://niperraebareli.edu.in/DM.html
+- **Portrait**: https://niperraebareli.edu.in/images/director_new1.jpg (linked from the official homepage), downloaded unchanged as `public/assets/leadership/prof-shubhini-a-saraf.jpg`; 3225 × 3451 pixels.
+- **Chairperson**: Prof. Rakesh Kumar Singh, listed as Dean & Professor at https://niperraebareli.edu.in/faculty.html; the linked profile https://niperraebareli.edu.in/faculty/CV_Rakesh%20K%20Singh.pdf identifies his Head of Department role.
+- **Co-Chairperson and organizers**: Conference roles supplied by the organizer; faculty names verified against the same official faculty listing. Display uses the requested abbreviated name Dr. Gopal L. Khatik.

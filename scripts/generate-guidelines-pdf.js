@@ -22,17 +22,17 @@ function generateAbstractGuidelinesPDF() {
   doc.setTextColor(203, 162, 52);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10);
-  doc.text('INDIAN PHARMACOLOGICAL SOCIETY (NORTHERN CHAPTER)', 105, 12, { align: 'center' });
+  doc.text('INDIAN PHARMACOLOGICAL SOCIETY ', 105, 12, { align: 'center' });
 
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(14);
-  doc.text('IPS NORTH ZONE ANNUAL CONFERENCE 2027', 105, 20, { align: 'center' });
+  doc.text('NeuroMet Pharmacon-2027', 105, 20, { align: 'center' });
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
   doc.setTextColor(200, 215, 235);
   doc.text('Hosted by National Institute of Pharmaceutical Education & Research (NIPER), Raebareli at Lucknow', 105, 26, { align: 'center' });
-  doc.text('In Association with CSIR-CDRI, CSIR-IITR & KGMU Lucknow · February 18–20, 2027', 105, 32, { align: 'center' });
+  doc.text('19–20 February 2027 | Post-conference workshop: 21 February', 105, 32, { align: 'center' });
 
   // Document Title
   doc.setTextColor(15, 23, 42);
@@ -128,18 +128,18 @@ function generateAbstractGuidelinesPDF() {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
   doc.setTextColor(71, 85, 105);
-  doc.text('Delegates applying for the IPS Northern Chapter Young Scientist Award must be under 35 years as of Feb 18, 2027. Proof of age (copy of birth certificate/Aadhaar/passport) and recommendation letter from Head of Department must be uploaded during online submission.', 25, curY + 11, { maxWidth: 160 });
+  doc.text('Delegates applying for the Indian Pharmacological Society Young Scientist Award must be under 35 years as of Feb 19, 2027. Proof of age (copy of birth certificate/Aadhaar/passport) and recommendation letter from Head of Department must be uploaded during online submission.', 25, curY + 11, { maxWidth: 160 });
 
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(6, 14, 24);
   doc.text('Key Dates: Abstract Deadline: 31st December 2026 | Acceptance Notice: 15th January 2027', 25, curY + 24);
   doc.setFont('helvetica', 'normal');
-  doc.text('Official Submission Portal: https://neuromedpharmacon.niperraebareli.edu.in/abstracts | Email: abstracts@niperraebareli.edu.in', 25, curY + 29);
+  doc.text('Official Submission Portal: https://neuro-med-pharmacon-27.vercel.app/#abstracts | Email: abstracts@niperraebareli.edu.in', 25, curY + 29);
 
   // Footer
   doc.setFontSize(7.5);
   doc.setTextColor(148, 163, 184);
-  doc.text('Page 1 of 2 — IPS North Zone Conference 2027 · NIPER-Raebareli Lucknow Campus', 105, 290, { align: 'center' });
+  doc.text('Page 1 of 2 — Indian Pharmacological Society Conference 2027 · NIPER-Raebareli Lucknow Campus', 105, 290, { align: 'center' });
 
   // Page 2: Official Template & Formatting Specifications
   doc.addPage('a4', 'portrait');
@@ -153,7 +153,7 @@ function generateAbstractGuidelinesPDF() {
   doc.setTextColor(203, 162, 52);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(9);
-  doc.text('INDIAN PHARMACOLOGICAL SOCIETY (NORTHERN CHAPTER)', 105, 12, { align: 'center' });
+  doc.text('INDIAN PHARMACOLOGICAL SOCIETY ', 105, 12, { align: 'center' });
 
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(12);
@@ -262,12 +262,12 @@ function generateAbstractGuidelinesPDF() {
   if (!fs.existsSync(targetDir)) {
     fs.mkdirSync(targetDir, { recursive: true });
   }
-  const filePath = path.join(targetDir, 'IPS_NorthZone_Abstract_Guidelines_2027.pdf');
+  const filePath = path.join(targetDir, 'NeuroMet_Pharmacon_2027_Abstract_Guidelines.pdf');
   fs.writeFileSync(filePath, Buffer.from(buffer));
   console.log(`Generated official PDF: ${filePath} (${fs.statSync(filePath).size} bytes)`);
 
   // Also write template copy
-  const templatePath = path.join(targetDir, 'IPS_NorthZone_Abstract_Template_2027.pdf');
+  const templatePath = path.join(targetDir, 'NeuroMet_Pharmacon_2027_Abstract_Template.pdf');
   fs.writeFileSync(templatePath, Buffer.from(buffer));
   console.log(`Generated template PDF: ${templatePath}`);
 }
