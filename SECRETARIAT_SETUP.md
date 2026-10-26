@@ -142,7 +142,7 @@ are flagged for review, never silently replayed beyond that window.
 
 The workspace shows the size of uploaded files and total submissions. Compare it
 with Supabase's actual Usage page, including database size and bandwidth. At the
-2 MB maximum, 500 Word files alone approach 1 GB; payment proofs consume additional
+1 MB maximum, 500 Word files alone approach 500 MB; payment proofs consume additional
 space. Encourage small Word files and compressed proof images. The integration
 cannot promise 500 maximum-size submissions will fit a particular free plan.
 Do not delete live conference files to free space without an approved archive.

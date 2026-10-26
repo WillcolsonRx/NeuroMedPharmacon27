@@ -17,3 +17,15 @@ test('rejects missing, spoofed, oversized and macro-enabled abstract documents',
   assert.throws(()=>validateAbstractDocument('data:text/plain;base64,'+'A'.repeat(3*1024*1024),'large.docx'),/exceeds/);
   assert.throws(()=>validateAbstractDocument(data({...entries,'word/vbaProject.bin':Buffer.from('macro')}),'unsafe.docx'),/Invalid/);
 });
+test('abstract upload limit accepts 1 MB and rejects even one byte above it',()=>{
+  const {MAX_DOCUMENT_SIZE}=require('../abstractDocument');
+  assert.equal(MAX_DOCUMENT_SIZE,1024*1024);
+  function document(size) {
+    const bytes=Buffer.alloc(size);
+    Buffer.from('d0cf11e0a1b11ae1','hex').copy(bytes);
+    Buffer.from('WordDocument','utf16le').copy(bytes,64);
+    return 'data:application/msword;base64,'+bytes.toString('base64');
+  }
+  assert.equal(validateAbstractDocument(document(MAX_DOCUMENT_SIZE),'abstract.doc').buffer.length,MAX_DOCUMENT_SIZE);
+  assert.throws(()=>validateAbstractDocument(document(MAX_DOCUMENT_SIZE+1),'abstract.doc'),/1 MB/);
+});

@@ -132,7 +132,7 @@ redeploying this update. It adds document metadata and a private
 `abstract-documents` bucket. New projects can run the complete `supabase/schema.sql`.
 No additional credentials are needed.
 
-Abstract submissions require a Word `.doc` or `.docx` file (maximum 2 MB) instead
+Abstract submissions require a Word `.doc` or `.docx` file (maximum 1 MB) instead
 of a text body. File headers/container contents are checked; this is not malware
 scanning. The Secretariat should review attachments in protected mode. The file
 is stored privately and attached only to organizer acknowledgement

@@ -3,7 +3,7 @@ const path = require('node:path');
 const { randomUUID } = require('node:crypto');
 const { unzipSync, strFromU8 } = require('fflate');
 const DOCUMENT_DIR = path.join(__dirname, '.data', 'abstract-documents');
-const MAX_DOCUMENT_SIZE = 2 * 1024 * 1024;
+const MAX_DOCUMENT_SIZE = 1024 * 1024;
 const MIME = {doc:'application/msword',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'};
 
 function validateAbstractDocument(data, filename) {
@@ -11,9 +11,9 @@ function validateAbstractDocument(data, filename) {
   const ext = path.extname(filename).slice(1).toLowerCase();
   if (!MIME[ext]) throw new Error('Only .doc and .docx Word documents are supported');
   const match = data.match(/^data:[^;,]*;base64,([A-Za-z0-9+/]+={0,2})$/);
-  if (!match || match[1].length > Math.ceil(MAX_DOCUMENT_SIZE / 3) * 4) throw new Error('Invalid Word document or file exceeds 2 MB');
+  if (!match || match[1].length > Math.ceil(MAX_DOCUMENT_SIZE / 3) * 4) throw new Error('Invalid Word document or file exceeds 1 MB');
   const buffer = Buffer.from(match[1], 'base64');
-  if (!buffer.length || buffer.length > MAX_DOCUMENT_SIZE) throw new Error('Word document must be between 1 byte and 2 MB');
+  if (!buffer.length || buffer.length > MAX_DOCUMENT_SIZE) throw new Error('Word document must be between 1 byte and 1 MB');
   if (ext === 'doc') {
     if (buffer.subarray(0,8).toString('hex') !== 'd0cf11e0a1b11ae1' || buffer.length < 512 || !buffer.includes(Buffer.from('WordDocument','utf16le'))) throw new Error('Invalid Word .doc document');
   } else {
