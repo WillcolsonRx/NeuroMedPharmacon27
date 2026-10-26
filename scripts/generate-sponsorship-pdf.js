@@ -29,7 +29,7 @@ function generateSponsorshipProspectusPDF() {
 
   doc.setTextColor(200, 215, 235);
   doc.setFontSize(12);
-  doc.text('Scientific Talks · 10+ Curated Thematic Tracks · 300+ Abstracts', 105, 62, { align: 'center' });
+  doc.text('Scientific Talks · 10 Curated Thematic Tracks · 300+ Abstracts', 105, 62, { align: 'center' });
 
   doc.setDrawColor(203, 162, 52);
   doc.setLineWidth(0.5);
@@ -57,7 +57,7 @@ function generateSponsorshipProspectusPDF() {
 
   doc.setFontSize(9);
   doc.setTextColor(255, 255, 255);
-  doc.text('• 300+ Peer-Reviewed Abstracts across 10+ Curated Thematic Tracks', 32, 140);
+  doc.text('• 300+ Peer-Reviewed Abstracts across 10 Curated Thematic Tracks', 32, 140);
   doc.text('• 30 Scientific Talks across Pharmaceutical Research', 32, 147);
   doc.text('• 20+ Commercial Pharmaceutical, Analytical Instrument, and Biotech Exhibitors', 32, 154);
   doc.text('• 2 Conference Days (19-20 February) + Post-conference Workshop (21 February)', 32, 161);

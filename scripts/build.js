@@ -30,7 +30,17 @@ if (fs.existsSync(publicDir)) {
 
 // Ensure root index.html is copied to dist/index.html
 if (fs.existsSync(rootIndex)) {
-  fs.copyFileSync(rootIndex, path.join(distDir, 'index.html'));
+  const { renderTracks, renderBrochure } = require('./render-tracks');
+  fs.writeFileSync(path.join(distDir, 'index.html'), renderTracks(fs.readFileSync(rootIndex, 'utf8')));
+  const downloads = path.join(distDir, 'downloads');
+  if (fs.existsSync(downloads)) {
+    for (const file of fs.readdirSync(downloads)) {
+      if (file.endsWith('2027_Brochure.txt')) {
+        const target = path.join(downloads, file);
+        fs.writeFileSync(target, renderBrochure(fs.readFileSync(target, 'utf8')));
+      }
+    }
+  }
 }
 
 console.log('[BUILD] Successfully prepared dist output directory with static assets.');

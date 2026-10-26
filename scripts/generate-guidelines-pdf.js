@@ -53,7 +53,7 @@ function generateAbstractGuidelinesPDF() {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
   doc.setTextColor(51, 65, 85);
-  const mandateText = 'The Scientific Program Committee invites original research abstracts in basic, clinical, experimental, and translational pharmacology. Submissions are open to faculty members, scientists, postdoctoral researchers, PhD scholars, and postgraduate students (MD/MS/M.Pharm/Pharm.D/M.Sc) from recognized academic and research institutions across India and internationally. Registration for the conference is mandatory for the presenting author upon abstract acceptance.';
+  const mandateText = 'The Scientific Program Committee invites original research abstracts spanning chemistry, pharmacology, biotechnology, and translational drug discovery, with a focus on neuro-metabolic disorders, cancer, and safety sciences. Submissions are open to faculty members, scientists, postdoctoral researchers, PhD scholars, and postgraduate students (MD/MS/M.Pharm/Pharm.D/M.Sc) from recognized academic and research institutions across India and internationally. Registration for the conference is mandatory for the presenting author upon abstract acceptance.';
   doc.text(doc.splitTextToSize(mandateText, 170), 20, 63);
 
   // Section 2: Structured Abstract Format
@@ -93,27 +93,15 @@ function generateAbstractGuidelinesPDF() {
   doc.setFontSize(8);
   doc.setTextColor(51, 65, 85);
 
-  const tracksCol1 = [
-    'TR-01: Molecular NeuroTherapeutics & Neurodegenerative Targets',
-    'TR-02: AI/ML, Chemoinformatics & Computational Biology',
-    'TR-03: Cardiovascular & Metabolic Disease Pharmacology',
-    'TR-04: Targeted Oncology Therapeutics & Immunopharmacology',
-    'TR-05: Pharmacokinetics, MIDD, & Drug Delivery Platforms'
-  ];
-  const tracksCol2 = [
-    'TR-06: Preclinical Toxicology, Safety Assays & NAMs',
-    'TR-07: Phytomedicine, Natural Products & Ethno-therapeutics',
-    'TR-08: Clinical Pharmacology & Pharmacovigilance Science',
-    'TR-09: Biologics, Biosimilars & Peptide Therapeutics',
-    'TR-10: Regulatory Affairs, CDSCO Pathways & Translation'
-  ];
-
-  tracksCol1.forEach((t, i) => {
-    doc.text(t, 20, curY + (i * 4.5));
-    doc.text(tracksCol2[i], 105, curY + (i * 4.5));
-  });
-
-  curY += 26;
+  const { tracks } = require('../conference-tracks.json');
+  for (let i = 0; i < 5; i++) {
+    const left = doc.splitTextToSize(`TR-${tracks[i].id}: ${tracks[i].title}`, 80);
+    const right = doc.splitTextToSize(`TR-${tracks[i + 5].id}: ${tracks[i + 5].title}`, 80);
+    doc.text(left, 20, curY);
+    doc.text(right, 105, curY);
+    curY += Math.max(left.length, right.length) * 4 + 2;
+  }
+  curY += 3;
 
   // Section 4: Young Scientist Award & Important Dates
   doc.setFillColor(248, 250, 252);

@@ -28,16 +28,26 @@ LEADERSHIP & ORGANIZING COMMITTEE:
 ================================================================================
 10 SCIENTIFIC THEMES (CALL FOR ABSTRACTS):
 ================================================================================
-Theme I:    Molecular Mechanisms of Drug Action & Receptor Pharmacology
-Theme II:   Neuropharmacology & CNS Drug Discovery (Neurodegeneration, Stroke, Epilepsy)
-Theme III:  Cardiovascular & Metabolic Pharmacology (Hypertension, Diabetes, NASH)
-Theme IV:   Cancer Pharmacology & Immunotherapeutics (Targeted Biologics, Immuno-oncology)
-Theme V:    Pharmacokinetics, PK/PD & Model-Informed Drug Development (MIDD)
-Theme VI:   Toxicology, Predictive Organ Safety & Regulatory Toxicology
-Theme VII:  Natural Products, Phytomedicine & Ethnopharmacology
-Theme VIII: Clinical Pharmacology, Precision Therapeutics & Pharmacovigilance
-Theme IX:   AI/ML in Drug Discovery, Chemoinformatics & Drug Repurposing
-Theme X:    Regulatory Science, CDSCO/FDA Pathways & Translational Medicine
+Track 01: Neuropharmacology & Neurotherapeutics
+  Neurodegeneration, neuroinflammation, synaptic dysfunction, epilepsy, and neuropsychiatric disorders; mechanistic target validation and experimental pharmacotherapeutics for CNS disease.
+Track 02: Cerebrovascular & Neuro-Metabolic Pharmacology
+  Stroke, ischemia-reperfusion injury, neurovascular dysfunction, brain insulin resistance, obesity, and diabetes-associated cognitive impairment; the links between metabolic dysfunction and neurological disease.
+Track 03: Cancer Pharmacology & Neuro-Oncology
+  Glioma, brain metastases, cancer metabolism, tumor-microenvironment interactions, anticancer target validation, and treatment resistance; mechanisms linking cancer biology with CNS complications.
+Track 04: Biotechnology & Translational Disease Models
+  Biologics, RNA-based approaches, extracellular vesicles, disease biomarkers, and multi-omics; cellular, iPSC-derived, and organoid models for studying neuro-metabolic disorders and evaluating therapeutic candidates.
+Track 05: Medicinal Chemistry & Target Validation
+  Pharmacophore design, structure-activity relationships, lead optimization, target engagement, and selectivity; discovery and characterization of chemical entities for neuro-metabolic disorders and cancer.
+Track 06: Synthetic Chemistry & Chemical Biology
+  Novel synthetic methods, catalysis, green chemistry, bioactive natural-product synthesis, and chemical probes; enabling chemistry to investigate disease mechanisms and support drug discovery.
+Track 07: In-silico & AI-Driven Drug Design
+  Molecular docking, molecular dynamics, QSAR, chemoinformatics, generative AI, and multi-omics integration; interpretable models and experimental validation of predictions for CNS, metabolic, and cancer targets.
+Track 08: Pharmacovigilance-Guided Drug Repurposing & Network Pharmacology
+  Safety-signal analysis, real-world data, drug-target-disease networks, systems pharmacology, and pathway analysis to generate repurposing hypotheses for neuro-metabolic disorders and cancer. Signals require validation and do not establish causality or treatment efficacy.
+Track 09: Indian Indigenous Systems & Ethnopharmacology
+  Ayurveda, Siddha, Unani, and ethnobotanical knowledge; phytochemical characterization, formulation standardization, herb-drug interactions, safety, and mechanistic evaluation in neuro-metabolic disease models.
+Track 10: Toxicology & Safety Pharmacology
+  Neurotoxicity, metabolic and organ toxicity, environmental exposures, genotoxicity, and preclinical safety assessment; mechanism-based biomarkers and alternative experimental models for evaluating therapeutic risks.
 
 ================================================================================
 BROCHURE REGISTRATION TARIFF (INR Inclusive of 18% GST):

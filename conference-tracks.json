@@ -1,0 +1,23 @@
+{
+  "categories": [
+    {"id":"cns","label":"CNS Pharmacology"},
+    {"id":"biotechnology","label":"Biotechnology"},
+    {"id":"chemistry","label":"Chemistry"},
+    {"id":"ai","label":"In-silico & AI Drug Design"},
+    {"id":"repurposing","label":"Drug Repurposing & Network Pharmacology"},
+    {"id":"indigenous","label":"Indigenous Systems & Ethnopharmacology"},
+    {"id":"toxicology","label":"Toxicology & Safety Pharmacology"}
+  ],
+  "tracks": [
+    {"id":"01","category":"cns","title":"Neuropharmacology & Neurotherapeutics","description":"Neurodegeneration, neuroinflammation, synaptic dysfunction, epilepsy, and neuropsychiatric disorders; mechanistic target validation and experimental pharmacotherapeutics for CNS disease."},
+    {"id":"02","category":"cns","title":"Cerebrovascular & Neuro-Metabolic Pharmacology","description":"Stroke, ischemia-reperfusion injury, neurovascular dysfunction, brain insulin resistance, obesity, and diabetes-associated cognitive impairment; the links between metabolic dysfunction and neurological disease."},
+    {"id":"03","category":"cns","title":"Cancer Pharmacology & Neuro-Oncology","description":"Glioma, brain metastases, cancer metabolism, tumor-microenvironment interactions, anticancer target validation, and treatment resistance; mechanisms linking cancer biology with CNS complications."},
+    {"id":"04","category":"biotechnology","title":"Biotechnology & Translational Disease Models","description":"Biologics, RNA-based approaches, extracellular vesicles, disease biomarkers, and multi-omics; cellular, iPSC-derived, and organoid models for studying neuro-metabolic disorders and evaluating therapeutic candidates."},
+    {"id":"05","category":"chemistry","title":"Medicinal Chemistry & Target Validation","description":"Pharmacophore design, structure-activity relationships, lead optimization, target engagement, and selectivity; discovery and characterization of chemical entities for neuro-metabolic disorders and cancer."},
+    {"id":"06","category":"chemistry","title":"Synthetic Chemistry & Chemical Biology","description":"Novel synthetic methods, catalysis, green chemistry, bioactive natural-product synthesis, and chemical probes; enabling chemistry to investigate disease mechanisms and support drug discovery."},
+    {"id":"07","category":"ai","title":"In-silico & AI-Driven Drug Design","description":"Molecular docking, molecular dynamics, QSAR, chemoinformatics, generative AI, and multi-omics integration; interpretable models and experimental validation of predictions for CNS, metabolic, and cancer targets."},
+    {"id":"08","category":"repurposing","title":"Pharmacovigilance-Guided Drug Repurposing & Network Pharmacology","description":"Safety-signal analysis, real-world data, drug-target-disease networks, systems pharmacology, and pathway analysis to generate repurposing hypotheses for neuro-metabolic disorders and cancer. Signals require validation and do not establish causality or treatment efficacy."},
+    {"id":"09","category":"indigenous","title":"Indian Indigenous Systems & Ethnopharmacology","description":"Ayurveda, Siddha, Unani, and ethnobotanical knowledge; phytochemical characterization, formulation standardization, herb-drug interactions, safety, and mechanistic evaluation in neuro-metabolic disease models."},
+    {"id":"10","category":"toxicology","title":"Toxicology & Safety Pharmacology","description":"Neurotoxicity, metabolic and organ toxicity, environmental exposures, genotoxicity, and preclinical safety assessment; mechanism-based biomarkers and alternative experimental models for evaluating therapeutic risks."}
+  ]
+}
