@@ -2550,30 +2550,23 @@ button, input, select, textarea {
   .committee-scroll-hint { display: block; color: #cbd5e1; font-size: .8rem; }
 }
 
-/* Expanded institutional lockup with fire-like effects outside the artwork. */
+/* Expanded institutional lockup with clean white logo panels. */
 .hero-title-lockup { position: relative; left: 50%; transform: translateX(-50%); display: grid; grid-template-columns: 240px minmax(0,1fr) 240px; align-items: center; gap: clamp(1rem,2.2vw,2rem); width: min(1440px,calc(100vw - 64px)); margin: 1.8rem 0 2rem; isolation: isolate; }
 .hero-title-text { min-width: 0; container-type: inline-size; }
 .hero-title-lockup .hero-main-title { margin: 0; white-space: nowrap; text-wrap: nowrap; font-size: clamp(.72rem,4vw,3.65rem); font-size: clamp(.72rem,6.6cqw,3.65rem); }
 .hero-logo-frame { position: relative; display: block; min-width: 0; width: 100%; isolation: isolate; border-radius: 14px; transition: transform .25s ease; text-decoration: none; }
 .hero-logo-niper { width: 180px; justify-self: start; }
 .hero-logo-ips { width: 240px; justify-self: end; }
-.hero-logo-artwork { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 160px; padding: 12px; border-radius: 12px; background: #fff; border: 1px solid #f2ca72; box-shadow: 0 0 24px rgba(255,155,40,.2); }
+.hero-logo-artwork { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 160px; padding: 12px; border-radius: 12px; background: #fff; border: 1px solid #f2ca72; }
 .hero-logo-niper .hero-logo-artwork { min-height: 200px; }
 .hero-logo-frame img { display: block; width: 100%; height: auto; max-height: 160px; object-fit: contain; }
 .niper-location-wordmark { display: block; color: #000099; font: 700 clamp(.55rem,1.2vw,1.05rem)/1.1 Arial,sans-serif; text-align: center; white-space: nowrap; margin-top: 3px; }
-.hero-logo-frame::before,.hero-logo-frame::after { content: ''; position: absolute; pointer-events: none; z-index: 0; border-radius: 20px; }
-.hero-logo-frame::before { inset: -15px; background: radial-gradient(ellipse at 20% 85%,rgba(255,82,8,.8),transparent 58%),radial-gradient(ellipse at 80% 70%,rgba(255,172,32,.9),transparent 55%),radial-gradient(ellipse at 50% 5%,rgba(255,217,104,.9),transparent 65%); filter: blur(11px); animation: institutional-flame-glow 3.2s ease-in-out infinite alternate; }
-.hero-logo-frame::after { inset: -26px -10px -8px; background: radial-gradient(ellipse at 15% 65%,rgba(255,122,24,.7),transparent 28%),radial-gradient(ellipse at 48% 35%,rgba(255,202,76,.75),transparent 32%),radial-gradient(ellipse at 83% 60%,rgba(255,74,16,.65),transparent 29%); filter: blur(7px); transform-origin: center bottom; animation: institutional-flame-tips 2.6s ease-in-out infinite alternate; }
-.hero-logo-ips::before { animation-delay: -1.6s; }
-.hero-logo-ips::after { animation-delay: -.9s; }
 .hero-logo-frame:hover { transform: translateY(-3px); }
 .hero-logo-frame:focus-visible { outline: 3px solid #e2c477; outline-offset: 18px; }
-@keyframes institutional-flame-glow { 0% { opacity: .48; transform: scale(.97,1); } 50% { opacity: .9; transform: scale(1.06,1.1); } 100% { opacity: .64; transform: scale(1.01,1.04); } }
-@keyframes institutional-flame-tips { 0% { opacity: .35; transform: translateY(3px) scale(1,.94); } 55% { opacity: .8; transform: translateY(-8px) scale(1.04,1.1); } 100% { opacity: .5; transform: translateY(-3px) scale(.98,1.03); } }
 @media (max-width: 1100px) { .hero-title-lockup { width: calc(100vw - 48px); grid-template-columns: 180px minmax(0,1fr) 180px; gap: 1rem; } .hero-logo-niper { width: 132px; } .hero-logo-ips { width: 180px; } .hero-logo-artwork { min-height: 128px; padding: 9px; } .hero-logo-niper .hero-logo-artwork { min-height: 150px; } .hero-logo-frame img { max-height: 118px; } }
 @media (max-width: 800px) { .hero-title-lockup { grid-template-columns: 110px minmax(0,1fr) 110px; width: calc(100vw - 32px); gap: .65rem; } .hero-logo-niper { width: 88px; } .hero-logo-ips { width: 110px; } .hero-logo-artwork,.hero-logo-niper .hero-logo-artwork { min-height: 104px; padding: 6px; } .hero-logo-frame img { max-height: 80px; } }
-@media (max-width: 480px) { .hero-title-lockup { grid-template-columns: 70px minmax(0,1fr) 70px; width: calc(100vw - 24px); gap: .4rem; } .hero-logo-niper { width: 64px; } .hero-logo-ips { width: 70px; } .hero-logo-artwork,.hero-logo-niper .hero-logo-artwork { min-height: 80px; padding: 4px; border-radius: 7px; } .hero-logo-frame img { max-height: 60px; } .hero-logo-frame::before { inset: -8px; filter: blur(7px); } .hero-logo-frame::after { inset: -15px -5px -5px; filter: blur(5px); } }
-@media (prefers-reduced-motion: reduce) { .hero-logo-frame::before,.hero-logo-frame::after { animation: none; opacity: .45; } .hero-logo-frame { transition: none; } .hero-logo-frame:hover { transform: none; } }
+@media (max-width: 480px) { .hero-title-lockup { grid-template-columns: 70px minmax(0,1fr) 70px; width: calc(100vw - 24px); gap: .4rem; } .hero-logo-niper { width: 64px; } .hero-logo-ips { width: 70px; } .hero-logo-artwork,.hero-logo-niper .hero-logo-artwork { min-height: 80px; padding: 4px; border-radius: 7px; } .hero-logo-frame img { max-height: 60px; } }
+@media (prefers-reduced-motion: reduce) { .hero-logo-frame { transition: none; } .hero-logo-frame:hover { transform: none; } }
 </style>
 </head>
 <body>
