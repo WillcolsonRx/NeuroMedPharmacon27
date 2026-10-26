@@ -121,7 +121,7 @@ Admin proof links are signed for five minutes; refresh the dashboard to renew.
 The website checks image/PDF headers, not whether a bank transfer actually settled.
 The Secretariat must reconcile submitted references against bank records.
 
-Early-bird rates run through 9 November 2026, regular rates through 9 December
+Early-bird rates run through 9 November 2026, regular rates through 15 December
 2026 (inclusive, Asia/Kolkata), and spot rates apply afterward.
 
 ## Word abstracts and sponsorship confirmations

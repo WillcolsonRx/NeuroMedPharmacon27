@@ -10,7 +10,9 @@ test('Tier calculation auto-switches correctly by date', () => {
   assert.equal(currentTier(new Date('2026-11-09T23:59:59+05:30')), 'early');
   assert.equal(currentTier(new Date('2026-11-10T00:00:00+05:30')), 'regular');
   assert.equal(currentTier(new Date('2026-12-09T23:59:59+05:30')), 'regular');
-  assert.equal(currentTier(new Date('2026-12-10T00:00:00+05:30')), 'spot');
+  assert.equal(currentTier(new Date('2026-12-10T00:00:00+05:30')), 'regular');
+  assert.equal(currentTier(new Date('2026-12-15T23:59:59+05:30')), 'regular');
+  assert.equal(currentTier(new Date('2026-12-16T00:00:00+05:30')), 'spot');
 });
 
 test('TARIFF contains expected rate structures for all tiers', () => {
@@ -90,6 +92,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
     // 1. GET /api/tariff
     const tariffRes = await fetch(`${baseUrl}/api/tariff`);
     assert.equal(tariffRes.status, 200);
+    assert.equal(tariffRes.headers.get('cache-control'), 'no-store');
     const tariffJson = await tariffRes.json();
     assert.ok(tariffJson.tier);
     assert.ok(tariffJson.prices);
