@@ -3005,84 +3005,16 @@ button, input, select, textarea {
      ========================================================================== -->
 <section class="section-block section-block-light" id="schedule">
   <div class="container">
-    
     <div class="section-header-centered">
       <span class="editorial-kicker">Scientific Agenda</span>
       <h2 class="section-title-large">Program Schedule &amp; Sessions</h2>
-      <p class="section-lead-text">
-        Two days of scientific talks, thematic sessions, oral communications, and poster presentations on 19–20 February, followed by a post-conference workshop on 21 February 2027.
-      </p>
+      <p class="section-lead-text">The detailed program schedule will be updated soon.</p>
     </div>
-
-    <!-- Day Selector Tabs -->
-    <div class="schedule-nav-tabs">
-      <button class="schedule-day-btn active" onclick="switchScheduleDay(1, this)">
-        Day 1: Feb 19, 2027 (Inauguration &amp; Scientific Talks)
-      </button>
-      <button class="schedule-day-btn" onclick="switchScheduleDay(2, this)">
-        Day 2: Feb 20, 2027 (Scientific Sessions &amp; Valedictory)
-      </button>
-      <button class="schedule-day-btn" onclick="switchScheduleDay(3, this)">
-        Post-conference Workshop: Feb 21, 2027
-      </button>
+    <div class="institutional-callout" style="max-width:760px; margin:1.5rem auto; text-align:center;">
+      <h3>Schedule Coming Soon</h3>
+      <p>Session timings, scientific talks, plenary orations, and speaker details will be published here once finalized.</p>
+      <p><strong>Conference:</strong> 19–20 February 2027<br><strong>Post-conference workshop:</strong> 21 February 2027</p>
     </div>
-
-    <!-- Timeline List Container -->
-    <div class="timeline-list" id="scheduleTimeline">
-      
-      <!-- Day 1 Schedule Items (Default) -->
-      <div class="timeline-row">
-        <div class="timeline-time-col">
-          <div>08:30 – 09:30</div>
-          <div class="timeline-venue-sub">Main Foyer</div>
-        </div>
-        <div>
-          <h3 class="timeline-title">Delegate Registration &amp; Kit Distribution</h3>
-          <p class="timeline-speakers">Secretariat desk verification, kit handover, and poster installation assistance.</p>
-        </div>
-      </div>
-
-      <div class="timeline-row">
-        <div class="timeline-time-col">
-          <div>09:30 – 11:00</div>
-          <div class="timeline-venue-sub">Auditorium A</div>
-        </div>
-        <div>
-          <h3 class="timeline-title">Inaugural Ceremony &amp; Presidential Address</h3>
-          <p class="timeline-speakers">
-            Chief Guest Address (Ministry of Chemicals &amp; Fertilizers, Govt. of India), Director NIPER-Raebareli, and President Indian Pharmacological Society.
-          </p>
-        </div>
-      </div>
-
-      <div class="timeline-row">
-        <div class="timeline-time-col">
-          <div>11:30 – 13:00</div>
-          <div class="timeline-venue-sub">Auditorium A</div>
-        </div>
-        <div>
-          <h3 class="timeline-title">Scientific Talk</h3>
-          <p class="timeline-speakers">
-            <strong>Speaker:</strong> Dr. Ashok K Datusalia
-          </p>
-        </div>
-      </div>
-
-      <div class="timeline-row">
-        <div class="timeline-time-col">
-          <div>14:00 – 16:30</div>
-          <div class="timeline-venue-sub">Hall B</div>
-        </div>
-        <div>
-          <h3 class="timeline-title">Scientific Talks &amp; Poster Presentations</h3>
-          <p class="timeline-speakers">
-            Scientific sessions across the conference thematic tracks. Detailed programme to be announced.
-          </p>
-        </div>
-      </div>
-
-    </div>
-
   </div>
 </section>
 
@@ -4423,50 +4355,7 @@ function openAbstractWithTrack(trackName) {
   }
 }
 
-// 4. SCHEDULE DAY SWITCHER
-const SCHEDULE_DATA = {
-  1: [
-    { time: '08:30 – 09:30', venue: 'Main Foyer', title: 'Delegate Registration & Kit Distribution', speakers: 'Secretariat desk verification, kit handover, and poster installation assistance.' },
-    { time: '09:30 – 11:00', venue: 'Auditorium A', title: 'Inaugural Ceremony & Presidential Address', speakers: 'Chief Guest Address (Ministry of Chemicals & Fertilizers, Govt. of India), Director NIPER-Raebareli, and President Indian Pharmacological Society.' },
-    { time: '11:30 – 13:00', venue: 'Auditorium A', title: 'Scientific Talk', speakers: 'Speaker: Dr. Ashok K Datusalia' },
-    { time: '14:00 – 16:30', venue: 'Hall B', title: 'Scientific Talks & Poster Presentations', speakers: 'Scientific sessions across the conference thematic tracks. Detailed programme to be announced.' }
-  ],
-  2: [
-    { time: '09:00 – 10:30', venue: 'Auditorium A', title: 'Scientific TalkI: AI and Generative Molecular Modeling', speakers: 'Scientific Talk: Computational Drug Design & Deep-Learning Affinity Predictors in Central Nervous System Drug Discovery.' },
-    { time: '11:00 – 13:00', venue: 'Hall B', title: 'IPS Symposia: National Pharmacovigilance & Safety Standards', speakers: 'Chaired by Executive Members of IPS. Regulatory harmonization with CDSCO & OECD toxicological guidelines.' },
-    { time: '14:00 – 16:00', venue: 'Exhibition Hall', title: 'Poster Session A & Young Pharmacologist Communications', speakers: '120 research scholars presenting findings in Molecular Neuropharmacology, Synaptic Modulation, and Neurodegenerative Therapeutics.' },
-    { time: '16:30 – 18:00', venue: 'Seminar Hall 1', title: 'Valedictory Function & Certificate Conferral', speakers: 'Conference closing and recognition of scientific contributions.' }
-  ],
-  3: [
-    { time: 'Time to be announced', venue: 'NIPER-Raebareli, Lucknow Campus', title: 'Post-conference Workshop — 21 February 2027', speakers: 'Network Pharmacology workshop. Detailed timings and venue will be announced.' }
-  ]
-};
-
-function switchScheduleDay(dayNum, btn) {
-  const buttons = document.querySelectorAll('.schedule-day-btn');
-  buttons.forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-
-  const container = document.getElementById('scheduleTimeline');
-  const items = SCHEDULE_DATA[dayNum] || SCHEDULE_DATA[1];
-  
-  let html = '';
-  items.forEach(item => {
-    html += `
-      <div class="timeline-row">
-        <div class="timeline-time-col">
-          <div>${item.time}</div>
-          <div class="timeline-venue-sub">${item.venue}</div>
-        </div>
-        <div>
-          <h3 class="timeline-title">${item.title}</h3>
-          <p class="timeline-speakers">${item.speakers}</p>
-        </div>
-      </div>
-    `;
-  });
-  container.innerHTML = html;
-}
+// 4. SCHEDULE — detailed programme will be published once finalized.
 
 // Keep the displayed payable amount aligned with the registration API.
 async function loadRegistrationTariff() {
