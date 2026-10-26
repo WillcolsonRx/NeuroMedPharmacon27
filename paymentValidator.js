@@ -9,7 +9,7 @@ const ALLOWED_MIME_TYPES = {
   'application/pdf': 'pdf'
 };
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+const MAX_FILE_SIZE = 200 * 1024; // 200 KB
 const MIN_FILE_SIZE = 50; // 50 bytes
 
 /**
@@ -17,7 +17,7 @@ const MIN_FILE_SIZE = 50; // 50 bytes
  */
 function validatePaymentRef(payment_ref) {
   if (!payment_ref || typeof payment_ref !== 'string') {
-    return { valid: false, error: 'Transaction reference or UTR number is required.' };
+    return { valid: false, error: 'Transaction/Reference ID is required.' };
   }
 
   const trimmed = payment_ref.trim();
@@ -118,7 +118,7 @@ function validatePaymentProofPayload(payment_proof, original_filename) {
   }
 
   if (buffer.length > MAX_FILE_SIZE) {
-    return { valid: false, error: 'Payment proof file exceeds maximum 5MB size limit.' };
+    return { valid: false, error: 'Payment proof file exceeds maximum 200 KB size limit.' };
   }
 
   // Verify file signatures to prevent spoofing

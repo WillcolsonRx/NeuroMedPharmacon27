@@ -229,14 +229,14 @@ async function sendDelegateConfirmation(db, registration) {
             </tr>
             <tr>
               <td>A workshop of Network Pharmacology</td>
-              <td>${workshop ? 'Included (+₹500)' : 'Not Included'}</td>
+              <td>${workshop ? 'Included (+₹600)' : 'Not Included'}</td>
             </tr>
             <tr>
               <td>Amount Remitted (Incl. 18% GST)</td>
               <td>${currency === 'USD' ? '$' : '₹ '}${Number(amount).toLocaleString()} ${currency}</td>
             </tr>
             <tr>
-              <td>Payment / UTR Ref ID</td>
+              <td>Transaction/Reference ID</td>
               <td style="font-family: monospace; color: #16a34a;">${payment_ref || 'Submitted on Portal'}</td>
             </tr>
             <tr>
@@ -275,7 +275,7 @@ Your registration for NeuroMet Pharmacon-2027 is confirmed.
 - Affiliation: ${affiliation || 'Not supplied'}
 - Category: ${categoryLabel}
 - Tier: ${(tier || 'early').toUpperCase()} RATE
-- A workshop of Network Pharmacology: ${workshop ? 'Included (+₹500)' : 'Not Included'}
+- A workshop of Network Pharmacology: ${workshop ? 'Included (+₹600)' : 'Not Included'}
 - Total Amount Remitted (Incl. 18% GST): ${currency === 'USD' ? '$' : '₹ '}${amount} ${currency}
 - Dates: 19th – 20th February 2027; workshop: 21 February 2027
 - Venue: NIPER-Raebareli Lucknow Campus, Bijnor Road, Sarojini Nagar, Lucknow 226002
@@ -353,14 +353,14 @@ async function sendOrganizerNotification(db, registration) {
           </div>
           <div class="item-row">
             <span class="item-label">A workshop of Network Pharmacology:</span>
-            <span class="item-val">${workshop ? 'Included (+₹500)' : 'No'}</span>
+            <span class="item-val">${workshop ? 'Included (+₹600)' : 'No'}</span>
           </div>
           <div class="item-row">
             <span class="item-label">Fee Amount (Incl. 18% GST):</span>
             <span class="item-val" style="color: #0f172a;">${currency === 'USD' ? '$' : '₹'} ${Number(amount).toLocaleString()} ${currency}</span>
           </div>
           <div class="item-row">
-            <span class="item-label">Bank Ref / UTR ID:</span>
+            <span class="item-label">Transaction/Reference ID:</span>
             <span class="item-val" style="font-family: monospace; color: #15803d; font-weight: 700;">${payment_ref || 'Provided'}</span>
           </div>
           <div class="item-row">
@@ -387,7 +387,7 @@ Category: ${categoryLabel}
 Tier: ${(tier || 'early').toUpperCase()} RATE
 Workshop: ${workshop ? 'Yes' : 'No'}
 Amount: ${currency === 'USD' ? '$' : '₹'} ${amount} ${currency}
-Bank Ref / UTR ID: ${payment_ref || 'N/A'}
+Transaction/Reference ID: ${payment_ref || 'N/A'}
 Payment Screenshot: ${has_proof ? 'Attached in Database' : 'None'}
   `.trim();
 

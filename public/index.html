@@ -1578,6 +1578,16 @@ button, input, select, textarea {
   color: #ffffff;
 }
 
+.sbi-collect-option { margin-top:1.25rem; padding:1.25rem; border:1px solid #a5d6ed; border-radius:12px; background:linear-gradient(120deg,#edf8ff,#fff); display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap; }
+.sbi-collect-option > div { flex:1 1 240px; }
+.sbi-collect-badge { font-size:.65rem; letter-spacing:.06em; font-weight:700; color:#075985; }
+.sbi-collect-option h4 { margin:.5rem 0; color:#0f172a; font-size:1rem; }
+.sbi-collect-option p { margin:0; color:#475569; font-size:.8rem; line-height:1.6; }
+.sbi-collect-link { display:block; padding:.85rem 1.1rem; background:#075985; color:#fff; border-radius:8px; text-align:center; text-decoration:none; font-weight:700; }
+.sbi-collect-link small { display:block; margin-top:.25rem; font-size:.65rem; font-weight:400; }
+.sbi-collect-link:hover { background:#0c4a6e; color:#fff; }
+.sbi-collect-link:focus-visible { outline:3px solid #d4a72c; outline-offset:4px; }
+
 .proof-upload-box {
   background: #ffffff;
   border: 1.5px dashed #cbd5e1;
@@ -3045,9 +3055,9 @@ button, input, select, textarea {
             </tr>
             <tr>
               <td>A workshop of Network Pharmacology Add-on — 21 February</td>
-              <td class="tar-amt">+₹500</td>
-              <td class="tar-amt">+₹500</td>
-              <td class="tar-amt">+₹500</td>
+              <td class="tar-amt">+₹600</td>
+              <td class="tar-amt">+₹600</td>
+              <td class="tar-amt">+₹600</td>
             </tr>
           </tbody>
         </table>
@@ -3099,7 +3109,7 @@ button, input, select, textarea {
           <div class="calc-checkbox-row">
             <input type="checkbox" id="regWorkshop" onchange="recalculateTariff()">
             <label for="regWorkshop" style="cursor: pointer;">
-              Include post-conference workshop — 21 February (+₹500)
+              Include post-conference workshop — 21 February (+₹600)
             </label>
           </div>
 
@@ -3111,7 +3121,7 @@ button, input, select, textarea {
             </div>
             <div class="calc-total-row" id="rowWorkshop" style="display:none;">
               <span>A workshop of Network Pharmacology:</span>
-              <span class="tabular-nums" id="summaryWorkshop">+₹500</span>
+              <span class="tabular-nums" id="summaryWorkshop">+₹600</span>
             </div>
             <div class="calc-grand-total">
               <span class="calc-grand-label">Total Payable Remittance (Incl. 18% GST):</span>
@@ -3224,18 +3234,26 @@ button, input, select, textarea {
               </div>
             </div>
 
+            <div class="sbi-collect-option">
+              <div><span class="sbi-collect-badge">OFFICIAL NIPER-RAEBARELI PAYMENT PORTAL</span>
+                <h4>Prefer to pay online through SBI Collect?</h4>
+                <p>Open the institutional payment portal, complete your payment, then return here to enter your Transaction/Reference ID and upload proof. Your enrolment is submitted on this page.</p>
+              </div>
+              <a class="sbi-collect-link" href="https://sbcollect.sbi.bank.in/sbicollect/icollecthome.htm?corpID=4357359" target="_blank" rel="noopener noreferrer">Pay via SBI Collect <span aria-hidden="true">↗</span><small>Opens in a new tab</small></a>
+            </div>
+
             <!-- Transaction Reference & Screenshot Upload -->
             <div style="margin-top: 1rem; border-top: 1px solid #e2e8f0; padding-top: 0.85rem;">
               <div class="mb-2">
-                <label class="calc-label">Bank Transaction / UTR / Reference ID *</label>
-                <input type="text" class="calc-input" id="regPaymentRef" placeholder="e.g. 429182910482 or UPI Ref / Cheque No." oninput="validatePaymentSubmissionState()" required>
-                <span style="font-size:0.7rem; color:#64748b; display:block; margin-top:0.25rem;">Enter the 12-digit UTR or transaction ID shown in your payment confirmation.</span>
+                <label class="calc-label">Transaction/Reference ID *</label>
+                <input type="text" class="calc-input" id="regPaymentRef" placeholder="Enter your payment transaction or reference ID" oninput="validatePaymentSubmissionState()" required>
+                <span style="font-size:0.7rem; color:#64748b; display:block; margin-top:0.25rem;">Enter the transaction or reference ID exactly as shown on your payment confirmation.</span>
               </div>
 
               <div>
                 <label class="calc-label" style="display:flex; justify-content:space-between; align-items:center;">
                   <span>Payment Transaction Screenshot *</span>
-                  <span style="font-size:0.7rem; color:#64748b; font-weight:normal;">PNG, JPG, WebP, PDF (Max 5MB)</span>
+                  <span style="font-size:0.7rem; color:#64748b; font-weight:normal;">PNG, JPG, WebP, PDF (Max 200 KB)</span>
                 </label>
                 
                 <div class="proof-upload-box" id="proofDropZone" onclick="document.getElementById('regPaymentFile').click()">
@@ -3958,10 +3976,10 @@ button, input, select, textarea {
       </div>
       <div class="d-flex justify-content-between mb-1">
         <span style="color:#64748b;">A workshop of Network Pharmacology:</span>
-        <span id="receiptWorkshop" style="color:#0f172a;">Included (+₹500)</span>
+        <span id="receiptWorkshop" style="color:#0f172a;">Included (+₹600)</span>
       </div>
       <div class="d-flex justify-content-between mb-1">
-        <span style="color:#64748b;">Bank UTR / Transaction ID:</span>
+        <span style="color:#64748b;">Transaction/Reference ID:</span>
         <strong id="receiptPaymentRef" style="color:#16a34a; font-family:var(--font-mono);">-</strong>
       </div>
       <div class="d-flex justify-content-between mb-1">
@@ -4059,10 +4077,10 @@ button, input, select, textarea {
 
         <div class="mb-3">
           <label class="calc-label" for="sponPaymentRef">Transaction Reference (optional for an inquiry)</label>
-          <input type="text" class="calc-input" id="sponPaymentRef" placeholder="Bank UTR / transaction reference">
+          <input type="text" class="calc-input" id="sponPaymentRef" placeholder="Transaction/Reference ID">
           <label class="calc-label" for="sponPaymentProof">Payment Proof</label>
           <input type="file" class="calc-input" id="sponPaymentProof" accept=".png,.jpg,.jpeg,.webp,.pdf">
-          <p>If already paid, provide both the reference and proof (up to 2 MB). Bank confirmation is subject to Secretariat review. Custom sponsorships require an agreed quotation before payment.</p>
+          <p>If already paid, provide both the reference and proof (up to 200 KB). Bank confirmation is subject to Secretariat review. Custom sponsorships require an agreed quotation before payment.</p>
         </div>
 
         <div class="d-flex justify-content-end gap-2">
@@ -4157,19 +4175,19 @@ const TARIFF_DATA = {
     student: 3500,
     faculty: 4500,
     corporate: 6000,
-    workshop: 500
+    workshop: 600
   },
   regular: {
     student: 4000,
     faculty: 5500,
     corporate: 7500,
-    workshop: 500
+    workshop: 600
   },
   spot: {
     student: 4500,
     faculty: 6500,
     corporate: 9000,
-    workshop: 500
+    workshop: 600
   }
 };
 
@@ -4329,7 +4347,7 @@ function recalculateTariff() {
   const base = select.value === 'inhouse_student' ? 2000 : prices[select.value];
   document.getElementById('summaryBase').textContent = '₹' + base.toLocaleString('en-IN');
   document.getElementById('rowWorkshop').style.display = workshop ? 'flex' : 'none';
-  document.getElementById('summaryWorkshop').textContent = '+₹' + Number(prices.workshop ?? 500).toLocaleString('en-IN');
+  document.getElementById('summaryWorkshop').textContent = '+₹' + Number(prices.workshop ?? 600).toLocaleString('en-IN');
   const total = '₹' + amount.toLocaleString('en-IN');
   document.getElementById('summaryGrandTotal').textContent = total;
   document.getElementById('paymentRemitNotice').textContent = total;
@@ -4370,49 +4388,6 @@ function fallbackCopy(text, btn) {
 let delegateProofDataUrl = null;
 let delegateProofFileName = null;
 
-// Client-side screenshot optimizer: resizes phone screenshots to max 1200px
-// Drastically shrinks 3MB-6MB mobile screenshots to ~120KB-200KB
-// Prevents Vercel 4.5MB Serverless function payload limit errors and network timeouts
-function compressImageFile(file, maxDimension = 1200, quality = 0.82) {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const img = new Image();
-      img.onload = function() {
-        let width = img.width;
-        let height = img.height;
-        if (width > maxDimension || height > maxDimension) {
-          if (width > height) {
-            height = Math.round((height * maxDimension) / width);
-            width = maxDimension;
-          } else {
-            width = Math.round((width * maxDimension) / height);
-            height = maxDimension;
-          }
-        }
-        const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, width, height);
-        ctx.drawImage(img, 0, 0, width, height);
-        const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
-        const approxBytes = Math.round((compressedDataUrl.length * 3) / 4);
-        resolve({ dataUrl: compressedDataUrl, size: approxBytes });
-      };
-      img.onerror = function() {
-        resolve({ dataUrl: e.target.result, size: file.size });
-      };
-      img.src = e.target.result;
-    };
-    reader.onerror = function() {
-      resolve(null);
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
 async function processPaymentProofFile(file) {
   if (!file) return;
 
@@ -4424,35 +4399,18 @@ async function processPaymentProofFile(file) {
     return;
   }
 
-  const promptEl = document.getElementById('proofUploadPrompt');
-  if (promptEl) {
-    promptEl.innerHTML = '<div style="font-size:0.85rem; color:#64748b; padding:0.5rem;">Optimizing screenshot for fast submission...</div>';
+  if (file.size > 200 * 1024) {
+    alert('Payment proof must be 200 KB or smaller. Please resize your screenshot or choose a smaller PDF.');
+    clearPaymentFile();
+    return;
   }
-
-  let finalDataUrl = '';
-  let finalSize = file.size;
-
-  if (file.type.startsWith('image/')) {
-    const compressed = await compressImageFile(file, 1200, 0.82);
-    if (compressed) {
-      finalDataUrl = compressed.dataUrl;
-      finalSize = compressed.size;
-    }
-  }
-
-  if (!finalDataUrl) {
-    if (file.size > 3.5 * 1024 * 1024) {
-      alert('PDF exceeds 3.5MB limit. Please upload an image screenshot or a smaller PDF file.');
-      clearPaymentFile();
-      return;
-    }
-    const reader = new FileReader();
-    finalDataUrl = await new Promise((res) => {
-      reader.onload = (e) => res(e.target.result);
-      reader.onerror = () => res(null);
-      reader.readAsDataURL(file);
-    });
-  }
+  const finalSize = file.size;
+  const reader = new FileReader();
+  const finalDataUrl = await new Promise((resolve) => {
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => resolve(null);
+    reader.readAsDataURL(file);
+  });
 
   if (!finalDataUrl) {
     alert('Failed to read file. Please try selecting the screenshot again.');
@@ -4467,7 +4425,7 @@ async function processPaymentProofFile(file) {
   const previewWrap = document.getElementById('proofFilePreview');
   previewWrap.style.display = 'flex';
   document.getElementById('proofFileName').textContent = file.name;
-  document.getElementById('proofFileSize').textContent = (finalSize / 1024).toFixed(1) + ' KB (Verified)';
+  document.getElementById('proofFileSize').textContent = (finalSize / 1024).toFixed(1) + ' KB (Ready to upload)';
 
   const thumb = document.getElementById('proofThumb');
   const docIcon = document.getElementById('proofDocIcon');
@@ -4749,7 +4707,7 @@ async function handleRegistrationSubmit(e) {
     const catLabel = RegistrationPricing.labels[data.category || category];
     document.getElementById('receiptCategory').textContent = catLabel;
     document.getElementById('receiptTier').textContent = (data.tier || 'early').toUpperCase() + ' RATE';
-    document.getElementById('receiptWorkshop').textContent = workshop ? 'Included (+₹500)' : 'Not Opted';
+    document.getElementById('receiptWorkshop').textContent = workshop ? 'Included (+₹600)' : 'Not Opted';
     const recPaymentRef = document.getElementById('receiptPaymentRef');
     if (recPaymentRef) recPaymentRef.textContent = paymentRef;
     document.getElementById('receiptAmount').textContent = '₹' + Number(data.amount).toLocaleString('en-IN') + ' INR (Incl. 18% GST)';
@@ -4804,10 +4762,10 @@ function closeReceiptModal() {
 }
 
 // 8. ABSTRACT SUBMISSION LOGIC WITH CONCURRENCY LOCK & RETRY
-function readSubmissionFile(file, allowedExtensions) {
+function readSubmissionFile(file, allowedExtensions, maxBytes = 2 * 1024 * 1024) {
   return new Promise((resolve,reject) => {
-    if (!file || !allowedExtensions.test(file.name) || file.size > 2 * 1024 * 1024 || !file.size) {
-      reject(new Error('Select a supported file up to 2 MB.'));
+    if (!file || !allowedExtensions.test(file.name) || file.size > maxBytes || !file.size) {
+      reject(new Error('Select a supported file up to ' + (maxBytes / 1024) + ' KB.'));
       return;
     }
     const reader = new FileReader();
@@ -4950,7 +4908,7 @@ async function handleSponsorshipSubmit(event) {
     const paymentRef = document.getElementById('sponPaymentRef').value.trim();
     const proofFile = document.getElementById('sponPaymentProof').files[0];
     if (Boolean(paymentRef) !== Boolean(proofFile)) throw new Error('Provide both a transaction reference and a payment proof, or leave both empty for an inquiry.');
-    const proofData = proofFile ? await readSubmissionFile(proofFile, /\.(png|jpe?g|webp|pdf)$/i) : undefined;
+    const proofData = proofFile ? await readSubmissionFile(proofFile, /\.(png|jpe?g|webp|pdf)$/i, 200 * 1024) : undefined;
     const res = await fetchWithRetry('/api/sponsorship', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

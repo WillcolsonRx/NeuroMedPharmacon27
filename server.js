@@ -134,9 +134,9 @@ for (const column of ['document_path TEXT','document_filename TEXT','document_mi
 }
 
 const TARIFF = {
-  early:   { student: 3500, inhouse_student: 2000, faculty: 4500, corporate: 6000, workshop: 500 },
-  regular: { student: 4000, inhouse_student: 2000, faculty: 5500, corporate: 7500, workshop: 500 },
-  spot:    { student: 4500, inhouse_student: 2000, faculty: 6500, corporate: 9000, workshop: 500 }
+  early:   { student: 3500, inhouse_student: 2000, faculty: 4500, corporate: 6000, workshop: 600 },
+  regular: { student: 4000, inhouse_student: 2000, faculty: 5500, corporate: 7500, workshop: 600 },
+  spot:    { student: 4500, inhouse_student: 2000, faculty: 6500, corporate: 9000, workshop: 600 }
 };
 
 function currentTier(customDate) {

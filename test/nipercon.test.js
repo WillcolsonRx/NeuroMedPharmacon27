@@ -27,7 +27,7 @@ test('TARIFF contains expected rate structures for all tiers', () => {
   assert.equal(TARIFF.early.student, 3500);
   assert.equal(TARIFF.early.faculty, 4500);
   assert.equal(TARIFF.early.corporate, 6000);
-  assert.equal(TARIFF.early.workshop, 500);
+  assert.equal(TARIFF.early.workshop, 600);
 });
 
 test('Database tables are properly initialized and handle inserts', () => {
@@ -124,7 +124,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
     assert.ok(regJson.proof_metadata);
     assert.equal(regJson.proof_metadata.proof_mimetype, 'image/png');
     assert.ok(regJson.proof_metadata.proof_size > 0);
-    assert.equal(regJson.amount, 4000);
+    assert.equal(regJson.amount, 4100);
     assert.equal(regJson.affiliation, 'Example University');
 
     // 3. POST /api/register - rejection when payment proof is missing
@@ -362,7 +362,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
     assert.equal((await register({...inhouse,affiliation:''})).status,400);
     const inhouseResponse=await register(inhouse);assert.equal(inhouseResponse.status,200);
     const inhouseData=await inhouseResponse.json();assert.equal(inhouseData.amount,2000);assert.equal(inhouseData.affiliation,'NIPER-Raebareli');
-    const inhouseWorkshop=await register({...inhouse,workshop:1,payment_ref:'INHOUSE-UTR-67890'});assert.equal(inhouseWorkshop.status,200);assert.equal((await inhouseWorkshop.json()).amount,2500);
+    const inhouseWorkshop=await register({...inhouse,workshop:1,payment_ref:'INHOUSE-UTR-67890'});assert.equal(inhouseWorkshop.status,200);assert.equal((await inhouseWorkshop.json()).amount,2600);
 
   } finally {
     testServer.close();

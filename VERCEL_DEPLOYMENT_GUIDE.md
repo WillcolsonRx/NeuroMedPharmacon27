@@ -169,7 +169,7 @@ registrations and amounts; no historical payments are recalculated.
 
 Delegates enter their name, affiliation, email and phone before choosing a category.
 Standard delegate prices already include GST: no additional percentage is added.
-The optional workshop adds only its listed INR 500. Sponsorship pricing is unchanged.
+The optional workshop adds only its listed INR 600. Sponsorship pricing is unchanged.
 
 The fourth category, In-house students (INR 2,000 in every registration tier), is
 shown only when the entered affiliation matches NIPER-Raebareli aliases, including

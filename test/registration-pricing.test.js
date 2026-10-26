@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const vm=require('node:vm');
 const fs=require('node:fs');
 const pricing=require('../public/registration-pricing');
-const prices={student:3500,faculty:4500,corporate:6000,workshop:500};
+const prices={student:3500,faculty:4500,corporate:6000,workshop:600};
 
 test('recognizes NIPER-Raebareli affiliation variants but rejects other institutions',()=>{
  for(const affiliation of ['NIPER-R','niper r','NIPER-Raebareli','NIPER RAE BARELI','National Institute of Pharmaceutical Education and Research, Raebareli','National Institute of Pharmaceutical Education & Research (Raebareli)','Department of Pharmacology, NIPER-Raebareli (Lucknow)','N.I.P.E.R., Raebareli'])assert.equal(pricing.isInHouseAffiliation(affiliation),true,affiliation);
@@ -11,9 +11,9 @@ test('recognizes NIPER-Raebareli affiliation variants but rejects other institut
 });
 test('registration totals use inclusive prices and enforce category and affiliation rules',()=>{
  assert.equal(pricing.registrationAmount({category:'student',affiliation:'Example University'},prices),3500);
- assert.equal(pricing.registrationAmount({category:'student',workshop:true,affiliation:'Example University'},prices),4000);
+ assert.equal(pricing.registrationAmount({category:'student',workshop:true,affiliation:'Example University'},prices),4100);
  assert.equal(pricing.registrationAmount({category:'inhouse_student',affiliation:'NIPER-R'},prices),2000);
- assert.equal(pricing.registrationAmount({category:'inhouse_student',workshop:1,affiliation:'NIPER-R'},prices),2500);
+ assert.equal(pricing.registrationAmount({category:'inhouse_student',workshop:1,affiliation:'NIPER-R'},prices),2600);
  assert.throws(()=>pricing.registrationAmount({category:'inhouse_student',affiliation:'NIPER Mohali'},prices),/require/);
  for(const category of ['workshop','constructor','__proto__'])assert.throws(()=>pricing.registrationAmount({category,affiliation:'NIPER-R'},prices),/Invalid delegate category/);
 });

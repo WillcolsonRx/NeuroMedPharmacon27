@@ -13,7 +13,7 @@
     if(![true,false,0,1].includes(workshop))throw Error('Invalid workshop selection');
     const base=category==='inhouse_student'?2000:prices[category];
     if(!Number.isFinite(base)||base<0)throw Error('Registration fees unavailable');
-    return base+(workshop?(prices.workshop ?? 500):0);
+    return base+(workshop?(prices.workshop ?? 600):0);
   }
   const api={labels,isInHouseAffiliation,registrationAmount};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
