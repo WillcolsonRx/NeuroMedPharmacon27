@@ -1203,6 +1203,25 @@ button, input, select, textarea {
   align-items: start;
 }
 
+.registration-info-column { min-width:0; display:grid; gap:1.5rem; }
+.sbi-payment-guide { background:#fff; padding:clamp(1.25rem,3vw,2.25rem); border:1px solid #bae6fd; border-radius:12px; box-shadow:0 8px 24px rgba(7,89,133,.05); }
+.sbi-guide-kicker { color:#075985; font-size:.72rem; font-weight:700; letter-spacing:.12em; }
+.sbi-payment-guide h3 { font-size:1.25rem; color:#0f172a; margin:.6rem 0; }
+.sbi-guide-intro,.sbi-guide-note { color:#64748b; font-size:.82rem; line-height:1.65; }
+.sbi-guide-steps { list-style:none; padding:0; margin:1.5rem 0; counter-reset:payment-step; }
+.sbi-guide-steps li { position:relative; padding:0 0 1.5rem 2.8rem; counter-increment:payment-step; }
+.sbi-guide-steps li::before { content:counter(payment-step); position:absolute; left:0; top:0; width:1.9rem; height:1.9rem; display:grid; place-items:center; border-radius:50%; background:#075985; color:#fff; font-weight:700; font-size:.85rem; }
+.sbi-guide-steps li:not(:last-child)::after { content:""; position:absolute; left:.9rem; top:2.1rem; bottom:.25rem; border-left:2px solid #dbeafe; }
+.sbi-guide-steps strong { color:#0f172a; font-size:.9rem; }
+.sbi-guide-steps p { margin:.4rem 0 0; color:#475569; font-size:.82rem; line-height:1.65; }
+.sbi-reference-example { border:1px dashed #7dd3fc; border-radius:8px; background:#f0f9ff; padding:.8rem; margin-top:.8rem; }
+.sbi-reference-example span,.sbi-reference-example small { display:block; color:#475569; font-size:.72rem; }
+.sbi-reference-example code { display:block; color:#075985; font-size:1.35rem; font-weight:700; margin:.3rem 0; }
+.sbi-guide-actions { display:grid; gap:.75rem; }
+.sbi-guide-return { padding:.75rem; border:1px solid #cbd5e1; border-radius:8px; background:#fff; color:#075985; font-weight:600; cursor:pointer; }
+.sbi-guide-return:focus-visible { outline:3px solid #d4a72c; outline-offset:3px; }
+.sbi-guide-note { margin:1rem 0 0; font-size:.72rem; }
+
 .tariff-matrix-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -3014,7 +3033,8 @@ button, input, select, textarea {
 
     <div class="tariff-section-wrap">
       
-      <!-- Left: Tariff Matrix Table -->
+      <!-- Left: Tariff Matrix and SBI Collect guide -->
+      <div class="registration-info-column">
       <div class="tariff-matrix-card">
         <div class="d-flex justify-content-between align-items-baseline mb-3">
           <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin: 0;">Official Tariff Matrix</h3>
@@ -3063,6 +3083,25 @@ button, input, select, textarea {
         <p style="font-size: 0.78rem; color: #64748b; margin-top: 0.85rem; line-height: 1.4;">
           Tariffs + 18% GST Included — no additional GST is added to the listed registration fees.
         </p>
+      </div>
+
+      <aside class="sbi-payment-guide" aria-labelledby="sbiGuideTitle">
+        <span class="sbi-guide-kicker">PAYMENT GUIDE</span>
+        <h3 id="sbiGuideTitle">SBI Collect → Delegate enrolment</h3>
+        <p class="sbi-guide-intro">Keep this page open while you use the official institutional payment portal in another tab.</p>
+        <ol class="sbi-guide-steps">
+          <li><strong>Open the NIPER-Raebareli portal</strong><p>Use the SBI Collect link below. Check that the institution shown is NIPER-Raebareli before proceeding.</p></li>
+          <li><strong>Find the conference fee category</strong><p>Look for the conference fee option for NeuroMet Pharmacon-2027. If it is missing or unclear, contact the Secretariat before paying.</p></li>
+          <li><strong>Enter your details and check the amount</strong><p>Follow SBI’s prompts. Use the same delegate details as this form and check the amount against your selected category and optional ₹600 workshop.</p></li>
+          <li><strong>Save the payment confirmation</strong><p>After a successful payment, keep the SBI receipt and its Transaction/Reference ID starting with <strong>DU</strong>. Copy the full ID exactly as printed.</p><div class="sbi-reference-example"><span>SBI reference format</span><code>DU…</code><small>Illustration only — use your own receipt’s full ID.</small></div></li>
+          <li><strong>Return here to finish enrolment</strong><p>Enter the DU reference in <strong>Transaction/Reference ID</strong>, attach your payment proof (maximum <strong>200 KB</strong>), then submit the delegate form. SBI payment alone does not submit your enrolment.</p></li>
+        </ol>
+        <div class="sbi-guide-actions">
+          <a class="sbi-collect-link" href="https://sbcollect.sbi.bank.in/sbicollect/icollecthome.htm?corpID=4357359" target="_blank" rel="noopener noreferrer">Open SBI Collect ↗<small>Opens in a new tab</small></a>
+          <button type="button" class="sbi-guide-return" onclick="document.getElementById('regPaymentRef').focus()">Already paid? Enter reference →</button>
+        </div>
+        <p class="sbi-guide-note">General guidance, not a recording of SBI’s screens. Category names and steps may vary on the payment portal.</p>
+      </aside>
       </div>
 
       <!-- Right: Real-Time Working Registration Form -->
@@ -3244,8 +3283,8 @@ button, input, select, textarea {
             <div style="margin-top: 1rem; border-top: 1px solid #e2e8f0; padding-top: 0.85rem;">
               <div class="mb-2">
                 <label class="calc-label">Transaction/Reference ID *</label>
-                <input type="text" class="calc-input" id="regPaymentRef" placeholder="Enter your payment transaction or reference ID" oninput="validatePaymentSubmissionState()" required>
-                <span style="font-size:0.7rem; color:#64748b; display:block; margin-top:0.25rem;">Enter the transaction or reference ID exactly as shown on your payment confirmation.</span>
+                <input type="text" class="calc-input" id="regPaymentRef" placeholder="SBI Collect: enter the full DU reference ID" oninput="validatePaymentSubmissionState()" required>
+                <span style="font-size:0.7rem; color:#64748b; display:block; margin-top:0.25rem;">For SBI Collect, enter the full reference starting with DU. For UPI or bank transfer, enter the transaction/reference ID shown on your confirmation.</span>
               </div>
 
               <div>
