@@ -119,3 +119,9 @@ The following images were downloaded unchanged from the image URLs associated wi
 - Prof. Abha Sharma: https://niperraebareli.edu.in/faculty/abha.jpg → `public/assets/leadership/prof-abha-sharma.jpg`
 - Dr. Ashok K. Datusalia: https://niperraebareli.edu.in/images/ashokd.png → `public/assets/leadership/dr-ashok-k-datusalia.png`
 - Dr. Gopal L. Khatik: https://niperraebareli.edu.in/images/gopal.jpg → `public/assets/leadership/dr-gopal-l-khatik.jpg`
+
+### Raebareli label in the official NIPER lockup
+The official header at https://niperraebareli.edu.in/header.html renders `images/logo.png`
+with a separate blue `RAEBARELI` text label beneath it. The image itself ends at NIPER.
+The conference hero and institution card now use that same image-plus-label pattern,
+so the location text remains visible without altering or regenerating the emblem.
