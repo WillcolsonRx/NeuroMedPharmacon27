@@ -2542,7 +2542,7 @@ button, input, select, textarea {
 /* Shared designation spans both secretaries while their portraits stay in sequence. */
 .conference-secretaries { grid-column: span 2; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 1rem; align-content: start; justify-items: center; }
 .conference-secretaries .conference-leadership-role { grid-column: 1 / -1; }
-.conference-secretaries h3 { align-self: start; }
+.conference-secretaries .committee-member-details { align-self: start; min-width: 0; }
 .committee-scroll-hint { display: none; }
 @media (max-width: 900px) {
   .conference-leadership-grid { grid-template-columns: repeat(5,190px); overflow-x: auto; padding-bottom: .8rem; scroll-snap-type: x proximity; }
@@ -2678,13 +2678,13 @@ button, input, select, textarea {
       <div class="conference-leadership-grid" tabindex="0" aria-label="Committee members in order: patron, chairperson, co-chairperson and organizers">
         <article class="conference-leadership-card"><img src="/assets/leadership/prof-shubhini-a-saraf.jpg" alt="Prof. Shubhini A. Saraf" width="144" height="170" decoding="async"><p class="conference-leadership-role">Patron</p><h3>Prof. Shubhini A. Saraf</h3><p>Director, NIPER-Raebareli</p></article>
         <article class="conference-leadership-card"><img src="/assets/leadership/prof-rakesh-kumar-singh.jpg" alt="Prof. Rakesh Kumar Singh" width="144" height="170" decoding="async"><p class="conference-leadership-role">Chairperson</p><h3>Prof. Rakesh Kumar Singh</h3><p>Dean &amp; HOD, NIPER-Raebareli</p></article>
-        <article class="conference-leadership-card"><img src="/assets/leadership/prof-abha-sharma.jpg" alt="Prof. Abha Sharma" width="144" height="170" decoding="async"><p class="conference-leadership-role">Co-Chairperson</p><h3>Prof. Abha Sharma</h3></article>
+        <article class="conference-leadership-card"><img src="/assets/leadership/prof-abha-sharma.jpg" alt="Prof. Abha Sharma" width="144" height="170" decoding="async"><p class="conference-leadership-role">Co-Chairperson</p><h3>Prof. Abha Sharma</h3><p>NIPER-Raebareli</p></article>
         <section class="conference-leadership-card conference-secretaries" aria-labelledby="organizingSecretariesTitle">
           <img src="/assets/leadership/dr-ashok-k-datusalia.png" alt="Dr. Ashok K. Datusalia" width="144" height="170" decoding="async">
           <img src="/assets/leadership/dr-gopal-l-khatik.jpg" alt="Dr. Gopal L. Khatik" width="144" height="170" decoding="async">
           <p id="organizingSecretariesTitle" class="conference-leadership-role">Organizing Secretaries</p>
-          <h3>Dr. Ashok K. Datusalia</h3>
-          <h3>Dr. Gopal L. Khatik</h3>
+          <div class="committee-member-details"><h3>Dr. Ashok K. Datusalia</h3><p>NIPER-Raebareli</p></div>
+          <div class="committee-member-details"><h3>Dr. Gopal L. Khatik</h3><p>NIPER-Raebareli</p></div>
         </section>
       </div>
     </section>
