@@ -77,7 +77,7 @@ function generateSponsorshipProspectusPDF() {
   doc.setFontSize(8);
   doc.setTextColor(220, 230, 245);
   doc.setFont('helvetica', 'normal');
-  doc.text('Space for one display booth · Two complimentary registrations · Listed as sponsor of conference', 32, 200);
+  doc.text('Space for one display booth · Two complimentary registrations · Displayed as sponsor of conference', 32, 200);
 
   // Tier 2: Gold (Rs. 50,000)
   doc.setFillColor(20, 40, 68);
@@ -89,7 +89,7 @@ function generateSponsorshipProspectusPDF() {
   doc.setFontSize(8);
   doc.setTextColor(220, 230, 245);
   doc.setFont('helvetica', 'normal');
-  doc.text('Space for one display booth · One complimentary registration · Listed as sponsor of conference', 32, 222);
+  doc.text('Space for one display booth · One complimentary registration · Displayed as sponsor of conference', 32, 222);
 
   // Tier 3: Silver (Rs. 25,000)
   doc.setFillColor(20, 40, 68);
@@ -101,7 +101,7 @@ function generateSponsorshipProspectusPDF() {
   doc.setFontSize(8);
   doc.setTextColor(220, 230, 245);
   doc.setFont('helvetica', 'normal');
-  doc.text('Complimentary sponsorship · Space for one display booth · Listed as sponsor of conference', 32, 244);
+  doc.text('One complimentary registration · No display booth · Displayed as sponsor of conference', 32, 244);
 
   // Tier 4: Bronze (Rs. 25,000)
   doc.setFillColor(20, 40, 68);
@@ -146,9 +146,9 @@ function generateSponsorshipProspectusPDF() {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
   const summary = [
-    'Platinum: INR 100,000 + 18% GST; one booth, two registrations, sponsor listing.',
-    'Gold: INR 50,000 + 18% GST; one booth, one registration, sponsor listing.',
-    'Silver: INR 25,000 + 18% GST; one booth and sponsor listing.',
+    'Platinum: INR 100,000 + 18% GST; one booth, two registrations, displayed as sponsor.',
+    'Gold: INR 50,000 + 18% GST; one booth, one registration, displayed as sponsor.',
+    'Silver: INR 25,000 + 18% GST; one complimentary registration, no booth, displayed as sponsor.',
     'Philanthropic support: custom contribution agreed with Secretariat; one lunch and one dinner',
     'for one supporter. No commercial deliverables. Delegate registration is separate.',
     'The institution will confirm the contribution amount and applicable tax treatment before payment.'

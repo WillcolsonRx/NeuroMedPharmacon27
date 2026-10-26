@@ -21,3 +21,6 @@ https://www.acm.org/conferences/conference-planning could not be retrieved: the
 network proxy returned HTTP 403. No external practice or tax conclusion was verified.
 The design therefore uses explicit prices/inclusions and voluntary inquiry wording,
 without representing a researched market strategy or obscuring the available choices.
+
+Silver includes one complimentary registration, no stall/display booth, and display
+as a sponsor of the conference. Sponsorship recognition is described as displayed.
