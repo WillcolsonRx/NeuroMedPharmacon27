@@ -1578,11 +1578,10 @@ button, input, select, textarea {
   color: #ffffff;
 }
 
-.sbi-collect-option { margin-top:1.25rem; padding:1.25rem; border:1px solid #a5d6ed; border-radius:12px; background:linear-gradient(120deg,#edf8ff,#fff); display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap; }
-.sbi-collect-option > div { flex:1 1 240px; }
+.sbi-collect-option { margin-top:1.25rem; padding:1.25rem; border:1px solid #a5d6ed; border-radius:12px; background:linear-gradient(120deg,#edf8ff,#fff); display:flex; flex-direction:column; align-items:center; gap:1rem; text-align:center; }
+.sbi-collect-option > div { width:100%; max-width:36rem; }
 .sbi-collect-badge { font-size:.65rem; letter-spacing:.06em; font-weight:700; color:#075985; }
-.sbi-collect-option h4 { margin:.5rem 0; color:#0f172a; font-size:1rem; }
-.sbi-collect-option p { margin:0; color:#475569; font-size:.8rem; line-height:1.6; }
+.sbi-collect-option p { margin:.65rem 0 0; color:#475569; font-size:.8rem; line-height:1.6; }
 .sbi-collect-link { display:block; padding:.85rem 1.1rem; background:#075985; color:#fff; border-radius:8px; text-align:center; text-decoration:none; font-weight:700; }
 .sbi-collect-link small { display:block; margin-top:.25rem; font-size:.65rem; font-weight:400; }
 .sbi-collect-link:hover { background:#0c4a6e; color:#fff; }
@@ -3236,7 +3235,6 @@ button, input, select, textarea {
 
             <div class="sbi-collect-option">
               <div><span class="sbi-collect-badge">OFFICIAL NIPER-RAEBARELI PAYMENT PORTAL</span>
-                <h4>Prefer to pay online through SBI Collect?</h4>
                 <p>Open the institutional payment portal, complete your payment, then return here to enter your Transaction/Reference ID and upload proof. Your enrolment is submitted on this page.</p>
               </div>
               <a class="sbi-collect-link" href="https://sbcollect.sbi.bank.in/sbicollect/icollecthome.htm?corpID=4357359" target="_blank" rel="noopener noreferrer">Pay via SBI Collect <span aria-hidden="true">↗</span><small>Opens in a new tab</small></a>
