@@ -111,3 +111,11 @@ This manifest documents all external photographic and identity assets utilized a
 - **Portrait**: https://niperraebareli.edu.in/images/director_new1.jpg (linked from the official homepage), downloaded unchanged as `public/assets/leadership/prof-shubhini-a-saraf.jpg`; 3225 × 3451 pixels.
 - **Chairperson**: Prof. Rakesh Kumar Singh, listed as Dean & Professor at https://niperraebareli.edu.in/faculty.html; the linked profile https://niperraebareli.edu.in/faculty/CV_Rakesh%20K%20Singh.pdf identifies his Head of Department role.
 - **Co-Chairperson and organizers**: Conference roles supplied by the organizer; faculty names verified against the same official faculty listing. Display uses the requested abbreviated name Dr. Gopal L. Khatik.
+
+### Additional committee portraits
+Official faculty listing: https://niperraebareli.edu.in/faculty.html
+The following images were downloaded unchanged from the image URLs associated with each faculty name on that listing:
+- Prof. Rakesh Kumar Singh: https://niperraebareli.edu.in/faculty/Rakesh%20Kumar%20Singh.jpg → `public/assets/leadership/prof-rakesh-kumar-singh.jpg`
+- Prof. Abha Sharma: https://niperraebareli.edu.in/faculty/abha.jpg → `public/assets/leadership/prof-abha-sharma.jpg`
+- Dr. Ashok K. Datusalia: https://niperraebareli.edu.in/images/ashokd.png → `public/assets/leadership/dr-ashok-k-datusalia.png`
+- Dr. Gopal L. Khatik: https://niperraebareli.edu.in/images/gopal.jpg → `public/assets/leadership/dr-gopal-l-khatik.jpg`

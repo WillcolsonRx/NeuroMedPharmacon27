@@ -2530,16 +2530,21 @@ button, input, select, textarea {
 .conference-countdown-note { margin: .85rem 0 0; color: #cbd5e1; font-size: .78rem; }
 
 
-.conference-leadership { width: 100%; max-width: 1000px; margin: 2rem auto; text-align: center; }
-.conference-patron { display: flex; justify-content: center; align-items: center; gap: 1.5rem; padding: 1.4rem; border: 1px solid rgba(203,162,52,.35); border-radius: 8px; background: rgba(15,34,56,.75); }
-.conference-patron img { width: 168px; height: 180px; object-fit: contain; border-radius: 6px; background: #fff; }
-.conference-leadership-role { color: #e2c477; font-size: .76rem; text-transform: uppercase; letter-spacing: .1em; margin: 0 0 .5rem; }
-.conference-leadership h3 { color: #fff; font-family: var(--font-serif); font-size: 1.3rem; margin: .3rem 0; }
-.conference-leadership p { color: #cbd5e1; margin: .4rem 0; line-height: 1.5; }
+.hero-main-title { white-space: nowrap; text-wrap: nowrap; font-size: clamp(1rem, 5.2vw, 4.5rem); }
+.conference-leadership { width: 100%; max-width: 1200px; margin: 2rem auto; text-align: center; }
+.conference-leadership-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 1rem; align-items: stretch; }
+.conference-leadership-card { display: flex; flex-direction: column; align-items: center; padding: 1.15rem .7rem; border: 1px solid rgba(203,162,52,.3); background: rgba(15,34,56,.75); border-radius: 8px; }
+.conference-leadership-card img { width: 144px; max-width: 100%; height: 170px; object-fit: contain; object-position: center; border-radius: 6px; background: #fff; margin-bottom: 1rem; }
+.conference-leadership-role { color: #e2c477; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .5rem; }
+.conference-leadership h3 { color: #fff; font-family: var(--font-serif); font-size: clamp(.94rem,1.25vw,1.15rem); margin: .3rem 0; line-height: 1.4; }
+.conference-leadership p { color: #cbd5e1; margin: .4rem 0; line-height: 1.5; font-size: .85rem; }
 .conference-leadership .conference-leadership-role { color: #e2c477; }
-.conference-leadership-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; margin-top: 1rem; }
-.conference-leadership-card { padding: 1.2rem .8rem; border: 1px solid rgba(255,255,255,.12); background: rgba(15,34,56,.5); border-radius: 8px; }
-@media (max-width: 700px) { .conference-patron { flex-direction: column; } .conference-leadership-grid { grid-template-columns: 1fr; } }
+.committee-scroll-hint { display: none; }
+@media (max-width: 900px) {
+  .conference-leadership-grid { grid-template-columns: repeat(5,190px); overflow-x: auto; padding-bottom: .8rem; scroll-snap-type: x proximity; }
+  .conference-leadership-card { scroll-snap-align: start; }
+  .committee-scroll-hint { display: block; color: #cbd5e1; font-size: .8rem; }
+}
 </style>
 </head>
 <body>
@@ -2665,14 +2670,13 @@ button, input, select, textarea {
     </div>
 
     <section class="conference-leadership" aria-label="Conference patron and organizing committee">
-      <article class="conference-patron">
-        <img src="/assets/leadership/prof-shubhini-a-saraf.jpg" alt="Prof. Shubhini A. Saraf, Director of NIPER-Raebareli" width="3225" height="3451" decoding="async">
-        <div><p class="conference-leadership-role">Patron</p><h3>Prof. Shubhini A. Saraf</h3><p>Director, NIPER-Raebareli</p></div>
-      </article>
-      <div class="conference-leadership-grid">
-        <article class="conference-leadership-card"><p class="conference-leadership-role">Chairperson</p><h3>Prof. Rakesh Kumar Singh</h3><p>Dean &amp; HOD, NIPER-Raebareli</p></article>
-        <article class="conference-leadership-card"><p class="conference-leadership-role">Co-Chairperson</p><h3>Prof. Abha Sharma</h3></article>
-        <article class="conference-leadership-card"><p class="conference-leadership-role">Organizers</p><h3>Dr. Ashok K. Datusalia</h3><h3>Dr. Gopal L. Khatik</h3></article>
+      <p class="committee-scroll-hint">Swipe or scroll horizontally to see all committee members.</p>
+      <div class="conference-leadership-grid" tabindex="0" aria-label="Committee members in order: patron, chairperson, co-chairperson and organizers">
+        <article class="conference-leadership-card"><img src="/assets/leadership/prof-shubhini-a-saraf.jpg" alt="Prof. Shubhini A. Saraf" width="144" height="170" decoding="async"><p class="conference-leadership-role">Patron</p><h3>Prof. Shubhini A. Saraf</h3><p>Director, NIPER-Raebareli</p></article>
+        <article class="conference-leadership-card"><img src="/assets/leadership/prof-rakesh-kumar-singh.jpg" alt="Prof. Rakesh Kumar Singh" width="144" height="170" decoding="async"><p class="conference-leadership-role">Chairperson</p><h3>Prof. Rakesh Kumar Singh</h3><p>Dean &amp; HOD, NIPER-Raebareli</p></article>
+        <article class="conference-leadership-card"><img src="/assets/leadership/prof-abha-sharma.jpg" alt="Prof. Abha Sharma" width="144" height="170" decoding="async"><p class="conference-leadership-role">Co-Chairperson</p><h3>Prof. Abha Sharma</h3></article>
+        <article class="conference-leadership-card"><img src="/assets/leadership/dr-ashok-k-datusalia.png" alt="Dr. Ashok K. Datusalia" width="144" height="170" decoding="async"><p class="conference-leadership-role">Organizer</p><h3>Dr. Ashok K. Datusalia</h3></article>
+        <article class="conference-leadership-card"><img src="/assets/leadership/dr-gopal-l-khatik.jpg" alt="Dr. Gopal L. Khatik" width="144" height="170" decoding="async"><p class="conference-leadership-role">Organizer</p><h3>Dr. Gopal L. Khatik</h3></article>
       </div>
     </section>
 
