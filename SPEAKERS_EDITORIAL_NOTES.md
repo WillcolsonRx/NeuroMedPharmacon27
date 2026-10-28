@@ -127,3 +127,14 @@ The organizer subsequently supplied a direct LinkedIn CDN URL for a preferred
 800 × 800 JPEG. That exact image was downloaded unchanged and replaces the
 ResearchGate portrait. A new local filename prevents reuse of the old cached image.
 Designation, affiliation, source profile link, and speaker membership are unchanged.
+
+## Designation ordering and centered final rows
+
+The organizer requested that the keynote and Pharmazz CEO remain the first two
+cards. The renderer pins those entries, then groups the remaining cards in this
+editorial order: President; Professor & Associate Dean; Head; Professor & In-Charge;
+Professor; Additional Professor; Scientist F; Associate Professor; Assistant
+Professor. Equal groups retain their catalogue order. This is a conference display
+order, not a claim of formal equivalence between scientific and academic grades.
+A wrapping flex layout preserves equal card widths and centers incomplete rows
+at each responsive column count, including the two-card final desktop row.

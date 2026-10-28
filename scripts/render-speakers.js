@@ -1,5 +1,21 @@
 const speakers = require('../conference-speakers.json');
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// Keep the keynote and Pharmazz CEO first; group the remaining professional roles.
+function designationPriority(speaker) {
+  if (speaker.id === 'anil-gaikwad') return -2;
+  if (speaker.id === 'anil-gulati') return -1;
+  const title = speaker.designation.toLowerCase();
+  if (/^president\b/.test(title)) return 0;
+  if (title.includes('associate dean')) return 1;
+  if (/\bhead\b/.test(title)) return 2;
+  if (title.includes('in-charge')) return 3;
+  if (/^professor\b/.test(title)) return 4;
+  if (title.includes('additional professor')) return 5;
+  if (title.includes('scientist')) return 6;
+  if (title.includes('associate professor')) return 7;
+  if (title.includes('assistant professor')) return 8;
+  return 9;
+}
 function renderSpeakers(html) {
   const seen = new Set();
   const cards = speakers.filter(speaker => {
@@ -9,7 +25,7 @@ function renderSpeakers(html) {
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
-  }).map(speaker => {
+  }).sort((a, b) => designationPriority(a) - designationPriority(b)).map(speaker => {
     const initials = speaker.name.replace(/\b(?:Dr|Prof)\.?\s*/g,'').split(/\s+/).map(word => word[0]).join('');
     const portrait = speaker.image
       ? `<img src="${escape(speaker.image)}" alt="${escape(speaker.name)}" width="180" height="200" loading="lazy" decoding="async">`
