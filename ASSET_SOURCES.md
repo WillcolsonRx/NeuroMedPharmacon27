@@ -160,3 +160,10 @@ Each verified card links to its institutional/company profile. No synthetic port
 ### Organizer-selected replacement for Prof. Shyam S. Sharma
 
 The organizer supplied the exact LinkedIn CDN portrait on 28 October 2026. It was downloaded unchanged (JPEG, 800 × 800, 106,615 bytes) and visually matched to the supplied preview. It replaces the ResearchGate portrait as `/assets/speakers/shyam-sharma-selected.jpg`; the old local image is removed. CDN path: https://media.licdn.com/dms/image/v2/D5603AQFKChqkWrqkHw/profile-displayphoto-shrink_800_800/B56ZltX.hgHkAc-/0/1758476627694 (signed query omitted). The live page uses the local file, so CDN link expiry does not affect it. The ResearchGate link remains the professional profile source.
+
+### Ayodhya Ram Mandir destination photograph (28 October 2026)
+
+- Replaces the illustrated placeholder with an actual front-view temple photograph, 1280 × 738 pixels (132,621 bytes), downloaded unchanged.
+- Source page: https://www.ndtv.com/topic/ram-mandir
+- Source image: https://c.ndtvimg.com/2026-07/dlhqe9og_ram-temple-ayodhya_625x300_09_July_26.jpg
+- Local asset: `/assets/photography/ayodhya-ram-mandir.jpg`. No open-license claim is made for this editorial source.
