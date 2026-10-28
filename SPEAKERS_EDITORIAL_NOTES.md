@@ -5,12 +5,12 @@ update the speaker cards; `scripts/render-speakers.js` renders that catalogue at
 build time. Keep root and public HTML synchronized when changing the committed
 fallback. The section sits between the thematic tracks and program schedule.
 
-The organizer supplied 14 unique names (PDF and DOCX duplicates were deduplicated)
+The organizer supplied 14 unique names in the first list (PDF and DOCX duplicates were deduplicated)
 and identified the Gaikwad file as keynote. Prof. Anil Gulati of Pharmazz was
 explicitly confirmed by the organizer. No talk titles or speaking times have
 been invented.
 
-13 portraits, designations, and affiliations were verified using the sources in
+Portraits, designations, and affiliations were verified using the sources in
 the catalogue. Public source links are available from the cards. These are
 professional profile checks, not independent confirmations of attendance.
 
@@ -30,8 +30,9 @@ professional profile checks, not independent confirmations of attendance.
 - Kanthi Kiran Kondepudi's institution is now styled BRIC-National Agri-Food and
   Biomanufacturing Institute (formerly NABI & CIAB). Its official profile/list
   states Scientist F. The updated institution name is used.
-- Hemant Kumar and Ritesh Kumar match the neuroscience/pharmacology profiles
-  linked from AIIMS Jammu's pharmacology department. Both are Assistant Professors.
+- Ritesh Kumar matches AIIMS Jammu’s pharmacology profile (Assistant Professor).
+  Hemant Kumar was corrected to NIPER Ahmedabad’s Associate Professor after the
+  organizer identified the intended person; his portrait was replaced as well.
 - Central University of Haryana serves unrelated physics faculty in its initial
   HTML. Its public department data endpoint is what the browser uses to load the
   correct pharmacy faculty. The response for department 1069 / section 3 directly
@@ -41,9 +42,8 @@ professional profile checks, not independent confirmations of attendance.
 
 Discovery results point to NIPER Hajipur's `/nitesh-kumar/` page, but the official
 site repeatedly returned HTTP 503 or timed out. A discovery snippet is not treated
-as verified profile evidence. Only the supplied name is published, with an initials
-placeholder and a “profile details will be updated soon” message. No affiliation,
-designation, stock portrait, or another person's photo is substituted.
+as verified profile evidence. The record is retained privately in the source catalogue for editorial follow-up,
+but is not rendered. No incomplete or placeholder speaker card is published.
 
 ## Sources requiring browser data requests
 
@@ -56,3 +56,23 @@ designation, stock portrait, or another person's photo is substituted.
   returned Srikumar B N, Additional Professor, Neurophysiology and the portrait URL.
 
 No personal contact details from these profiles were added to the conference page.
+
+## Follow-up speaker list (28 October 2026)
+
+The organizer requested no duplicates and no incomplete profiles. Only verified
+records now render publicly, including when the build reads the catalogue.
+Nitesh Kumar's former placeholder is omitted.
+
+- New verified addition: Dr. Mahendra Bishnoi, Scientist F, BRIC-NABI, Mohali.
+  Profile and portrait were obtained directly from the institute's scientist page.
+- Existing Ritesh Kumar, Anil Gaikwad, Yogesh Kulkarni (PDF/DOCX), Vinod Tiwari,
+  Kanthi Kiran Kondepudi, B. N. Srikumar (PDF/DOCX), and Anil Gulati remain single
+  entries. The second Gaikwad DOCX likewise does not create another card.
+- Shyam S. Sharma: official profile and CV URLs were located but returned HTTP 503
+  or proxy errors. No complete verified profile/portrait has been added.
+- Ashutosh Kumar and Pragyanshu Khare: no complete verified profile/portrait was
+  obtained in this research pass; search service throttling impeded further checks.
+- YKG: filename contains initials only; no identity is inferred from those initials.
+- The organizer confirmed Hemant Kumar is from NIPER Ahmedabad. His correct
+  institutional portrait, Associate Professor designation, and affiliation are
+  now used; the former AIIMS Jammu image and association were replaced.

@@ -1,7 +1,7 @@
 const speakers = require('../conference-speakers.json');
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function renderSpeakers(html) {
-  const cards = speakers.map(speaker => {
+  const cards = speakers.filter(speaker => speaker.profile_status === 'verified').map(speaker => {
     const portrait = speaker.image
       ? `<img src="${escape(speaker.image)}" alt="${escape(speaker.name)}" width="180" height="200" loading="lazy" decoding="async">`
       : '<div class="speaker-portrait-pending" role="img" aria-label="Portrait forthcoming">NK</div>';

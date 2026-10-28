@@ -39,11 +39,11 @@
     "id": "hemant-kumar",
     "name": "Dr. Hemant Kumar",
     "role": "Invited Speaker",
-    "designation": "Assistant Professor, Department of Pharmacology",
-    "affiliation": "AIIMS Jammu",
+    "designation": "Associate Professor, Department of Pharmacology & Toxicology",
+    "affiliation": "NIPER Ahmedabad",
     "image": "/assets/speakers/hemant-kumar.jpg",
-    "profile_url": "https://www.aiimsjammu.edu.in/pharmacology/",
-    "image_source": "https://www.aiimsjammu.edu.in/wp-content/uploads/2024/12/Dr-Hemant_Dr-Hemant-Kumar-300x300.jpg",
+    "profile_url": "https://niperahm.ac.in/faculty/dr-hemant-kumar/",
+    "image_source": "https://niperahm.ac.in/wp-content/uploads/2022/11/Dr-Hemant-Kumar-683x1024.jpg",
     "profile_status": "verified",
     "verified_on": "2026-10-28"
   },
@@ -164,6 +164,18 @@
     "image": "/assets/speakers/srikumar.png",
     "profile_url": "https://www.nimhans.ac.in/faculty/srikumar-b-n",
     "image_source": "https://arms.nimhans.ac.in:1338/uploads/BNS_ba8f703ec1.png",
+    "profile_status": "verified",
+    "verified_on": "2026-10-28"
+  },
+  {
+    "id": "mahendra-bishnoi",
+    "name": "Dr. Mahendra Bishnoi",
+    "role": "Invited Speaker",
+    "designation": "Scientist F",
+    "affiliation": "BRIC-National Agri-Food and Biomanufacturing Institute, Mohali",
+    "image": "/assets/speakers/mahendra-bishnoi.jpg",
+    "profile_url": "https://nabi.res.in/profile/scientists?id=MTg%3D",
+    "image_source": "https://nabi.res.in/backend/web/img/profile/profile-204-Mahendra%20Bishnoi.jpg",
     "profile_status": "verified",
     "verified_on": "2026-10-28"
   }
