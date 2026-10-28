@@ -149,3 +149,9 @@ Each verified card links to its institutional/company profile. No synthetic port
 - **Dr. B. N. Srikumar**: [NIMHANS, Bengaluru](https://www.nimhans.ac.in/faculty/srikumar-b-n); portrait: https://arms.nimhans.ac.in:1338/uploads/BNS_ba8f703ec1.png → `/assets/speakers/srikumar.png`.
 
 - **Dr. Mahendra Bishnoi**: [BRIC-NABI scientist profile](https://nabi.res.in/profile/scientists?id=MTg%3D); official portrait https://nabi.res.in/backend/web/img/profile/profile-204-Mahendra%20Bishnoi.jpg → `/assets/speakers/mahendra-bishnoi.jpg` (downloaded unchanged, 28 October 2026).
+
+### Additional speaker portraits (28 October 2026)
+
+- **Prof. Y. K. Gupta**: AIIMS Kalyani's current president record at https://aiimskalyani.edu.in/aiimsapi/api/v1/presidents/current identifies the portrait https://aiimskalyani.edu.in/aiimsapi/uploads/images/general/dr_yk_gupta_20260306_151619_7b8d6b0f.jpg → `/assets/speakers/yk-gupta.jpg`. Locally hosted unchanged.
+- **Dr. Pragyanshu Khare**: https://www.bits-pilani.ac.in/pilani/pragyanshu-khare/ identifies the portrait https://www.bits-pilani.ac.in/wp-content/uploads/WhatsApp-Image-2023-07-04-at-13.55.26.jpeg → `/assets/speakers/pragyanshu-khare.jpeg`. Locally hosted unchanged.
+- **Dr. Ashutosh Kumar and Prof. Shyam S. Sharma**: no portrait downloaded. Text details supplied by the organizer; visible initials avatars are explicitly labelled as forthcoming photos.

@@ -178,5 +178,55 @@
     "image_source": "https://nabi.res.in/backend/web/img/profile/profile-204-Mahendra%20Bishnoi.jpg",
     "profile_status": "verified",
     "verified_on": "2026-10-28"
+  },
+  {
+    "id": "ashutosh-kumar",
+    "name": "Dr. Ashutosh Kumar",
+    "role": "Invited Speaker",
+    "designation": "Assistant Professor, Department of Pharmacology & Toxicology",
+    "affiliation": "NIPER S.A.S. Nagar (Mohali)",
+    "image": null,
+    "profile_url": null,
+    "image_source": null,
+    "profile_status": "organizer_confirmed",
+    "verified_on": null,
+    "details_source": "Organizer-supplied speaker identification, 28 October 2026; institutional site unavailable."
+  },
+  {
+    "id": "yk-gupta",
+    "name": "Prof. Y. K. Gupta",
+    "role": "Invited Speaker",
+    "designation": "President",
+    "affiliation": "AIIMS Kalyani",
+    "image": "/assets/speakers/yk-gupta.jpg",
+    "profile_url": "https://aiimskalyani.edu.in/president/",
+    "image_source": "https://aiimskalyani.edu.in/aiimsapi/uploads/images/general/dr_yk_gupta_20260306_151619_7b8d6b0f.jpg",
+    "profile_status": "verified",
+    "verified_on": "2026-10-28"
+  },
+  {
+    "id": "shyam-sharma",
+    "name": "Prof. Shyam S. Sharma",
+    "role": "Invited Speaker",
+    "designation": "Head, Department of Pharmacology & Toxicology",
+    "affiliation": "NIPER S.A.S. Nagar (Mohali)",
+    "image": null,
+    "profile_url": null,
+    "image_source": null,
+    "profile_status": "organizer_confirmed",
+    "verified_on": null,
+    "details_source": "Organizer-supplied speaker identification, 28 October 2026; institutional site unavailable."
+  },
+  {
+    "id": "pragyanshu-khare",
+    "name": "Dr. Pragyanshu Khare",
+    "role": "Invited Speaker",
+    "designation": "Assistant Professor, Department of Pharmacy",
+    "affiliation": "BITS Pilani, Pilani Campus",
+    "image": "/assets/speakers/pragyanshu-khare.jpeg",
+    "profile_url": "https://www.bits-pilani.ac.in/pilani/pragyanshu-khare/",
+    "image_source": "https://www.bits-pilani.ac.in/wp-content/uploads/WhatsApp-Image-2023-07-04-at-13.55.26.jpeg",
+    "profile_status": "verified",
+    "verified_on": "2026-10-28"
   }
 ]

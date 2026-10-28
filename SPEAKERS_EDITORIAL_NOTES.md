@@ -76,3 +76,29 @@ Nitesh Kumar's former placeholder is omitted.
 - The organizer confirmed Hemant Kumar is from NIPER Ahmedabad. His correct
   institutional portrait, Associate Professor designation, and affiliation are
   now used; the former AIIMS Jammu image and association were replaced.
+
+## Organizer identifies the remaining four (28 October 2026)
+
+The organizer supplied names, roles and affiliations for Ashutosh Kumar,
+Y. K. Gupta, Shyam S. Sharma and Pragyanshu Khare. They are now added once each.
+
+- Pragyanshu Khare: BITS Pilani's official profile confirms Assistant Professor,
+  Department of Pharmacy, Pilani Campus and supplies the portrait.
+- Y. K. Gupta: AIIMS Kalyani's current presidents API confirms Prof. (Dr.) Yogendra
+  Kumar Gupta as President and supplies the portrait. The page is a JavaScript app;
+  its public read-only JSON is `/aiimsapi/api/v1/presidents/current`. The card uses
+  President, AIIMS Kalyani. It does not assign him a Department of Pharmaceutical
+  Sciences appointment, which is not established by the current institutional bio.
+  Ignore the API's inconsistent SEO meta_description; use the named current record
+  and profile content, which also agree with the organizer's identification.
+- Ashutosh Kumar: the organizer confirms Assistant Professor, Pharmacology &
+  Toxicology, NIPER S.A.S. Nagar. Institutional profile pages still return 503.
+- Shyam S. Sharma: the organizer confirms Head, Pharmacology & Toxicology,
+  NIPER S.A.S. Nagar. Institutional profile and CV requests still fail.
+
+The two NIPER Mohali records use `organizer_confirmed`, not `verified`, and retain
+explicit "Photo forthcoming" initials avatars. Their names/designations/affiliations
+are complete and organizer-confirmed; no stock or synthetic face is substituted
+and no broken institutional link is shown. Nitesh Kumar remains omitted because
+his identity/profile details are still unresolved. The renderer deduplicates
+normalized names and only displays verified or organizer-confirmed complete records.
