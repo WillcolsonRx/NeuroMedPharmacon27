@@ -1,6 +1,6 @@
 # Asset Sources & Provenance Manifest
 
-This manifest documents all external photographic and identity assets utilized across the **IPS North Zone Annual Conference 2027 (NeuroMedPharmacon)** web portal. All assets have been obtained from verified, legitimately licensed open-source and public-domain repositories (Wikimedia Commons / Government of India open repositories) in strict compliance with licensing standards.
+This manifest records photographic and identity assets used by NeuroMet Pharmacon-2027. Sources and available licensing information are recorded per asset; a public institutional profile does not imply a Creative Commons or public-domain licence.
 
 ---
 
@@ -125,3 +125,25 @@ The official header at https://niperraebareli.edu.in/header.html renders `images
 with a separate blue `RAEBARELI` text label beneath it. The image itself ends at NIPER.
 The conference hero and institution card now use that same image-plus-label pattern,
 so the location text remains visible without altering or regenerating the emblem.
+
+
+## Invited speaker portraits (28 October 2026)
+
+Profiles and exact source image URLs are recorded in `conference-speakers.json`.
+Images are hosted locally in `public/assets/speakers/` and displayed without retouching.
+Priyanka Bajaj’s source URL ends in `.jpeg` but serves PNG bytes; the local file uses `.png`.
+Each verified card links to its institutional/company profile. No synthetic portraits are used.
+
+- **Prof. Anil B. Gaikwad**: [BITS Pilani, Pilani Campus](https://www.bits-pilani.ac.in/pilani/anil-b-gaikwad/); portrait: https://www.bits-pilani.ac.in/wp-content/uploads/Prof.-Anil.-B.-Gaikwad.jpeg → `/assets/speakers/anil-b-gaikwad.jpeg`.
+- **Prof. Anil Gulati**: [Pharmazz, Inc., USA](https://pharmazz.com/directors-advisors.php); portrait: https://pharmazz.com/assets/images/team/Anil_Gulati.jpg → `/assets/speakers/gulati.jpg`.
+- **Dr. Ashok Jangra**: [Central University of Haryana](https://www.cuh.ac.in/department.aspx?departmentid=1069&subid=3); portrait: https://www.cuh.ac.in/admin/uploads/department/pharma/dr%20ashok.jpg → `/assets/speakers/ashok-jangra.jpg`.
+- **Dr. Hemant Kumar**: [AIIMS Jammu](https://www.aiimsjammu.edu.in/pharmacology/); portrait: https://www.aiimsjammu.edu.in/wp-content/uploads/2024/12/Dr-Hemant_Dr-Hemant-Kumar-300x300.jpg → `/assets/speakers/hemant-kumar.jpg`.
+- **Dr. Priyanka Bajaj**: [NIPER Hyderabad](https://www.niperhyd.ac.in/ProfilePriyanka.html); portrait: https://www.niperhyd.ac.in/images/faculty%20and%20staff/drpriyanka.jpeg → `/assets/speakers/priyanka-bajaj.png`.
+- **Dr. Manoj P. Dandekar**: [NIPER Hyderabad](https://www.niperhyd.ac.in/Faculty_of_NIPER_Hyderabad(PC).html); portrait: http://www.niperhyd.ac.in/images/faculty%20and%20staff/drmanojdandekar.jpg → `/assets/speakers/manoj-dandekar.jpg`.
+- **Prof. V. G. M. Naidu**: [NIPER Guwahati](https://sites.google.com/niperguwahati.in/drvgmnaidu); portrait: https://niperguwahati.ac.in/img/people/NAIDU.jpg → `/assets/speakers/vgm-naidu.jpg`.
+- **Prof. Dhiraj G. Kabra**: [NIPER Kolkata](https://niperkolkata.edu.in/FacultyStaffMasterDetails.aspx?Department=79); portrait: https://niperkolkata.edu.in/niperadmin/Upload/PicsSizer_165x165.jpeg → `/assets/speakers/dhiraj-kabra.jpeg`.
+- **Dr. Ritesh Kumar**: [AIIMS Jammu](https://www.aiimsjammu.edu.in/pharmacology/); portrait: https://www.aiimsjammu.edu.in/wp-content/uploads/2024/12/new_Ritesh-Kumar-1-300x300.jpg → `/assets/speakers/ritesh-kumar.jpg`.
+- **Dr. Yogesh Kulkarni**: [Shobhaben Pratapbhai Patel School of Pharmacy & Technology Management, SVKM’s NMIMS, Mumbai](https://pharmacy.nmims.edu/faculty-and-research/faculty/yogesh-kulkarni/); portrait: https://pharmacy.nmims.edu/images/dr.-yogesh-kulkarni.jpg → `/assets/speakers/yogesh-kulkarni.jpg`.
+- **Dr. Vinod Tiwari**: [IIT (BHU), Varanasi](https://iitbhu.ac.in/dept/phe/people/vtiwariphe); portrait: https://iitbhu.ac.in/sites/default/files/styles/large/public/pictures/2026-04/A.%20Dr.%20Tiwari%20profile%20pic.jpg.webp?itok=2zazMso2 → `/assets/speakers/vinod-tiwari.webp`.
+- **Dr. Kanthi Kiran Kondepudi**: [BRIC-National Agri-Food and Biomanufacturing Institute, Mohali](https://nabi.res.in/profile/scientists?id=MTc%3D); portrait: https://nabi.res.in/backend/web/img/profile/profile-586-kiran.jpeg → `/assets/speakers/kanthi-kiran-kondepudi.jpeg`.
+- **Dr. B. N. Srikumar**: [NIMHANS, Bengaluru](https://www.nimhans.ac.in/faculty/srikumar-b-n); portrait: https://arms.nimhans.ac.in:1338/uploads/BNS_ba8f703ec1.png → `/assets/speakers/srikumar.png`.

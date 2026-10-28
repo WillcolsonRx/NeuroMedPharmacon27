@@ -31,7 +31,8 @@ if (fs.existsSync(publicDir)) {
 // Ensure root index.html is copied to dist/index.html
 if (fs.existsSync(rootIndex)) {
   const { renderTracks, renderBrochure } = require('./render-tracks');
-  fs.writeFileSync(path.join(distDir, 'index.html'), renderTracks(fs.readFileSync(rootIndex, 'utf8')));
+  const { renderSpeakers } = require('./render-speakers');
+  fs.writeFileSync(path.join(distDir, 'index.html'), renderSpeakers(renderTracks(fs.readFileSync(rootIndex, 'utf8'))));
   const downloads = path.join(distDir, 'downloads');
   if (fs.existsSync(downloads)) {
     for (const file of fs.readdirSync(downloads)) {

@@ -2528,6 +2528,23 @@ button, input, select, textarea {
 
 
 .hero-main-title { white-space: nowrap; text-wrap: nowrap; font-size: clamp(1rem, 5.2vw, 4.5rem); }
+/* Speaker portraits and verified professional profiles */
+.speakers-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1.25rem; }
+.speaker-card { min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; padding:1.5rem 1rem; border:1px solid #334155; border-radius:10px; background:#0b1a2d; }
+.speaker-card.speaker-keynote { border-color:#cba234; box-shadow:inset 0 3px 0 #cba234; }
+.speaker-card img,.speaker-portrait-pending { width:180px; max-width:100%; height:200px; object-fit:contain; border-radius:6px; background:#fff; margin-bottom:1rem; }
+.speaker-portrait-pending { display:grid; place-items:center; color:#64748b; background:#17283e; font-size:2.5rem; }
+.speaker-card .speaker-role { color:#e2c477; font-size:.7rem; text-transform:uppercase; letter-spacing:.09em; margin:0 0 .5rem; }
+.speaker-card h3 { font-size:1.1rem; line-height:1.4; color:#fff; margin:.25rem 0 .6rem; }
+.speaker-card .speaker-designation { color:#e2e8f0; font-size:.85rem; line-height:1.55; margin:0 0 .6rem; }
+.speaker-card .speaker-affiliation { color:#94a3b8; font-size:.82rem; line-height:1.55; margin:0 0 1rem; }
+.speaker-profile { margin-top:auto; color:#7dd3fc; font-size:.8rem; padding:.4rem; text-decoration:none; }
+.speaker-profile:hover { color:#fff; text-decoration:underline; }
+.speaker-profile:focus-visible { outline:2px solid #e2c477; outline-offset:3px; }
+@media(max-width:1100px) { .speakers-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:800px) { .speakers-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:480px) { .speakers-grid { grid-template-columns:1fr; } }
+
 .conference-leadership { width: 100%; max-width: 1200px; margin: 2rem auto; text-align: center; }
 .conference-leadership-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 1rem; align-items: stretch; }
 .conference-leadership-card { display: flex; flex-direction: column; align-items: center; padding: 1.15rem .7rem; border: 1px solid rgba(203,162,52,.3); background: rgba(15,34,56,.75); border-radius: 8px; }
@@ -2587,6 +2604,7 @@ button, input, select, textarea {
       <a href="#about" class="nav-anchor">About</a>
       <a href="#consortium" class="nav-anchor">Partners</a>
       <a href="#tracks" class="nav-anchor">Tracks</a>
+      <a href="#speakers" class="nav-anchor">Speakers</a>
       <a href="#schedule" class="nav-anchor">Schedule</a>
       <a href="#abstracts" class="nav-anchor">Abstracts</a>
       <a href="#sponsorship" class="nav-anchor">Sponsorship</a>
@@ -2628,6 +2646,7 @@ button, input, select, textarea {
     <a href="#about" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">About Conference</a>
     <a href="#consortium" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Regional Consortium</a>
     <a href="#tracks" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Scientific Tracks</a>
+    <a href="#speakers" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Speakers</a>
     <a href="#schedule" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Program Schedule</a>
     <a href="#abstracts" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Call for Abstracts</a>
     <a href="#sponsorship" class="text-white text-decoration-none py-1" onclick="toggleMobileNav()">Sponsorship Prospectus</a>
@@ -3000,6 +3019,35 @@ button, input, select, textarea {
 
 
 
+<!-- Invited speakers -->
+<section class="section-block section-block-dark" id="speakers" aria-labelledby="speakersTitle">
+  <div class="container">
+    <div class="section-header-centered">
+      <span class="editorial-kicker">Scientific Faculty</span>
+      <h2 class="section-title-large" id="speakersTitle">Keynote &amp; Invited Speakers</h2>
+      <p class="section-lead-text">Meet the researchers and industry leaders joining NeuroMet Pharmacon-2027.</p>
+    </div>
+    <div class="speakers-grid">
+<!-- SPEAKER_CARDS_START -->
+<article class="speaker-card speaker-keynote" data-speaker="anil-gaikwad"><img src="/assets/speakers/anil-b-gaikwad.jpeg" alt="Prof. Anil B. Gaikwad" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Keynote Speaker</p><h3>Prof. Anil B. Gaikwad</h3><p class="speaker-designation">Professor, Department of Pharmacy</p><p class="speaker-affiliation">BITS Pilani, Pilani Campus</p><a class="speaker-profile" href="https://www.bits-pilani.ac.in/pilani/anil-b-gaikwad/" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="anil-gulati"><img src="/assets/speakers/gulati.jpg" alt="Prof. Anil Gulati" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Prof. Anil Gulati</h3><p class="speaker-designation">Founder &amp; Director, Chairman &amp; CEO</p><p class="speaker-affiliation">Pharmazz, Inc., USA</p><a class="speaker-profile" href="https://pharmazz.com/directors-advisors.php" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="ashok-jangra"><img src="/assets/speakers/ashok-jangra.jpg" alt="Dr. Ashok Jangra" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Dr. Ashok Jangra</h3><p class="speaker-designation">Assistant Professor, Department of Pharmaceutical Sciences</p><p class="speaker-affiliation">Central University of Haryana</p><a class="speaker-profile" href="https://www.cuh.ac.in/department.aspx?departmentid=1069&amp;subid=3" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="hemant-kumar"><img src="/assets/speakers/hemant-kumar.jpg" alt="Dr. Hemant Kumar" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Dr. Hemant Kumar</h3><p class="speaker-designation">Assistant Professor, Department of Pharmacology</p><p class="speaker-affiliation">AIIMS Jammu</p><a class="speaker-profile" href="https://www.aiimsjammu.edu.in/pharmacology/" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="priyanka-bajaj"><img src="/assets/speakers/priyanka-bajaj.png" alt="Dr. Priyanka Bajaj" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Dr. Priyanka Bajaj</h3><p class="speaker-designation">Assistant Professor, Department of Chemical Sciences</p><p class="speaker-affiliation">NIPER Hyderabad</p><a class="speaker-profile" href="https://www.niperhyd.ac.in/ProfilePriyanka.html" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="manoj-dandekar"><img src="/assets/speakers/manoj-dandekar.jpg" alt="Dr. Manoj P. Dandekar" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Dr. Manoj P. Dandekar</h3><p class="speaker-designation">Associate Professor, Department of Biological Sciences</p><p class="speaker-affiliation">NIPER Hyderabad</p><a class="speaker-profile" href="https://www.niperhyd.ac.in/Faculty_of_NIPER_Hyderabad(PC).html" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="vgm-naidu"><img src="/assets/speakers/vgm-naidu.jpg" alt="Prof. V. G. M. Naidu" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Prof. V. G. M. Naidu</h3><p class="speaker-designation">Professor &amp; In-Charge, Pharmacology &amp; Toxicology</p><p class="speaker-affiliation">NIPER Guwahati</p><a class="speaker-profile" href="https://sites.google.com/niperguwahati.in/drvgmnaidu" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="dhiraj-kabra"><img src="/assets/speakers/dhiraj-kabra.jpeg" alt="Prof. Dhiraj G. Kabra" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Prof. Dhiraj G. Kabra</h3><p class="speaker-designation">Professor, Pharmacology &amp; Toxicology</p><p class="speaker-affiliation">NIPER Kolkata</p><a class="speaker-profile" href="https://niperkolkata.edu.in/FacultyStaffMasterDetails.aspx?Department=79" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="nitesh-kumar"><div class="speaker-portrait-pending" role="img" aria-label="Portrait forthcoming">NK</div><p class="speaker-role">Invited Speaker</p><h3>Dr. Nitesh Kumar</h3><p class="speaker-designation">Portrait and profile details will be updated soon.</p></article>
+<article class="speaker-card" data-speaker="ritesh-kumar"><img src="/assets/speakers/ritesh-kumar.jpg" alt="Dr. Ritesh Kumar" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Dr. Ritesh Kumar</h3><p class="speaker-designation">Assistant Professor, Department of Pharmacology</p><p class="speaker-affiliation">AIIMS Jammu</p><a class="speaker-profile" href="https://www.aiimsjammu.edu.in/pharmacology/" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="yogesh-kulkarni"><img src="/assets/speakers/yogesh-kulkarni.jpg" alt="Dr. Yogesh Kulkarni" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Dr. Yogesh Kulkarni</h3><p class="speaker-designation">Professor &amp; Associate Dean</p><p class="speaker-affiliation">Shobhaben Pratapbhai Patel School of Pharmacy &amp; Technology Management, SVKM’s NMIMS, Mumbai</p><a class="speaker-profile" href="https://pharmacy.nmims.edu/faculty-and-research/faculty/yogesh-kulkarni/" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="vinod-tiwari"><img src="/assets/speakers/vinod-tiwari.webp" alt="Dr. Vinod Tiwari" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Dr. Vinod Tiwari</h3><p class="speaker-designation">Associate Professor, Pharmaceutical Engineering &amp; Technology</p><p class="speaker-affiliation">IIT (BHU), Varanasi</p><a class="speaker-profile" href="https://iitbhu.ac.in/dept/phe/people/vtiwariphe" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="kanthi-kiran-kondepudi"><img src="/assets/speakers/kanthi-kiran-kondepudi.jpeg" alt="Dr. Kanthi Kiran Kondepudi" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Dr. Kanthi Kiran Kondepudi</h3><p class="speaker-designation">Scientist F</p><p class="speaker-affiliation">BRIC-National Agri-Food and Biomanufacturing Institute, Mohali</p><a class="speaker-profile" href="https://nabi.res.in/profile/scientists?id=MTc%3D" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<article class="speaker-card" data-speaker="bn-srikumar"><img src="/assets/speakers/srikumar.png" alt="Dr. B. N. Srikumar" width="180" height="200" loading="lazy" decoding="async"><p class="speaker-role">Invited Speaker</p><h3>Dr. B. N. Srikumar</h3><p class="speaker-designation">Additional Professor, Department of Neurophysiology</p><p class="speaker-affiliation">NIMHANS, Bengaluru</p><a class="speaker-profile" href="https://www.nimhans.ac.in/faculty/srikumar-b-n" target="_blank" rel="noopener noreferrer">View profile <span aria-hidden="true">↗</span></a></article>
+<!-- SPEAKER_CARDS_END -->
+    </div>
+  </div>
+</section>
+
 <!-- ==========================================================================
      PROGRAM SCHEDULE & SESSIONS
      ========================================================================== -->
@@ -3012,7 +3060,7 @@ button, input, select, textarea {
     </div>
     <div class="institutional-callout" style="max-width:760px; margin:1.5rem auto; text-align:center;">
       <h3>Schedule Coming Soon</h3>
-      <p>Session timings, scientific talks, plenary orations, and speaker details will be published here once finalized.</p>
+      <p>Session timings, scientific talks, plenary orations, and talk titles will be published here once finalized.</p>
       <p><strong>Conference:</strong> 19–20 February 2027<br><strong>Post-conference workshop:</strong> 21 February 2027</p>
     </div>
   </div>
@@ -3896,6 +3944,7 @@ button, input, select, textarea {
           <li><a href="#consortium" class="footer-link">Regional Consortium (IPS)</a></li>
           <li><a href="#tracks" class="footer-link">10 Thematic Tracks</a></li>
           <li><a href="#abstracts" class="footer-link">Call for Abstracts</a></li>
+          <li><a href="#speakers" class="footer-link">Keynote &amp; Invited Speakers</a></li>
           <li><a href="#schedule" class="footer-link">Program Schedule</a></li>
           <li><a href="#sponsorship" class="footer-link">Sponsorship Packages</a></li>
         </ul>
