@@ -167,3 +167,7 @@ The organizer supplied the exact LinkedIn CDN portrait on 28 October 2026. It wa
 - Source page: https://www.ndtv.com/topic/ram-mandir
 - Source image: https://c.ndtvimg.com/2026-07/dlhqe9og_ram-temple-ayodhya_625x300_09_July_26.jpg
 - Local asset: `/assets/photography/ayodhya-ram-mandir.jpg`. No open-license claim is made for this editorial source.
+
+### Organizer-selected replacement for Dr. Ashutosh Kumar
+
+The organizer supplied the exact LinkedIn portrait, saved unchanged as `/assets/speakers/ashutosh-kumar-selected.jpg` (JPEG, 800 × 800, 106,195 bytes). It replaces the earlier ResearchGate image. Source: https://media.licdn.com/dms/image/v2/D5603AQHiLq8d3E-hzQ/profile-displayphoto-crop_800_800/B56ZewIHKPH8AI-/0/1751006606453 (expiring signature omitted). The website uses the local asset.
