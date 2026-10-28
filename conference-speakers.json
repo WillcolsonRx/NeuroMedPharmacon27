@@ -210,12 +210,13 @@
     "role": "Invited Speaker",
     "designation": "Head, Department of Pharmacology & Toxicology",
     "affiliation": "NIPER S.A.S. Nagar (Mohali)",
-    "image": "/assets/speakers/shyam-sharma.jpg",
+    "image": "/assets/speakers/shyam-sharma-selected.jpg",
     "profile_url": "https://www.researchgate.net/profile/Shyam-Sharma-11",
-    "image_source": "https://i1.rgstatic.net/ii/profile.image/273562977214469-1442233904630_Q512/Shyam-Sharma-11.jpg",
+    "image_source": "https://media.licdn.com/dms/image/v2/D5603AQFKChqkWrqkHw/profile-displayphoto-shrink_800_800/B56ZltX.hgHkAc-/0/1758476627694",
     "profile_status": "verified",
     "verified_on": "2026-10-28",
-    "details_source": "Organizer-confirmed Head designation; public ResearchGate profile corroborates Shyam S. Sharma, Professor, Pharmacology and Toxicology, NIPER Mohali."
+    "details_source": "Organizer-confirmed Head designation; public ResearchGate profile corroborates Shyam S. Sharma, Professor, Pharmacology and Toxicology, NIPER Mohali.",
+    "image_source_note": "Organizer-selected LinkedIn CDN portrait, downloaded unchanged from the supplied signed URL. Query signature omitted from provenance; website serves the local copy."
   },
   {
     "id": "pragyanshu-khare",

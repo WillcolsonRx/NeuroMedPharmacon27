@@ -120,3 +120,10 @@ Shyam's Head designation remains organizer-confirmed. ResearchGate lists additio
 older affiliations as well; the current institution fields and organizer's
 identifications were used, not older affiliation entries. No photo was synthesized
 or altered and no duplicate card was created. Nitesh Kumar remains unpublished.
+
+## Organizer-selected Sharma portrait
+
+The organizer subsequently supplied a direct LinkedIn CDN URL for a preferred
+800 × 800 JPEG. That exact image was downloaded unchanged and replaces the
+ResearchGate portrait. A new local filename prevents reuse of the old cached image.
+Designation, affiliation, source profile link, and speaker membership are unchanged.
