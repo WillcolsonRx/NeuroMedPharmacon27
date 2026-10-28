@@ -102,3 +102,21 @@ are complete and organizer-confirmed; no stock or synthetic face is substituted
 and no broken institutional link is shown. Nitesh Kumar remains omitted because
 his identity/profile details are still unresolved. The renderer deduplicates
 normalized names and only displays verified or organizer-confirmed complete records.
+
+## Portrait follow-up resolved (28 October 2026)
+
+The organizer explicitly authorized alternate platforms such as LinkedIn.
+LinkedIn returned HTTP 999, but the public ResearchGate pages were readable:
+
+- https://www.researchgate.net/profile/Shyam-Sharma-11
+- https://www.researchgate.net/profile/Ashutosh-Kumar-97
+
+Each page identified the matching person, NIPER Mohali / SAS Nagar affiliation and
+Pharmacology and Toxicology department, and supplied an `og:image` portrait. Those
+portraits were downloaded unchanged and visually inspected. Both former initials
+placeholders are replaced; the cards now link to the ResearchGate source profiles.
+Ashutosh's Assistant Professor designation is corroborated by the research profile;
+Shyam's Head designation remains organizer-confirmed. ResearchGate lists additional
+older affiliations as well; the current institution fields and organizer's
+identifications were used, not older affiliation entries. No photo was synthesized
+or altered and no duplicate card was created. Nitesh Kumar remains unpublished.

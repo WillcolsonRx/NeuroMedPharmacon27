@@ -31,6 +31,8 @@ test('speaker catalogue publishes unique sourced portraits and omits unresolved 
  assert.ok(!html.includes('Portrait and profile details will be updated soon.'));
  assert.equal((html.match(/data-speaker="yk-gupta"/g)||[]).length,1);
  assert.equal((html.match(/data-speaker="ashutosh-kumar"/g)||[]).length,1);
- assert.ok(html.includes('Photo forthcoming'));
+ assert.ok(!html.includes('Photo forthcoming'));
+ assert.ok(html.includes('/assets/speakers/ashutosh-kumar.jpg'));
+ assert.ok(html.includes('/assets/speakers/shyam-sharma.jpg'));
  assert.equal(html,fs.readFileSync(path.join(__dirname,'..','public/index.html'),'utf8'));
 });

@@ -185,12 +185,12 @@
     "role": "Invited Speaker",
     "designation": "Assistant Professor, Department of Pharmacology & Toxicology",
     "affiliation": "NIPER S.A.S. Nagar (Mohali)",
-    "image": null,
-    "profile_url": null,
-    "image_source": null,
-    "profile_status": "organizer_confirmed",
-    "verified_on": null,
-    "details_source": "Organizer-supplied speaker identification, 28 October 2026; institutional site unavailable."
+    "image": "/assets/speakers/ashutosh-kumar.jpg",
+    "profile_url": "https://www.researchgate.net/profile/Ashutosh-Kumar-97",
+    "image_source": "https://i1.rgstatic.net/ii/profile.image/272183222075412-1441904945412_Q512/Ashutosh-Kumar-97.jpg",
+    "profile_status": "verified",
+    "verified_on": "2026-10-28",
+    "details_source": "Organizer identification corroborated by public ResearchGate profile: Assistant Professor, Pharmacology and Toxicology, NIPER SAS Nagar."
   },
   {
     "id": "yk-gupta",
@@ -210,12 +210,12 @@
     "role": "Invited Speaker",
     "designation": "Head, Department of Pharmacology & Toxicology",
     "affiliation": "NIPER S.A.S. Nagar (Mohali)",
-    "image": null,
-    "profile_url": null,
-    "image_source": null,
-    "profile_status": "organizer_confirmed",
-    "verified_on": null,
-    "details_source": "Organizer-supplied speaker identification, 28 October 2026; institutional site unavailable."
+    "image": "/assets/speakers/shyam-sharma.jpg",
+    "profile_url": "https://www.researchgate.net/profile/Shyam-Sharma-11",
+    "image_source": "https://i1.rgstatic.net/ii/profile.image/273562977214469-1442233904630_Q512/Shyam-Sharma-11.jpg",
+    "profile_status": "verified",
+    "verified_on": "2026-10-28",
+    "details_source": "Organizer-confirmed Head designation; public ResearchGate profile corroborates Shyam S. Sharma, Professor, Pharmacology and Toxicology, NIPER Mohali."
   },
   {
     "id": "pragyanshu-khare",
