@@ -3,7 +3,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('path');
 const Database = require('better-sqlite3');
-const { currentTier, TARIFF, app } = require('../server.js');
+const { currentTier, TARIFF, app, db } = require('../server.js');
 
 test('Tier calculation auto-switches correctly by date', () => {
   assert.equal(currentTier(new Date('2026-10-23T12:00:00Z')), 'early');
@@ -225,13 +225,27 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
     });
     assert.equal(badReg.status, 400);
 
+    const checkRegistration = body => fetch(`${baseUrl}/api/abstract/registration`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    assert.equal((await checkRegistration({registration_id:regJson.ref_id,email:'other@example.com'})).status,403);
+    const eligibilityResponse=await checkRegistration({registration_id:regJson.ref_id.toLowerCase(),email:'SCHOLAR@example.com'});
+    assert.equal(eligibilityResponse.status,200);assert.deepEqual(await eligibilityResponse.json(),{eligible:true});
+    for(const body of [
+      {full_name:'Unregistered',email:'scholar@example.com',title:'Test'},
+      {registration_id:'NMP27-DEL-99999999',full_name:'Unregistered',email:'scholar@example.com',title:'Test'},
+      {registration_id:regJson.ref_id,full_name:'Other Author',email:'other@example.com',title:'Test'}
+    ]){
+      const rejected=await fetch(`${baseUrl}/api/abstract`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      assert.ok([400,403].includes(rejected.status));
+    }
+    assert.equal(db.prepare('SELECT count(*) as count FROM abstracts').get().count,0);
     // 5. POST /api/abstract
     const absRes = await fetch(`${baseUrl}/api/abstract`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         full_name: 'Dr. Researcher',
-        email: 'research@example.com',
+        email: 'scholar@example.com',
+        registration_id: regJson.ref_id,
         title: 'Targeted Nano-carriers in Cancer Chemotherapy',
         category: 'Drug Discovery',
         preference: 'Poster',
@@ -244,6 +258,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
     assert.ok(absJson.id);
     assert.deepEqual(absJson.email_status,{delegate:'simulated',organizer:'simulated'});
     assert.ok(absJson.ref_id && absJson.ref_id.startsWith('NMP27-ABS-'));
+    assert.equal(absJson.registration_ref,regJson.ref_id);
 
     // 6. POST /api/contact
     const cntRes = await fetch(`${baseUrl}/api/contact`, {
@@ -288,6 +303,7 @@ test('HTTP API routes handle registration, abstracts, contacts, and admin endpoi
     assert.ok(Array.isArray(abstractsList));
     assert.ok(abstractsList.length >= 1);
     assert.equal(abstractsList[0].document_filename, 'abstract.docx');
+    assert.equal(abstractsList[0].registration_ref,regJson.ref_id);
     const wordDownload = await fetch(baseUrl + abstractsList[0].document_path);
     assert.equal(wordDownload.status,200);
     assert.ok((await wordDownload.arrayBuffer()).byteLength > 0);

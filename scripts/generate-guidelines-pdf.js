@@ -53,7 +53,7 @@ function generateAbstractGuidelinesPDF() {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
   doc.setTextColor(51, 65, 85);
-  const mandateText = 'The Scientific Program Committee invites original research abstracts spanning chemistry, pharmacology, biotechnology, and translational drug discovery, with a focus on neuro-metabolic disorders, cancer, and safety sciences. Submissions are open to faculty members, scientists, postdoctoral researchers, PhD scholars, and postgraduate students (MD/MS/M.Pharm/Pharm.D/M.Sc) from recognized academic and research institutions across India and internationally. Registration for the conference is mandatory for the presenting author upon abstract acceptance.';
+  const mandateText = 'The Scientific Program Committee invites original research abstracts spanning chemistry, pharmacology, biotechnology, and translational drug discovery, with a focus on neuro-metabolic disorders, cancer, and safety sciences. Submissions are open to faculty members, scientists, postdoctoral researchers, PhD scholars, and postgraduate students (MD/MS/M.Pharm/Pharm.D/M.Sc) from recognized academic and research institutions across India and internationally. Registration is required before submission. Verify your receipt Registration ID and registration email in the portal.';
   doc.text(doc.splitTextToSize(mandateText, 170), 20, 63);
 
   // Section 2: Structured Abstract Format

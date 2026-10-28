@@ -182,3 +182,34 @@ and included in receipts, registration email and staff records.
 This is self-declared affiliation, not identity verification. Secretariat staff must
 verify in-house student status before confirming eligibility. Hiding a dropdown
 option does not make a fee secret or establish student identity.
+
+## Registration-gated abstract submission (28 October 2026)
+
+Before deploying this version, run `supabase/migrations/20261028_abstract_registration.sql`
+in the existing project's Supabase SQL Editor. The migration is additive and
+repeatable: existing abstracts retain a null registration link and remain readable.
+It adds the registration reference, its foreign key/index, and a service-only
+shared rate-limit function/table. No new credentials or paid service is needed.
+
+After applying the migration, deploy/redeploy the latest GitHub commit on Vercel.
+The Abstract Submission Center requires the delegate's conference Registration ID
+(`NMP27-DEL-...`, not the SBI DU reference) and the same registration email. Click
+Verify Registration to unlock the submit button. The server repeats validation
+before accepting the document; frontend unlocking alone cannot authorize a post.
+The presenting author can use a personal email if it matches their registration.
+
+The saved `abstracts.registration_ref` is shown in Secretariat and included in
+abstract acknowledgements. No manual payment-approval state is introduced.
+Legacy five-digit registration references continue working. New delegate IDs use
+64 random bits to avoid predictable IDs and reduce collisions. Invalid/mismatched
+checks return no delegate profile or payment details. Verification is limited
+to 20 checks per email and 300 per client IP per 15 minutes using hashed keys;
+Supabase enforces these across Vercel instances. Verification unavailability
+leaves submission locked. The local development fallback uses in-memory limits.
+
+Word uploads remain limited to 1 MB; attachments are sent only to the administrator.
+Submitting an abstract no longer retries POST automatically after network errors,
+to avoid duplicate submissions when a response is lost. Multiple intentional
+abstracts per registered delegate remain allowed; no per-delegate abstract cap
+has been introduced. The ID/email check is an eligibility check, not an email-OTP
+login or independent confirmation of bank settlement.

@@ -40,6 +40,10 @@ class InMemoryDb {
     return this;
   }
 
+  registrationByReference(ref) {
+    return this.tables.registrations.filter(row=>row.ref_id===ref).slice(0,2).map(row=>({ref_id:row.ref_id,email:row.email}));
+  }
+
   prepare(sql) {
     const normalized = (sql || '').replace(/\s+/g, ' ').trim();
     const self = this;
@@ -87,7 +91,7 @@ class InMemoryDb {
             category: args[3],
             body: args[4],
             ref_id: args[5],
-            document_path: args[6], document_filename: args[7], document_mimetype: args[8], document_size: args[9], preference: args[10],
+            document_path: args[6], document_filename: args[7], document_mimetype: args[8], document_size: args[9], preference: args[10], registration_ref: args[11],
             created_at: now
           };
         } else if (tableName === 'contacts') {

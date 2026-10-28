@@ -29,13 +29,15 @@ test('abstract form sends the selected Word file and reports incomplete email ac
   const html=fs.readFileSync(require.resolve('../index.html'),'utf8');
   const start=html.indexOf('async function handleAbstractSubmit(');
   const code=html.slice(start,html.indexOf('// 9. SECRETARIAT ADMIN CONSOLE LOGIC',start));
-  const nodes={btnSubmitAbs:{},absAuthor:{value:'Author'},absEmail:{value:'author@example.test'},absCategory:{value:'Track 1'},absTitle:{value:'Study'},absDocument:{files:[{name:'study.docx'}]},absPreference:{value:'Poster'},abstractForm:{reset(){}}};
+  let eligible=true;
+  const nodes={btnSubmitAbs:{},absRegistrationId:{value:'NMP27-DEL-12345'},absAuthor:{value:'Author'},absEmail:{value:'author@example.test'},absCategory:{value:'Track 1'},absTitle:{value:'Study'},absDocument:{files:[{name:'study.docx'}]},absPreference:{value:'Poster'},abstractForm:{reset(){eligible=false;}}};
   const alerts=[];let payload;
-  const context={isSubmittingAbstract:false,document:{getElementById:id=>nodes[id]},readSubmissionFile:async()=> 'data:test;base64,TEST',fetchWithRetry:async(url,options)=>{assert.equal(url,'/api/abstract');payload=JSON.parse(options.body);return {ok:true,json:async()=>({ref_id:'ABS-TEST',email_status:{delegate:'failed',organizer:'sent'}})};},submissionEmailNotice:status=>status.delegate==='sent'?'sent':'incomplete',alert:msg=>alerts.push(msg),console};
+  const context={window:{AbstractRegistration:{isEligible:()=>eligible,reset(){eligible=false;},setSubmitting(value){nodes.btnSubmitAbs.disabled=value||!eligible;}}},isSubmittingAbstract:false,document:{getElementById:id=>nodes[id]},readSubmissionFile:async()=> 'data:test;base64,TEST',fetch:async(url,options)=>{assert.equal(url,'/api/abstract');payload=JSON.parse(options.body);return {ok:true,json:async()=>({ref_id:'ABS-TEST',email_status:{delegate:'failed',organizer:'sent'}})};},submissionEmailNotice:status=>status.delegate==='sent'?'sent':'incomplete',alert:msg=>alerts.push(msg),console};
   await vm.runInNewContext(code+'\nhandleAbstractSubmit({preventDefault(){}});',context);
+  assert.equal(payload.registration_id,'NMP27-DEL-12345');
   assert.equal(payload.document_filename,'study.docx');
   assert.equal(payload.preference,'Poster');
   assert.equal(payload.document_data,'data:test;base64,TEST');
   assert.match(alerts[0],/incomplete/);
-  assert.equal(nodes.btnSubmitAbs.disabled,false);
+  assert.equal(nodes.btnSubmitAbs.disabled,true);
 });

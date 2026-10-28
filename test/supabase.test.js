@@ -50,6 +50,7 @@ test('Vercel registration persists records and proofs through Supabase and prote
   global.fetch=async(url,options={})=>{
     const parsed=new URL(url);
     if(parsed.hostname!=='project.supabase.co')return previousFetch(url,options);
+    if(parsed.pathname==='/rest/v1/rpc/abstract_registration_limit')return response(true);
     if(parsed.pathname.startsWith('/storage/v1/object/sign/'))return response({signedURL:'/object/sign/payment-proofs/proof.png?token=test-only'});
     if(parsed.pathname.startsWith('/storage/v1/object/')){uploads.push(parsed.pathname);return response({Key:'ok'});}
     const table=parsed.pathname.split('/').pop();
@@ -58,7 +59,8 @@ test('Vercel registration persists records and proofs through Supabase and prote
       const row={...JSON.parse(options.body),id:tables[table].length+1};
       tables[table].push(row);return response([row]);
     }
-    return response(tables[table].map(row=>({...row})));
+    const rows=parsed.searchParams.has('ref_id')?tables[table].filter(row=>row.ref_id===parsed.searchParams.get('ref_id').slice(3)):tables[table];
+    return response(rows.map(row=>({...row})));
   };
   const {app}=require('../server');
   const server=app.listen(0,'127.0.0.1');
@@ -85,14 +87,19 @@ test('Vercel registration persists records and proofs through Supabase and prote
   assert.match(rows[0].payment_proof,/^https:\/\/project.supabase.co\/storage\/v1\/object\/sign\//);
   const word = Buffer.from(require('fflate').zipSync({'[Content_Types].xml':Buffer.from('<Types/>'),'word/document.xml':Buffer.from('<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"/>')}));
   const post = (route,body)=>previousFetch(base+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-  const abstract=await post('/api/abstract',{full_name:'Author',email:'author@example.test',title:'Study',preference:'Poster',document_filename:'study.docx',document_data:'data:application/octet-stream;base64,'+word.toString('base64')});
+  const beforeUploads=uploads.length;
+  const denied=await post('/api/abstract',{full_name:'Other',email:'other@example.test',registration_id:tables.registrations[0].ref_id,title:'Study'});
+  assert.equal(denied.status,403);assert.equal(uploads.length,beforeUploads);
+  assert.equal(tables.abstracts?.length || 0,0);
+  const abstract=await post('/api/abstract',{full_name:'Author',email:'delegate@example.test',registration_id:tables.registrations[0].ref_id,title:'Study',preference:'Poster',document_filename:'study.docx',document_data:'data:application/octet-stream;base64,'+word.toString('base64')});
   assert.equal(abstract.status,200);
   assert.deepEqual((await abstract.json()).email_status,{delegate:'simulated',organizer:'simulated'});
+  assert.equal(tables.abstracts[0].registration_ref,tables.registrations[0].ref_id);
   assert.match(tables.abstracts[0].document_path,/^supabase:\/\/abstract-documents\//);
   assert.ok(uploads.some(path=>path.includes('/abstract-documents/')));
   const abstractRows = await require('../supabaseStorage').getSupabaseStorage().signRows(tables.abstracts);
   assert.match(abstractRows[0].document_path,/^https:/);
-  const invalidAbstract=await post('/api/abstract',{full_name:'Author',email:'author@example.test',title:'Study',document_filename:'study.docx',document_data:'data:text/plain;base64,aGVsbG8='});
+  const invalidAbstract=await post('/api/abstract',{full_name:'Author',email:'delegate@example.test',registration_id:tables.registrations[0].ref_id,title:'Study',document_filename:'study.docx',document_data:'data:text/plain;base64,aGVsbG8='});
   assert.equal(invalidAbstract.status,400);
   assert.equal(tables.abstracts.length,1);
   const inquiry=await post('/api/sponsorship',{company_name:'Company',contact_person:'Contact',email:'sponsor@example.test',tier:'Gold',amount:1});

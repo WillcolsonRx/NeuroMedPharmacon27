@@ -1678,6 +1678,12 @@ button, input, select, textarea {
 /* ==========================================================================
    ABSTRACT SUBMISSION PORTAL
    ========================================================================== */
+.abstract-registration-gate { background:#f0f9ff; border:1px solid #bae6fd; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem; }
+.abstract-registration-gate h3 { color:#0f172a; font-size:1.1rem; margin:0 0 .6rem; }
+.abstract-registration-gate p { color:#475569; font-size:.85rem; line-height:1.6; margin:.6rem 0; }
+.abstract-registration-gate a { color:#075985; font-size:.85rem; }
+#btnSubmitAbs:disabled,#btnVerifyAbsRegistration:disabled { opacity:.5; cursor:not-allowed; }
+
 .abstract-panel-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -3406,15 +3412,26 @@ button, input, select, textarea {
     <div class="abstract-panel-card">
       <form id="abstractForm" onsubmit="handleAbstractSubmit(event)">
         
-        <div class="row g-3 mb-2">
-          <div class="col-md-6">
-            <label class="form-label-scholarly">Presenting Author Name</label>
-            <input type="text" class="form-input-scholarly" id="absAuthor" placeholder="e.g. Dr. Ananya Sen" required>
+        <div class="abstract-registration-gate">
+          <h3>Registration required</h3>
+          <p>Use the conference Registration ID from your delegate receipt or confirmation email. This is different from your bank Transaction/Reference ID.</p>
+          <div class="row g-3 mb-2">
+            <div class="col-md-6">
+              <label class="form-label-scholarly" for="absRegistrationId">Registration ID *</label>
+              <input type="text" class="form-input-scholarly" id="absRegistrationId" placeholder="NMP27-DEL-..." maxlength="90" autocomplete="off" spellcheck="false" aria-describedby="absRegistrationStatus" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-scholarly" for="absEmail">Author Email *</label>
+              <input type="email" class="form-input-scholarly" id="absEmail" placeholder="Same email used for registration" maxlength="254" required>
+            </div>
           </div>
-          <div class="col-md-6">
-            <label class="form-label-scholarly">Author Email</label>
-            <input type="email" class="form-input-scholarly" id="absEmail" placeholder="author.name@institution.edu" required>
-          </div>
+          <button type="button" class="btn-primary-action" id="btnVerifyAbsRegistration" disabled>Verify Registration</button>
+          <p id="absRegistrationStatus" role="status" aria-live="polite">Enter your Registration ID and registration email, then verify to unlock submission.</p>
+          <a href="#registration">Not registered yet? Complete delegate enrolment first &rarr;</a>
+        </div>
+        <div class="mb-2">
+          <label class="form-label-scholarly" for="absAuthor">Presenting Author Name *</label>
+          <input type="text" class="form-input-scholarly" id="absAuthor" placeholder="e.g. Dr. Ananya Sen" required>
         </div>
 
         <div class="row g-3 mb-2">
@@ -3476,8 +3493,8 @@ button, input, select, textarea {
             </a>
           </div>
 
-          <button type="submit" class="btn-primary-action" id="btnSubmitAbs">
-            Submit Abstract for Review &rarr;
+          <button type="submit" class="btn-primary-action" id="btnSubmitAbs" disabled>
+            Verify registration to unlock
           </button>
         </div>
 
@@ -4846,12 +4863,18 @@ async function handleAbstractSubmit(e) {
   e.preventDefault();
 
   if (isSubmittingAbstract) return;
+  if (!window.AbstractRegistration?.isEligible()) {
+    alert('Verify your conference Registration ID and registration email before submitting an abstract.');
+    return;
+  }
   isSubmittingAbstract = true;
 
   const btn = document.getElementById('btnSubmitAbs');
   btn.disabled = true;
   btn.textContent = 'Submitting Abstract...';
+  window.AbstractRegistration.setSubmitting(true);
 
+  const registrationId = document.getElementById('absRegistrationId').value.trim().toUpperCase();
   const author = document.getElementById('absAuthor').value.trim();
   const email = document.getElementById('absEmail').value.trim();
   const category = document.getElementById('absCategory').value;
@@ -4861,10 +4884,11 @@ async function handleAbstractSubmit(e) {
 
   try {
     const documentData = await readSubmissionFile(file, /\.docx?$/i);
-    const res = await fetchWithRetry('/api/abstract', {
+    const res = await fetch('/api/abstract', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        registration_id: registrationId,
         full_name: author,
         email: email,
         category: category,
@@ -4873,13 +4897,12 @@ async function handleAbstractSubmit(e) {
         document_data: documentData,
         document_filename: file.name
       })
-    }, 2, 800);
+    });
 
     const data = await res.json();
     if (!res.ok) {
       alert(data.error || 'Failed to submit abstract.');
-      btn.disabled = false;
-      btn.textContent = 'Submit Abstract for Review →';
+      if (res.status === 403) window.AbstractRegistration.reset();
       return;
     }
 
@@ -4891,8 +4914,7 @@ async function handleAbstractSubmit(e) {
     alert(err.message || 'Could not confirm abstract submission. Contact the Secretariat before retrying.');
   } finally {
     isSubmittingAbstract = false;
-    btn.disabled = false;
-    btn.textContent = 'Submit Abstract for Review →';
+    window.AbstractRegistration.setSubmitting(false);
   }
 }
 
@@ -5048,6 +5070,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+<script src="/abstract-registration.js" defer></script>
 <script src="/conference-countdown.js" defer></script>
 </body>
 </html>

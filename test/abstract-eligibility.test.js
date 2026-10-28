@@ -1,0 +1,62 @@
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const {createAbstractEligibility,normalizeRegistrationPair}=require('../abstractEligibility');
+const {InMemoryDb}=require('../dbFallback');
+const {createSupabaseStorage}=require('../supabaseStorage');
+const pair={registration_id:'NMP27-DEL-12345',email:'registered@example.test'};
+test('registration eligibility checks the stored ID and matching email, including old IDs',async()=>{
+ const db=new InMemoryDb();
+ db.tables.registrations.push({ref_id:pair.registration_id,email:' Registered@example.test '});
+ const verify=createAbstractEligibility(db);
+ assert.deepEqual(await verify({...pair,registration_id:' nmp27-del-12345 ',email:'REGISTERED@example.test'}),{registration_ref:pair.registration_id,email:pair.email});
+ await assert.rejects(verify({...pair,email:'other@example.test'}),e=>e.status===403);
+ await assert.rejects(verify({...pair,registration_id:'NMP27-DEL-54321'}),e=>e.status===403);
+ await assert.rejects(verify({...pair,registration_id:'DU123456'}),e=>e.status===400);
+ assert.equal(normalizeRegistrationPair({...pair,registration_id:'NMP27-DEL-0123456789ABCDEF'}).ref,'NMP27-DEL-0123456789ABCDEF');
+ db.tables.registrations.push({ref_id:pair.registration_id,email:pair.email});
+ await assert.rejects(verify(pair),e=>e.status===403);
+});
+test('eligibility fails closed on database errors and throttles repeated guesses',async()=>{
+ let lookup=false;
+ const db={kind:'supabase',rpc:async()=>{throw new Error('database unavailable')},registrationByReference:async()=>{lookup=true;return []}};
+ await assert.rejects(createAbstractEligibility(db)(pair),e=>e.status===503&&!e.message.includes('database unavailable'));
+ assert.equal(lookup,false);
+ db.rpc=async()=>false;
+ await assert.rejects(createAbstractEligibility(db)(pair),e=>e.status===429);
+ const local=new InMemoryDb();local.tables.registrations.push({ref_id:pair.registration_id,email:pair.email});
+ const verify=createAbstractEligibility(local);
+ for(let i=0;i<20;i++)await assert.rejects(verify({...pair,email:'wrong@example.test'}),e=>e.status===403);
+ await assert.rejects(verify({...pair,email:'wrong@example.test'}),e=>e.status===429);
+});
+test('Supabase lookup selects only ID/email with an exact bounded server-side filter',async()=>{
+ let requested;
+ const db=createSupabaseStorage({url:'https://project.supabase.co',key:'test-only',fetchImpl:async(url)=>{requested=new URL(url);return {ok:true,json:async()=>[{ref_id:pair.registration_id,email:pair.email}]};}});
+ const rows=await db.registrationByReference(pair.registration_id);
+ assert.equal(requested.searchParams.get('select'),'ref_id,email');
+ assert.equal(requested.searchParams.get('ref_id'),'eq.'+pair.registration_id);
+ assert.equal(requested.searchParams.get('limit'),'2');assert.equal(rows[0].email,pair.email);
+});
+test('abstract button stays locked after changes, failed checks and stale successful responses',async()=>{
+ function node(){return {value:'',disabled:false,listeners:{},addEventListener(name,handler){this.listeners[name]=handler;},checkValidity(){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value);}};}
+ const ids=['abstractForm','absRegistrationId','absEmail','btnVerifyAbsRegistration','btnSubmitAbs','absRegistrationStatus'];
+ const nodes=Object.fromEntries(ids.map(id=>[id,node()]));const requests=[];
+ const context={document:{getElementById:id=>nodes[id]},window:{},AbortController,setTimeout,clearTimeout,fetch:(url,options)=>new Promise(resolve=>requests.push({url,options,resolve}))};
+ vm.runInNewContext(fs.readFileSync('public/abstract-registration.js','utf8'),context);
+ const api=context.window.AbstractRegistration;
+ const id=nodes.absRegistrationId,email=nodes.absEmail,verify=nodes.btnVerifyAbsRegistration,submit=nodes.btnSubmitAbs;
+ assert.equal(submit.disabled,true);assert.equal(verify.disabled,true);
+ id.value=pair.registration_id;email.value=pair.email;email.listeners.input();assert.equal(verify.disabled,false);
+ let pending=verify.listeners.click();assert.equal(submit.disabled,true);
+ id.value='NMP27-DEL-54321';id.listeners.input();
+ requests[0].resolve({ok:true,json:async()=>({eligible:true})});await pending;
+ assert.equal(submit.disabled,true);assert.equal(api.isEligible(),false);
+ pending=verify.listeners.click();requests[1].resolve({ok:false,json:async()=>({error:'No match'})});await pending;assert.equal(submit.disabled,true);
+ pending=verify.listeners.click();requests[2].resolve({ok:true,json:async()=>({eligible:true})});await pending;
+ assert.equal(submit.disabled,false);assert.equal(api.isEligible(),true);
+ api.setSubmitting(true);assert.equal(submit.disabled,true);assert.equal(verify.disabled,true);
+ api.setSubmitting(false);assert.equal(submit.disabled,false);
+ email.value='other@example.test';email.listeners.input();assert.equal(submit.disabled,true);
+ api.reset();assert.equal(api.isEligible(),false);
+});

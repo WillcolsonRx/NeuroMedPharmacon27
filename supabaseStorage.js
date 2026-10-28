@@ -71,6 +71,9 @@ function createSupabaseStorage({ url, key, fetchImpl = fetch }) {
       }
       throw new Error('Unsupported storage query');
     },
+    async registrationByReference(ref) {
+      return request('/rest/v1/registrations?select=ref_id,email&ref_id=eq.'+encodeURIComponent(ref)+'&limit=2');
+    },
     async storeDocument(document) {
       const object = `${randomUUID()}.${document.ext}`;
       await request(`/storage/v1/object/abstract-documents/${object}`, {method:'POST',headers:{'Content-Type':document.mimetype,'x-upsert':'false'},body:document.buffer});

@@ -129,7 +129,7 @@ try { db.exec(`ALTER TABLE sponsorships ADD COLUMN payment_ref TEXT;`); } catch 
 try { db.exec(`ALTER TABLE sponsorships ADD COLUMN payment_proof TEXT;`); } catch (e) {}
 try { db.exec(`ALTER TABLE abstracts ADD COLUMN ref_id TEXT;`); } catch (e) {}
 
-for (const column of ['document_path TEXT','document_filename TEXT','document_mimetype TEXT','document_size INTEGER', 'preference TEXT']) {
+for (const column of ['document_path TEXT','document_filename TEXT','document_mimetype TEXT','document_size INTEGER', 'preference TEXT','registration_ref TEXT']) {
   try { db.exec(`ALTER TABLE abstracts ADD COLUMN ${column}`); } catch {}
 }
 
@@ -321,22 +321,34 @@ app.post(['/api/register', '/register'], async (req, res) => {
   }
 });
 
+const verifyAbstractRegistration = require('./abstractEligibility').createAbstractEligibility(db);
+const abstractClientIp = req => String(process.env.VERCEL ? (req.headers['x-forwarded-for'] || req.ip || 'unknown') : (req.ip || 'unknown')).split(',')[0].trim();
+app.post(['/api/abstract/registration','/abstract/registration'],async(req,res)=>{
+  res.setHeader('Cache-Control','no-store');
+  try{
+    await verifyAbstractRegistration(req.body,abstractClientIp(req));
+    res.json({eligible:true});
+  }catch(error){res.status(error.status || 503).json({eligible:false,error:error.message});}
+});
+
 app.post(['/api/abstract', '/abstract'], async (req, res) => {
   try {
-    const { full_name, email, title, category, preference, document_data, document_filename } = req.body;
+    const { full_name, email, title, category, preference, document_data, document_filename, registration_id } = req.body;
     if (!full_name || !email || !title || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ error: 'Valid author name, email and title are required' });
+    const eligibility = await verifyAbstractRegistration({registration_id,email},abstractClientIp(req));
     let document;
     try { document = validateAbstractDocument(document_data, document_filename); }
     catch (err) { return res.status(400).json({error:err.message}); }
     const ref_id = generateRefId('ABS');
     const document_path = await storeAbstractDocument(document, permanentStorage);
     const info = await db.prepare(`
-      INSERT INTO abstracts (full_name,email,title,category,body,ref_id,document_path,document_filename,document_mimetype,document_size,preference)
-      VALUES (?,?,?,?,?,?,?,?,?,?,?)
-    `).run(full_name, email, title, category || '', '', ref_id, document_path, document.filename, document.mimetype, document.buffer.length, preference || 'Oral');
-    const email_status = await sendSubmissionEmails(db, 'ABSTRACT', {full_name,email,title,category,preference:preference || 'Oral',ref_id}, [{filename:document.filename,content:document.buffer,contentType:document.mimetype}]);
-    res.json({ id: info.lastInsertRowid, ref_id, email_status });
+      INSERT INTO abstracts (full_name,email,title,category,body,ref_id,document_path,document_filename,document_mimetype,document_size,preference,registration_ref)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+    `).run(full_name, email, title, category || '', '', ref_id, document_path, document.filename, document.mimetype, document.buffer.length, preference || 'Oral', eligibility.registration_ref);
+    const email_status = await sendSubmissionEmails(db, 'ABSTRACT', {full_name,email,title,category,preference:preference || 'Oral',ref_id,registration_ref:eligibility.registration_ref}, [{filename:document.filename,content:document.buffer,contentType:document.mimetype}]);
+    res.json({ id: info.lastInsertRowid, ref_id, registration_ref:eligibility.registration_ref, email_status });
   } catch (err) {
+    if (err.status) return res.status(err.status).json({error:err.message});
     console.error('[ABSTRACT SUBMISSION ERROR]', err.message);
     res.status(500).json({ error: 'Could not save abstract. Please contact the Secretariat.' });
   }
