@@ -138,3 +138,9 @@ Professor. Equal groups retain their catalogue order. This is a conference displ
 order, not a claim of formal equivalence between scientific and academic grades.
 A wrapping flex layout preserves equal card widths and centers incomplete rows
 at each responsive column count, including the two-card final desktop row.
+
+## Additional filename list (29 October 2026)
+
+Published Satyendra Kumar Rajput, Sachchidanand Tewari and Jayant Kumar with sourced portraits. Rajput's current university page identifies him as Dean; the renderer places a Dean after President and before Associate Dean, keeping the first two featured entries fixed. Tewari's current ResearchGate profile says Associate Professor, whereas older editorial listings say Assistant Professor. Jayant's university CV (March 2023) gives Assistant Professor and a current verified-email Scholar profile corroborates the university and research field. These are the best available source-based designations, not a claim that every institution has freshly confirmed its roster.
+
+Yogesh Kulkarni was already published and was not duplicated. Jayant Kumar's DOCX/PDF entries produce one card. Mangesh Bankar is held unpublished: Cureus (https://www.cureus.com/users/549928-mangesh-bankar) identifies Associate Professor, Pharmacology, AIIMS Raebareli, but Cureus and the matching Scholar profile show generic avatars and the institutional website returned HTTP 406. A different ResearchGate namesake is in mechanical engineering and must not be used. Obtain an organizer-confirmed portrait/identity before publishing.

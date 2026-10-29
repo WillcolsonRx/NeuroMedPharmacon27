@@ -171,3 +171,11 @@ The organizer supplied the exact LinkedIn CDN portrait on 28 October 2026. It wa
 ### Organizer-selected replacement for Dr. Ashutosh Kumar
 
 The organizer supplied the exact LinkedIn portrait, saved unchanged as `/assets/speakers/ashutosh-kumar-selected.jpg` (JPEG, 800 × 800, 106,195 bytes). It replaces the earlier ResearchGate image. Source: https://media.licdn.com/dms/image/v2/D5603AQHiLq8d3E-hzQ/profile-displayphoto-crop_800_800/B56ZewIHKPH8AI-/0/1751006606453 (expiring signature omitted). The website uses the local asset.
+
+### Additional invited speakers (29 October 2026)
+
+- **Prof. Satyendra Kumar Rajput**: Dean confirmed at https://www.gkv.ac.in/faculty-of-medical-science-health/; Professor of Pharmacology & Toxicology and original portrait from page 1 of https://www.gkv.ac.in/wp-content/uploads/2022/08/SKRajput.pdf. Embedded JPEG extracted unchanged (659 × 782) to `/assets/speakers/satyendra-rajput.jpeg`.
+- **Dr. Sachchidanand Tewari**: current Associate Professor, AIIMS Raebareli, Pharmacology, at https://www.researchgate.net/profile/Sachchidanand-Tewari. Exact portrait https://i1.rgstatic.net/ii/profile.image/11431281270242089-1723021046105_Q512/Sachchidanand-Tewari.jpg downloaded unchanged (512 × 512) to `/assets/speakers/sachchidanand-tewari.jpg`.
+- **Dr. Jayant Kumar**: Assistant Professor, Pharmaceutical Sciences, Chauras Campus, from university CV https://hnbgu.ac.in/sites/default/files/2023-03/Dr%20Jayant%20Kumar.pdf. Department and institution corroborated by https://scholar.google.com/citations?hl=en&user=nOAUNTgAAAAJ. Original embedded CV portrait extracted unchanged (506 × 493) to `/assets/speakers/jayant-kumar.jpeg`.
+
+Institutional/research-profile sources are documented for provenance; no blanket open-license claim is made.

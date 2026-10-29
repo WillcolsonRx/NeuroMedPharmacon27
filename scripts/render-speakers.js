@@ -6,6 +6,7 @@ function designationPriority(speaker) {
   if (speaker.id === 'anil-gulati') return -1;
   const title = speaker.designation.toLowerCase();
   if (/^president\b/.test(title)) return 0;
+  if (/^dean\b/.test(title)) return 0.5;
   if (title.includes('associate dean')) return 1;
   if (/\bhead\b/.test(title)) return 2;
   if (title.includes('in-charge')) return 3;

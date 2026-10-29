@@ -230,5 +230,47 @@
     "image_source": "https://www.bits-pilani.ac.in/wp-content/uploads/WhatsApp-Image-2023-07-04-at-13.55.26.jpeg",
     "profile_status": "verified",
     "verified_on": "2026-10-28"
+  },
+  {
+    "id": "satyendra-rajput",
+    "name": "Prof. Satyendra Kumar Rajput",
+    "role": "Invited Speaker",
+    "designation": "Dean, Faculty of Medical Science & Health; Professor of Pharmacology & Toxicology",
+    "affiliation": "Gurukula Kangri (Deemed to be University), Haridwar",
+    "image": "/assets/speakers/satyendra-rajput.jpeg",
+    "profile_url": "https://www.gkv.ac.in/faculty-of-medical-science-health/",
+    "image_source": "https://www.gkv.ac.in/wp-content/uploads/2022/08/SKRajput.pdf",
+    "profile_status": "verified",
+    "verified_on": "2026-10-29",
+    "details_source": "Current university Faculty of Medical Science & Health page identifies him as Dean; institutional CV identifies Professor of Pharmacology & Toxicology, Department of Pharmaceutical Sciences.",
+    "image_source_note": "Original embedded JPEG extracted from page 1 of the institutional CV; no retouching or synthetic portrait."
+  },
+  {
+    "id": "sachchidanand-tewari",
+    "name": "Dr. Sachchidanand Tewari",
+    "role": "Invited Speaker",
+    "designation": "Associate Professor, Department of Pharmacology",
+    "affiliation": "AIIMS Raebareli",
+    "image": "/assets/speakers/sachchidanand-tewari.jpg",
+    "profile_url": "https://www.researchgate.net/profile/Sachchidanand-Tewari",
+    "image_source": "https://i1.rgstatic.net/ii/profile.image/11431281270242089-1723021046105_Q512/Sachchidanand-Tewari.jpg",
+    "profile_status": "verified",
+    "verified_on": "2026-10-29",
+    "details_source": "Public researcher profile identifies current Associate Professor position at AIIMS Raebareli and Pharmacology department. Older editorial listings describe Assistant Professor; the current self-maintained profile is used.",
+    "image_source_note": "Original profile JPEG downloaded unchanged, 512 × 512 pixels."
+  },
+  {
+    "id": "jayant-kumar",
+    "name": "Dr. Jayant Kumar",
+    "role": "Invited Speaker",
+    "designation": "Assistant Professor, Department of Pharmaceutical Sciences",
+    "affiliation": "HNB Garhwal University, Chauras Campus",
+    "image": "/assets/speakers/jayant-kumar.jpeg",
+    "profile_url": "https://hnbgu.ac.in/sites/default/files/2023-03/Dr%20Jayant%20Kumar.pdf",
+    "image_source": "https://hnbgu.ac.in/sites/default/files/2023-03/Dr%20Jayant%20Kumar.pdf",
+    "profile_status": "verified",
+    "verified_on": "2026-10-29",
+    "details_source": "Institutional faculty CV identifies Assistant Professor, Pharmaceutical Sciences, Chauras Campus. Current Google Scholar profile (nOAUNTgAAAAJ, verified university email) corroborates HNB Garhwal University department and neurotoxicity research. CV was uploaded March 2023; designation is last institutionally documented, not a newly confirmed appointment.",
+    "image_source_note": "Original embedded JPEG extracted from page 1 of the institutional CV; no retouching or synthetic portrait."
   }
 ]
