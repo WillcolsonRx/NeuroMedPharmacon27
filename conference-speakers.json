@@ -1,15 +1,17 @@
 [
   {
     "id": "anil-gaikwad",
-    "name": "Prof. Anil B. Gaikwad",
+    "name": "Dr. Anil Nilkanth Gaikwad",
     "role": "Keynote Speaker",
-    "designation": "Professor, Department of Pharmacy",
-    "affiliation": "BITS Pilani, Pilani Campus",
-    "image": "/assets/speakers/anil-b-gaikwad.jpeg",
-    "profile_url": "https://www.bits-pilani.ac.in/pilani/anil-b-gaikwad/",
-    "image_source": "https://www.bits-pilani.ac.in/wp-content/uploads/Prof.-Anil.-B.-Gaikwad.jpeg",
+    "designation": "Senior Principal Scientist, Pharmacology Division",
+    "affiliation": "CSIR-Central Drug Research Institute, Lucknow",
+    "image": "/assets/speakers/anil-n-gaikwad-cdri.png",
+    "profile_url": "https://www.cdri.res.in/scientist-profile?anil_gaikwad",
+    "image_source": "https://www.cdri.res.in/images/Scientists/1572.png",
     "profile_status": "verified",
-    "verified_on": "2026-10-28"
+    "verified_on": "2026-10-29",
+    "details_source": "Organizer explicitly identifies the intended keynote speaker as Dr. Anil Nilkanth Gaikwad, Senior Principal Scientist, Pharmacology Division, CSIR-CDRI Lucknow. Official profile and Pharmacology directory corroborate Anil N Gaikwad and the institute; directory labels Scientist F & Head while individual page labels Scientist G, so the organizer-supplied designation is retained.",
+    "image_source_note": "Official individual-profile portrait downloaded unchanged, PNG 400 × 400. Replaces the incorrect BITS Pilani namesake portrait."
   },
   {
     "id": "anil-gulati",

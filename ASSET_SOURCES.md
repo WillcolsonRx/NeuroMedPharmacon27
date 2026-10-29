@@ -179,3 +179,7 @@ The organizer supplied the exact LinkedIn portrait, saved unchanged as `/assets/
 - **Dr. Jayant Kumar**: Assistant Professor, Pharmaceutical Sciences, Chauras Campus, from university CV https://hnbgu.ac.in/sites/default/files/2023-03/Dr%20Jayant%20Kumar.pdf. Department and institution corroborated by https://scholar.google.com/citations?hl=en&user=nOAUNTgAAAAJ. Original embedded CV portrait extracted unchanged (506 × 493) to `/assets/speakers/jayant-kumar.jpeg`.
 
 Institutional/research-profile sources are documented for provenance; no blanket open-license claim is made.
+
+### Keynote identity correction (29 October 2026)
+
+The organizer confirmed the keynote is **Dr. Anil Nilkanth Gaikwad, CSIR-CDRI Lucknow**, replacing the earlier mistaken BITS Pilani namesake. Official profile https://www.cdri.res.in/scientist-profile?anil_gaikwad serves portrait https://www.cdri.res.in/images/Scientists/1572.png, saved unchanged (400 × 400 PNG) as `/assets/speakers/anil-n-gaikwad-cdri.png`. The earlier BITS portrait was removed. The organizer-provided Senior Principal Scientist designation is used because the official individual page and Pharmacology directory show inconsistent grade labels. Earlier BITS source notes above are superseded.
