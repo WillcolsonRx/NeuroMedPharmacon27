@@ -57,3 +57,13 @@ test('abstract and sponsorship emails attach files only for admins and preserve 
   assert.equal(messages[3].attachments.length,1);
   assert.match(messages[2].html,/Sponsorship Acknowledgement/);
 });
+
+test('R2 registration Secretariat copy attaches proof; uncertain and temporary SMTP outcomes remain distinguishable',async t=>{
+ delete process.env.NODE_ENV;process.env.SMTP_USER='r2-sender@example.test';process.env.SMTP_PASS='test-only';process.env.SMTP_HOST='smtp.example.test';process.env.ORGANIZER_EMAIL='r2-organizer@example.test';
+ const messages=[];t.mock.method(nodemailer,'createTransport',()=>({sendMail:async message=>{messages.push(message);if(message.to==='temporary@example.test')throw Object.assign(Error('Temporary rejection'),{responseCode:451});if(message.to==='uncertain@example.test')throw Object.assign(Error('Connection timed out'),{code:'ETIMEDOUT'});return {messageId:'mock-only'};}}));
+ const proof={filename:'proof.png',content:Buffer.from('mock proof'),contentType:'image/png'};
+ const results=await handleRegistrationEmails(null,{full_name:'<b>Delegate</b>',email:'r2-delegate@example.test',category:'student',amount:3500,currency:'INR',ref_id:'NMP27-DEL-TEST',has_proof:true,proof_attachments:[proof]});
+ assert.equal(results.organizer.status,'sent');assert.equal(messages.find(m=>m.to==='r2-organizer@example.test').attachments[0].content,proof.content);assert.equal(messages.find(m=>m.to==='r2-delegate@example.test').attachments.length,0);assert.match(messages[0].html,/&lt;b&gt;Delegate&lt;\/b&gt;/);
+ const uncertain=await sendMail(null,{to:'uncertain@example.test',subject:'Test',text:'Test'});assert.equal(uncertain.status,'failed');assert.equal(uncertain.uncertain,true);assert.equal(uncertain.retryable,false);
+ const temporary=await sendMail(null,{to:'temporary@example.test',subject:'Test',text:'Test'});assert.equal(temporary.retryable,true);assert.equal(temporary.uncertain,false);
+});

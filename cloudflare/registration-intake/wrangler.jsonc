@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "neuromet-registration-intake",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-29",
+  "workers_dev": true,
+  "r2_buckets": [{"binding": "INTAKE", "bucket_name": "neuromet-registration-intake"}],
+  "queues": {
+    "producers": [{"binding": "PROCESSING", "queue": "neuromet-registration-processing"}],
+    "consumers": [{"queue": "neuromet-registration-processing", "max_batch_size": 1, "max_batch_timeout": 1, "max_retries": 10}]
+  },
+  "triggers": {"crons": ["*/5 * * * *"]},
+  "vars": {"CALLBACK_URL": "https://REPLACE-WITH-YOUR-CONFERENCE-HOST/api/internal/r2-registration"}
+}

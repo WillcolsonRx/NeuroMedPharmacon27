@@ -4749,10 +4749,14 @@ async function handleRegistrationSubmit(e) {
   btn.textContent = 'Verifying & Registering Delegate...';
 
   try {
+    // Keep the same ID after network failures/reloads so R2 retries cannot create duplicates.
+    let submissionId=sessionStorage.getItem('neuromet.registrationSubmissionId');
+    if(!submissionId){submissionId=crypto.randomUUID();sessionStorage.setItem('neuromet.registrationSubmissionId',submissionId);}
     const res = await fetchWithRetry('/api/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        submission_id: submissionId,
         full_name: fullName,
         email: email,
         phone: phone,
@@ -4799,10 +4803,13 @@ async function handleRegistrationSubmit(e) {
     document.getElementById('receiptAmount').textContent = '₹' + Number(data.amount).toLocaleString('en-IN') + ' INR (Incl. 18% GST)';
 
     document.getElementById('receiptEmailStatus').textContent =
-      data.email_status?.delegate === 'sent' && data.email_status?.organizer === 'sent'
+      data.intake_status === 'received'
+        ? 'Your registration and payment proof have been safely received. Email confirmation and roster processing are pending. Keep this receipt; do not register or pay again. Abstract verification will become available after roster processing.'
+        : data.email_status?.delegate === 'sent' && data.email_status?.organizer === 'sent'
         ? 'Confirmation emails were accepted by the mail server for you and the Secretariat. Please check your inbox and spam folder.'
         : 'Your registration has been saved, but email confirmation could not be completed for all recipients. Download your receipt and contact the Secretariat if needed; do not submit again.';
     document.getElementById('receiptModal').style.display = 'flex';
+    sessionStorage.removeItem('neuromet.registrationSubmissionId');
     document.getElementById('registrationForm').reset();
     clearPaymentFile();
     recalculateTariff();

@@ -27,6 +27,8 @@ const {
 const {validateAbstractDocument,storeAbstractDocument,DOCUMENT_DIR} = require('./abstractDocument');
 const { registrationAmount } = require('./public/registration-pricing');
 const app = express();
+const {intakeConfig,prepareIntake,receiveIntake,authorized}=require('./r2Intake');
+const r2Config=intakeConfig();
 
 // Initialize Database (handles Vercel Serverless /tmp writable directory or InMemoryDb fallback)
 const permanentStorage = require('./supabaseStorage').getSupabaseStorage();
@@ -153,7 +155,7 @@ app.post('/api/internal/mail-events',express.raw({type:'application/json',limit:
 app.use(express.json({ limit: '10mb' }));
 // Vercel's temporary filesystem cannot safely retain conference submissions.
 app.use((req, res, next) => {
-  if (process.env.VERCEL && !permanentStorage && req.method === 'POST') {
+  if (process.env.VERCEL && !permanentStorage && req.method === 'POST' && !(r2Config && ['/api/register','/register'].includes(req.path)) && req.path!=='/api/internal/r2-registration') {
     return res.status(503).json({error:'Registration storage is not configured. Please contact the Secretariat; do not submit payment proofs yet.'});
   }
   next();
@@ -181,7 +183,7 @@ app.get(['/api/tariff', '/tariff'], (req, res) => {
 
 app.get(['/api/health', '/health'], (req, res) => {
   res.setHeader('Cache-Control', 'no-cache');
-  res.json({ status: 'ok', time: new Date().toISOString(), storage: permanentStorage ? 'supabase' : 'local', durableStorage: Boolean(permanentStorage), submissionsEnabled: !process.env.VERCEL || Boolean(permanentStorage) });
+  res.json({ status: 'ok', time: new Date().toISOString(), storage: permanentStorage ? 'supabase' : 'local', durableStorage: Boolean(permanentStorage || r2Config), submissionsEnabled: !process.env.VERCEL || Boolean(permanentStorage || r2Config), primaryReceiver: r2Config ? 'r2' : (permanentStorage ? 'supabase' : 'local') });
 });
 
 // Endpoint: Standalone Payment Proof Pre-Validation & Metadata Inspection
@@ -212,11 +214,27 @@ app.post(['/api/validate-payment-proof', '/validate-payment-proof'], async (req,
   }
 });
 
+// Cloudflare-only callbacks: separately authenticated, never accessible with admin/ingest credentials.
+app.post('/api/internal/r2-registration',async(req,res)=>{
+  res.setHeader('Cache-Control','no-store');
+  if(!authorized(req.headers.authorization,process.env.R2_CALLBACK_TOKEN))return res.status(401).json({error:'Unauthorized'});
+  try{
+    const result=await require('./r2RegistrationProcessor').processIntakeStage(req.body.record,req.body.stage,permanentStorage);
+    res.json(result);
+  }catch{res.status(503).json({error:'Intake processing unavailable',safe_to_retry:true});}
+});
+
 // Endpoint: Delegate Registration
 // Validates registration inputs, verifies payment reference & proof,
 // stores proof file and metadata, and dispatches confirmation emails.
 app.post(['/api/register', '/register'], async (req, res) => {
+  res.setHeader('Cache-Control','no-store');
   try {
+    if(r2Config){
+      const tier=currentTier();
+      const record=prepareIntake(req.body,{tier,prices:TARIFF[tier],token:r2Config.token});
+      return res.status(202).json(await receiveIntake(record,r2Config));
+    }
     const {
       full_name,
       email,
@@ -317,7 +335,7 @@ app.post(['/api/register', '/register'], async (req, res) => {
     });
   } catch (err) {
     console.error('[REGISTRATION HANDLER ERROR]', err);
-    res.status(500).json({ error: 'Registration processing error: ' + err.message });
+    res.status(err.status || 500).json({ error: r2Config ? (err.status ? err.message : 'Registration receipt could not be confirmed. Retry with the same form; do not pay again.') : 'Registration processing error: ' + err.message });
   }
 });
 

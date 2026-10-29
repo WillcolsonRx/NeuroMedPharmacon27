@@ -213,3 +213,7 @@ to avoid duplicate submissions when a response is lost. Multiple intentional
 abstracts per registered delegate remain allowed; no per-delegate abstract cap
 has been introduced. The ID/email check is an eligibility check, not an email-OTP
 login or independent confirmation of bank settlement.
+
+## Optional R2-first registration intake (29 October 2026)
+
+See [R2_INTAKE_SETUP.md](R2_INTAKE_SETUP.md) for the evaluated architecture, required SQL migration, private Worker/bucket/queue setup, separate recovery access and activation order. The feature remains off until `R2_INTAKE_URL` and `R2_INTAKE_TOKEN` are configured. `R2_CALLBACK_TOKEN` authenticates the independent worker's database/email processing callbacks. Do not publish or share any of these credentials.

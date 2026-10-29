@@ -116,6 +116,8 @@ async function sendMail(db, { to, subject, html, text, type = 'GENERAL', refId =
   let status = 'logged';
   let messageId = null;
   let errorMsg = null;
+  let retryable = false;
+  let uncertain = false;
 
   if (process.env.NODE_ENV === 'test') {
     // Automated test mode: simulate email delivery to avoid sending emails over the internet
@@ -136,6 +138,10 @@ async function sendMail(db, { to, subject, html, text, type = 'GENERAL', refId =
       console.log(`[SMTP SENT] (${type}) Successfully dispatched to ${to} | Ref: ${refId || 'N/A'} | ID: ${messageId}`);
     } catch (err) {
       status = 'failed';
+      const code=Number(err.responseCode);
+      if(code>=400 && code<500)retryable=true;
+      else if(!(code>=500) && ['ECONNECTION','EDNS','ECONNREFUSED','ENETUNREACH'].includes(err.code))retryable=true;
+      else if(!(code>=500) && err.code!=='EAUTH')uncertain=true;
       errorMsg = err.message;
       console.error(`[SMTP ERROR] Failed to send email to ${to}:`, err.message);
       if (err.message && (err.message.includes('534') || err.message.includes('InvalidSecondFactor') || err.message.includes('Application-specific password'))) {
@@ -159,7 +165,7 @@ async function sendMail(db, { to, subject, html, text, type = 'GENERAL', refId =
     console.error('[DB MAIL LOG ERROR]', dbErr.message);
   }
 
-  return { status, messageId, error: errorMsg };
+  return { status, messageId, error: errorMsg, retryable, uncertain };
 }
 
 function formatCategoryName(cat) {
@@ -210,12 +216,12 @@ async function sendDelegateConfirmation(db, registration) {
           <p>In Collaboration with Indian Pharmacological Society</p>
         </div>
         <div class="body">
-          <p>Dear <strong>${full_name}</strong>,</p>
+          <p>Dear <strong>${affiliationHtml(full_name)}</strong>,</p>
           <p>Your registration for <strong>NeuroMet Pharmacon-2027</strong> has been successfully confirmed.</p>
           
           <div class="ref-box">
             <div class="ref-label">Official Delegate Reference ID</div>
-            <div class="ref-val">${ref_id}</div>
+            <div class="ref-val">${affiliationHtml(ref_id)}</div>
           </div>
 
           <table class="details-table">
@@ -255,7 +261,7 @@ async function sendDelegateConfirmation(db, registration) {
           </table>
 
           <p style="font-size: 13px; color: #475569; line-height: 1.5;">
-            Please present this Reference ID (<strong>${ref_id}</strong>) at the Secretariat Registration Counter upon arrival to collect your delegate badge, scientific proceedings, and conference kit.
+            Please present this Reference ID (<strong>${affiliationHtml(ref_id)}</strong>) at the Secretariat Registration Counter upon arrival to collect your delegate badge, scientific proceedings, and conference kit.
           </p>
         </div>
         <div class="footer">
@@ -329,20 +335,20 @@ async function sendOrganizerNotification(db, registration) {
         <div class="body">
           <div class="item-row">
             <span class="item-label">Reference ID:</span>
-            <span class="item-val" style="font-family: monospace; color: #16a34a;">${ref_id}</span>
+            <span class="item-val" style="font-family: monospace; color: #16a34a;">${affiliationHtml(ref_id)}</span>
           </div>
           <div class="item-row">
             <span class="item-label">Delegate Name:</span>
-            <span class="item-val">${full_name}</span>
+            <span class="item-val">${affiliationHtml(full_name)}</span>
           </div>
           <div class="item-row"><span class="item-label">Affiliation:</span><span class="item-val">${affiliationHtml(affiliation)}</span></div>
           <div class="item-row">
             <span class="item-label">Email Address:</span>
-            <span class="item-val">${email}</span>
+            <span class="item-val">${affiliationHtml(email)}</span>
           </div>
           <div class="item-row">
             <span class="item-label">Phone:</span>
-            <span class="item-val">${phone || 'N/A'}</span>
+            <span class="item-val">${affiliationHtml(phone || 'N/A')}</span>
           </div>
           <div class="item-row">
             <span class="item-label">Category:</span>
@@ -362,14 +368,14 @@ async function sendOrganizerNotification(db, registration) {
           </div>
           <div class="item-row">
             <span class="item-label">Transaction/Reference ID:</span>
-            <span class="item-val" style="font-family: monospace; color: #15803d; font-weight: 700;">${payment_ref || 'Provided'}</span>
+            <span class="item-val" style="font-family: monospace; color: #15803d; font-weight: 700;">${affiliationHtml(payment_ref || 'Provided')}</span>
           </div>
           <div class="item-row">
             <span class="item-label">Payment Screenshot:</span>
-            <span class="item-val" style="color: #0284c7;">${has_proof ? '✓ Attached (Stored in SQLite Database)' : 'Not Attached'}</span>
+            <span class="item-val" style="color: #0284c7;">${has_proof ? '✓ Payment proof received' : 'Not Attached'}</span>
           </div>
           <p style="margin: 18px 0 0; font-size: 12px; color: #64748b;">
-            Logged automatically in conference database. View full roster and payment proof in the Secretariat Admin Portal.
+            Registration received for Secretariat review. The payment proof is attached when supplied by the durable intake service.
           </p>
         </div>
       </div>
@@ -398,7 +404,8 @@ Payment Screenshot: ${has_proof ? 'Attached in Database' : 'None'}
     html,
     text,
     type: 'ORGANIZER_NOTIFICATION',
-    refId: ref_id
+    refId: ref_id,
+    attachments: registration.proof_attachments || []
   });
 }
 
