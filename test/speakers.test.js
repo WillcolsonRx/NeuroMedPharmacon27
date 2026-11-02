@@ -51,7 +51,7 @@ test('published speakers follow the organizer sequence before previously listed 
  ];
  assert.deepEqual(ids.slice(0,expected.length),expected);
  assert.deepEqual(ids.slice(expected.length),[
-  'satyendra-rajput','bn-srikumar','kanthi-kiran-kondepudi','vinod-tiwari',
+  'satyendra-rajput','bn-srikumar','kanthi-kiran-kondepudi','k-srinivasan','vinod-tiwari',
   'sachchidanand-tewari','ashok-jangra','priyanka-bajaj','ritesh-kumar','jayant-kumar'
  ]);
  assert.ok(!html.includes('speaker-keynote'));

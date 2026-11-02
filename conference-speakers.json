@@ -582,5 +582,19 @@
     "verified_on": "2026-11-02",
     "details_source": "Organizer-supplied official GGSIPU CEPS faculty list confirms Debapriya Garabadu as Professor. CEPS homepage confirms centre expansion. Portrait is from the matching Frontiers Loop academic profile https://loop.frontiersin.org/people/1264857/overview. Its older CUP Assistant Professor affiliation is NOT used for the displayed current role.",
     "image_source_note": "Matching academic profile portrait downloaded unchanged; PNG, 203 × 203 pixels."
+  },
+  {
+    "id": "k-srinivasan",
+    "name": "Dr. K. Srinivasan",
+    "role": "Invited Speaker",
+    "designation": "Principal Scientist",
+    "affiliation": "CSIR-Indian Institute of Chemical Technology, Hyderabad",
+    "image": "/assets/speakers/k-srinivasan-iict.jpg",
+    "profile_url": "https://www.iict.res.in/SCIENTIFIC_STAFF",
+    "image_source": "https://www.iict.res.in/picsml/StaffNo2057.jpg",
+    "profile_status": "verified",
+    "verified_on": "2026-11-02",
+    "details_source": "Organizer-provided LinkedIn screenshot identifies K Srinivasan as Principal Scientist at CSIR-IICT Hyderabad. Official scientific staff directory identifies Dr. K. Srinivasan (staff number 2057); his PERSONAL_PROFILE page, accessed by POST StaffNo=2057, lists Principal Scientist, CSIR-IICT Hyderabad, 2024–Till Date. The directory itself labels the grade Scientist-E. Profile link points to the working staff directory because the individual profile requires POST.",
+    "image_source_note": "Official CSIR-IICT portrait, JPEG 800 × 1000, downloaded unchanged."
   }
 ]
