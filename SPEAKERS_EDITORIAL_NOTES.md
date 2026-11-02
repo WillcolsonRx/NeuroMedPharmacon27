@@ -148,3 +148,11 @@ Yogesh Kulkarni was already published and was not duplicated. Jayant Kumar's DOC
 ## Keynote identity corrected by organizer (29 October 2026)
 
 Replace the previous Prof. Anil B. Gaikwad (BITS Pilani) with **Dr. Anil Nilkanth Gaikwad**, CSIR-Central Drug Research Institute, Lucknow. The keynote role, first position, and stable `anil-gaikwad` card ID are preserved. The official CSIR-CDRI profile identifies Anil N Gaikwad and supplies the new original portrait. User supplied Senior Principal Scientist, Pharmacology Division. Official Pharmacology directory (https://www.cdri.res.in/ScientistDivisionWise?division=pharma) says Scientist F & Head, while the individual profile says Scientist G; do not silently infer a different designation from those conflicting labels. The organizer's explicit designation is used. This correction supersedes all earlier BITS identification/provenance statements.
+
+## Expanded organizer list (2 November 2026)
+
+See `SPEAKERS_NOVEMBER_2026_REVIEW.md` for the full 37-name reconciliation, 19 new
+published profiles, 12 existing matches, six unpublished candidates, corrected
+spellings and source limitations. Shyam S. Sharma's organizer-confirmed IPS
+Vice-President role is added to his existing card. Preferred supplied portraits,
+first two featured entries, and other existing speakers are retained.
