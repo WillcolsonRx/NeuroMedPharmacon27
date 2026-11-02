@@ -2596,6 +2596,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
   text-justify: inter-word;
   text-align-last: start;
 }
+.required-marker { color: #dc2626; }
 </style>
 </head>
 <body>
@@ -3205,29 +3206,29 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
           
           <!-- Delegate Information -->
           <div class="calc-field">
-            <label class="calc-label">Full Name &amp; Academic Title *</label>
+            <label class="calc-label">Full Name &amp; Academic Title <span class="required-marker">*</span></label>
             <input type="text" class="calc-input" id="regFullName" placeholder="e.g. Dr. Rajesh Sharma" required>
           </div>
 
           <div class="calc-field">
-            <label class="calc-label" for="regAffiliation">Institutional Affiliation *</label>
+            <label class="calc-label" for="regAffiliation">Institutional Affiliation <span class="required-marker">*</span></label>
             <input type="text" class="calc-input" id="regAffiliation" placeholder="Institution / university name" minlength="2" maxlength="300" oninput="recalculateTariff()" autocomplete="organization" required>
           </div>
 
           <div class="row g-2 mb-3">
             <div class="col-md-6">
-              <label class="calc-label" for="regEmail">Email *</label>
+              <label class="calc-label" for="regEmail">Email <span class="required-marker">*</span></label>
               <input type="email" class="calc-input" id="regEmail" placeholder="name@example.com" required>
             </div>
             <div class="col-md-6">
-              <label class="calc-label">Contact Phone *</label>
+              <label class="calc-label">Contact Phone <span class="required-marker">*</span></label>
               <input type="tel" class="calc-input" id="regPhone" placeholder="+91 9876543210" required>
             </div>
           </div>
 
           <!-- STAGE 1: TARIFF & CATEGORY ASSESSMENT -->
           <div class="calc-field">
-            <label class="calc-label">Select Delegate Category *</label>
+            <label class="calc-label">Select Delegate Category <span class="required-marker">*</span></label>
             <select class="calc-select" id="regCategory" onchange="recalculateTariff()" required>
               <option value="student">Research Scholar / PG Student — ₹3,500</option>
               <option value="faculty">Faculty / Academic Scientist — ₹4,500</option>
@@ -3374,14 +3375,14 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
             <!-- Transaction Reference & Screenshot Upload -->
             <div style="margin-top: 1rem; border-top: 1px solid #e2e8f0; padding-top: 0.85rem;">
               <div class="mb-2">
-                <label class="calc-label">Transaction/Reference ID *</label>
+                <label class="calc-label">Transaction/Reference ID <span class="required-marker">*</span></label>
                 <input type="text" class="calc-input" id="regPaymentRef" placeholder="SBI Collect: enter the full DU reference ID" oninput="validatePaymentSubmissionState()" required>
                 <span style="font-size:0.7rem; color:#64748b; display:block; margin-top:0.25rem;">For SBI Collect, enter the full reference starting with DU. For UPI or bank transfer, enter the transaction/reference ID shown on your confirmation.</span>
               </div>
 
               <div>
                 <label class="calc-label" style="display:flex; justify-content:space-between; align-items:center;">
-                  <span>Payment Transaction Screenshot *</span>
+                  <span>Payment Transaction Screenshot <span class="required-marker">*</span></span>
                   <span style="font-size:0.7rem; color:#64748b; font-weight:normal;">PNG, JPG, WebP, PDF (Max 200 KB)</span>
                 </label>
                 
@@ -3450,11 +3451,11 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
           <p>Use the conference Registration ID from your delegate receipt or confirmation email. This is different from your bank Transaction/Reference ID.</p>
           <div class="row g-3 mb-2">
             <div class="col-md-6">
-              <label class="form-label-scholarly" for="absRegistrationId">Registration ID *</label>
+              <label class="form-label-scholarly" for="absRegistrationId">Registration ID <span class="required-marker">*</span></label>
               <input type="text" class="form-input-scholarly" id="absRegistrationId" placeholder="NMP27-DEL-..." maxlength="90" autocomplete="off" spellcheck="false" aria-describedby="absRegistrationStatus" required>
             </div>
             <div class="col-md-6">
-              <label class="form-label-scholarly" for="absEmail">Author Email *</label>
+              <label class="form-label-scholarly" for="absEmail">Author Email <span class="required-marker">*</span></label>
               <input type="email" class="form-input-scholarly" id="absEmail" placeholder="Same email used for registration" maxlength="254" required>
             </div>
           </div>
@@ -3463,7 +3464,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
           <a href="#registration">Not registered yet? Complete delegate enrolment first &rarr;</a>
         </div>
         <div class="mb-2">
-          <label class="form-label-scholarly" for="absAuthor">Presenting Author Name *</label>
+          <label class="form-label-scholarly" for="absAuthor">Presenting Author Name <span class="required-marker">*</span></label>
           <input type="text" class="form-input-scholarly" id="absAuthor" placeholder="e.g. Dr. Ananya Sen" required>
         </div>
 
@@ -3498,7 +3499,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
         </div>
 
         <div class="mb-2">
-          <label class="form-label-scholarly" for="absDocument">Attach Abstract Word Document *</label>
+          <label class="form-label-scholarly" for="absDocument">Attach Abstract Word Document <span class="required-marker">*</span></label>
           <input type="file" class="form-input-scholarly" id="absDocument" accept=".doc,.docx" required>
           <p>Upload a .doc or .docx file, up to 1 MB. Follow the structured abstract guidelines (maximum 300 words). The Secretariat will review your document.</p>
         </div>
@@ -4131,7 +4132,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
       
       <!-- Tier Selection -->
       <div class="mb-3">
-        <label class="calc-label">Selected Partnership Tier *</label>
+        <label class="calc-label">Selected Partnership Tier <span class="required-marker">*</span></label>
         <select class="calc-select" id="sponTierSelect" onchange="updateSponsorshipTariff()" required>
           <option value="Platinum">Platinum Sponsor — ₹ 100,000 (₹ 1,00,000)</option>
           <option value="Gold">Gold Sponsor — ₹ 50,000 (₹ 50,000)</option>
@@ -4160,24 +4161,24 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
       <!-- Company Fields -->
       <div id="sponFieldsSet">
         <div class="mb-3">
-          <label class="calc-label">Individual / Company / Institution Name *</label>
+          <label class="calc-label">Individual / Company / Institution Name <span class="required-marker">*</span></label>
           <input type="text" class="calc-input" id="sponCompany" placeholder="e.g. Bharat Biotech / Waters India / Lupin Ltd" required>
         </div>
 
         <div class="row g-2 mb-3">
           <div class="col-md-6">
-            <label class="calc-label">Authorized Contact Person *</label>
+            <label class="calc-label">Authorized Contact Person <span class="required-marker">*</span></label>
             <input type="text" class="calc-input" id="sponContact" placeholder="e.g. Dr. Rajiv Sharma" required>
           </div>
           <div class="col-md-6">
-            <label class="calc-label">Email *</label>
+            <label class="calc-label">Email <span class="required-marker">*</span></label>
             <input type="email" class="calc-input" id="sponEmail" placeholder="partnerships@company.com" required>
           </div>
         </div>
 
         <div class="row g-2 mb-3">
           <div class="col-md-6">
-            <label class="calc-label">Direct Phone / WhatsApp *</label>
+            <label class="calc-label">Direct Phone / WhatsApp <span class="required-marker">*</span></label>
             <input type="tel" class="calc-input" id="sponPhone" placeholder="+91 98765 43210" required>
           </div>
           <div class="col-md-6">
