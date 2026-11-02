@@ -36,16 +36,22 @@ test('speaker catalogue publishes unique sourced portraits and omits unresolved 
  assert.ok(html.includes('/assets/speakers/shyam-sharma-selected.jpg'));
  assert.equal(html,fs.readFileSync(path.join(__dirname,'..','public/index.html'),'utf8'));
 });
-test('speaker order preserves the first two and then groups by designation',()=>{
+test('published speakers follow the organizer sequence before previously listed extras',()=>{
  const html=renderSpeakers('<!-- SPEAKER_CARDS_START --><!-- SPEAKER_CARDS_END -->');
  const ids=Array.from(html.matchAll(/data-speaker="([^"]+)"/g),m=>m[1]);
- assert.deepEqual(ids.slice(0,2),['anil-gaikwad','anil-gulati']);
- assert.equal(ids[2],'yk-gupta');
- const before=(a,b)=>assert.ok(ids.indexOf(a)<ids.indexOf(b),a+' precedes '+b);
- before('yogesh-kulkarni','shyam-sharma');
- before('shyam-sharma','dhiraj-kabra');
- before('dhiraj-kabra','bn-srikumar');
- before('bn-srikumar','kanthi-kiran-kondepudi');
- before('mahendra-bishnoi','hemant-kumar');
- before('vinod-tiwari','ashok-jangra');
+ const expected=[
+  'babul-bezbaruah','anil-gulati','yk-gupta','shyam-sharma','anil-gaikwad',
+  'chandishwar-nath','gautam-palit','rakesh-dixit','jayantee-kalita','vgm-naidu',
+  'dhiraj-kabra','yogesh-kulkarni','rajeev-taliyan','rahul-verma','syed-ziaur-rahman',
+  'jiban-jyoti-panda','rajnish-kumar','chhuttan-lal-meena','mahendra-bishnoi',
+  'hemant-kumar','manoj-dandekar','pragyanshu-khare','sudipta-raha-roy','dinesh-kumar',
+  'karuna-shanker','kishor-mohanan','ashutosh-kumar','uma-shanker-navik',
+  'abhinav-kanwal','vikas-mishra','mandeep-arora'
+ ];
+ assert.deepEqual(ids.slice(0,expected.length),expected);
+ assert.deepEqual(ids.slice(expected.length),[
+  'satyendra-rajput','bn-srikumar','kanthi-kiran-kondepudi','vinod-tiwari',
+  'sachchidanand-tewari','ashok-jangra','priyanka-bajaj','ritesh-kumar','jayant-kumar'
+ ]);
+ assert.match(html, /speaker-keynote" data-speaker="anil-gaikwad"/);
 });

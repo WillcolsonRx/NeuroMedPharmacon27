@@ -156,3 +156,12 @@ published profiles, 12 existing matches, six unpublished candidates, corrected
 spellings and source limitations. Shyam S. Sharma's organizer-confirmed IPS
 Vice-President role is added to his existing card. Preferred supplied portraits,
 first two featured entries, and other existing speakers are retained.
+
+## Explicit organizer order (2 November 2026, subsequent instruction)
+
+`conference-speaker-order.json` records all 37 requested identities in the exact
+new order, including reserved positions for the six unpublished profiles. This
+supersedes the earlier instruction to pin the keynote and CEO first. Published
+entries follow the specified sequence, beginning Bezbaruah, Gulati, Gupta, Sharma,
+Gaikwad. Existing speakers absent from the supplied list remain afterward in their
+previous role ordering. No biography, portrait, role or membership is changed.

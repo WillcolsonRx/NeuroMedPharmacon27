@@ -1,9 +1,9 @@
 const speakers = require('../conference-speakers.json');
+const speakerOrder = require('../conference-speaker-order.json');
+const requestedPosition = new Map(speakerOrder.map((id,index)=>[id,index]));
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-// Keep the keynote and Pharmazz CEO first; group the remaining professional roles.
+// Explicit organizer order takes precedence; unlisted speakers retain their role ordering.
 function designationPriority(speaker) {
-  if (speaker.id === 'anil-gaikwad') return -2;
-  if (speaker.id === 'anil-gulati') return -1;
   const title = speaker.designation.toLowerCase();
   if (/^president\b/.test(title)) return 0;
   if (/^dean\b/.test(title)) return 0.5;
@@ -26,7 +26,10 @@ function renderSpeakers(html) {
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
-  }).sort((a, b) => designationPriority(a) - designationPriority(b)).map(speaker => {
+  }).sort((a, b) =>
+    (requestedPosition.get(a.id) ?? speakerOrder.length) - (requestedPosition.get(b.id) ?? speakerOrder.length)
+    || designationPriority(a) - designationPriority(b)
+  ).map(speaker => {
     const initials = speaker.name.replace(/\b(?:Dr|Prof)\.?\s*/g,'').split(/\s+/).map(word => word[0]).join('');
     const portrait = speaker.image
       ? `<img src="${escape(speaker.image)}" alt="${escape(speaker.name)}" width="180" height="200" loading="lazy" decoding="async">`
