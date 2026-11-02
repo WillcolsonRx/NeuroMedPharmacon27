@@ -8,8 +8,11 @@ test('Secretariat document links reject executable URLs and escape filenames', (
   const start=source.indexOf('function fileLink('), end=source.indexOf('function renderRows',start);
   const context={escape:value=>String(value).replace(/</g,'&lt;').replace(/"/g,'&quot;')};
   vm.runInNewContext(source.slice(start,end),context);
-  assert.equal(context.fileLink('javascript:alert(1)','Unsafe'),'');
-  assert.match(context.fileLink('https://example.test/document','<script>'),/&lt;script>/);
+  assert.equal(context.fileLink({id:1},'abstracts','Missing file'),'');
+  const link=context.fileLink({id:1,document_path:'javascript:alert(1)'},'abstracts','<script>');
+  assert.match(link,/&lt;script>/);
+  assert.match(link,/href="\/api\/secretariat\/files\/abstracts\/1"/);
+  assert.ok(!link.includes('javascript:')); // Stored URLs never become browser destinations.
   assert.ok(!source.includes('localStorage'));
 });
 

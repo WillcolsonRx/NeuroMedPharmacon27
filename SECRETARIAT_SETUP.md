@@ -1,9 +1,9 @@
-# Secretariat review and batch email setup
+# Secretariat review and decision email setup
 
 The code is ready to configure; it does not create provider accounts, change billing,
 run production SQL, or send real messages by itself. Keep the queue paused until the
 checks below pass. Existing registration and submission confirmations keep using
-SMTP. Only abstract decision campaigns use the new durable queue.
+SMTP. Abstract decision emails use the durable queue, with an immediate attempt on finalization.
 
 ## Zero-additional-cost configuration
 
@@ -30,7 +30,10 @@ No free provider guarantees delivery or uptime. There are no automatic paid upgr
 ## 1. Database migration
 
 In the existing Supabase SQL Editor, run
-`supabase/migrations/20261023_secretariat.sql`. Run the existing base schema and
+`supabase/migrations/20261023_secretariat.sql`, then
+`supabase/migrations/20261102_secretariat_decisions.sql`. For an existing Secretariat
+installation, only the latter update is new. Apply it **before deploying this update**.
+Run the existing base schema and
 Word-document migration first if preparing a new project. This migration is
 repeatable and preserves submissions. It installs staff membership, review
 metadata, an audit log, a mail queue, delivery events and rate limits. Only the
@@ -98,25 +101,53 @@ server processes or browser timers.
 
 ## 5. Review and mail workflow
 
-1. Sign in at `/secretariat`, enroll/verify the authenticator, and open Abstract review.
-2. Review the private Word file, choose a decision, record internal notes, and save.
-   Saving never emails the author. Concurrent edits require refreshing.
-3. Filter by decision and select reviewed abstracts, 25 per page. Selections carry
-   across pages; the selected count is shown. Bulk requests allow at most 500.
-4. Add shared instructions, preview the individual personalized letters, and queue
-   a test to the signed-in staff member's own email. Internal notes are not emailed.
-5. On Decision email queue, resume delivery and verify the test in the actual inbox.
-   The queue starts paused on installation. It sends gradually within the daily cap;
-   a batch of 100 may span two days. It does not bypass provider/account limits.
-6. Confirm and queue the reviewed recipients. Duplicate requests for the same
-   abstract decision version do not add duplicate jobs. Changed decisions invalidate
-   old previews. Queued/in-flight decisions cannot be changed until resolved.
-7. Track status and errors, pause when necessary, cancel untouched queued jobs, and
-   retry definitive failures when safe. For an uncertain SMTP outcome, first inspect
-   provider logs/the sender's Sent folder, then use Reconcile with provider logs.
-   Explicitly record whether it was sent; resending requires your confirmation and
-   a recorded explanation. Corrections to already-notified decisions require a new
-   saved review version and a deliberate new campaign.
+1. Sign in at `/secretariat`, verify your authenticator and open Abstract review.
+2. On first setup, verify SMTP/provider settings with a staff test using the advanced
+   batch tools below. Then explicitly enable decision email delivery using the banner
+   or Resume delivery in the queue. The migration preserves the current pause setting;
+   enabling delivery also resumes any existing queued messages.
+3. Open a private Word abstract. Choose **Accept · Oral**, **Accept · Poster**,
+   **Request revision** or **Reject**. This is the team's decision, independent of
+   the delegate's requested presentation type. Expand Ready message snippet to read
+   the prepared letter. Add optional presenter instructions when needed.
+4. **Save notes only** saves private notes without changing the decision or sending
+   mail. Notes and presentation choices remain drafts in this tab until finalized;
+   refreshing the browser loses unsaved drafts. Internal notes never enter the email.
+5. Click **Preview & finalize** to read the personalized letter and recipient. Then
+   **Finalize decision & send email** atomically saves the decision and one durable
+   notification before attempting that specific message immediately in the request.
+   The preview alone sends nothing. Repeat/lost-response requests reuse the same
+   decision-version job. Concurrent changes require reloading the review.
+6. Check the resulting per-abstract delivery badge and Decision email queue. “Sent”
+   means provider/SMTP acceptance, not proven inbox delivery. Pauses, daily allowance
+   exhaustion, configuration problems and temporary failures retain the job; they
+   never silently discard the decision or report it as sent. The scheduled worker
+   retries eligible jobs, so keep the scheduler configured even with immediate sends.
+7. For uncertain SMTP outcomes, inspect provider logs/the sender's mailbox before
+   **Reconcile with provider logs**. Record whether it was definitely sent; a resend
+   requires confirmation and evidence. Resolve outstanding/uncertain notifications
+   before changing a decision. Sent decisions may be deliberately corrected with a
+   new decision/version; the earlier email cannot be recalled.
+
+The advanced batch tools remain available for already-reviewed legacy records:
+filter/select reviewed abstracts (25/page, at most 500), add shared instructions,
+preview, queue a test to the signed-in staff member, check its actual inbox, then
+confirm the batch. Batch jobs use the scheduler rather than an immediate attempt.
+The 90-attempt UTC daily cap applies jointly to immediate sends and scheduled jobs;
+100 decisions may therefore span two days. Other Gmail mail consumes provider quota
+outside this application cap. No provider limit is bypassed.
+
+## Dashboard responsiveness
+
+Record pages no longer sign every attachment before rendering. Private download
+links are created on demand through an authenticated endpoint when a file is opened;
+legacy inline payment proofs are omitted from list payloads. Submission totals load
+separately, and recent tab/page responses are cached in memory for 15 seconds, up to
+20 pages. Refresh explicitly fetches current data; writes clear this cache. Rapid tab
+changes cancel/ignore outdated requests, and unsaved row drafts survive tab switches.
+Authentication and staff membership remain checked on every server request, without
+an authentication cache. Indexes support date-ordered pages. Free-tier cold starts,
+Supabase availability and network/provider latency can still affect response times.
 
 Acceptance letters distinguish presentation acceptance from verified registration
 and payment. Neither uploads nor acknowledgements prove a bank transfer settled.

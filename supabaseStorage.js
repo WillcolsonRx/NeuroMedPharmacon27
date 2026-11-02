@@ -11,6 +11,10 @@ function createSupabaseStorage({ url, key, fetchImpl = fetch }) {
       signal: AbortSignal.timeout(15000)
     });
     if (!response.ok) {
+      if (path.startsWith('/rest/v1/rpc/secretariat_') && response.status === 404) {
+        const error = await response.json().catch(() => ({}));
+        if (error.code === 'PGRST202') throw Object.assign(new Error('Secretariat database update required: apply 20261102_secretariat_decisions.sql in Supabase SQL Editor.'), {status:503});
+      }
       // Only fixed workflow conflicts are safe to show; never forward arbitrary provider data.
       if (path.startsWith('/rest/v1/rpc/secretariat_') && response.status === 400) {
         const error = await response.json().catch(() => ({}));
@@ -19,7 +23,8 @@ function createSupabaseStorage({ url, key, fetchImpl = fetch }) {
           'Selection includes missing or pending reviews', 'Decision changed after preview; reload',
           'Recipient suppressed after a bounce or complaint', 'Select between 1 and 500 abstracts',
           'Cannot safely retry this job; inspect provider logs', 'Job is already sending or finished',
-          'Record provider-log evidence before resolving an uncertain delivery', 'Only uncertain jobs can be reconciled'
+          'Record provider-log evidence before resolving an uncertain delivery', 'Only uncertain jobs can be reconciled', 'Staff account is not approved',
+          'Choose a final decision', 'Abstract not found', 'This decision already has a notification; check delivery status'
         ]);
         if (error.code === 'P0001' && safe.has(error.message)) throw Object.assign(new Error(error.message), {status:409});
       }

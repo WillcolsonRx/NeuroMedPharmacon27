@@ -3,12 +3,21 @@ const express = require('express');
 const COOKIE = '__Host-nmp_session';
 const escape = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const decisions = ['pending','accepted_oral','accepted_poster','revision_requested','rejected'];
+const TEMPLATE_VERSION='2026-11-02';
+const decisionTemplates={
+ accepted_oral:{label:'Accepted for Oral Presentation',message:'We are pleased to inform you that your abstract has been accepted for an oral presentation at NeuroMet Pharmacon-2027. Please retain this letter and follow the presentation instructions provided by the Conference Secretariat. Abstract acceptance does not confirm registration or payment; please complete registration if outstanding.'},
+ accepted_poster:{label:'Accepted for Poster Presentation',message:'We are pleased to inform you that your abstract has been accepted for a poster presentation at NeuroMet Pharmacon-2027. Please retain this letter and follow the poster preparation and presentation instructions provided by the Conference Secretariat. Abstract acceptance does not confirm registration or payment; please complete registration if outstanding.'},
+ revision_requested:{label:'Revision Requested',message:'Thank you for submitting your abstract to NeuroMet Pharmacon-2027. The review team requests a revision before a final presentation decision can be made. Please follow the instructions below, or contact the Conference Secretariat for the requested changes.'},
+ rejected:{label:'Abstract Not Selected',message:'Thank you for submitting your abstract to NeuroMet Pharmacon-2027. Following review, we regret to inform you that your abstract has not been selected for presentation. We appreciate your interest in the conference and the work you have shared with us.'}
+};
+
 
 function decisionEmail(job) {
   const data = job.snapshot;
-  const label = {accepted_oral:'Accepted for Oral Presentation',accepted_poster:'Accepted for Poster Presentation',revision_requested:'Revision Requested',rejected:'Abstract Review Decision'}[data.decision];
+  const modern=data.template_version===TEMPLATE_VERSION;
+  const label = modern ? decisionTemplates[data.decision]?.label : {accepted_oral:'Accepted for Oral Presentation',accepted_poster:'Accepted for Poster Presentation',revision_requested:'Revision Requested',rejected:'Abstract Review Decision'}[data.decision];
   if (!label) throw new Error('Invalid review decision');
-  const message = data.decision.startsWith('accepted_')
+  const message = modern ? decisionTemplates[data.decision].message : data.decision.startsWith('accepted_')
     ? 'We are pleased to accept your abstract and welcome you to NeuroMet Pharmacon-2027. Please retain this confirmation and follow the Secretariat’s presentation instructions. Abstract acceptance does not confirm registration or payment; please complete registration if outstanding.'
     : data.decision === 'revision_requested' ? 'The review team requests a revision. Please follow the Secretariat’s instructions before submitting a revision.' : 'Thank you for your submission. Following review, your abstract has not been selected for presentation.';
   const subject = `${label}: NeuroMet Pharmacon-2027 [${data.ref_id}]`;
@@ -110,8 +119,7 @@ function createSecretariat({storage,fetchImpl=fetch,env=process.env}) {
   router.get('/session',route(async(req,res)=>{const user=await identity(req,false);res.json({email:user.email,mfaRequired:user.aal!=='aal2'});}));
   router.get('/factors',route(async(req,res)=>{
     const user=await identity(req,false);
-    const details=await service('/auth/v1/user',{headers:{Authorization:`Bearer ${user.token}`}});
-    res.json({factors:(details.factors || []).filter(f=>f.factor_type==='totp'&&f.status==='verified').map(f=>({id:f.id,friendly_name:f.friendly_name}))});
+    res.json({factors:(user.factors || []).filter(f=>f.factor_type==='totp'&&f.status==='verified').map(f=>({id:f.id,friendly_name:f.friendly_name}))});
   }));
   router.post('/enroll',route(async(req,res)=>{
     const user=await identity(req,false);
@@ -132,7 +140,52 @@ function createSecretariat({storage,fetchImpl=fetch,env=process.env}) {
     if(!['abstracts','registrations','sponsorships','mail_logs'].includes(req.params.table))return res.status(404).end();
     const page=Math.max(0,Number.parseInt(req.query.page,10)||0);
     const result=await rpc('secretariat_records',{p_table:req.params.table,p_page:page,p_limit:25,p_status:req.query.status || null});
-    result.rows=await storage.signRows(result.rows);res.json(result);
+    // Sign private files only when opened, not 25 times on every tab/page load.
+    if(req.params.table==='abstracts')result.templates=decisionTemplates;
+    res.json(result);
+  }));
+  router.get('/files/:table/:id',route(async(req,res)=>{
+    const {table,id}=req.params;
+    if(!['abstracts','registrations','sponsorships'].includes(table) || !/^\d+$/.test(id) || !Number.isSafeInteger(Number(id)))return res.status(404).end();
+    const row=await rpc('secretariat_record',{p_table:table,p_id:Number(id)});
+    const field=table==='abstracts'?'document_path':'payment_proof';
+    const value=row?.[field];
+    if(typeof value!=='string')return res.status(404).json({error:'File not found'});
+    if(value.startsWith('data:') && table!=='abstracts'){
+      const match=value.match(/^data:(image\/(?:png|jpeg|jpg|webp)|application\/pdf);base64,([A-Za-z0-9+/=]+)$/);
+      if(!match || match[2].length>8*1024*1024)return res.status(404).end();
+      const bytes=Buffer.from(match[2],'base64');
+      if(!require('./paymentValidator').verifyMagicBytes(bytes,match[1]))return res.status(404).end();
+      res.setHeader('Content-Type',match[1]);res.setHeader('Content-Disposition','attachment; filename="payment-proof.'+require('./paymentValidator').ALLOWED_MIME_TYPES[match[1]]+'"');return res.send(bytes);
+    }
+    const bucket=table==='abstracts'?'abstract-documents':'payment-proofs';
+    if(!value.startsWith('supabase://'+bucket+'/'))return res.status(404).json({error:'Private file unavailable'});
+    const [signed]=await storage.signRows([{[field]:value}]);
+    const target=new URL(signed[field]);
+    if(target.protocol!=='https:' || target.origin!==new URL(env.SUPABASE_URL).origin)throw Error('Invalid file destination');
+    res.redirect(302,target.href);
+  }));
+  router.post('/decision-preview',route(async(req,res)=>{
+    const {id,decision,version}=req.body;
+    if(!Number.isSafeInteger(id)||!Number.isSafeInteger(version)||!Object.hasOwn(decisionTemplates,decision))return res.status(400).json({error:'Choose an abstract and a final decision'});
+    const row=await rpc('secretariat_record',{p_table:'abstracts',p_id:id});
+    if(!row)return res.status(404).json({error:'Abstract not found'});
+    if(row.decision_version!==version)return res.status(409).json({error:'Review changed; reload before saving'});
+    const snapshot={...row,decision,message:String(req.body.message||'').slice(0,4000),template_version:TEMPLATE_VERSION};
+    res.json({id,version,email:row.email,...decisionEmail({snapshot})});
+  }));
+  router.post('/finalize',route(async(req,res)=>{
+    const {id,decision,version}=req.body;
+    if(!Number.isSafeInteger(id)||!Number.isSafeInteger(version)||!Object.hasOwn(decisionTemplates,decision)||req.body.confirm!==true)return res.status(400).json({error:'Preview and confirm a final decision'});
+    const result=await rpc('secretariat_finalize',{p_id:id,p_decision:decision,p_notes:String(req.body.notes||'').slice(0,4000),p_message:String(req.body.message||'').slice(0,4000),p_actor:req.admin.id,p_version:version});
+    let notification={...result.job};
+    // Await the selected job inside this invocation, never a fragile background SMTP task.
+    try{
+      await processMailQueue({storage,fetchImpl,env,jobId:result.job.id,actor:req.admin.id});
+      const current=await rpc('secretariat_notification',{p_id:result.job.id});
+      notification={...(current.job||notification),paused:current.settings?.paused,dailyLimitReached:current.settings?.usage_day===new Date().toISOString().slice(0,10)&&current.settings?.attempts_today>=current.settings?.daily_limit};
+    }catch{notification.warning='Decision saved and email retained in the queue. Check mail configuration or delivery status.';}
+    res.json({...result,notification});
   }));
   router.post('/review',route(async(req,res)=>{
     if(!Number.isSafeInteger(req.body.id)||!decisions.includes(req.body.decision))return res.status(400).json({error:'Choose a valid abstract and decision'});
@@ -167,7 +220,7 @@ function createSecretariat({storage,fetchImpl=fetch,env=process.env}) {
   return router;
 }
 
-async function processMailQueue({storage,fetchImpl=fetch,env=process.env,smtpTransport}) {
+async function processMailQueue({storage,fetchImpl=fetch,env=process.env,smtpTransport,jobId,actor}) {
   const provider=env.MAIL_PROVIDER || 'smtp';
   if(!['smtp','resend'].includes(provider))throw new Error('Unsupported mail provider');
   let transport=smtpTransport;
@@ -177,7 +230,7 @@ async function processMailQueue({storage,fetchImpl=fetch,env=process.env,smtpTra
     transport=transport || mailer.getTransporter();
     if(!transport)throw new Error('Configure SMTP before starting mail delivery');
   }
-  const jobs=await storage.rpc('secretariat_claim',{p_limit:3});
+  const jobs=await storage.rpc(jobId?'secretariat_claim_one':'secretariat_claim',jobId?{p_id:jobId,p_actor:actor}:{p_limit:3});
   const results=[];
   for(const job of jobs){
     try{
@@ -221,4 +274,4 @@ async function handleMailEvent({req,res,storage,env=process.env}) {
     res.json({ok:true});
   }catch{res.status(503).json({error:'Could not record mail event'});}
 }
-module.exports={createSecretariat,processMailQueue,decisionEmail,handleMailEvent};
+module.exports={createSecretariat,processMailQueue,decisionEmail,handleMailEvent,decisionTemplates};
