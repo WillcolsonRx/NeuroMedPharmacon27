@@ -8,7 +8,7 @@ test('speaker catalogue publishes unique sourced portraits and omits unresolved 
  assert.ok(speakers.length>=14);
  const published=speakers.filter(s=>['verified','organizer_confirmed'].includes(s.profile_status));
  assert.equal(new Set(speakers.map(s=>s.id)).size,speakers.length);
- assert.equal(speakers.filter(s=>s.role==='Keynote Speaker').length,1);
+ assert.equal(speakers.filter(s=>s.role==='Keynote Speaker').length,0);
  for(const s of speakers){
   if(s.profile_status==='verified'){
    assert.ok(s.designation&&s.affiliation&&s.image_source&&s.verified_on);
@@ -53,5 +53,6 @@ test('published speakers follow the organizer sequence before previously listed 
   'satyendra-rajput','bn-srikumar','kanthi-kiran-kondepudi','vinod-tiwari',
   'sachchidanand-tewari','ashok-jangra','priyanka-bajaj','ritesh-kumar','jayant-kumar'
  ]);
- assert.match(html, /speaker-keynote" data-speaker="anil-gaikwad"/);
+ assert.ok(!html.includes('speaker-keynote'));
+ assert.equal(speakers.find(s=>s.id==='anil-gaikwad').role,'Invited Speaker');
 });
