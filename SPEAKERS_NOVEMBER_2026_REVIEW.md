@@ -2,8 +2,8 @@
 
 The organizer supplied 37 names: 12 map to existing published speakers, 19 new
 profiles have a verified identity, usable portrait and designation, and six remain
-unpublished pending adequate source material. This produces 40 published speaker
-cards in total. Earlier published speakers not mentioned in this new list remain.
+unpublished pending adequate source material. That initial review produced 40 published speaker
+cards. Three later additions from uploaded official links bring the current total to 43 (see update below). Earlier published speakers not mentioned in this new list remain.
 The keynote CSIR-CDRI speaker and Pharmazz CEO stay first; the established
 role-based ordering and centered incomplete rows remain unchanged.
 
@@ -60,3 +60,13 @@ The organizer subsequently requested LinkedIn as a fallback for the six held
 profiles. Public LinkedIn lookup requests returned HTTP 999 (access blocked), so
 no protected profile was accessed and no LinkedIn portrait was claimed or copied.
 The six entries remain unpublished pending a verifiable portrait/profile.
+
+## Update after uploaded official-profile links
+
+The subsequent uploaded text file provided six exact institutional links.
+Ashween D. Nannaware, Anoop Kumar and Debapriya Garabadu are now **published**,
+superseding their held outcomes in the original review table. Source/portrait
+URLs and designation provenance are recorded in `conference-speakers.json`.
+Saumen Hajra (CBMR 503), Ajay Prakash (PGIMER 503), and K. H. Reeta (AIIMS 403)
+remain unpublished. The organizer explicitly rejects initials placeholders, so no
+portrait-free cards are published. Published total: 43.

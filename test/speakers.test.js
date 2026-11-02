@@ -45,8 +45,9 @@ test('published speakers follow the organizer sequence before previously listed 
   'dhiraj-kabra','yogesh-kulkarni','rajeev-taliyan','rahul-verma','syed-ziaur-rahman',
   'jiban-jyoti-panda','rajnish-kumar','chhuttan-lal-meena','mahendra-bishnoi',
   'hemant-kumar','manoj-dandekar','pragyanshu-khare','sudipta-raha-roy','dinesh-kumar',
-  'karuna-shanker','kishor-mohanan','ashutosh-kumar','uma-shanker-navik',
-  'abhinav-kanwal','vikas-mishra','mandeep-arora'
+  'karuna-shanker','kishor-mohanan','ashween-nannaware','anoop-kumar',
+  'ashutosh-kumar','uma-shanker-navik',
+  'abhinav-kanwal','debapriya-garabadu','vikas-mishra','mandeep-arora'
  ];
  assert.deepEqual(ids.slice(0,expected.length),expected);
  assert.deepEqual(ids.slice(expected.length),[

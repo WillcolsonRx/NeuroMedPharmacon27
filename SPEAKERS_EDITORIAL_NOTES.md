@@ -165,3 +165,19 @@ supersedes the earlier instruction to pin the keynote and CEO first. Published
 entries follow the specified sequence, beginning Bezbaruah, Gulati, Gupta, Sharma,
 Gaikwad. Existing speakers absent from the supplied list remain afterward in their
 previous role ordering. No biography, portrait, role or membership is changed.
+
+## Uploaded official-profile links (2 November 2026)
+
+`researcher_affiliation_designation_links.txt` supplied six exact official URLs.
+Published Ashween D. Nannaware, Anoop Kumar and Debapriya Garabadu in their reserved
+organizer positions after verifying usable portraits. DPSRU is a Svelte app; the
+route's public component contains the actual designation and portrait URL. CIMAP's
+profile has an unavailable default photo, but its linked institutional CV contains
+a real portrait. GGSIPU confirms the Professor role; the matching Frontiers Loop
+portrait is used without importing the outdated CUP affiliation.
+
+Saumen Hajra's CBMR profile and Ajay Prakash's PGIMER directory return 503 (also
+on the corresponding www hosts); K. H. Reeta's AIIMS profile returns 403. These
+three remain unpublished. The organizer explicitly says to keep anyone without
+a photograph unpublished; no initials cards were added. There are now 43 published
+speakers. Mangesh Bankar and Nitesh Kumar remain separate earlier unresolved entries.

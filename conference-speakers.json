@@ -540,5 +540,47 @@
     "details_source": "Official DIT University profile confirms Professor and Head, School of Pharmaceutical and Population Health Informatics (Faculty of Pharmacy), vascular pharmacology and Dehradun campus. This matches organizer city and pharmacology context; unrelated KIET namesake record is not used. Organizer authorizes using the matched candidate provisionally and will review identity later (2 November 2026).",
     "image": "/assets/speakers/mandeep-arora.webp",
     "image_source_note": "Original source portrait downloaded unchanged; 306 × 385 pixels."
+  },
+  {
+    "id": "ashween-nannaware",
+    "name": "Dr. Ashween D. Nannaware",
+    "role": "Invited Speaker",
+    "designation": "Scientist F",
+    "affiliation": "CSIR-Central Institute of Medicinal and Aromatic Plants, Lucknow",
+    "image": "/assets/speakers/ashween-nannaware.jpeg",
+    "profile_url": "https://www.cimap.res.in/cimhindi/EmployeeProfile/EmployeeProfile.aspx?id=639",
+    "image_source": "https://www.cimap.res.in/EmployeeProfile/employeecv/639.pdf",
+    "profile_status": "verified",
+    "verified_on": "2026-11-02",
+    "details_source": "Organizer-supplied official employee profile identifies Ashween Deepak Nannaware and current Scientist-F grade. Official CV supplies portrait; its older Principal Scientist title is superseded by the current employee profile.",
+    "image_source_note": "Original JPEG extracted unchanged from page 1 of the official institutional CV; 206 × 187 pixels."
+  },
+  {
+    "id": "anoop-kumar",
+    "name": "Dr. Anoop Kumar",
+    "role": "Invited Speaker",
+    "designation": "Assistant Professor, Department of Pharmacology",
+    "affiliation": "Delhi Pharmaceutical Sciences and Research University, New Delhi",
+    "image": "/assets/speakers/anoop-kumar.jpg",
+    "profile_url": "https://dpsru.edu.in/Dr-Anoop-kumar-Assistant-Professor",
+    "image_source": "https://dpsru.edu.in/shell-images/faculty-dr-anoop-kumar-assistant-professor.jpg",
+    "profile_status": "verified",
+    "verified_on": "2026-11-02",
+    "details_source": "Organizer-supplied official DPSRU page is a Svelte client-rendered application. Its current route module /_app/immutable/nodes/34.Bo5dnOIs.js explicitly identifies Dr. Anoop Kumar, Assistant Professor, Department of Pharmacology, and the source portrait.",
+    "image_source_note": "Official profile photograph downloaded unchanged; JPEG, 1080 × 1225 pixels."
+  },
+  {
+    "id": "debapriya-garabadu",
+    "name": "Prof. Debapriya Garabadu",
+    "role": "Invited Speaker",
+    "designation": "Professor, Centre of Excellence in Pharmaceutical Sciences",
+    "affiliation": "Guru Gobind Singh Indraprastha University, New Delhi",
+    "image": "/assets/speakers/debapriya-garabadu.png",
+    "profile_url": "https://www.ipu.ac.in/ceps/cepsfacultymain.php",
+    "image_source": "https://loop.frontiersin.org/images/profile/1264857/203",
+    "profile_status": "verified",
+    "verified_on": "2026-11-02",
+    "details_source": "Organizer-supplied official GGSIPU CEPS faculty list confirms Debapriya Garabadu as Professor. CEPS homepage confirms centre expansion. Portrait is from the matching Frontiers Loop academic profile https://loop.frontiersin.org/people/1264857/overview. Its older CUP Assistant Professor affiliation is NOT used for the displayed current role.",
+    "image_source_note": "Matching academic profile portrait downloaded unchanged; PNG, 203 × 203 pixels."
   }
 ]

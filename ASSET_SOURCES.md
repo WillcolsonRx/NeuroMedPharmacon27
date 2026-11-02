@@ -207,3 +207,13 @@ All portraits below are downloaded unchanged and hosted locally; institutional/r
 - **Dr. Abhinav Kanwal**: [profile](https://aiimsbathinda.edu.in/Dept-Pharmacology-12); [source portrait](https://aiimsbathinda.edu.in/images/doctors/20240722101047.jpg) → `/assets/speakers/abhinav-kanwal.jpg`.
 - **Dr. Vikas Mishra**: [profile](https://www.bbau.ac.in/DeptPharmaceuticalScienceFaculties.aspx); [source portrait](https://www.bbau.ac.in/dept/dphs/DRVikas.JPG) → `/assets/speakers/vikas-mishra.jpg`.
 - **Dr. Mandeep Kumar Arora**: [profile](https://www.dituniversity.edu.in/faculty/mandeep-kumar-arora/116); [source portrait](https://www.dituniversity.edu.in/uploads/faculty_images/1725689955_2ebee5b2b397a8032f82.webp) → `/assets/speakers/mandeep-arora.webp`.
+
+### Organizer-supplied missing-profile links (2 November 2026)
+
+The uploaded `researcher_affiliation_designation_links.txt` identifies the intended official profiles. Three previously unpublished speakers now have verified portraits and roles:
+
+- **Dr. Ashween D. Nannaware**: [current institutional profile](https://www.cimap.res.in/cimhindi/EmployeeProfile/EmployeeProfile.aspx?id=639); [portrait source](https://www.cimap.res.in/EmployeeProfile/employeecv/639.pdf) → `/assets/speakers/ashween-nannaware.jpeg`. Original JPEG extracted unchanged from page 1 of the official institutional CV; 206 × 187 pixels.
+- **Dr. Anoop Kumar**: [current institutional profile](https://dpsru.edu.in/Dr-Anoop-kumar-Assistant-Professor); [portrait source](https://dpsru.edu.in/shell-images/faculty-dr-anoop-kumar-assistant-professor.jpg) → `/assets/speakers/anoop-kumar.jpg`. Official profile photograph downloaded unchanged; JPEG, 1080 × 1225 pixels.
+- **Prof. Debapriya Garabadu**: [current institutional profile](https://www.ipu.ac.in/ceps/cepsfacultymain.php); [portrait source](https://loop.frontiersin.org/images/profile/1264857/203) → `/assets/speakers/debapriya-garabadu.png`. Matching academic profile portrait downloaded unchanged; PNG, 203 × 203 pixels.
+
+Garabadu’s current GGSIPU professorship comes from the institutional list, not the older CUP appointment on the portrait source. Nannaware’s portrait is extracted from his institutional CV, but his current grade comes from the newer employee profile. No synthetic or retouched portraits are used; no blanket open-license claim is made.
