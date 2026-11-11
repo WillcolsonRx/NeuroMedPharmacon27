@@ -8,7 +8,9 @@ const { currentTier, TARIFF, app, db } = require('../server.js');
 test('Tier calculation auto-switches correctly by date', () => {
   assert.equal(currentTier(new Date('2026-10-23T12:00:00Z')), 'early');
   assert.equal(currentTier(new Date('2026-11-09T23:59:59+05:30')), 'early');
-  assert.equal(currentTier(new Date('2026-11-10T00:00:00+05:30')), 'regular');
+  assert.equal(currentTier(new Date('2026-11-11T12:00:00+05:30')), 'early');
+  assert.equal(currentTier(new Date('2026-11-15T23:59:59+05:30')), 'early');
+  assert.equal(currentTier(new Date('2026-11-16T00:00:00+05:30')), 'regular');
   assert.equal(currentTier(new Date('2026-12-09T23:59:59+05:30')), 'regular');
   assert.equal(currentTier(new Date('2026-12-10T00:00:00+05:30')), 'regular');
   assert.equal(currentTier(new Date('2026-12-15T23:59:59+05:30')), 'regular');

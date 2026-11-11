@@ -19,7 +19,7 @@ test('registration totals use inclusive prices and enforce category and affiliat
 });
 test('affiliation changes expose exactly four options and remove stale discounted selections',()=>{
  const html=fs.readFileSync(require.resolve('../index.html'),'utf8');const start=html.indexOf('function recalculateTariff()'),end=html.indexOf('// Bank Details Copy Helper',start);
- const nodes={regCategory:{value:'student'},regAffiliation:{value:'Example University'},inHouseEligibility:{},regWorkshop:{checked:false},summaryBase:{},rowWorkshop:{style:{}},summaryWorkshop:{},summaryGrandTotal:{},paymentRemitNotice:{}};
+ const nodes={regCategory:{value:'student'},regAffiliation:{value:'Example University'},inHouseEligibility:{},regWorkshop:{checked:false},summaryBase:{},rowWorkshop:{style:{}},summaryWorkshop:{},summaryGrandTotal:{}};
  const context={document:{getElementById:id=>nodes[id]},RegistrationPricing:pricing,TARIFF_DATA:{early:prices},currentTier:'early'};
  vm.runInNewContext(html.slice(start,end),context);
  context.recalculateTariff();assert.equal((nodes.regCategory.innerHTML.match(/<option/g)||[]).length,3);assert.equal(nodes.summaryGrandTotal.textContent,'₹3,500');
