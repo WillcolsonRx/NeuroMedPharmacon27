@@ -143,8 +143,8 @@ const TARIFF = {
 
 function currentTier(customDate) {
   const now = customDate || new Date();
-  if (now < new Date('2026-11-16T00:00:00+05:30')) return 'early';
-  if (now < new Date('2026-12-16T00:00:00+05:30')) return 'regular';
+  if (now < new Date('2027-01-16T00:00:00+05:30')) return 'early';
+  if (now < new Date('2027-02-16T00:00:00+05:30')) return 'regular';
   return 'spot';
 }
 
