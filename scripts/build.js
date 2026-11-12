@@ -3,7 +3,7 @@ const path = require('path');
 
 console.log('[BUILD] Generating current conference documents...');
 try {
-  require('./generate-sponsorship-pdf');
+  require('./generate-sponsorship-pdf').generateSponsorshipProspectusPDF();
   require('./generate-guidelines-pdf').generateAbstractGuidelinesPDF();
 } catch (err) {
   console.warn('[BUILD] PDF generation warning:', err.message);

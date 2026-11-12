@@ -120,5 +120,5 @@ function generateAbstractGuidelinesPDF({targetDir=path.join(ROOT,'public/downloa
  for(const [filename,doc] of files){const bytes=Buffer.from(doc.output('arraybuffer'));fs.writeFileSync(path.join(targetDir,filename),bytes);const legacy=filename.includes('Guidelines')?'IPS_NorthZone_Abstract_Guidelines_2027.pdf':'IPS_NorthZone_Abstract_Template_2027.pdf';fs.writeFileSync(path.join(targetDir,legacy),bytes);console.log(`Generated ${filename}: ${doc.getNumberOfPages()} page(s), ${bytes.length} bytes`);}
  return files.map(([filename])=>path.join(targetDir,filename));
 }
-module.exports={createGuidelinesPDF,createTemplatePDF,generateAbstractGuidelinesPDF};
+module.exports={createGuidelinesPDF,createTemplatePDF,generateAbstractGuidelinesPDF,createDocumentLayout:layout};
 if(require.main===module)generateAbstractGuidelinesPDF();

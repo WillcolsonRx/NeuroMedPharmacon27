@@ -1,193 +1,57 @@
-const fs = require('fs');
-const path = require('path');
-const { jsPDF } = require('jspdf');
-
-function generateSponsorshipProspectusPDF() {
-  const doc = new jsPDF({
-    orientation: 'portrait',
-    unit: 'mm',
-    format: 'a4'
-  });
-
-  // Page 1: Cover & Congress Overview
-  doc.setFillColor(6, 14, 24);
-  doc.rect(0, 0, 210, 297, 'F');
-
-  // Decorative border
-  doc.setDrawColor(203, 162, 52);
-  doc.setLineWidth(0.8);
-  doc.rect(12, 12, 186, 273, 'D');
-
-  doc.setTextColor(203, 162, 52);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(11);
-  doc.text('INDIAN PHARMACOLOGICAL SOCIETY ', 105, 35, { align: 'center' });
-
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(22);
-  doc.text('NeuroMet Pharmacon-2027', 105, 52, { align: 'center' });
-
-  doc.setTextColor(200, 215, 235);
-  doc.setFontSize(12);
-  doc.text('Scientific Talks · 10 Curated Thematic Tracks · 300+ Abstracts', 105, 62, { align: 'center' });
-
-  doc.setDrawColor(203, 162, 52);
-  doc.setLineWidth(0.5);
-  doc.line(40, 70, 170, 70);
-
-  doc.setTextColor(203, 162, 52);
-  doc.setFontSize(16);
-  doc.text('INDUSTRY SPONSORSHIP & EXHIBITION PROSPECTUS', 105, 84, { align: 'center' });
-
-  doc.setTextColor(220, 230, 242);
-  doc.setFontSize(10);
-  doc.setFont('helvetica', 'normal');
-  doc.text('Host Institution: NIPER-Raebareli', 105, 96, { align: 'center' });
-  doc.text('National Institute of Pharmaceutical Education and Research (NIPER), Raebareli at Lucknow', 105, 102, { align: 'center' });
-  doc.text('19–20 February 2027 | Post-conference workshop: 21 February', 105, 108, { align: 'center' });
-
-  // Key stats box
-  doc.setFillColor(15, 34, 56);
-  doc.roundedRect(25, 120, 160, 48, 2, 2, 'F');
-
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(11);
-  doc.setTextColor(203, 162, 52);
-  doc.text('EXPECTED AUDIENCE & CONGRESS FOOTPRINT', 105, 130, { align: 'center' });
-
-  doc.setFontSize(9);
-  doc.setTextColor(255, 255, 255);
-  doc.text('• 300+ Peer-Reviewed Abstracts across 10 Curated Thematic Tracks', 32, 140);
-  doc.text('• 30 Scientific Talks across Pharmaceutical Research', 32, 147);
-  doc.text('• 20+ Commercial Pharmaceutical, Analytical Instrument, and Biotech Exhibitors', 32, 154);
-  doc.text('• 2 Conference Days (19-20 February) + Post-conference Workshop (21 February)', 32, 161);
-
-  // Sponsorship Summary Table
-  doc.setFontSize(12);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(203, 162, 52);
-  doc.text('SPONSORSHIP TIERS AT A GLANCE', 105, 178, { align: 'center' });
-
-  // Tier 1: Platinum (Rs. 100,000)
-  doc.setFillColor(20, 40, 68);
-  doc.roundedRect(25, 186, 160, 19, 2, 2, 'F');
-  doc.setTextColor(203, 162, 52);
-  doc.setFontSize(10.5);
-  doc.text('PLATINUM SPONSOR — Rs. 100,000 (INR 1,00,000 + 18% GST)', 32, 194);
-  doc.setFontSize(8);
-  doc.setTextColor(220, 230, 245);
-  doc.setFont('helvetica', 'normal');
-  doc.text('Space for one display booth · Two complimentary registrations · Displayed as sponsor of conference', 32, 200);
-
-  // Tier 2: Gold (Rs. 50,000)
-  doc.setFillColor(20, 40, 68);
-  doc.roundedRect(25, 208, 160, 19, 2, 2, 'F');
-  doc.setTextColor(203, 162, 52);
-  doc.setFontSize(10.5);
-  doc.setFont('helvetica', 'bold');
-  doc.text('GOLD SPONSOR — Rs. 50,000 (INR 50,000 + 18% GST)', 32, 216);
-  doc.setFontSize(8);
-  doc.setTextColor(220, 230, 245);
-  doc.setFont('helvetica', 'normal');
-  doc.text('Space for one display booth · One complimentary registration · Displayed as sponsor of conference', 32, 222);
-
-  // Tier 3: Silver (Rs. 25,000)
-  doc.setFillColor(20, 40, 68);
-  doc.roundedRect(25, 230, 160, 19, 2, 2, 'F');
-  doc.setTextColor(203, 162, 52);
-  doc.setFontSize(10.5);
-  doc.setFont('helvetica', 'bold');
-  doc.text('SILVER SPONSOR — Rs. 25,000 (INR 25,000 + 18% GST)', 32, 238);
-  doc.setFontSize(8);
-  doc.setTextColor(220, 230, 245);
-  doc.setFont('helvetica', 'normal');
-  doc.text('One complimentary registration · No display booth · Displayed as sponsor of conference', 32, 244);
-
-  // Tier 4: Bronze (Rs. 25,000)
-  doc.setFillColor(20, 40, 68);
-  doc.roundedRect(25, 252, 160, 19, 2, 2, 'F');
-  doc.setTextColor(203, 162, 52);
-  doc.setFontSize(10.5);
-  doc.setFont('helvetica', 'bold');
-  doc.text('PHILANTHROPIC SUPPORT — Contribution agreed with Secretariat', 32, 260);
-  doc.setFontSize(8);
-  doc.setTextColor(220, 230, 245);
-  doc.setFont('helvetica', 'normal');
-  doc.text('One lunch and one dinner for one supporter. No commercial deliverables; registration is separate.', 32, 266);
-
-  doc.setFontSize(8);
-  doc.setTextColor(148, 163, 184);
-  doc.text('Contact Secretariat: neuromedpharmacon26@gmail.com | (+91) 9250446799', 105, 280, { align: 'center' });
-
-  // Page 2: Detailed Matrix & Booking Information
-  doc.addPage('a4', 'portrait');
-
-  doc.setFillColor(6, 14, 24);
-  doc.rect(0, 0, 210, 32, 'F');
-  doc.setFillColor(203, 162, 52);
-  doc.rect(0, 32, 210, 1.5, 'F');
-
-  doc.setTextColor(203, 162, 52);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(10);
-  doc.text('NeuroMet Pharmacon-2027 · NIPER-RAEBARELI LUCKNOW', 105, 14, { align: 'center' });
-
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(13);
-  doc.text('SPONSORSHIP & VOLUNTARY SUPPORT', 105, 23, { align: 'center' });
-
-  let rY = 44;
-  doc.setTextColor(15, 23, 42);
-  doc.setFontSize(11);
-  doc.text('Support options and inclusions', 20, rY);
-
-  // Philanthropic contributions have no commercial entitlements.
-  rY += 18;
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9);
-  const summary = [
-    'Platinum: INR 100,000 + 18% GST; one booth, two registrations, displayed as sponsor.',
-    'Gold: INR 50,000 + 18% GST; one booth, one registration, displayed as sponsor.',
-    'Silver: INR 25,000 + 18% GST; one complimentary registration, no booth, displayed as sponsor.',
-    'Philanthropic support: custom contribution agreed with Secretariat; one lunch and one dinner',
-    'for one supporter. No commercial deliverables. Delegate registration is separate.',
-    'The institution will confirm the contribution amount and applicable tax treatment before payment.'
-  ];
-  summary.forEach(line => { doc.text(line, 23, rY); rY += 7; });
-
-  // Terms & Payment Details
-  rY += 8;
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(10);
-  doc.setTextColor(6, 14, 24);
-  doc.text('Stall Allocation & Booking Protocol', 20, rY);
-
-  rY += 5;
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8);
-  doc.setTextColor(71, 85, 105);
-  const terms = [
-    '1. Stalls will be allotted strictly on a first-come, first-served basis upon receipt of official confirmation & advance payment.',
-    '2. 50% advance payment is required upon confirmation; remaining balance must be settled 30 days prior to the conference.',
-    '3. GST at 18% is applicable as per Govt of India tax regulations. Formal GST invoice will be issued by NIPER-Raebareli.',
-    '4. Standard stall provisions include octanorm structure, 2 spotlights, 1 power socket (5A), 1 discussion table, and 2 chairs.',
-    '5. Bank Wire Transfer (NEFT/RTGS) Details: Account Name: NIPER-Raebareli Conferences | Bank: State Bank of India | IFSC: SBIN0011214.'
-  ];
-  terms.forEach(t => {
-    const lines = doc.splitTextToSize(t, 170);
-    doc.text(lines, 20, rY);
-    rY += lines.length * 4.2;
-  });
-
-  doc.setFontSize(7.5);
-  doc.setTextColor(148, 163, 184);
-  doc.text('Page 2 of 2 — Sponsorship Secretariat: neuromedpharmacon26@gmail.com | (+91) 9250446799', 105, 290, { align: 'center' });
-
-  const buffer = doc.output('arraybuffer');
-  const targetDir = path.join(__dirname, '../public/downloads');
-  const filePath = path.join(targetDir, 'NeuroMet_Pharmacon_2027_Sponsorship_Prospectus.pdf');
-  fs.writeFileSync(filePath, Buffer.from(buffer));
-  console.log(`Generated official Sponsorship PDF: ${filePath} (${fs.statSync(filePath).size} bytes)`);
+const fs=require('fs');
+const path=require('path');
+const {createDocumentLayout}=require('./generate-guidelines-pdf');
+const CONTACT='neurometpharmacon27@gmail.com';
+const PHONE='(+91) 9250446799';
+const NAVY=[7,23,41],MUTED=[91,110,130],GOLD=[153,111,20];
+const PACKAGES=[
+ {name:'Platinum sponsor',amount:'INR 1,00,000 + 18% GST',benefits:'Space for one display booth; two complimentary registrations; displayed as a sponsor of the conference.'},
+ {name:'Gold sponsor',amount:'INR 50,000 + 18% GST',benefits:'Space for one display booth; one complimentary registration; displayed as a sponsor of the conference.'},
+ {name:'Silver sponsor',amount:'INR 25,000 + 18% GST',benefits:'One complimentary registration; no display booth; displayed as a sponsor of the conference.'}
+];
+const TERMS=[
+ ['1. Stall allocation','Stalls will be allotted on a first-come, first-served basis upon receipt of official confirmation and advance payment.'],
+ ['2. Payment schedule','A 50% advance payment is required upon confirmation. The remaining balance must be settled 30 days before the conference.'],
+ ['3. Taxes and invoice','GST at 18% is applicable as per Government of India tax regulations. A formal GST invoice will be issued by NIPER-Raebareli.'],
+ ['4. Standard stall','Standard stall provisions include an octanorm structure, two spotlights, one 5A power socket, one discussion table and two chairs.']
+];
+function createSponsorshipProspectusPDF(options={}){
+ const out=createDocumentLayout(options),doc=out.doc;
+ doc.setProperties({title:'Sponsorship & Exhibition Prospectus | NeuroMet Pharmacon-2027',subject:'Industry sponsorship and exhibition opportunities',author:'NeuroMet Pharmacon-2027 Secretariat'});
+ out.newPage('Sponsorship & exhibition','INDUSTRY PROSPECTUS');
+ out.paragraph('Industry sponsorship and exhibition opportunities for pharmaceutical, analytical instrumentation and biotechnology organizations.',{after:4});
+ out.heading('Expected congress footprint');
+ const start=out.y;
+ const stats=[['300+','Peer-reviewed abstracts'],['10','Curated thematic tracks'],['30','Scientific talks'],['20+','Commercial exhibitors']];
+ for(let i=0;i<stats.length;i++){
+  const x=i%2?108:18,y=start+Math.floor(i/2)*22;
+  doc.setFillColor(245,248,251);doc.roundedRect(x,y-4,84,19,1.5,1.5,'F');
+  out.text(stats[i][0],x+4,y+3,14,true,NAVY);out.text(stats[i][1],x+4,y+10,8.8,false,MUTED);
+ }
+ out.y=start+43;out.paragraph('Two conference days (19–20 February) plus a post-conference workshop (21 February).',{size:9,gap:4.6,after:5,justify:false});
+ out.heading('Commercial sponsorship packages');
+ for(const pack of PACKAGES){
+  const y=out.y;doc.setFillColor(248,250,252);doc.setDrawColor(221,229,237);doc.roundedRect(18,y-4,174,28,1.5,1.5,'FD');
+  out.text(pack.name,22,y+3,11.2,true,NAVY);out.text(pack.amount,188,y+3,10.2,true,GOLD,{align:'right'});
+  out.y=y+10;out.paragraph(pack.benefits,{x:22,w:166,size:9.7,gap:4.8,after:0});out.y=y+32;
+ }
+ out.paragraph('Commercial package prices above exclude 18% GST.',{size:9,gap:4.6,after:0,justify:false});
+ out.newPage('Booking and voluntary support','SPONSORSHIP PROSPECTUS');
+ out.heading('Philanthropic support');
+ out.paragraph('The contribution amount is agreed with the Secretariat. Philanthropic support includes one lunch and one dinner for one supporter, without commercial deliverables. Delegate registration is separate. The institution will confirm the contribution amount and applicable tax treatment before payment.',{after:6});
+ out.heading('Stall allocation and booking protocol');
+ TERMS.forEach(([label,body],index)=>out.specification(label,body,index));
+ out.y+=7;out.heading('Contact the Sponsorship Secretariat');
+ out.paragraph('For sponsorship bookings, custom commercial exhibition packages or symposium sponsorship, contact the Secretariat.',{after:3});
+ out.font(10.5,true);doc.setTextColor(18,92,162);doc.textWithLink(CONTACT,18,out.y,{url:'mailto:'+CONTACT});out.y+=7;
+ out.text(PHONE,18,out.y,10.5,true,NAVY);
+ return out.finish();
 }
-
-generateSponsorshipProspectusPDF();
+function generateSponsorshipProspectusPDF({targetDir=path.join(__dirname,'../public/downloads')}={}){
+ fs.mkdirSync(targetDir,{recursive:true});const doc=createSponsorshipProspectusPDF(),bytes=Buffer.from(doc.output('arraybuffer'));
+ const file=path.join(targetDir,'NeuroMet_Pharmacon_2027_Sponsorship_Prospectus.pdf');fs.writeFileSync(file,bytes);
+ fs.writeFileSync(path.join(targetDir,'IPS_NorthZone_Sponsorship_Prospectus_2027.pdf'),bytes);
+ console.log(`Generated sponsorship prospectus: ${doc.getNumberOfPages()} pages, ${bytes.length} bytes`);return file;
+}
+module.exports={createSponsorshipProspectusPDF,generateSponsorshipProspectusPDF};
+if(require.main===module)generateSponsorshipProspectusPDF();
