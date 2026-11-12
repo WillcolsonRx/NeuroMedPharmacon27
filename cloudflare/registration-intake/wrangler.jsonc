@@ -10,5 +10,5 @@
     "consumers": [{"queue": "neuromet-registration-processing", "max_batch_size": 1, "max_batch_timeout": 1, "max_retries": 10}]
   },
   "triggers": {"crons": ["*/5 * * * *"]},
-  "vars": {"CALLBACK_URL": "https://REPLACE-WITH-YOUR-CONFERENCE-HOST/api/internal/r2-registration"}
+  "vars": {"CALLBACK_URL": "https://neuro-med-pharmacon-27.vercel.app/api/internal/r2-registration"}
 }

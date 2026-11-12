@@ -37,7 +37,7 @@ npx wrangler r2 bucket create neuromet-registration-intake
 npx wrangler queues create neuromet-registration-processing
 ```
 
-Replace `CALLBACK_URL` in `wrangler.jsonc` with the production HTTPS URL ending `/api/internal/r2-registration`. Use the production host directly; do not rely on redirects or a deployment-protected preview.
+`CALLBACK_URL` in `wrangler.jsonc` is set to `https://neuro-med-pharmacon-27.vercel.app/api/internal/r2-registration`. Keep this full endpoint in sync with the Worker dashboard. It must not point to the homepage. If the production host changes, update it here before deploying; do not rely on redirects or a deployment-protected preview.
 
 Generate **three different** random secrets of at least 32 characters in a password manager:
 
