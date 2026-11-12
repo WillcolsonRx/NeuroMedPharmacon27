@@ -3352,7 +3352,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
           <div class="row g-3 mb-2">
             <div class="col-md-6">
               <label class="form-label-scholarly" for="absRegistrationId">Registration ID <span class="required-marker">*</span></label>
-              <input type="text" class="form-input-scholarly" id="absRegistrationId" placeholder="NMP27-DEL-..." maxlength="90" autocomplete="off" spellcheck="false" aria-describedby="absRegistrationStatus" required>
+              <input type="text" class="form-input-scholarly" id="absRegistrationId" placeholder="NMP27-A1B2C3D4E5F6" maxlength="90" autocomplete="off" spellcheck="false" aria-describedby="absRegistrationStatus" required>
             </div>
             <div class="col-md-6">
               <label class="form-label-scholarly" for="absEmail">Author Email <span class="required-marker">*</span></label>
@@ -4180,6 +4180,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
      VANILLA JAVASCRIPT: AUTONOMOUS BEHAVIOR & REGISTRATION CALCULATOR
      ========================================================================== -->
 <script src="/registration-pricing.js"></script>
+<script src="/registration-reference.js"></script>
 <script>
 // TARIFF DEFINITIONS
 const TARIFF_DATA = {
@@ -4716,7 +4717,7 @@ async function handleRegistrationSubmit(e) {
 
     // Open Confirmation Receipt Modal
     const regIdStr = data.ref_id || ('NMP27-DEL-' + (1000 + (data.id || 1)));
-    document.getElementById('receiptRegId').textContent = regIdStr;
+    document.getElementById('receiptRegId').textContent = RegistrationReference.display(regIdStr);
     document.getElementById('receiptName').textContent = fullName;
     document.getElementById('receiptAffiliation').textContent = data.affiliation || affiliation;
     const catLabel = RegistrationPricing.labels[data.category || category];

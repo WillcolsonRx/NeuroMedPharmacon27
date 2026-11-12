@@ -1,10 +1,11 @@
 const {createHash}=require('node:crypto');
+const RegistrationReference=require('./public/registration-reference');
 const hash=value=>createHash('sha256').update(value).digest('hex');
 function eligibilityError(status,message){const error=new Error(message);error.status=status;return error;}
 function normalizeRegistrationPair(input={}){
  const ref=typeof input.registration_id==='string'?input.registration_id.trim().toUpperCase():'';
  const email=typeof input.email==='string'?input.email.trim().toLowerCase():'';
- if(!/^NMP27-DEL-[A-Z0-9-]{5,64}$/.test(ref)||email.length>254||!/^\S+@[^\s@]+\.[^\s@]+$/.test(email))throw eligibilityError(400,'Enter your conference Registration ID and the email used for registration.');
+ if(!RegistrationReference.isValid(ref)||email.length>254||!/^\S+@[^\s@]+\.[^\s@]+$/.test(email))throw eligibilityError(400,'Enter your conference Registration ID and the email used for registration.');
  return {ref,email};
 }
 function createAbstractEligibility(db){
@@ -33,8 +34,11 @@ function createAbstractEligibility(db){
    await limit(ip,email);
    const rows=db.registrationByReference
     ? await db.registrationByReference(ref)
-    : await db.prepare('SELECT ref_id,email FROM registrations WHERE ref_id = ? LIMIT 2').all(ref);
-   if(!Array.isArray(rows)||rows.length!==1||rows[0].ref_id!==ref||String(rows[0].email).trim().toLowerCase()!==email)throw eligibilityError(403,'Registration ID and email do not match a completed conference registration.');
+    : RegistrationReference.isCompact(ref)
+      ? await db.prepare('SELECT ref_id,email FROM registrations WHERE ref_id LIKE ? LIMIT 2').all('NMP27-DEL-%'+ref.slice(6))
+      : await db.prepare('SELECT ref_id,email FROM registrations WHERE ref_id = ? LIMIT 2').all(ref);
+   if(Array.isArray(rows)&&rows.length>1&&RegistrationReference.isCompact(ref))throw eligibilityError(403,'This short ID is ambiguous. Use your original full Reference ID or contact the Secretariat.');
+   if(!Array.isArray(rows)||rows.length!==1||(rows[0].ref_id!==ref&&RegistrationReference.display(rows[0].ref_id)!==ref)||String(rows[0].email).trim().toLowerCase()!==email)throw eligibilityError(403,'Registration ID and email do not match a completed conference registration.');
    return {registration_ref:rows[0].ref_id,email};
   }catch(error){
    if(error.status)throw error;

@@ -2,6 +2,13 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env'), override: true });
 const nodemailer = require('nodemailer');
 const {randomBytes} = require('node:crypto');
+const {display:displayRegistrationReference}=require('./public/registration-reference');
+function registrationLogoAttachments(){
+  return [
+    {filename:'niper-logo.png',path:path.join(__dirname,'public/assets/logos/niper_logo.png'),cid:'nmp-niper-logo',contentType:'image/png',contentDisposition:'inline'},
+    {filename:'ips-logo.png',path:path.join(__dirname,'public/assets/logos/ips_logo.png'),cid:'nmp-ips-logo',contentType:'image/png',contentDisposition:'inline'}
+  ];
+}
 
 function generateRefId(type = 'DEL') {
   const rand = type.toUpperCase() === 'DEL' ? randomBytes(8).toString('hex').toUpperCase() : Math.floor(10000 + Math.random() * 90000);
@@ -184,8 +191,9 @@ function affiliationHtml(value) {
 }
 async function sendDelegateConfirmation(db, registration) {
   const { full_name, email, affiliation, category, tier, workshop, amount, currency, ref_id, payment_ref } = registration;
+  const display_ref=displayRegistrationReference(ref_id);
   const categoryLabel = formatCategoryName(category);
-  const subject = `Registration Confirmation: NeuroMet Pharmacon-2027 [Ref: ${ref_id}]`;
+  const subject = `Registration Confirmation: NeuroMet Pharmacon-2027 [Ref: ${display_ref}]`;
 
   const html = `
     <!DOCTYPE html>
@@ -201,7 +209,7 @@ async function sendDelegateConfirmation(db, registration) {
         .body { padding: 24px; }
         .ref-box { background: #f0fdf4; border: 1px dashed #16a34a; border-radius: 6px; padding: 14px; margin: 18px 0; text-align: center; }
         .ref-label { font-size: 12px; color: #166534; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
-        .ref-val { font-size: 24px; font-weight: 700; color: #15803d; font-family: monospace; margin-top: 4px; }
+        .ref-val { font-size: 20px; font-weight: 700; color: #15803d; font-family: monospace; margin-top: 4px; }
         .details-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
         .details-table td { padding: 9px 12px; border-bottom: 1px solid #f1f5f9; }
         .details-table td:first-child { color: #64748b; width: 42%; }
@@ -221,7 +229,7 @@ async function sendDelegateConfirmation(db, registration) {
           
           <div class="ref-box">
             <div class="ref-label">Official Delegate Reference ID</div>
-            <div class="ref-val">${affiliationHtml(ref_id)}</div>
+            <div class="ref-val">${affiliationHtml(display_ref)}</div>
           </div>
 
           <table class="details-table">
@@ -261,11 +269,14 @@ async function sendDelegateConfirmation(db, registration) {
           </table>
 
           <p style="font-size: 13px; color: #475569; line-height: 1.5;">
-            Please present this Reference ID (<strong>${affiliationHtml(ref_id)}</strong>) at the Secretariat Registration Counter upon arrival to collect your delegate badge, scientific proceedings, and conference kit.
+            Please present this Reference ID (<strong>${affiliationHtml(display_ref)}</strong>) at the Secretariat Registration Counter upon arrival to collect your delegate badge, scientific proceedings, and conference kit.
           </p>
         </div>
         <div class="footer">
-          NIPER-Raebareli Lucknow Campus · In Collaboration with Indian Pharmacological Society
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:420px;margin:0 auto;"><tr>
+            <td width="30%" align="center" valign="middle"><img src="cid:nmp-niper-logo" alt="NIPER Raebareli" width="60" height="68" style="display:block;width:60px;height:auto;"></td>
+            <td width="70%" align="center" valign="middle"><img src="cid:nmp-ips-logo" alt="Indian Pharmacological Society" width="220" height="45" style="display:block;width:100%;max-width:220px;height:auto;"></td>
+          </tr></table>
         </div>
       </div>
     </body>
@@ -274,7 +285,7 @@ async function sendDelegateConfirmation(db, registration) {
 
   const text = `
 NeuroMet Pharmacon-2027 - Delegate Registration Confirmation
-Reference ID: ${ref_id}
+Reference ID: ${display_ref}
 
 Dear ${full_name},
 
@@ -287,7 +298,7 @@ Your registration for NeuroMet Pharmacon-2027 is confirmed.
 - Dates: 19th – 20th February 2027; workshop: 21 February 2027
 - Venue: NIPER-Raebareli Lucknow Campus, Bijnor Road, Sarojini Nagar, Lucknow 226002
 
-Please present your Reference ID (${ref_id}) at registration desk for badge collection.
+Please present your Reference ID (${display_ref}) at registration desk for badge collection.
   `.trim();
 
   return await sendMail(db, {
@@ -296,6 +307,7 @@ Please present your Reference ID (${ref_id}) at registration desk for badge coll
     html,
     text,
     type: 'DELEGATE_CONFIRMATION',
+    attachments: registrationLogoAttachments(),
     refId: ref_id
   });
 }
@@ -307,8 +319,9 @@ async function sendOrganizerNotification(db, registration) {
   const config = getSmtpConfig();
   const organizerEmail = config.organizerEmail;
   const { full_name, email, phone, affiliation, category, tier, workshop, amount, currency, ref_id, payment_ref, has_proof } = registration;
+  const display_ref=displayRegistrationReference(ref_id);
   const categoryLabel = formatCategoryName(category);
-  const subject = `[New Registration] ${full_name} (${categoryLabel}) [Ref: ${ref_id}]`;
+  const subject = `[New Registration] ${full_name} (${categoryLabel}) [Ref: ${display_ref}]`;
 
   const html = `
     <!DOCTYPE html>
@@ -335,7 +348,7 @@ async function sendOrganizerNotification(db, registration) {
         <div class="body">
           <div class="item-row">
             <span class="item-label">Reference ID:</span>
-            <span class="item-val" style="font-family: monospace; color: #16a34a;">${affiliationHtml(ref_id)}</span>
+            <span class="item-val" style="font-family: monospace; color: #16a34a;">${affiliationHtml(display_ref)}</span>
           </div>
           <div class="item-row">
             <span class="item-label">Delegate Name:</span>
@@ -385,7 +398,7 @@ async function sendOrganizerNotification(db, registration) {
 
   const text = `
 New Delegate Registration - NeuroMet Pharmacon-2027
-Ref ID: ${ref_id}
+Ref ID: ${display_ref}
 Name: ${full_name}
 Affiliation: ${affiliation || 'Not supplied'}
 Email: ${email}

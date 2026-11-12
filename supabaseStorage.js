@@ -77,7 +77,9 @@ function createSupabaseStorage({ url, key, fetchImpl = fetch }) {
       throw new Error('Unsupported storage query');
     },
     async registrationByReference(ref) {
-      return request('/rest/v1/registrations?select=ref_id,email&ref_id=eq.'+encodeURIComponent(ref)+'&limit=2');
+      const filter=require('./public/registration-reference').isCompact(ref)
+        ? 'like.'+encodeURIComponent('NMP27-DEL-*'+ref.slice(6)) : 'eq.'+encodeURIComponent(ref);
+      return request('/rest/v1/registrations?select=ref_id,email&ref_id='+filter+'&limit=2');
     },
     async storeDocument(document) {
       const object = `${randomUUID()}.${document.ext}`;

@@ -41,7 +41,8 @@ class InMemoryDb {
   }
 
   registrationByReference(ref) {
-    return this.tables.registrations.filter(row=>row.ref_id===ref).slice(0,2).map(row=>({ref_id:row.ref_id,email:row.email}));
+    const reference=require('./public/registration-reference');
+    return this.tables.registrations.filter(row=>row.ref_id===ref||(reference.isCompact(ref)&&reference.display(row.ref_id)===ref)).slice(0,2).map(row=>({ref_id:row.ref_id,email:row.email}));
   }
 
   prepare(sql) {

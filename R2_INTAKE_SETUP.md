@@ -83,3 +83,23 @@ Before activation, verify:
 - R2 credentials and private object URLs never appear in the frontend/receipt.
 
 Use Worker metrics, queue backlog and the private recovery list. There is no automatic retention deletion, billing hard cap, independent external uptime monitor, or promise of unlimited/free availability. Operators must decide retention and delete records only under a reviewed retention policy. Do not expose the bucket publicly. Website hosting remains on Vercel: this design protects acknowledged intake from Supabase/SMTP failure but does not make Vercel or Cloudflare outages impossible. Actual staging load/CPU limits and provider credentials must be verified in the owner's accounts.
+
+## Short check-in IDs
+
+Delegate receipts/PDFs, registration emails and the Secretariat dashboard show a
+compact check-in ID such as `NMP27-A1B2C3D4E5F6`, derived from the last 12 hexadecimal
+characters of the original registration reference. The full reference remains
+unchanged in R2, Supabase, payment-proof paths and email logs. Old emails and recovery
+links continue to work; no Worker deployment, SQL migration or registration
+renumbering is needed for this display/lookup change.
+
+Abstract verification accepts the short ID with the original registration email
+and resolves it back to the canonical reference before saving the abstract. Lookups
+return at most two candidates and refuse ambiguous short IDs; staff can retrieve
+the original full reference through the existing private recovery record. A short
+ID alone does not prove registration identity or payment.
+
+Delegate email footers embed the existing official NIPER and IPS logo assets using
+inline Content-ID images, without depending on external image hosting. These two
+inline images are not delegate payment-proof attachments. SMTP recipients and
+credentials remain unchanged.
