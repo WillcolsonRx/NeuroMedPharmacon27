@@ -4017,7 +4017,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
         </p>
 
     <div class="d-flex justify-content-end gap-2">
-      <button class="btn-primary-action" onclick="downloadRegistrationReceipt()">Download Receipt PDF</button>
+      <button class="btn-primary-action" id="btnDownloadReceipt" onclick="downloadRegistrationReceipt()">Download Receipt PDF</button>
       <button class="btn-secretariat" style="color:#0f172a; border-color:#cbd5e1;" onclick="closeReceiptModal()">Done</button>
     </div>
   </div>
@@ -4189,6 +4189,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
      ========================================================================== -->
 <script src="/registration-pricing.js"></script>
 <script src="/registration-reference.js"></script>
+<script src="/registration-receipt.js"></script>
 <script>
 // TARIFF DEFINITIONS
 const TARIFF_DATA = {
@@ -4756,32 +4757,26 @@ async function handleRegistrationSubmit(e) {
   }
 }
 
-function downloadRegistrationReceipt() {
-  if (!window.jspdf?.jsPDF) {
+async function downloadRegistrationReceipt() {
+  if (!window.jspdf?.jsPDF || !window.RegistrationReceipt) {
     alert('The PDF library could not load. Please check your connection and try again.');
     return;
   }
-  const doc = new window.jspdf.jsPDF();
-  doc.setFontSize(18);
-  doc.text('NeuroMet Pharmacon-2027', 20, 25);
-  doc.setFontSize(12);
-  doc.text('Registration Receipt', 20, 36);
-  let y = 50;
-  const fields = [
-    ['Registration ID', 'receiptRegId'], ['Delegate', 'receiptName'],
-    ['Affiliation', 'receiptAffiliation'], ['Category', 'receiptCategory'], ['Rate', 'receiptTier'],
-    ['Workshop', 'receiptWorkshop'], ['Transaction reference', 'receiptPaymentRef'],
-    ['Total amount', 'receiptAmount']
-  ];
-  for (const [label, id] of fields) {
-    const value = document.getElementById(id).textContent.replace(/₹/g, 'INR ');
-    const lines = doc.splitTextToSize(label + ': ' + value, 170);
-    doc.text(lines, 20, y);
-    y += lines.length * 7 + 5;
+  const button = document.getElementById('btnDownloadReceipt');
+  if (button?.disabled) return;
+  if (button) { button.disabled = true; button.textContent = 'Preparing receipt...'; }
+  try {
+    const ids = ['receiptRegId','receiptName','receiptAffiliation','receiptCategory','receiptTier','receiptWorkshop','receiptPaymentRef','receiptAmount'];
+    const fields = Object.fromEntries(ids.map(id => [id, document.getElementById(id).textContent]));
+    const logos = await window.RegistrationReceipt.loadAssets(fetch);
+    const doc = window.RegistrationReceipt.create(window.jspdf.jsPDF, fields, logos);
+    doc.save(window.RegistrationReceipt.filename(fields));
+  } catch (error) {
+    console.error('[RECEIPT PDF]', error.message);
+    alert('Your registration is saved, but the receipt could not be generated. Please check your connection and try downloading again.');
+  } finally {
+    if (button) { button.disabled = false; button.textContent = 'Download Receipt PDF'; }
   }
-  doc.text('Payment proof received; subject to Secretariat verification.', 20, y + 8);
-  const ref = document.getElementById('receiptRegId').textContent.replace(/[^a-zA-Z0-9_-]/g, '_');
-  doc.save('NeuroMet Pharmacon-2027_Receipt_' + ref + '.pdf');
 }
 
 function closeReceiptModal() {
