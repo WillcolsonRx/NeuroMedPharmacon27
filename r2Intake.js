@@ -35,7 +35,8 @@ async function receiveIntake(record,config,fetchImpl=fetch) {
   if(response.status===409)throw Object.assign(new Error('This submission reference already has different details. Contact the Secretariat before submitting again.'),{status:409});
   if(!response.ok)throw Object.assign(new Error('Receipt could not be confirmed. Retry with the same form; do not pay again.'),{status:503});
   const data=await response.json();
-  if(data.accepted!==true || data.ref_id!==record.ref_id)throw Object.assign(new Error('Receipt could not be confirmed. Retry with the same form.'),{status:503});
+  const numbered=/^NMP27-A[1-9][0-9]{0,9}$/.test(data.ref_id||'')&&data.submission_ref===record.ref_id;
+  if(data.accepted!==true || (data.ref_id!==record.ref_id&&!numbered))throw Object.assign(new Error('Receipt could not be confirmed. Retry with the same form.'),{status:503});
   return {ref_id:data.ref_id,tier:data.tier,amount:data.amount,currency:'INR',category:record.category,affiliation:record.affiliation,payment_ref:record.payment_ref,intake_status:'received',database_status:'pending',email_status:{delegate:'queued',organizer:'queued'}};
 }
 module.exports={authorized,intakeConfig,prepareIntake,receiveIntake};

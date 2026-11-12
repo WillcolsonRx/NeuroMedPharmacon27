@@ -1,7 +1,7 @@
 const {validatePaymentProofPayload}=require('./paymentValidator');
 const {sendDelegateConfirmation,sendOrganizerNotification}=require('./mailer');
 async function processIntakeStage(record,stage,storage) {
-  if(!record || !/^NMP27-DEL-[A-F0-9]{32}$/.test(record.ref_id) || !/^[a-f0-9]{64}$/.test(record.input_hash))throw new Error('Invalid intake record');
+  if(!record || !/^NMP27-(?:DEL-[A-F0-9]{32}|A[1-9][0-9]{0,9})$/.test(record.ref_id) || !/^[a-f0-9]{64}$/.test(record.input_hash))throw new Error('Invalid intake record');
   const proof=validatePaymentProofPayload(record.payment_proof,record.proof_filename);
   if(!proof.valid)throw new Error('Invalid stored payment proof');
   if(stage==='database'){

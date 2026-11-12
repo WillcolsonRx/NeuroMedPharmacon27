@@ -107,7 +107,7 @@ create or replace function public.intake_registration_store(p_record jsonb)
 returns bigint language plpgsql security definer set search_path=public,pg_temp as $$
 declare result_id bigint; stored_hash text;
 begin
-  if coalesce(p_record->>'ref_id','') !~ '^NMP27-DEL-[A-F0-9]{32}$'
+  if coalesce(p_record->>'ref_id','') !~ '^NMP27-(DEL-[A-F0-9]{32}|A[1-9][0-9]{0,9})$'
      or coalesce(p_record->>'input_hash','') !~ '^[a-f0-9]{64}$' then
     raise exception 'Invalid intake record';
   end if;

@@ -1,6 +1,8 @@
 import {recoveryHTML,recoveryJS} from './recovery.mjs';
+import {allocateRegistrationNumber} from './registration-numbers.mjs';
 // R2 is the durable source; the cron scans records, not expiring queue messages.
-const REF=/^NMP27-DEL-[A-F0-9]{32}$/;
+const REF=/^NMP27-(?:DEL-[A-F0-9]{32}|A[1-9][0-9]{0,9})$/;
+const SOURCE_REF=/^NMP27-DEL-[A-F0-9]{32}$/;
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 async function auth(request,token) {
   if(!token || token.length<32)return false;
@@ -91,15 +93,28 @@ export default {
       if(!await auth(request,env.INTAKE_TOKEN))return json({error:'Unauthorized'},401);
       if(!env.CALLBACK_URL || !env.CALLBACK_TOKEN || env.CALLBACK_TOKEN.length<32 || !env.RECOVERY_TOKEN || env.RECOVERY_TOKEN.length<32 || !env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_CHAT_ID)return json({error:'Intake setup incomplete'},503);
       let record;try{record=await readJSON(request);}catch{return json({error:'Invalid submission'},400);}
-      if(!REF.test(record.ref_id) || !/^[a-f0-9]{64}$/.test(record.input_hash) || record.version!==1 || typeof record.payment_proof!=='string' || record.payment_proof.length>280000 || !Number.isFinite(record.amount))return json({error:'Invalid submission'},400);
+      if(!SOURCE_REF.test(record.ref_id) || !/^[a-f0-9]{64}$/.test(record.input_hash) || record.version!==1 || typeof record.payment_proof!=='string' || record.payment_proof.length>280000 || !Number.isFinite(record.amount))return json({error:'Invalid submission'},400);
       try{
-        const saved=await env.INTAKE.put(key(record.ref_id),JSON.stringify(record),{onlyIf:{etagDoesNotMatch:'*'},httpMetadata:{contentType:'application/json'}});
-        if(!saved){const existing=await env.INTAKE.get(key(record.ref_id));if(!existing)return json({error:'Retry'},503);const original=await existing.json();if(original.input_hash!==record.input_hash)return json({error:'Submission changed'},409);record=original;}
+        const submissionRef=record.ref_id;
+        // Preserve already-received UUID registrations, including retries across this update.
+        const legacy=await env.INTAKE.get(key(submissionRef));
+        if(legacy){
+          const original=await legacy.json();if(original.input_hash!==record.input_hash)return json({error:'Submission changed'},409);record=original;
+        }else{
+          const registrationId=await allocateRegistrationNumber(env.INTAKE,submissionRef);
+          record={...record,submission_ref:submissionRef,ref_id:registrationId};
+          const saved=await env.INTAKE.put(key(registrationId),JSON.stringify(record),{onlyIf:{etagDoesNotMatch:'*'},httpMetadata:{contentType:'application/json'}});
+          if(!saved){
+            const existing=await env.INTAKE.get(key(registrationId));if(!existing)return json({error:'Retry'},503);
+            const original=await existing.json();
+            if(original.input_hash!==record.input_hash || original.submission_ref!==submissionRef)return json({error:'Submission changed'},409);record=original;
+          }
+        }
         const initial=await stateFor(env,record.ref_id);
         if(!initial.etag){const initialized=await saveState(env,record.ref_id,initial.value,null);if(!initialized)throw new Error('State initialization failed');}
         // Queue processing has its own lifecycle; cron recovers enqueue failures/expired messages.
         if(env.PROCESSING)try{await env.PROCESSING.send({ref_id:record.ref_id});}catch{console.error('Intake queued for scheduled recovery',record.ref_id);}
-        return json({accepted:true,ref_id:record.ref_id,tier:record.tier,amount:record.amount},202);
+        return json({accepted:true,ref_id:record.ref_id,submission_ref:record.submission_ref||record.ref_id,tier:record.tier,amount:record.amount},202);
       }catch{return json({error:'Durable receipt unavailable; retry the same submission'},503);}
     }
     // Private recovery API: separate read credential; never put tokens in URLs.

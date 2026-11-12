@@ -9,7 +9,7 @@
   let validated='',revision=0,pending=false,submitting=false,controller;
   const pair=()=>({registration_id:registration.value.trim().toUpperCase(),email:email.value.trim().toLowerCase()});
   const key=()=>JSON.stringify(pair());
-  const wellFormed=()=>/^(?:NMP27-DEL-[A-Z0-9-]{5,64}|NMP27-[A-F0-9]{12})$/.test(pair().registration_id)&&email.value.trim()!==''&&email.checkValidity();
+  const wellFormed=()=>/^(?:NMP27-DEL-[A-Z0-9-]{5,64}|NMP27-[A-F0-9]{12}|NMP27-A[1-9][0-9]{0,9})$/.test(pair().registration_id)&&email.value.trim()!==''&&email.checkValidity();
   const matches=()=>wellFormed()&&validated===key();
   function update(){
     verify.disabled=pending||submitting||!wellFormed();

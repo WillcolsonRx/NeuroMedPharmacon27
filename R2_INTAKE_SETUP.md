@@ -53,7 +53,7 @@ Set Worker secrets using Cloudflare's encrypted secrets UI or interactive `npx w
 
 ## Safe activation order
 
-1. Run `supabase/migrations/20261029_r2_registration_intake.sql` in the existing Supabase SQL Editor. This adds `input_hash` and a service-role-only idempotent import function; historical rows are retained. Ensure prior affiliation/abstract migrations are already applied.
+1. Run `supabase/migrations/20261029_r2_registration_intake.sql`, then `supabase/migrations/20261112_sequential_registration_numbers.sql` in the existing Supabase SQL Editor. This adds `input_hash` and a service-role-only idempotent import function; historical rows are retained. Ensure prior affiliation/abstract migrations are already applied.
 2. Deploy this application version to Vercel **without** either `R2_INTAKE_URL` or `R2_INTAKE_TOKEN` yet. Set `R2_CALLBACK_TOKEN`, retain working Supabase and SMTP settings, then redeploy. Existing registration behaviour continues.
 3. Create the Cloudflare bucket and queue; set the callback URL and all five Worker secrets; deploy with `npx wrangler deploy`. Confirm the queue consumer and five-minute cron are enabled. No custom domain transfer is necessary; the Worker can use its HTTPS `workers.dev` address.
 4. In a dedicated staging environment, run the verification cases below. Production email/payment tests need explicit operator-approved test data. Do not deliberately disable production Supabase to simulate an outage.
@@ -84,22 +84,27 @@ Before activation, verify:
 
 Use Worker metrics, queue backlog and the private recovery list. There is no automatic retention deletion, billing hard cap, independent external uptime monitor, or promise of unlimited/free availability. Operators must decide retention and delete records only under a reviewed retention policy. Do not expose the bucket publicly. Website hosting remains on Vercel: this design protects acknowledged intake from Supabase/SMTP failure but does not make Vercel or Cloudflare outages impossible. Actual staging load/CPU limits and provider credentials must be verified in the owner's accounts.
 
-## Short check-in IDs
+## Sequential registration IDs
 
-Delegate receipts/PDFs, registration emails and the Secretariat dashboard show a
-compact check-in ID such as `NMP27-A1B2C3D4E5F6`, derived from the last 12 hexadecimal
-characters of the original registration reference. The full reference remains
-unchanged in R2, Supabase, payment-proof paths and email logs. Old emails and recovery
-links continue to work; no Worker deployment, SQL migration or registration
-renumbering is needed for this display/lookup change.
+New R2 registrations use actual stored IDs `NMP27-A1`, `NMP27-A2`, and so on after
+activating this update. See [SEQUENTIAL_REGISTRATION_SETUP.md](SEQUENTIAL_REGISTRATION_SETUP.md)
+for the SQL and Worker deployment steps. Vercel remains compatible with the older
+Worker until it is redeployed; pushing the web code alone does not activate numbering.
 
-Abstract verification accepts the short ID with the original registration email
-and resolves it back to the canonical reference before saving the abstract. Lookups
-return at most two candidates and refuse ambiguous short IDs; staff can retrieve
-the original full reference through the existing private recovery record. A short
-ID alone does not prove registration identity or payment.
+The browser's UUID is an internal submission/retry key, not the displayed registration
+number. The Worker allocates each number through an R2 counter protected by ETag
+conditional writes and retains an immutable submission-to-number mapping. Concurrent
+requests help complete interrupted reservations. Repeated submissions keep their
+original number; abandoned/racing reservations can leave gaps, and numbers are
+never reused. Do not delete or reset the `registration-numbers/` objects.
 
-Delegate email footers embed the existing official NIPER and IPS logo assets using
-inline Content-ID images, without depending on external image hosting. These two
-inline images are not delegate payment-proof attachments. SMTP recipients and
-credentials remain unchanged.
+Previously received UUID records, email references and recovery links stay valid.
+Older long references retain their prior compact display aliases. Abstract verification
+accepts the new A-number or an existing reference with the delegate's original email;
+legacy compact aliases still fail closed if ambiguous. No existing registrations are
+renumbered, and payment transaction/reference IDs are unaffected. Local/Supabase-only
+registration paths retain their existing identifiers; sequential allocation belongs
+to the production R2 receiver.
+
+Delegate email footers embed the official NIPER and IPS logo assets using inline
+Content-ID images. SMTP recipients, credentials and delivery recovery are unchanged.
