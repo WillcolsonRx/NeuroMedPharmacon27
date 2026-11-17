@@ -1203,23 +1203,16 @@ button, input, select, textarea {
   align-items: start;
 }
 
-.registration-info-column { min-width:0; display:grid; gap:1.5rem; }
-.sbi-payment-guide { background:#fff; padding:clamp(1.25rem,3vw,2.25rem); border:1px solid #bae6fd; border-radius:12px; box-shadow:0 8px 24px rgba(7,89,133,.05); }
-.sbi-guide-pdf-link { display:inline-flex; align-items:center; gap:.5rem; padding:.85rem 1rem; border-radius:6px; background:#075985; color:#fff; font-size:.85rem; font-weight:600; text-decoration:none; }
+.registration-info-column { min-width:0; display:grid; grid-template-columns:minmax(0,1fr); gap:1.5rem; }
+.sbi-payment-guide { min-width:0; background:#fff; padding:clamp(1.25rem,3vw,2.25rem); border:1px solid #bae6fd; border-radius:12px; box-shadow:0 8px 24px rgba(7,89,133,.05); }
+.sbi-guide-pdf-link { display:inline-flex; max-width:100%; align-items:center; gap:.5rem; padding:.85rem 1rem; border-radius:6px; background:#075985; color:#fff; font-size:.85rem; font-weight:600; text-decoration:none; }
 .sbi-guide-pdf-link:hover { background:#064b69; color:#fff; }
 .sbi-guide-pdf-link:focus-visible { outline:3px solid #cba234; outline-offset:3px; }
 .sbi-guide-kicker { color:#075985; font-size:.72rem; font-weight:700; letter-spacing:.12em; }
 .sbi-payment-guide h3 { font-size:1.25rem; color:#0f172a; margin:.6rem 0; }
 .sbi-guide-intro { color:#64748b; font-size:.82rem; line-height:1.65; }
-.sbi-guide-steps { list-style:none; padding:0; margin:1.5rem 0; counter-reset:payment-step; }
-.sbi-guide-steps li { position:relative; padding:0 0 1.5rem 2.8rem; counter-increment:payment-step; }
-.sbi-guide-steps li::before { content:counter(payment-step); position:absolute; left:0; top:0; width:1.9rem; height:1.9rem; display:grid; place-items:center; border-radius:50%; background:#075985; color:#fff; font-weight:700; font-size:.85rem; }
-.sbi-guide-steps li:not(:last-child)::after { content:""; position:absolute; left:.9rem; top:2.1rem; bottom:.25rem; border-left:2px solid #dbeafe; }
-.sbi-guide-steps strong { color:#0f172a; font-size:.9rem; }
-.sbi-guide-steps p { margin:.4rem 0 0; color:#475569; font-size:.82rem; line-height:1.65; }
-.sbi-reference-example { border:1px dashed #7dd3fc; border-radius:8px; background:#f0f9ff; padding:.8rem; margin-top:.8rem; }
-.sbi-reference-example span,.sbi-reference-example small { display:block; color:#475569; font-size:.72rem; }
-.sbi-reference-example code { display:block; color:#075985; font-size:1.35rem; font-weight:700; margin:.3rem 0; }
+.sbi-guide-video { display:block; width:100%; height:auto; aspect-ratio:8 / 5; background:#f3f8fa; border:1px solid #cbdde3; border-radius:8px; margin:1.1rem 0; }
+.sbi-guide-video:focus-visible { outline:3px solid #cba234; outline-offset:3px; }
 
 .tariff-matrix-card {
   background: #ffffff;
@@ -3191,13 +3184,11 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
         <span class="sbi-guide-kicker">PAYMENT GUIDE</span>
         <h3 id="sbiGuideTitle">SBI Collect → Delegate registration</h3>
         <p class="sbi-guide-intro">Keep this page open while you use the official institutional payment portal in another tab.</p>
-        <ol class="sbi-guide-steps">
-          <li><strong>Open the NIPER-Raebareli portal</strong><p>Use the SBI Collect link below. Check that the institution shown is NIPER-Raebareli before proceeding.</p></li>
-          <li><strong>Find the conference fee category</strong><p>Look for the conference fee option for NeuroMet Pharmacon-2027. If it is missing or unclear, contact the Secretariat before paying.</p></li>
-          <li><strong>Enter your details and check the amount</strong><p>Follow SBI’s prompts. Use the same delegate details as this form and check the amount against your selected category and optional ₹600 workshop.</p></li>
-          <li><strong>Save the payment confirmation</strong><p>After a successful payment, keep the SBI receipt and its Transaction/Reference ID starting with <strong>DU</strong>. Copy the full ID exactly as printed.</p><div class="sbi-reference-example"><span>SBI reference format</span><code>DU…</code><small>Illustration only — use your own receipt’s full ID.</small></div></li>
-          <li><strong>Return here to finish registration</strong><p>Enter the DU reference in <strong>Transaction/Reference ID</strong>, attach your payment proof (maximum <strong>200 KB</strong>), then submit the delegate form. SBI payment alone does not submit your registration.</p></li>
-        </ol>
+        <video class="sbi-guide-video" id="sbiPaymentGuideVideo" controls playsinline preload="none" width="1280" height="800" poster="/assets/payment/sbi-collect-payment-guide-poster.jpg" aria-label="SBI Collect payment walkthrough for delegate registration" aria-describedby="sbiGuideVideoHelp">
+          <source src="/assets/payment/sbi-collect-payment-guide.mp4" type="video/mp4">
+          Your browser cannot play this video. Please open the PDF payment guide below.
+        </video>
+        <p class="sbi-guide-intro" id="sbiGuideVideoHelp">Play, pause or expand the walkthrough to follow each step. This is a demonstration; use your own delegate details and applicable conference fee.</p>
         <a class="sbi-guide-pdf-link" href="/downloads/NeuroMet_Pharmacon_2027_SBI_Collect_Payment_Guide.pdf?v=20261117" target="_blank" rel="noopener noreferrer">Open SBI Collect payment guide (PDF) <span aria-hidden="true">↗</span></a>
         <p class="sbi-guide-intro" style="margin-top:.6rem;">Keep the guide open in another tab while completing your payment, then return here to finish delegate registration.</p>
       </aside>
