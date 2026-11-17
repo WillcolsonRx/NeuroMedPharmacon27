@@ -1205,6 +1205,9 @@ button, input, select, textarea {
 
 .registration-info-column { min-width:0; display:grid; gap:1.5rem; }
 .sbi-payment-guide { background:#fff; padding:clamp(1.25rem,3vw,2.25rem); border:1px solid #bae6fd; border-radius:12px; box-shadow:0 8px 24px rgba(7,89,133,.05); }
+.sbi-guide-pdf-link { display:inline-flex; align-items:center; gap:.5rem; padding:.85rem 1rem; border-radius:6px; background:#075985; color:#fff; font-size:.85rem; font-weight:600; text-decoration:none; }
+.sbi-guide-pdf-link:hover { background:#064b69; color:#fff; }
+.sbi-guide-pdf-link:focus-visible { outline:3px solid #cba234; outline-offset:3px; }
 .sbi-guide-kicker { color:#075985; font-size:.72rem; font-weight:700; letter-spacing:.12em; }
 .sbi-payment-guide h3 { font-size:1.25rem; color:#0f172a; margin:.6rem 0; }
 .sbi-guide-intro { color:#64748b; font-size:.82rem; line-height:1.65; }
@@ -3123,7 +3126,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
   <div class="container">
     
     <div class="section-header-centered">
-      <span class="editorial-kicker">Conference Tariff &amp; Delegate Enrolment</span>
+      <span class="editorial-kicker">Conference Tariff &amp; Delegate Registration</span>
       <h2 class="section-title-large">Registration &amp; Fee Structure</h2>
       <p class="section-lead-text">
         Transparent rate tiers with dedicated fee relief for research scholars and students.
@@ -3186,21 +3189,23 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
 
       <aside class="sbi-payment-guide" aria-labelledby="sbiGuideTitle">
         <span class="sbi-guide-kicker">PAYMENT GUIDE</span>
-        <h3 id="sbiGuideTitle">SBI Collect → Delegate enrolment</h3>
+        <h3 id="sbiGuideTitle">SBI Collect → Delegate registration</h3>
         <p class="sbi-guide-intro">Keep this page open while you use the official institutional payment portal in another tab.</p>
         <ol class="sbi-guide-steps">
           <li><strong>Open the NIPER-Raebareli portal</strong><p>Use the SBI Collect link below. Check that the institution shown is NIPER-Raebareli before proceeding.</p></li>
           <li><strong>Find the conference fee category</strong><p>Look for the conference fee option for NeuroMet Pharmacon-2027. If it is missing or unclear, contact the Secretariat before paying.</p></li>
           <li><strong>Enter your details and check the amount</strong><p>Follow SBI’s prompts. Use the same delegate details as this form and check the amount against your selected category and optional ₹600 workshop.</p></li>
           <li><strong>Save the payment confirmation</strong><p>After a successful payment, keep the SBI receipt and its Transaction/Reference ID starting with <strong>DU</strong>. Copy the full ID exactly as printed.</p><div class="sbi-reference-example"><span>SBI reference format</span><code>DU…</code><small>Illustration only — use your own receipt’s full ID.</small></div></li>
-          <li><strong>Return here to finish enrolment</strong><p>Enter the DU reference in <strong>Transaction/Reference ID</strong>, attach your payment proof (maximum <strong>200 KB</strong>), then submit the delegate form. SBI payment alone does not submit your enrolment.</p></li>
+          <li><strong>Return here to finish registration</strong><p>Enter the DU reference in <strong>Transaction/Reference ID</strong>, attach your payment proof (maximum <strong>200 KB</strong>), then submit the delegate form. SBI payment alone does not submit your registration.</p></li>
         </ol>
+        <a class="sbi-guide-pdf-link" href="/downloads/NeuroMet_Pharmacon_2027_SBI_Collect_Payment_Guide.pdf?v=20261117" target="_blank" rel="noopener noreferrer">Open SBI Collect payment guide (PDF) <span aria-hidden="true">↗</span></a>
+        <p class="sbi-guide-intro" style="margin-top:.6rem;">Keep the guide open in another tab while completing your payment, then return here to finish delegate registration.</p>
       </aside>
       </div>
 
       <!-- Right: Real-Time Working Registration Form -->
       <div class="calc-widget-card" id="registrationFormCard">
-        <h3 class="calc-title">Delegate Enrolment Portal</h3>
+        <h3 class="calc-title">Delegate Registration Portal</h3>
         <p class="calc-subtitle">Enter your details and affiliation, select your delegate category, review the payable fee, and complete your registration.</p>
 
         <form id="registrationForm" onsubmit="handleRegistrationSubmit(event)">
@@ -3267,7 +3272,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
           <div class="payment-box-wrapper" id="paymentValidationComponent">
             <div class="sbi-collect-option">
               <div><span class="sbi-collect-badge">OFFICIAL NIPER-RAEBARELI PAYMENT PORTAL</span>
-                <p>Open the institutional payment portal, complete your payment, then return here to enter your Transaction/Reference ID and upload proof. Your enrolment is submitted on this page.</p>
+                <p>Open the institutional payment portal, complete your payment, then return here to enter your Transaction/Reference ID and upload proof. Your registration is submitted on this page.</p>
               </div>
               <a class="sbi-collect-link" href="https://sbcollect.sbi.bank.in/sbicollect/icollecthome.htm?corpID=4357359" target="_blank" rel="noopener noreferrer">Pay via SBI Collect <span aria-hidden="true">↗</span><small>Opens in a new tab</small></a>
             </div>
@@ -3365,7 +3370,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
           </div>
           <button type="button" class="btn-primary-action" id="btnVerifyAbsRegistration" disabled>Verify Registration</button>
           <p id="absRegistrationStatus" role="status" aria-live="polite">Enter your Registration ID and registration email, then verify to unlock submission.</p>
-          <a href="#registration">Not registered yet? Complete delegate enrolment first &rarr;</a>
+          <a href="#registration">Not registered yet? Complete delegate registration first &rarr;</a>
         </div>
         <div class="mb-2">
           <label class="form-label-scholarly" for="absAuthor">Presenting Author Name <span class="required-marker">*</span></label>
