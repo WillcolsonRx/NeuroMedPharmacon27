@@ -8,9 +8,9 @@
   const lines=[
    '*NeuroMet Pharmacon-2027*','',
    'Integrating AI, Drug Discovery, Therapeutics and Pharmacology for Neurometabolic Disorders','',
-   '📅 Conference: 19–20 February 2027',
-   '🧪 Network Pharmacology workshop: 21 February 2027',
-   '📍 NIPER-Raebareli, Lucknow Campus',
+   '• Conference: 19–20 February 2027',
+   '• Network Pharmacology workshop: 21 February 2027',
+   '• NIPER-Raebareli, Lucknow Campus',
    'In collaboration with Indian Pharmacological Society'
   ];
   if(now<new Date('2027-01-01T00:00:00+05:30'))lines.push('','Abstract deadline: 31 December 2026');
