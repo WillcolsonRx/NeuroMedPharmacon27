@@ -5,14 +5,16 @@ const Share=require('../public/conference-share');
 
 test('conference invitation includes actual theme, dates, venue and a fresh public link in a readable message',()=>{
  const text=Share.message(new Date('2026-11-18T10:00:00+05:30'));
- for(const detail of ['*NeuroMet Pharmacon-2027*','Integrating AI, Drug Discovery, Therapeutics and Pharmacology for Neurometabolic Disorders','19–20 February 2027','21 February 2027','NIPER-Raebareli, Lucknow Campus','Indian Pharmacological Society','31 December 2026','15 January 2027',Share.url])assert.ok(text.includes(detail),detail);
+ for(const detail of ['*NeuroMet Pharmacon-2027*','Integrating AI, Drug Discovery, Therapeutics and Pharmacology for Neurometabolic Disorders','19–20 February 2027','21 February 2027','NIPER-Raebareli, Lucknow Campus','Indian Pharmacological Society','31 January 2027','15 January 2027',Share.url])assert.ok(text.includes(detail),detail);
  assert.ok(text.includes('\n\n'));assert.ok(!text.includes('Annual Conference'));
  const whatsapp=new URL(Share.whatsappUrl(new Date('2026-11-18T10:00:00+05:30')));assert.equal(whatsapp.origin,'https://wa.me');assert.equal(whatsapp.searchParams.get('text'),text);
  assert.equal(new URL(Share.url).origin,'https://neuro-med-pharmacon-27.vercel.app');
 });
 
 test('sharing after deadlines does not advertise closed abstract or early-bird windows',()=>{
- assert.ok(!Share.message(new Date('2027-01-01T00:00:00+05:30')).includes('Abstract deadline:'));
+ assert.ok(Share.message(new Date('2027-01-16T00:00:00+05:30')).includes('Abstract deadline: 31 January 2027'));
+ assert.ok(Share.message(new Date('2027-01-31T23:59:59+05:30')).includes('Abstract deadline: 31 January 2027'));
+ assert.ok(!Share.message(new Date('2027-02-01T00:00:00+05:30')).includes('Abstract deadline:'));
  assert.ok(Share.message(new Date('2027-01-15T23:59:59+05:30')).includes('Early-bird'));
  assert.ok(!Share.message(new Date('2027-01-16T00:00:00+05:30')).includes('Early-bird'));
 });

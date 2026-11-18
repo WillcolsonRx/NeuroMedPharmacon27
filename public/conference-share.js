@@ -13,7 +13,7 @@
    '• NIPER-Raebareli, Lucknow Campus',
    'In collaboration with Indian Pharmacological Society'
   ];
-  if(now<new Date('2027-01-01T00:00:00+05:30'))lines.push('','Abstract deadline: 31 December 2026');
+  if(now<new Date('2027-02-01T00:00:00+05:30'))lines.push('','Abstract deadline: 31 January 2027');
   if(now<new Date('2027-01-16T00:00:00+05:30'))lines.push('Early-bird registration: until 15 January 2027');
   lines.push('','Conference details & registration:');return lines.join('\n');
  }

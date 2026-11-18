@@ -106,7 +106,7 @@ function createGuidelinesPDF(options={}){
   }out.y+=height;
  }
  out.y+=3;out.heading('4. Important dates');
- out.specification('Abstract deadline','31 December 2026',0);out.specification('Acceptance notice','15 January 2027',1);
+ out.specification('Abstract deadline','31 January 2027',0);out.specification('Acceptance notice','Rolling notifications from 15 January 2027',1);
  out.y+=5;out.heading('5. Before you submit');
  out.paragraph('Prepare a Word document (.doc or .docx), no larger than 1 MB, using Times New Roman or Calibri, 12 pt, with 1.15 line spacing. Check the word limit, author details, ethics information and selected track. Register for the conference first, then verify your Registration ID and the same registration email in the submission portal.',{size:10,gap:4.9,after:3});
  out.text('Submit online',18,out.y,9.4,true,NAVY);out.y+=5;

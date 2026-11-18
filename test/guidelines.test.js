@@ -21,7 +21,7 @@ test('guidelines preserve all ten tracks, key instructions and dates without awa
  const {PDF,calls}=recorder(),doc=createGuidelinesPDF({PDF}),text=calls.map(c=>c.text).join(' ');
  assert.equal(doc.getNumberOfPages(),3);
  for(const track of tracks){assert.ok(text.includes('TR-'+track.id));assert.ok(text.includes(track.title));}
- for(const phrase of ['300 words','31 December 2026','15 January 2027','Registration ID','IAEC/IEC','neurometpharmacon27@gmail.com','Word document'])assert.ok(text.includes(phrase),phrase);
+ for(const phrase of ['300 words','31 January 2027','Rolling notifications from 15 January 2027','Registration ID','IAEC/IEC','neurometpharmacon27@gmail.com','Word document'])assert.ok(text.includes(phrase),phrase);
  assert.doesNotMatch(text,/young scientist|young investigator|membership|age <=|birth certificate|recommendation letter/i);
  for(const call of calls){assert.ok(call.left>=17.5,JSON.stringify(call));assert.ok(call.right<=192.5,JSON.stringify(call));assert.ok(call.y>=10&&call.y<=294,JSON.stringify(call));if(call.y<267)assert.ok(call.y<=260,JSON.stringify(call));}
  // Non-final full-width paragraph lines finish at the right margin, rather than ragged wrapping.
@@ -44,7 +44,7 @@ test('regeneration updates current and legacy PDF downloads with identical copie
 test('website and current text downloads omit withdrawn requirements and refresh PDF links',()=>{
  const html=fs.readFileSync('index.html','utf8');assert.equal(html,fs.readFileSync('public/index.html','utf8'));
  assert.doesNotMatch(html,/Young Scientist|Young Investigator Awards|value="Award"/i);
- assert.match(html,/Abstract_Guidelines\.pdf\?v=20261112-guidelines/);assert.match(html,/Abstract_Template\.pdf\?v=20261112-guidelines/);
+ assert.match(html,/Abstract_Guidelines\.pdf\?v=20261118-deadline/);assert.match(html,/Abstract_Template\.pdf\?v=20261112-guidelines/);
  for(const file of ['NeuroMet_Pharmacon_2027_Abstract_Template.txt','NeuroMedPharmacon_2027_Abstract_Template.txt'])assert.doesNotMatch(fs.readFileSync('public/downloads/'+file,'utf8'),/award|membership|age <=/i);
  const headers=JSON.parse(fs.readFileSync('vercel.json','utf8')).headers.find(row=>row.source==='/downloads/(.*)').headers;
  assert.ok(headers.some(h=>h.key==='Cache-Control'&&h.value.includes('must-revalidate')&&!h.value.includes('immutable')));
