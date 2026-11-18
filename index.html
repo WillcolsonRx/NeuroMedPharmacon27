@@ -4,14 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NeuroMet Pharmacon-2027 — In Collaboration with Indian Pharmacological Society | NIPER-Raebareli</title>
-<meta name="description" content="NeuroMet Pharmacon-2027: International Conference on Molecular Neurotherapeutics, Translational Pharmacology & A workshop of Network Pharmacology, organized by NIPER-Raebareli & Indian Pharmacological Society, 19–20 Feb 2027; post-conference workshop 21 Feb 2027, Lucknow, India." />
+<meta name="description" content="NeuroMet Pharmacon-2027: Integrating AI, Drug Discovery, Therapeutics and Pharmacology for Neurometabolic Disorders. Conference: 19–20 February 2027; workshop: 21 February. NIPER-Raebareli, Lucknow, in collaboration with Indian Pharmacological Society." />
 
 <!-- Rich Social Share OpenGraph Metadata (WhatsApp, Telegram, LinkedIn, Facebook) -->
 <meta property="og:site_name" content="NeuroMet Pharmacon-2027" />
-<meta property="og:title" content="NeuroMet Pharmacon-2027 — NIPER-Raebareli & Indian Pharmacological Society Conference" />
-<meta property="og:description" content="Annual Conference of Indian Pharmacological Society & A workshop of Network Pharmacology. 19–20 February 2027; post-conference workshop 21 February at NIPER-Raebareli Lucknow Campus. Register as delegate or sponsor." />
+<meta property="og:title" content="NeuroMet Pharmacon-2027 | 19–20 February 2027 | Lucknow" />
+<meta property="og:description" content="Integrating AI, Drug Discovery, Therapeutics and Pharmacology for Neurometabolic Disorders. NIPER-Raebareli, Lucknow · Conference: 19–20 February 2027 · Workshop: 21 February." />
 <meta property="og:type" content="website" />
-<meta property="og:image" content="/assets/aistudio/Screenshot_2026-10-21_144158_87255ea5.png" />
+<meta property="og:url" content="https://neuro-med-pharmacon-27.vercel.app/" />
+<link rel="canonical" href="https://neuro-med-pharmacon-27.vercel.app/" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image" content="https://neuro-med-pharmacon-27.vercel.app/assets/social/neuromet-pharmacon-2027-share-20261118.png" />
 <meta property="og:image:alt" content="NeuroMet Pharmacon-2027 Official Conference Banner" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -19,8 +22,10 @@
 <!-- Twitter / X Large Summary Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="NeuroMet Pharmacon-2027 — NIPER-Raebareli & Indian Pharmacological Society" />
-<meta name="twitter:description" content="Annual Conference of Indian Pharmacological Society & Workshop on Network Pharmacology. 19–20 Feb 2027; workshop 21 Feb, Lucknow. Register now." />
-<meta name="twitter:image" content="/assets/aistudio/Screenshot_2026-10-21_144158_87255ea5.png" />
+<meta name="twitter:description" content="AI, Drug Discovery, Therapeutics and Pharmacology for Neurometabolic Disorders. Conference: 19–20 Feb 2027; workshop: 21 Feb · NIPER-Raebareli, Lucknow." />
+<meta name="twitter:image" content="https://neuro-med-pharmacon-27.vercel.app/assets/social/neuromet-pharmacon-2027-share-20261118.png" />
+
+<meta name="twitter:image:alt" content="NeuroMet Pharmacon-2027 conference, workshop dates and official NIPER and IPS logos" />
 
 <!-- Schema.org Event JSON-LD Structured Data for Google Rich Snippets -->
 <script type="application/ld+json">
@@ -28,7 +33,7 @@
   "@context": "https://schema.org",
   "@type": "Event",
   "name": "NeuroMet Pharmacon-2027: In Collaboration with Indian Pharmacological Society & A workshop of Network Pharmacology",
-  "description": "International Conference on Molecular Neurotherapeutics, Translational Pharmacology and Network Pharmacology organized by NIPER-Raebareli and Indian Pharmacological Society.",
+  "description": "Integrating AI, Drug Discovery, Therapeutics and Pharmacology for Neurometabolic Disorders, hosted by NIPER-Raebareli in collaboration with Indian Pharmacological Society.",
   "startDate": "2027-02-19T09:00:00+05:30",
   "endDate": "2027-02-20T18:00:00+05:30",
   "eventStatus": "https://schema.org/EventScheduled",
@@ -2593,6 +2598,20 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
   text-align-last: start;
 }
 .required-marker { color: #dc2626; }
+
+/* Conference invitation and image sharing. */
+#shareConferenceModal [hidden] { display:none!important; }
+.conference-share-dialog { max-width:620px; padding:2rem; border-radius:14px; }
+.conference-share-preview { margin:1.2rem 0 .9rem; border:1px solid #dbe3ee; border-radius:10px; overflow:hidden; background:#071729; }
+.conference-share-preview img { display:block; width:100%; height:auto; }
+.conference-poster-actions { display:flex; flex-wrap:wrap; gap:.6rem; }
+.conference-poster-actions a,.conference-poster-actions button { flex:1 1 140px; justify-content:center; text-align:center; font-size:.82rem; padding:.7rem .8rem; border-radius:6px; }
+.conference-copy-message { border:1px solid #cbd5e1; color:#12253d; background:#f8fafc; font:inherit; font-weight:600; cursor:pointer; }
+.conference-share-tip { font-size:.77rem; line-height:1.5; color:#64748b; margin:.75rem 0 1rem; }
+.conference-share-status { font-size:.8rem; color:#166534; line-height:1.5; }
+.conference-share-status:empty { display:none; }
+@media(max-width:600px) { #shareConferenceModal { padding:.65rem; } .conference-share-dialog { padding:1.2rem; max-height:94vh; } #shareConferenceTitle { padding:0 1rem; } }
+
 </style>
 </head>
 <body>
@@ -4111,26 +4130,28 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
 <!-- ==========================================================================
      SHARE CONGRESS DIALOG (VIRAL MESSAGING & SOCIAL CARDS)
      ========================================================================== -->
-<div class="custom-modal-backdrop" id="shareConferenceModal" style="display:none;" onclick="if(event.target===this) closeShareModal();">
-  <div class="custom-modal-dialog" style="max-width: 520px; padding: 2rem;">
+<div class="custom-modal-backdrop" id="shareConferenceModal" role="dialog" aria-modal="true" aria-labelledby="shareConferenceTitle" style="display:none;" onclick="if(event.target===this) closeShareModal();">
+  <div class="custom-modal-dialog conference-share-dialog">
     <button class="modal-close-btn" onclick="closeShareModal()" aria-label="Close Share Modal">&times;</button>
 
     <div class="mb-3 text-center">
-      <div class="editorial-kicker mb-1" style="color:var(--accent-gold); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700;">Delegate Network &amp; Scholar Exchange</div>
-      <h3 style="font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; margin: 0 0 0.4rem 0;">Share NeuroMet Pharmacon-2027</h3>
+      <div class="editorial-kicker mb-1" style="color:var(--accent-gold); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700;">INVITE YOUR SCIENTIFIC NETWORK</div>
+      <h3 id="shareConferenceTitle" style="font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; margin: 0 0 0.4rem 0;">Share NeuroMet Pharmacon-2027</h3>
       <p style="font-size: 0.82rem; color: #64748b; margin: 0 auto; max-width: 420px; line-height: 1.45;">
-        Spread the word across your scientific network, lab groups, researchers, and professional circles.
+        Invite colleagues, lab groups and researchers with a conference poster or a ready-to-send message.
       </p>
     </div>
 
-    <!-- Preview Card -->
-    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin-bottom: 1.25rem;">
-      <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-gold); font-weight: 700; margin-bottom: 0.25rem;">Conference Summary Card</div>
-      <div style="font-weight: 700; font-size: 0.95rem; color: #0f172a; margin-bottom: 0.35rem;">NeuroMet Pharmacon-2027 · Indian Pharmacological Society</div>
-      <div style="font-size: 0.8rem; color: #475569; line-height: 1.45;">
-        Feb 19–20, 2027 · Post-conference workshop: Feb 21 | NIPER-Raebareli Lucknow Campus · In collaboration with Indian Pharmacological Society. Early Bird &amp; Abstract Submissions Open!
-      </div>
+    <figure class="conference-share-preview">
+      <img src="/assets/social/neuromet-pharmacon-2027-share-20261118.png" width="1200" height="630" loading="lazy" alt="NeuroMet Pharmacon-2027: conference 19–20 February 2027, Network Pharmacology workshop 21 February, NIPER-Raebareli Lucknow Campus in collaboration with Indian Pharmacological Society">
+    </figure>
+    <div class="conference-poster-actions">
+      <button type="button" id="btnSharePoster" class="btn-primary-action" onclick="shareConferencePoster()" hidden>Share poster</button>
+      <a id="downloadConferencePoster" class="btn-primary-action" href="/assets/social/neuromet-pharmacon-2027-share-20261118.png" download="NeuroMet_Pharmacon_2027_Conference_Poster.png">Download poster</a>
+      <button type="button" class="conference-copy-message" onclick="copyShareMessage()">Copy invitation</button>
     </div>
+    <p class="conference-share-tip">For an image in WhatsApp, share the poster or download it and attach it to your message.</p>
+    <p id="shareStatus" class="conference-share-status" role="status" aria-live="polite"></p>
 
     <!-- Channels Grid -->
     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 1.25rem;">
@@ -4174,7 +4195,6 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
           Copy Link
         </button>
       </div>
-      <div id="copyShareFeedback" style="font-size:0.75rem; color:#16a34a; font-weight:600; margin-top:0.35rem; display:none;">✓ Conference link copied to clipboard!</div>
     </div>
   </div>
 </div>
@@ -4185,6 +4205,7 @@ p:not(:where(.hero-content *, .section-header-centered *, .ips-emblem-box *,
 <script src="/registration-pricing.js"></script>
 <script src="/registration-reference.js"></script>
 <script src="/registration-receipt.js"></script>
+<script src="/conference-share.js"></script>
 <script>
 // TARIFF DEFINITIONS
 const TARIFF_DATA = {
@@ -4556,89 +4577,102 @@ async function fetchWithRetry(url, options = {}, retries = 2, backoffMs = 600) {
 // ==========================================================================
 // SOCIAL SHARING & MESSAGING HANDLERS
 // ==========================================================================
+let conferencePosterFile = null;
+let shareModalTrigger = null;
+let sharePreviousOverflow = '';
+function shareFeedback(message) {
+  const status = document.getElementById('shareStatus');
+  if (status) status.textContent = message;
+}
 function openShareModal() {
   const modal = document.getElementById('shareConferenceModal');
   const input = document.getElementById('shareUrlInput');
-  if (input) {
-    input.value = window.location.origin + window.location.pathname;
+  if (input) input.value = ConferenceShare.url;
+  if (!modal || modal.style.display === 'flex') return;
+  shareModalTrigger = document.activeElement;
+  sharePreviousOverflow = document.body.style.overflow;
+  document.body.style.overflow = 'hidden';
+  modal.style.display = 'flex';
+  modal.querySelector('.modal-close-btn').focus();
+  shareFeedback('');
+  const button = document.getElementById('btnSharePoster');
+  button.hidden = true;
+  if (navigator.share && navigator.canShare && typeof File === 'function') {
+    ConferenceShare.posterFile(fetch, File).then(file => {
+      conferencePosterFile = file;
+      button.hidden = !navigator.canShare({files: [file]});
+    }).catch(() => { button.hidden = true; });
   }
-  if (modal) modal.style.display = 'flex';
 }
-
 function closeShareModal() {
   const modal = document.getElementById('shareConferenceModal');
-  if (modal) modal.style.display = 'none';
-  const fb = document.getElementById('copyShareFeedback');
-  if (fb) fb.style.display = 'none';
+  if (!modal || modal.style.display !== 'flex') return;
+  modal.style.display = 'none';
+  document.body.style.overflow = sharePreviousOverflow;
+  if (shareModalTrigger?.isConnected) shareModalTrigger.focus();
 }
-
-function getShareText() {
-  return "Join us at NeuroMet Pharmacon-2027 (Indian Pharmacological Society Annual Conference), organized by NIPER-Raebareli Lucknow Campus (19–20 Feb 2027; post-conference workshop 21 Feb). Call for Abstracts & Early Bird Registrations are open: ";
-}
-
+function getShareText() { return ConferenceShare.invitation(); }
 function shareOnWhatsApp() {
-  const url = window.location.origin + window.location.pathname;
-  const text = encodeURIComponent(getShareText() + url);
-  window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+  window.open(ConferenceShare.whatsappUrl(), '_blank', 'noopener,noreferrer');
 }
-
 function shareOnLinkedIn() {
-  const url = encodeURIComponent(window.location.origin + window.location.pathname);
-  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+  window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(ConferenceShare.url), '_blank', 'noopener,noreferrer');
 }
-
 function shareOnTwitter() {
-  const url = encodeURIComponent(window.location.origin + window.location.pathname);
-  const text = encodeURIComponent("Join us at NeuroMet Pharmacon-2027 @NIPER_Raebareli & Indian Pharmacological Society (Feb 19–20, 2027). Registrations & Abstracts now open! #Pharmacology #Neuroscience");
-  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+  const text = 'NeuroMet Pharmacon-2027 | AI, Drug Discovery, Therapeutics & Pharmacology for Neurometabolic Disorders\n19–20 Feb 2027 · NIPER-Raebareli, Lucknow\nWorkshop: 21 Feb #Pharmacology #DrugDiscovery';
+  window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(ConferenceShare.url) + '&text=' + encodeURIComponent(text), '_blank', 'noopener,noreferrer');
 }
-
-function shareNativeOrEmail() {
-  const url = window.location.origin + window.location.pathname;
-  const title = "NeuroMet Pharmacon-2027  — NIPER-Raebareli";
-  const text = getShareText() + url;
-
+async function shareConferencePoster() {
+  if (!conferencePosterFile || !navigator.share || !navigator.canShare?.({files: [conferencePosterFile]})) {
+    document.getElementById('downloadConferencePoster').click();
+    return;
+  }
+  const button = document.getElementById('btnSharePoster');
+  if (button.disabled) return;
+  button.disabled = true;
+  try {
+    await navigator.share({title: ConferenceShare.title, text: ConferenceShare.message(), files: [conferencePosterFile]});
+    shareFeedback('Poster handed to your selected app.');
+  } catch (error) {
+    if (error.name !== 'AbortError') shareFeedback('Unable to open sharing. Download the poster and attach it in your preferred app.');
+  } finally { button.disabled = false; }
+}
+async function shareNativeOrEmail() {
   if (navigator.share) {
-    navigator.share({
-      title: title,
-      text: getShareText(),
-      url: url
-    }).catch(() => {});
+    try { await navigator.share({title: ConferenceShare.title, text: ConferenceShare.invitation(), url: ConferenceShare.url}); }
+    catch (error) { if (error.name !== 'AbortError') shareFeedback('Unable to open sharing. Use a channel above or copy the invitation.'); }
   } else {
-    window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`;
+    window.location.href = 'mailto:?subject=' + encodeURIComponent(ConferenceShare.title) + '&body=' + encodeURIComponent(ConferenceShare.message());
   }
 }
-
-function copyShareLink() {
-  const input = document.getElementById('shareUrlInput');
-  const btn = document.getElementById('btnCopyShareUrl');
-  const feedback = document.getElementById('copyShareFeedback');
-  if (!input) return;
-
-  input.select();
-  input.setSelectionRange(0, 99999);
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(input.value).then(() => {
-      showCopiedFeedback();
-    }).catch(() => {
-      document.execCommand('copy');
-      showCopiedFeedback();
-    });
-  } else {
-    document.execCommand('copy');
-    showCopiedFeedback();
-  }
-
-  function showCopiedFeedback() {
-    if (btn) btn.textContent = 'Copied!';
-    if (feedback) feedback.style.display = 'block';
-    setTimeout(() => {
-      if (btn) btn.textContent = 'Copy Link';
-      if (feedback) feedback.style.display = 'none';
-    }, 2500);
+async function copyConferenceText(text, message) {
+  try {
+    if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(text);
+    else throw Error('Clipboard fallback required');
+    shareFeedback(message);
+  } catch {
+    const previous = document.activeElement;
+    const area = document.createElement('textarea');
+    area.value = text; area.style.position = 'fixed'; area.style.left = '-9999px';
+    document.body.append(area); area.select();
+    try { shareFeedback(document.execCommand('copy') ? message : 'Copy is unavailable. Select and copy the conference link below.'); }
+    catch { shareFeedback('Copy is unavailable. Select and copy the conference link below.'); }
+    finally { area.remove(); previous?.focus(); }
   }
 }
+function copyShareLink() { return copyConferenceText(ConferenceShare.url, 'Conference link copied.'); }
+function copyShareMessage() { return copyConferenceText(ConferenceShare.message(), 'Formatted invitation copied. Paste it into WhatsApp or your preferred app.'); }
+document.addEventListener('keydown', function(event) {
+  const modal = document.getElementById('shareConferenceModal');
+  if (!modal || modal.style.display !== 'flex') return;
+  if (event.key === 'Escape') { event.preventDefault(); closeShareModal(); }
+  if (event.key === 'Tab') {
+    const controls = [...modal.querySelectorAll('button:not(:disabled),a[href],input')].filter(element => element.getClientRects().length && !element.hidden);
+    const first = controls[0], last = controls.at(-1);
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  }
+});
 
 // Delegate Form Submission with Concurrency Lock & Retry
 async function handleRegistrationSubmit(e) {
