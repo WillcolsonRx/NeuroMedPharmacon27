@@ -22,7 +22,7 @@ function renderSpeakers(html) {
   const cards = speakers.filter(speaker => {
     if (!['verified','organizer_confirmed'].includes(speaker.profile_status)) return false;
     if (!speaker.designation || !speaker.affiliation) return false;
-    const key = speaker.name.toLowerCase().replace(/\b(dr|prof)\b/g,'').replace(/[^a-z]/g,'');
+    const key = speaker.name.toLowerCase().replace(/\b(dr|prof)\b/g,'').replace(/[^a-z]/g,'') + '|' + speaker.affiliation.toLowerCase().replace(/[^a-z]/g,'');
     if (seen.has(key)) return false;
     seen.add(key);
     return true;

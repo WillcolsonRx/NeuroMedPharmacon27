@@ -25,7 +25,7 @@ test('speaker catalogue publishes unique sourced portraits and omits unresolved 
  const html=renderSpeakers(fs.readFileSync(path.join(__dirname,'..','index.html'),'utf8'));
  assert.equal((html.match(/data-speaker=/g)||[]).length,published.length);
  for(const pending of speakers.filter(s=>s.profile_status==='pending')) assert.ok(!html.includes('data-speaker="'+pending.id+'"'));
- assert.equal(new Set(published.map(s=>s.name.toLowerCase().replace(/\b(dr|prof)\b/g,'').replace(/[^a-z]/g,''))).size,published.length);
+ assert.equal(new Set(published.map(s=>s.name.toLowerCase().replace(/\b(dr|prof)\b/g,'').replace(/[^a-z]/g,'')+'|'+s.affiliation.toLowerCase().replace(/[^a-z]/g,''))).size,published.length);
  assert.ok(html.indexOf('id="tracks"')<html.indexOf('id="speakers"'));
  assert.ok(html.indexOf('id="speakers"')<html.indexOf('id="schedule"'));
  assert.ok(!html.includes('Portrait and profile details will be updated soon.'));
@@ -51,9 +51,19 @@ test('published speakers follow the organizer sequence before previously listed 
  ];
  assert.deepEqual(ids.slice(0,expected.length),expected);
  assert.deepEqual(ids.slice(expected.length),[
-  'satyendra-rajput','bn-srikumar','kanthi-kiran-kondepudi','k-srinivasan','vinod-tiwari',
-  'sachchidanand-tewari','ashok-jangra','priyanka-bajaj','ritesh-kumar','jayant-kumar'
+  'satyendra-rajput','n-shankaraiah','raj-kumar','bn-srikumar','kanthi-kiran-kondepudi',
+  'k-srinivasan','sandip-bharate','linga-banoth','vinod-tiwari',
+  'sachchidanand-tewari','dinesh-kumar-cbmr','ashok-jangra','priyanka-bajaj','ritesh-kumar','jayant-kumar'
  ]);
  assert.ok(!html.includes('speaker-keynote'));
  assert.equal(speakers.find(s=>s.id==='anil-gaikwad').role,'Invited Speaker');
+});
+
+test('namesake Dinesh Kumar speakers retain separate institutional cards',()=>{
+ const html=renderSpeakers('<!-- SPEAKER_CARDS_START --><!-- SPEAKER_CARDS_END -->');
+ for(const id of ['dinesh-kumar','dinesh-kumar-cbmr']){
+  const card=html.match(new RegExp('<article[^>]*data-speaker="'+id+'"[\\s\\S]*?</article>'))?.[0];
+  assert.ok(card);
+  assert.ok(card.includes(speakers.find(s=>s.id===id).affiliation));
+ }
 });
